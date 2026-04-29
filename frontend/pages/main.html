@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Автошкола Лидер</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container header__inner">
+            <a href="../pages/main.html" class="logo">
+                <img src="../images/logo.svg" alt="Автошкола Лидер" class="logo__img">
+            </a>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li><a href="#">Обучение</a></li>
+                    <li><a href="#">Акции</a></li>
+                    <li><a href="#">Инструкторы</a></li>
+                    <li><a href="#">Вопросы</a></li>
+                    <li><a href="#">Отзывы</a></li>
+                    <li><a href="#">Контакты</a></li>
+                </ul>
+            </nav>
+            <button class="btn btn--login">Войти</button>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        <!-- Первый экран -->
+        <section class="hero container">
+            <h1 class="hero__title">
+                <span class="hero__word">Автошкола</span>
+                <span class="hero__word">лидер</span>
+            </h1>
+            <div class="hero__bottom">
+                <p class="hero__subtitle">Обучение водителей на любые<br>транспортные средства</p>
+                <button class="btn btn--cta">Записаться</button>
+            </div>
+        </section>
+
+        <!-- Карточки курсов -->
+        <section class="courses container">
+            <div class="cards">
+                <!-- Развёрнутая карточка по умолчанию -->
+                <div class="card card--expanded" data-category="b">
+                    <div class="card__content">
+                        <img src="../images/car1.svg" alt="Автомобиль" class="card__img-small">
+                        <div class="card__info">
+                            <h3 class="card__title">Обучение на автомобиль с МКПП</h3>
+                            <p class="card__category">Категория "B"</p>
+                        </div>
+                        <div class="card__visual">
+                            <img src="../images/gray1.svg" alt="Автомобиль" class="card__img-big">
+                        </div>
+                    </div>
+                    <button class="btn btn--detail">Узнать подробнее <span class="arrow"></span></button>
+                </div>
+
+                <!-- Свёрнутые карточки -->
+                <div class="card card--collapsed2" data-category="a">
+                    <div class="card__collapsed-content">
+                        <img src="../images/gray2.svg" alt="Мотоцикл" class="card__icon">
+                    </div>
+                </div>
+                <div class="card card--collapsed1" data-category="b">
+                    <div class="card__collapsed-content">
+                        <img src="../images/gray3.svg" alt="Машина АКПП" class="card__icon">
+                    </div>
+                </div>
+                <div class="card card--collapsed2" data-category="d">
+                    <div class="card__collapsed-content">
+                        <img src="../images/gray4.svg" alt="Трактор" class="card__icon">
+                    </div>
+                </div>
+                <div class="card card--collapsed1" data-category="e">
+                    <div class="card__collapsed-content">
+                        <img src="../images/gray5.svg" alt="Квадроцикл" class="card__icon">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- О центре -->
+        <section class="about container">
+            <h2 class="about__title">О центре</h2>
+            <div class="about__content">
+                <p class="about__text about__text--main">
+                    Учебный центр «Лидер» не просто автошкола, а настоящий старт для тысяч водителей. Наша история началась более 10 лет назад, и за это время мы выросли в крупный образовательный центр. Сейчас у нас есть множество направлений от классической автошколы до курсов по управлению спецтехникой и дорожно-строительными машинами
+                </p>
+                <div class="about__stats">
+                    <div class="stat-box">
+                        <span class="stat-box__value">&gt;10</span>
+                        <span class="stat-box__label">лет на рынке</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-box__value">15+</span>
+                        <span class="stat-box__label">инструкторов</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about__bottom">
+                <div class="about__stats about__stats--row">
+                    <div class="stat-box">
+                        <span class="stat-box__value">18</span>
+                        <span class="stat-box__label">курсов обучения</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-box__value">6</span>
+                        <span class="stat-box__label">офисов по городу</span>
+                    </div>
+                </div>
+                <p class="about__text about__text--secondary">
+                    Теоретические занятия проходят в филиалах по всему городу, вы легко выберете тот, что ближе к дому или работе. А для отработки практических навыков у нас есть собственный автодром, где под руководством опытных инструкторов вы освоите тонкости вождения
+                </p>
+            </div>
+        </section>
+
+        <!-- Филиалы -->
+        <section class="branches container">
+            <h2 class="branches__title">Филиалы</h2>
+            <div class="branches__grid">
+                <div class="branch-card">
+                    <img src="../images/office1.svg" alt="Офис на пр. Победы, 384" class="branch-card__img">
+                    <p class="branch-card__caption">Офис на пр. Победы, 384</p>
+                </div>
+                <div class="branch-card">
+                    <img src="../images/office2.svg" alt="Офис на Комсомольском пр., 80" class="branch-card__img">
+                    <p class="branch-card__caption">Офис на Комсомольском пр., 80</p>
+                </div>
+                <div class="branch-card">
+                    <img src="../images/office3.svg" alt="Офис на ул. Комарова, 114" class="branch-card__img">
+                    <p class="branch-card__caption">Офис на ул. Комарова, 114</p>
+                </div>
+                <div class="branch-card">
+                    <img src="../images/office4.svg" alt="Офис на ул. Сталеваров, 5а" class="branch-card__img">
+                    <p class="branch-card__caption">Офис на ул. Сталеваров, 5а</p>
+                </div>
+                <div class="branch-card">
+                    <img src="../images/office5.svg" alt="Офис на ул. 60 лет Октября, 18" class="branch-card__img">
+                    <p class="branch-card__caption">Офис на ул. 60 лет Октября, 18</p>
+                </div>
+                <div class="branch-card">
+                    <img src="../images/office6.svg" alt="Офис на шоссе Металлургов, 51" class="branch-card__img">
+                    <p class="branch-card__caption">Офис на шоссе Металлургов, 51</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Схема проезда -->
+        <section class="map-section container">
+            <h2 class="map-section__title">Схема проезда</h2>
+            <div class="map-section__map">
+                <div id="yandex-map" class="yandex-map__container"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал сайта -->
+    <footer class="footer">
+        <div class="container footer__inner">
+            <!-- Верхняя часть с контактами -->
+            <div class="footer__top">
+                <div class="footer__col footer__col--contacts">
+                    <div class="footer__contact-item">
+                        <img src="../images/email.svg" alt="" class="footer__icon footer__icon--email">
+                        <span>info@lider-center.com</span>
+                    </div>
+                    <div class="footer__contact-item">
+                        <img src="../images/phone.svg" alt="" class="footer__icon footer__icon--phone">
+                        <span>+7(351) 700-74-00</span>
+                    </div>
+                    <div class="footer__social">
+                        <a href="#"><img src="../images/whatsapp.svg" alt="" class="footer__icon footer__icon--social"></a>
+                        <a href="#"><img src="../images/telegram.svg" alt="" class="footer__icon footer__icon--social"></a>
+                        <a href="#"><img src="../images/vk.svg" alt="" class="footer__icon footer__icon--social"></a>
+                    </div>
+                </div>
+                <div class="footer__col footer__col--hours">
+                    <p class="footer__subtitle">Режим работы:</p>
+                    <p class="footer__text">пн — чт с 9:00 до 18:00<br>пт с 9:00 до 17:00<br>сб, вс — выходные<br>перерыв с 13:00 до 14:00</p>
+                    <p class="footer__city">г. Челябинск</p>
+                </div>
+                <div class="footer__col footer__col--addresses">
+                    <p class="footer__subtitle">Наши адреса:</p>
+                    <p class="footer__text2">ул. 60 лет Октября, д. 18<br>ул. Сталеваров, д. 5а (ДК «Восток»)<br>шоссе Металлургов, д. 51<br>проспект Победы, д. 384<br>Комсомольский проспект, д. 80<br>ул. Комарова, д. 114</p>
+                </div>
+            </div>
+
+            <!-- Карта сайта -->
+            <div class="footer__sitemap">
+                <h3 class="footer__sitemap-title">Карта сайта</h3>
+                <hr class="footer__divider">
+                <div class="footer__sitemap-columns">
+                    <div class="footer__sitemap-col">
+                        <p class="footer__sitemap-heading">Главная страница</p>
+                        <ul>
+                            <li>О центре</li>
+                            <li>Филиалы</li>
+                            <li>Схема проезда</li>
+                        </ul>
+                        <p class="footer__sitemap-heading">Обучение</p>
+                        <ul>
+                            <li>Автошкола</li>
+                            <li>Спецтехника</li>
+                        </ul>
+                        <p class="footer__sitemap-heading">Акции</p>
+                        <ul>
+                            <li>Акции</li>
+                            <li>Скидки</li>
+                        </ul>
+                    </div>
+                    <div class="footer__sitemap-col">
+                        <p class="footer__sitemap-heading">Вопросы</p>
+                        <ul>
+                            <li>О зачислении в автошколу</li>
+                            <li>Об обучении</li>
+                            <li>Об экзаменах</li>
+                        </ul>
+                        <p class="footer__sitemap-heading1">Отзывы</p>
+                        <p class="footer__sitemap-heading">Контакты</p>
+                        <ul>
+                            <li>Схема проезда</li>
+                            <li>Адреса филиалов</li>
+                            <li>Режим работы</li>
+                            <li>Контакты для связи</li>
+                        </ul>
+                    </div>
+                    <div class="footer__sitemap-col">
+                        <p class="footer__sitemap-heading">Личный кабинет</p>
+                        <ul>
+                            <li>Вход</li>
+                            <li>Регистрация</li>
+                        </ul>
+                        <p class="footer__sitemap-heading1">Записаться на обучение</p>
+                        <p class="footer__sitemap-heading1">Реквизиты компании</p>
+                        <p class="footer__sitemap-heading">Инструкторы</p>
+                        <ul>
+                            <li>Преподаватели по теории</li>
+                            <li>Инструкторы по вождению</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="footer__divider">
+                <div class="footer__legal">
+                    <a href="#">Политика обработки персональных данных</a>
+                    <a href="#">Оферта</a>
+                    <a href="#">Согласие на обработку персональных данных</a>
+                </div>
+                <div class="footer__search">
+                    <div class="search-box">
+                        <input type="text" placeholder="Поиск" class="search-box__input">
+                        <button type="submit" class="search-box__btn">
+                            <img src="../images/search.svg" alt="" class="search-box__icon">
+                        </button>
+                    </div>
+                    <p class="footer__copyright">©АНО ДПО «Учебный центр Лидер» 2026</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Yandex Maps API -->
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=422b52c4-aa7b-400d-9fd7-07c79fdf32c4&lang=ru_RU" type="text/javascript"></script>
+    <!-- Твой скрипт для карты -->
+    <script src="../js/map.js"></script>
+</body>
+</html>
