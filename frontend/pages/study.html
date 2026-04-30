@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Автошкола Лидер</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/study.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container header__inner">
+            <a href="../pages/main.html" class="logo">
+                <img src="../images/logo.svg" alt="Автошкола Лидер" class="logo__img">
+            </a>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li><a href="../pages/study.html">Обучение</a></li>
+                    <li><a href="#">Акции</a></li>
+                    <li><a href="#">Инструкторы</a></li>
+                    <li><a href="#">Вопросы</a></li>
+                    <li><a href="#">Отзывы</a></li>
+                    <li><a href="#">Контакты</a></li>
+                </ul>
+            </nav>
+            <button class="btn btn--login">Войти</button>
+        </div>
+    </header>
+
+    <main class="study-main">
+        <!-- Хлебные крошки -->
+        <div class="breadcrumbs container">
+            <a href="main.html">Главная</a>
+            <span class="breadcrumbs__sep">/</span>
+            <span class="breadcrumbs__current">Обучение</span>
+        </div>
+
+        <!-- Заголовок и описание -->
+        <section class="study-hero container">
+            <h1 class="study-hero__title">Обучение в автошколе</h1>
+            <p class="study-hero__desc">
+                Наша автошкола предлагает обучение на категории B и A, для легковых автомобилей вы можете выбрать как механическую коробку передач (МКПП), так и автоматическую (АКПП). Кроме того, мы готовим водителей спецтехники: экскаваторов, тракторов, бульдозеров и т.д. Теоретический курс можно изучать в дистанционном формате, в удобное для вас время. Практические занятия проходят на нашем собственном автодроме
+            </p>
+        </section>
+
+        <!-- Автошкола -->
+        <section class="study-category container">
+            <h2 class="study-category__title">Автошкола</h2>
+            <div class="study-cards">
+
+                <!-- Карточка 1: МКПП -->
+                <article class="course-card">
+                    <a href="#" class="course-card__link-overlay"></a>
+                    <div class="course-card__name">
+                        <a href="#">Автомобиль с МКПП — категория «B»</a>
+                    </div>
+                    <div class="course-card__duration">2,5 месяца</div>
+                    <div class="course-card__prices">
+                        <div class="price-option">
+                            <span class="price-option__label">дистанционное</span>
+                            <div class="price-option__values">
+                                <span class="price-current">46 700 руб.</span>
+                                <span class="price-old">48 700 руб.</span>
+                            </div>
+                        </div>
+                        <div class="price-option">
+                            <span class="price-option__label">очное</span>
+                            <div class="price-option__values">
+                                <span class="price-current">49 700 руб.</span>
+                                <span class="price-old">51 700 руб.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn course-card__btn">Записаться</a>
+                </article>
+
+                <!-- Карточка 2: АКПП -->
+                <article class="course-card">
+                    <a href="#" class="course-card__link-overlay"></a>
+                    <div class="course-card__name">
+                        <a href="#">Автомобиль с АКПП — категория «B» автомат</a>
+                    </div>
+                    <div class="course-card__duration">2,5 месяца</div>
+                    <div class="course-card__prices">
+                        <div class="price-option">
+                            <span class="price-option__label">дистанционное</span>
+                            <div class="price-option__values">
+                                <span class="price-current">50 300 руб.</span>
+                                <span class="price-old">53 300 руб.</span>
+                            </div>
+                        </div>
+                        <div class="price-option">
+                            <span class="price-option__label">очное</span>
+                            <div class="price-option__values">
+                                <span class="price-current">53 700 руб.</span>
+                                <span class="price-old">55 700 руб.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn course-card__btn">Записаться</a>
+                </article>
+
+                <!-- Карточка 3: Мотоцикл -->
+                <article class="course-card">
+                    <a href="#" class="course-card__link-overlay"></a>
+                    <div class="course-card__name">
+                        <a href="#">Мотоцикл — категория «A»</a>
+                    </div>
+                    <div class="course-card__duration">2,5 месяца</div>
+                    <div class="course-card__prices">
+                        <div class="price-option">
+                            <span class="price-option__label">дистанционное</span>
+                            <div class="price-option__values">
+                                <span class="price-current">25 000 руб.</span>
+                                <span class="price-old">25 000 руб.</span>
+                            </div>
+                        </div>
+                        <div class="price-option">
+                            <span class="price-option__label">очное</span>
+                            <div class="price-option__values">
+                                <span class="price-current">25 000 руб.</span>
+                                <span class="price-old">25 000 руб.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn course-card__btn">Записаться</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- Спецтехника -->
+        <section class="study-category container">
+            <h2 class="study-category__title">Спецтехника</h2>
+            <div class="study-cards">
+                <!-- Карточки, которые уже были, + 10 новых (всего 14) -->
+
+                <!-- 1. Погрузчик -->
+                <article class="course-card">
+                    <a href="#" class="course-card__link-overlay"></a>
+                    <div class="course-card__name">
+                        <a href="#">Погрузчик — категории «B», «C», «D»</a>
+                    </div>
+                    <div class="course-card__duration">1,5 месяца</div>
+                    <div class="course-card__prices course-card__prices--single">
+                        <span class="price-current">15 000 руб.</span>
+                        <span class="price-old">20 000 руб.</span>
+                    </div>
+                    <a href="#" class="btn course-card__btn">Записаться</a>
+                </article>
+
+                <!-- 2. Экскаватор -->
+                <article class="course-card">
+                    <a href="#" class="course-card__link-overlay"></a>
+                    <div class="course-card__name">
+                        <a href="#">Экскаватор — категории «C», «E», «D»</a>
+                    </div>
+                    <div class="course-card__duration">2 месяца</div>
+                    <div class="course-card__prices course-card__prices--single">
+                        <span class="price-current">15 000 руб.</span>
+                        <span class="price-old">18 000 руб.</span>
+                    </div>
+                    <a href="#" class="btn course-card__btn">Записаться</a>
+                </article>
+
+                <!-- 3. Трактор -->
+                <article class="course-card">
+                    <a href="#" class="course-card__link-overlay"></a>
+                    <div class="course-card__name">
+                        <a href="#">Трактор — категории «B», «C», «E», «D»</a>
+                    </div>
+                    <div class="course-card__duration">1 месяц</div>
+                    <div class="course-card__prices course-card__prices--single">
+                        <span class="price-current">25 000 руб.</span>
+                        <span class="price-old">30 000 руб.</span>
+                    </div>
+                    <a href="#" class="btn course-card__btn">Записаться</a>
+                </article>
+
+                <!-- 4. Бульдозер -->
+                <article class="course-card">
+                    <a href="#" class="course-card__link-overlay"></a>
+                    <div class="course-card__name">
+                        <a href="#">Бульдозер — категория «E» с 19 лет</a>
+                    </div>
+                    <div class="course-card__duration">2 месяца</div>
+                    <div class="course-card__prices course-card__prices--single">
+                        <span class="price-current">15 000 руб.</span>
+                        <span class="price-old">22 000 руб.</span>
+                    </div>
+                    <a href="#" class="btn course-card__btn">Записаться</a>
+                </article>
+
+                <!-- 5. Автогрейдер -->
+                <article class="course-card">
+                    <a href="#" class="course-card__link-overlay"></a>
+                    <div class="course-card__name">
+                        <a href="#">Автогрейдер — категории «C», «D» <br> с 19 лет</a>
+                    </div>
+                    <div class="course-card__duration">2 месяца</div>
+                    <div class="course-card__prices course-card__prices--single">
+                        <span class="price-current">15 000 руб.</span>
+                        <span class="price-old">25 000 руб.</span>
+                    </div>
+                    <a href="#" class="btn course-card__btn">Записаться</a>
+                </article>
+
+                <!-- 6. Автомобильный кран -->
+                <article class="course-card">
+                    <a href="#" class="course-card__link-overlay"></a>
+                    <div class="course-card__name">
+                        <a href="#">Автомобильный кран</a>
+                    </div>
+                    <div class="course-card__duration">2 месяца</div>
+                    <div class="course-card__prices course-card__prices--single">
+                        <span class="price-current">18 000 руб.</span>
+                    </div>
+                    <a href="#" class="btn course-card__btn">Записаться</a>
+                </article>
+
+                <!-- 7. Мостовой кран -->
+                <article class="course-card">
+                    <a href="#" class="course-card__link-overlay"></a>
+                    <div class="course-card__name">
+                        <a href="#">Мостовой кран</a>
+                    </div>
+                    <div class="course-card__duration">2 месяца</div>
+                    <div class="course-card__prices course-card__prices--single">
+                        <span class="price-current">18 000 руб.</span>
+                    </div>
+                    <a href="#" class="btn course-card__btn">Записаться</a>
+                </article>
+
+                <!-- 8. Автовышка и автогидроподъемник -->
+                <article class="course-card">
+                    <a href="#" class="course-card__link-overlay"></a>
+                    <div class="course-card__name">
+                        <a href="#">Автовышка и автогидроподъемник</a>
+                    </div>
+                    <div class="course-card__duration">2,5 месяца</div>
+                    <div class="course-card__prices course-card__prices--single">
+                        <span class="price-current">18 000 руб.</span>
+                    </div>
+                    <a href="#" class="btn course-card__btn">Записаться</a>
+                </article>
+
+                <!-- 9. Квадроцикл и снегоход -->
+                <article class="course-card">
+                    <a href="#" class="course-card__link-overlay"></a>
+                    <div class="course-card__name">
+                        <a href="#">Квадроцикл и снегоход — категория «AI» с 16 лет</a>
+                    </div>
+                    <div class="course-card__duration">1,5 месяца</div>
+                    <div class="course-card__prices course-card__prices--single">
+                        <span class="price-current">16 000 руб.</span>
+                    </div>
+                    <a href="#" class="btn course-card__btn">Записаться</a>
+                </article>
+
+                <!-- 10. Внедорожные автотранспортные средства (All) с 19 лет -->
+                <article class="course-card">
+                    <a href="#" class="course-card__link-overlay"></a>
+                    <div class="course-card__name">
+                        <a href="#">Внедорожные автотранспортные средства — категория «All» с 19 лет</a>
+                    </div>
+                    <div class="course-card__duration">1,5 месяца</div>
+                    <div class="course-card__prices course-card__prices--single">
+                        <span class="price-current">от 18 000 руб.</span>
+                    </div>
+                    <a href="#" class="btn course-card__btn">Записаться</a>
+                </article>
+
+                <!-- 11. Внедорожные автотранспортные средства (All) БелАЗ -->
+                <article class="course-card">
+                    <a href="#" class="course-card__link-overlay"></a>
+                    <div class="course-card__name">
+                        <a href="#">Внедорожные автотранспортные средства — категория «All» (БелАЗ)</a>
+                    </div>
+                    <div class="course-card__duration">1,5 месяца</div>
+                    <div class="course-card__prices course-card__prices--single">
+                        <span class="price-current">35 000 руб.</span>
+                    </div>
+                    <a href="#" class="btn course-card__btn">Записаться</a>
+                </article>
+
+                <!-- 12. Машинист катка -->
+                <article class="course-card">
+                    <a href="#" class="course-card__link-overlay"></a>
+                    <div class="course-card__name">
+                        <a href="#">Машинист катка — категория «C»</a>
+                    </div>
+                    <div class="course-card__duration">2 месяца</div>
+                    <div class="course-card__prices course-card__prices--single">
+                        <span class="price-current">15 000 руб.</span>
+                    </div>
+                    <a href="#" class="btn course-card__btn">Записаться</a>
+                </article>
+
+                <!-- 13. Машинист уплотняющей машины «Ратрак» -->
+                <article class="course-card">
+                    <a href="#" class="course-card__link-overlay"></a>
+                    <div class="course-card__name">
+                        <a href="#">Машинист уплотняющей машины «Ратрак» — категория «E»</a>
+                    </div>
+                    <div class="course-card__duration">2 месяца</div>
+                    <div class="course-card__prices course-card__prices--single">
+                        <span class="price-current">15 000 руб.</span>
+                    </div>
+                    <a href="#" class="btn course-card__btn">Записаться</a>
+                </article>
+
+                <!-- 14. Машинист крана на самоходном ходу -->
+                <article class="course-card">
+                    <a href="#" class="course-card__link-overlay"></a>
+                    <div class="course-card__name">
+                        <a href="#">Машинист крана на самоходном ходу</a>
+                    </div>
+                    <div class="course-card__duration">2,5 месяца</div>
+                    <div class="course-card__prices course-card__prices--single">
+                        <span class="price-current">15 000 руб.</span>
+                    </div>
+                    <a href="#" class="btn course-card__btn">Записаться</a>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал сайта -->
+    <footer class="footer">
+        <div class="container footer__inner">
+            <!-- Верхняя часть с контактами -->
+            <div class="footer__top">
+                <div class="footer__col footer__col--contacts">
+                    <div class="footer__contact-item">
+                        <img src="../images/email.svg" alt="" class="footer__icon footer__icon--email">
+                        <span>info@lider-center.com</span>
+                    </div>
+                    <div class="footer__contact-item">
+                        <img src="../images/phone.svg" alt="" class="footer__icon footer__icon--phone">
+                        <span>+7(351) 700-74-00</span>
+                    </div>
+                    <div class="footer__social">
+                        <a href="#"><img src="../images/whatsapp.svg" alt="" class="footer__icon footer__icon--social"></a>
+                        <a href="#"><img src="../images/telegram.svg" alt="" class="footer__icon footer__icon--social"></a>
+                        <a href="#"><img src="../images/vk.svg" alt="" class="footer__icon footer__icon--social"></a>
+                    </div>
+                </div>
+                <div class="footer__col footer__col--hours">
+                    <p class="footer__subtitle">Режим работы:</p>
+                    <p class="footer__text">пн — чт с 9:00 до 18:00<br>пт с 9:00 до 17:00<br>сб, вс — выходные<br>перерыв с 13:00 до 14:00</p>
+                    <p class="footer__city">г. Челябинск</p>
+                </div>
+                <div class="footer__col footer__col--addresses">
+                    <p class="footer__subtitle">Наши адреса:</p>
+                    <p class="footer__text2">ул. 60 лет Октября, д. 18<br>ул. Сталеваров, д. 5а (ДК «Восток»)<br>шоссе Металлургов, д. 51<br>проспект Победы, д. 384<br>Комсомольский проспект, д. 80<br>ул. Комарова, д. 114</p>
+                </div>
+            </div>
+
+            <!-- Карта сайта -->
+            <div class="footer__sitemap">
+                <h3 class="footer__sitemap-title">Карта сайта</h3>
+                <hr class="footer__divider">
+                <div class="footer__sitemap-columns">
+                    <div class="footer__sitemap-col">
+                        <p class="footer__sitemap-heading">Главная страница</p>
+                        <ul>
+                            <li>О центре</li>
+                            <li>Филиалы</li>
+                            <li>Схема проезда</li>
+                        </ul>
+                        <p class="footer__sitemap-heading">Обучение</p>
+                        <ul>
+                            <li>Автошкола</li>
+                            <li>Спецтехника</li>
+                        </ul>
+                        <p class="footer__sitemap-heading">Акции</p>
+                        <ul>
+                            <li>Акции</li>
+                            <li>Скидки</li>
+                        </ul>
+                    </div>
+                    <div class="footer__sitemap-col">
+                        <p class="footer__sitemap-heading">Вопросы</p>
+                        <ul>
+                            <li>О зачислении в автошколу</li>
+                            <li>Об обучении</li>
+                            <li>Об экзаменах</li>
+                        </ul>
+                        <p class="footer__sitemap-heading1">Отзывы</p>
+                        <p class="footer__sitemap-heading">Контакты</p>
+                        <ul>
+                            <li>Схема проезда</li>
+                            <li>Адреса филиалов</li>
+                            <li>Режим работы</li>
+                            <li>Контакты для связи</li>
+                        </ul>
+                    </div>
+                    <div class="footer__sitemap-col">
+                        <p class="footer__sitemap-heading">Личный кабинет</p>
+                        <ul>
+                            <li>Вход</li>
+                            <li>Регистрация</li>
+                        </ul>
+                        <p class="footer__sitemap-heading1">Записаться на обучение</p>
+                        <p class="footer__sitemap-heading1">Реквизиты компании</p>
+                        <p class="footer__sitemap-heading">Инструкторы</p>
+                        <ul>
+                            <li>Преподаватели по теории</li>
+                            <li>Инструкторы по вождению</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="footer__divider">
+                <div class="footer__legal">
+                    <a href="#">Политика обработки персональных данных</a>
+                    <a href="#">Оферта</a>
+                    <a href="#">Согласие на обработку персональных данных</a>
+                </div>
+                <div class="footer__search">
+                    <div class="search-box">
+                        <input type="text" placeholder="Поиск" class="search-box__input">
+                        <button type="submit" class="search-box__btn">
+                            <img src="../images/search.svg" alt="" class="search-box__icon">
+                        </button>
+                    </div>
+                    <p class="footer__copyright">©АНО ДПО «Учебный центр Лидер» 2026</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

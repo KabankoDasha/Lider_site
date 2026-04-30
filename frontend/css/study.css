@@ -1,0 +1,351 @@
+/* ========================
+   Базовые настройки (шрифты уже подключены в main.css)
+   ======================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+    background-color: #fcfcfc;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* ========================
+   Основной контент
+   ======================== */
+.study-main {
+    margin-top: 135px;
+    padding-top: 0;
+}
+
+/* ========================
+   Хлебные крошки
+   ======================== */
+.breadcrumbs {
+    font-size: 18px;
+    font-weight: 400;
+    color: #929292;
+    margin-bottom: 60px;
+    padding-top: 0;
+}
+
+.breadcrumbs a {
+    color: #929292;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumbs a:hover {
+    color: #D90D26;
+}
+
+.breadcrumbs__sep {
+    margin: 0 2px;
+}
+
+.breadcrumbs__current {
+    color: #929292;
+}
+
+/* ========================
+   Заголовок и описание
+   ======================== */
+.study-hero__title {
+    font-size: 50px;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 30px;
+    color: #000;
+}
+
+.study-hero__desc {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.5;
+    max-width: 1200px;
+    margin-bottom: 60px;
+    color: #000;
+}
+
+/* ========================
+   Категория обучения
+   ======================== */
+.study-category {
+    margin-bottom: 60px;
+}
+
+.study-category__title {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+/* ========================
+   Карточки курсов
+   ======================== */
+.study-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.course-card {
+    background-color: #F0F0F0;
+    border-radius: 10px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    min-height: 150px;
+    transition: box-shadow 0.3s, transform 0.2s;
+    position: relative;                  /* для оверлея ссылки */
+    overflow: hidden;
+    gap: 0;
+}
+
+.course-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Оверлей-ссылка на всю карточку */
+.course-card__link-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    /* Никакого фона, просто прозрачная ссылка */
+}
+
+/* Увеличиваем z-index для кнопки, чтобы она была кликабельна */
+.course-card__btn {
+    position: relative;
+    z-index: 2;
+}
+
+/* Название курса */
+.course-card__name {
+    width: 417px;
+    max-width: 417px;
+    padding-left: 30px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;                        
+}
+
+.course-card__name a {
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.3;
+    word-break: break-word;
+    transition: color 0.2s;
+}
+
+.course-card__name a:hover {
+    color: #D90D26;
+}
+
+/* Длительность */
+.course-card__duration {
+    font-size: 18px;
+    font-weight: 400;
+    color: #000;
+    width: 120px;
+    text-align: center;
+    flex-shrink: 0;
+    margin-left: 49px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Блок цен */
+.course-card__prices {
+    display: flex;
+    flex-direction: column;              /* опции идут вертикально */
+    gap: 5px;
+    margin-left: 70px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.price-option {
+    display: flex;
+    flex-direction: column;              /* метка над ценой */
+    align-items: flex-start;
+    gap: 5px;                           /* между меткой и ценой */
+}
+
+.price-option__label {
+    font-size: 18px;
+    font-weight: 400;
+    color: #969696;
+    white-space: nowrap;
+}
+
+.price-option__values {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.price-current {
+    font-size: 22px;
+    font-weight: 400;
+    color: #000;
+}
+
+.price-old {
+    font-size: 18px;
+    font-weight: 400;
+    color: #b9b9b9;
+    position: relative;
+    display: inline-block;
+}
+
+/* Прямая перечёркивающая полоска */
+.price-old::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    background-color: #D90D26;
+    transform: none;                     /* убираем наклон */
+}
+
+/* Одиночный блок цен (спецтехника) */
+.course-card__prices--single {
+    flex-direction: row;                 /* цена и старая в строку */
+    align-items: center;
+    gap: 15px;
+}
+
+.course-card__prices--single .price-current {
+    order: 1;
+}
+
+.course-card__prices--single .price-old {
+    order: 2;
+}
+
+/* Кнопка */
+.course-card__btn {
+    margin-left: auto;
+    margin-right: 30px;
+    width: 180px;
+    height: 70px;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+/* Анимация кнопки при наведении */
+.course-card__btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* ========================
+   Адаптивность
+   ======================== */
+@media (max-width: 1100px) {
+    .course-card {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .course-card__name {
+        width: 100%;
+        max-width: 100%;
+        padding: 20px 30px 10px;
+    }
+
+    .course-card__duration {
+        margin-left: 30px;
+        width: auto;
+        text-align: left;
+        padding-bottom: 10px;
+    }
+
+    .course-card__prices {
+        margin-left: 30px;
+        padding-bottom: 10px;
+    }
+
+    .course-card__btn {
+        margin: 0 30px 20px auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 16px;
+    }
+
+    .study-main {
+        margin-top: 100px;
+    }
+
+    .breadcrumbs {
+        margin-bottom: 40px;
+        font-size: 16px;
+    }
+
+    .study-hero__title {
+        font-size: 36px;
+    }
+
+    .study-hero__desc {
+        font-size: 16px;
+    }
+
+    .course-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    .course-card__name {
+        width: 100%;
+        padding: 0;
+        margin-bottom: 15px;
+    }
+
+    .course-card__duration {
+        margin-left: 0;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .course-card__prices {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .course-card__btn {
+        width: 100%;
+        margin: 20px 0 0;
+    }
+}
