@@ -17,11 +17,11 @@
             <nav class="nav">
                 <ul class="nav__list">
                     <li><a href="../pages/study.html">Обучение</a></li>
-                    <li><a href="#">Акции</a></li>
-                    <li><a href="#">Инструкторы</a></li>
-                    <li><a href="#">Вопросы</a></li>
-                    <li><a href="#">Отзывы</a></li>
-                    <li><a href="#">Контакты</a></li>
+                    <li><a href="../pages/sale.html">Акции</a></li>
+                    <li><a href="../pages/instructors.html">Инструкторы</a></li>
+                    <li><a href="../pages/faq.html">Вопросы</a></li>
+                    <li><a href="../pages/otzyv.html">Отзывы</a></li>
+                    <li><a href="../pages/contact.html">Контакты</a></li>
                 </ul>
             </nav>
             <button class="btn btn--login">Войти</button>
@@ -31,7 +31,7 @@
     <main class="study-main">
         <!-- Хлебные крошки -->
         <div class="breadcrumbs container">
-            <a href="main.html">Главная</a>
+            <a href="../pages/main.html">Главная</a>
             <span class="breadcrumbs__sep">/</span>
             <span class="breadcrumbs__current">Обучение</span>
         </div>
@@ -40,12 +40,12 @@
         <section class="study-hero container">
             <h1 class="study-hero__title">Обучение в автошколе</h1>
             <p class="study-hero__desc">
-                Наша автошкола предлагает обучение на категории B и A, для легковых автомобилей вы можете выбрать как механическую коробку передач (МКПП), так и автоматическую (АКПП). Кроме того, мы готовим водителей спецтехники: экскаваторов, тракторов, бульдозеров и т.д. Теоретический курс можно изучать в дистанционном формате, в удобное для вас время. Практические занятия проходят на нашем собственном автодроме
+                Наша автошкола предлагает обучение на категории B и A, для легковых автомобилей вы можете выбрать как механическую коробку передач (МКПП), так и автоматическую (АКПП). Кроме того, мы готовим водителей спецтехники: экскаваторов, тракторов, бульдозеров и т.д. Теоретический курс можно изучать в дистанционном формате, в удобное для вас время,<br>а практические занятия проходят на нашем собственном автодроме
             </p>
         </section>
 
         <!-- Автошкола -->
-        <section class="study-category container">
+        <section id="auto" class="study-category container">
             <h2 class="study-category__title">Автошкола</h2>
             <div class="study-cards">
 
@@ -130,7 +130,7 @@
         </section>
 
         <!-- Спецтехника -->
-        <section class="study-category container">
+        <section id="special" class="study-category container">
             <h2 class="study-category__title">Спецтехника</h2>
             <div class="study-cards">
                 <!-- Карточки, которые уже были, + 10 новых (всего 14) -->
@@ -332,17 +332,17 @@
             <div class="footer__top">
                 <div class="footer__col footer__col--contacts">
                     <div class="footer__contact-item">
-                        <img src="../images/email.svg" alt="" class="footer__icon footer__icon--email">
+                        <img src="../images/email.svg" alt="Иконка почты" class="footer__icon footer__icon--email">
                         <span>info@lider-center.com</span>
                     </div>
                     <div class="footer__contact-item">
-                        <img src="../images/phone.svg" alt="" class="footer__icon footer__icon--phone">
+                        <img src="../images/phone.svg" alt="Иконка телефона" class="footer__icon footer__icon--phone">
                         <span>+7(351) 700-74-00</span>
                     </div>
                     <div class="footer__social">
-                        <a href="#"><img src="../images/whatsapp.svg" alt="" class="footer__icon footer__icon--social"></a>
-                        <a href="#"><img src="../images/telegram.svg" alt="" class="footer__icon footer__icon--social"></a>
-                        <a href="#"><img src="../images/vk.svg" alt="" class="footer__icon footer__icon--social"></a>
+                        <a href="#"><img src="../images/whatsapp.svg" alt="Автошкола Лидер в WhatsApp" class="footer__icon footer__icon--social"></a>
+                        <a href="#"><img src="../images/telegram.svg" alt="Автошкола Лидер в Telegram" class="footer__icon footer__icon--social"></a>
+                        <a href="#"><img src="../images/vk.svg" alt="Автошкола Лидер в ВК" class="footer__icon footer__icon--social"></a>
                     </div>
                 </div>
                 <div class="footer__col footer__col--hours">
@@ -362,59 +362,59 @@
                 <hr class="footer__divider">
                 <div class="footer__sitemap-columns">
                     <div class="footer__sitemap-col">
-                        <p class="footer__sitemap-heading">Главная страница</p>
+                        <p class="footer__sitemap-heading"><a href="../pages/main.html">Главная страница</a></p>
                         <ul>
-                            <li>О центре</li>
-                            <li>Филиалы</li>
-                            <li>Схема проезда</li>
+                            <li><a href="../pages/main.html#about">О центре</a></li>
+                            <li><a href="../pages/main.html#branches">Филиалы</a></li>
+                            <li><a href="../pages/main.html#map">Схема проезда</a></li>
                         </ul>
-                        <p class="footer__sitemap-heading">Обучение</p>
+                        <p class="footer__sitemap-heading"><a href="../pages/study.html">Обучение</a></p>
                         <ul>
-                            <li>Автошкола</li>
-                            <li>Спецтехника</li>
+                            <li><a href="../pages/study.html#auto">Автошкола</a></li>
+                            <li><a href="../pages/study.html#special">Спецтехника</a></li>
                         </ul>
-                        <p class="footer__sitemap-heading">Акции</p>
+                        <p class="footer__sitemap-heading"><a href="../pages/sale.html">Акции</a></p>
                         <ul>
-                            <li>Акции</li>
-                            <li>Скидки</li>
-                        </ul>
-                    </div>
-                    <div class="footer__sitemap-col">
-                        <p class="footer__sitemap-heading">Вопросы</p>
-                        <ul>
-                            <li>О зачислении в автошколу</li>
-                            <li>Об обучении</li>
-                            <li>Об экзаменах</li>
-                        </ul>
-                        <p class="footer__sitemap-heading1">Отзывы</p>
-                        <p class="footer__sitemap-heading">Контакты</p>
-                        <ul>
-                            <li>Схема проезда</li>
-                            <li>Адреса филиалов</li>
-                            <li>Режим работы</li>
-                            <li>Контакты для связи</li>
+                            <li><a href="../pages/sale.html#promo">Акции</a></li>
+                            <li><a href="../pages/sale.html#regular">Скидки</a></li>
                         </ul>
                     </div>
                     <div class="footer__sitemap-col">
-                        <p class="footer__sitemap-heading">Личный кабинет</p>
+                        <p class="footer__sitemap-heading"><a href="../pages/faq.html">Вопросы</a></p>
                         <ul>
-                            <li>Вход</li>
-                            <li>Регистрация</li>
+                            <li><a href="../pages/faq.html#enrollment">О зачислении в автошколу</a></li>
+                            <li><a href="../pages/faq.html#training">Об обучении</a></li>
+                            <li><a href="../pages/faq.html#exams">Об экзаменах</a></li>
                         </ul>
-                        <p class="footer__sitemap-heading1">Записаться на обучение</p>
-                        <p class="footer__sitemap-heading1">Реквизиты компании</p>
-                        <p class="footer__sitemap-heading">Инструкторы</p>
+                        <p class="footer__sitemap-heading1"><a href="../pages/otzyv.html">Отзывы</a></p>
+                        <p class="footer__sitemap-heading"><a href="../pages/contact.html">Контакты</a></p>
                         <ul>
-                            <li>Преподаватели по теории</li>
-                            <li>Инструкторы по вождению</li>
+                            <li><a href="../pages/contact.html#map">Схема проезда</a></li>
+                            <li><a href="../pages/contact.html#addresses">Адреса филиалов</a></li>
+                            <li><a href="../pages/contact.html#hours">Режим работы</a></li>
+                            <li><a href="../pages/contact.html#contacts">Контакты для связи</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__sitemap-col">
+                        <p class="footer__sitemap-heading"><a href="../pages/login.html">Личный кабинет</a></p>
+                        <ul>
+                            <li><a href="../pages/login.html#login">Вход</a></li>
+                            <li><a href="../pages/login.html#register">Регистрация</a></li>
+                        </ul>
+                        <p class="footer__sitemap-heading1"><a href="../pages/forma.html">Записаться на обучение</a></p>
+                        <p class="footer__sitemap-heading1"><a href="../pages/data.html">Реквизиты компании</a></p>
+                        <p class="footer__sitemap-heading"><a href="../pages/instructors.html">Инструкторы</a></p>
+                        <ul>
+                            <li><a href="../pages/instructors.html#theory">Преподаватели по теории</a></li>
+                            <li><a href="../pages/instructors.html#driving">Инструкторы по вождению</a></li>
                         </ul>
                     </div>
                 </div>
                 <hr class="footer__divider">
                 <div class="footer__legal">
-                    <a href="#">Политика обработки персональных данных</a>
-                    <a href="#">Оферта</a>
-                    <a href="#">Согласие на обработку персональных данных</a>
+                    <a href="../policy.pdf">Политика обработки персональных данных</a>
+                    <a href="../oferta.pdf">Оферта</a>
+                    <a href="../agree.pdf">Согласие на обработку персональных данных</a>
                 </div>
                 <div class="footer__search">
                     <div class="search-box">

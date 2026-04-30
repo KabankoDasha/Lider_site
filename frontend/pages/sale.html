@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Автошкола Лидер</title>
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/sale.css">
 </head>
 <body>
     <!-- Шапка -->
@@ -27,133 +28,99 @@
         </div>
     </header>
 
-    <!-- Основной контент -->
-    <main>
-        <!-- Первый экран -->
-        <section class="hero container">
-            <h1 class="hero__title">
-                <span class="hero__word">Автошкола</span>
-                <span class="hero__word">лидер</span>
-            </h1>
-            <div class="hero__bottom">
-                <p class="hero__subtitle">Обучение водителей на любые<br>транспортные средства</p>
-                <button class="btn btn--cta">Записаться</button>
+    <main class="sale-main">
+        <!-- Хлебные крошки -->
+        <div class="breadcrumbs container">
+            <a href="../pages/main.html">Главная</a>
+            <span class="breadcrumbs__sep">/</span>
+            <span class="breadcrumbs__current">Акции</span>
+        </div>
+
+        <!-- Заголовок и описание -->
+        <section class="sale-hero container">
+            <h1 class="sale-hero__title">Акции и скидки на обучение</h1>
+            <p class="sale-hero__desc">
+                Мы стараемся сделать обучение в нашем центре доступным всем, поэтому часто проводим специальные акции и предлагаем скидки. Для уточнения информации по поводу акций вы можете связаться с нами по номеру телефона +7(351) 700-74-00 или<br>в любом удобном для вас мессенджере. Акции и скидки не суммируются
+            </p>
+        </section>
+
+        <!-- Актуальные акции -->
+        <section id="promo" class="promo-section container">
+            <div class="promo-section__header">
+                <h2 class="promo-section__title">Актуальные акции</h2>
+                <div class="promo-section__controls">
+                    <button class="promo-arrow promo-arrow--left" aria-label="Листать влево">
+                        <img src="../images/arrow.svg" alt="" class="promo-arrow__icon">
+                    </button>
+                    <button class="promo-arrow promo-arrow--right" aria-label="Листать вправо">
+                        <img src="../images/arrow.svg" alt="" class="promo-arrow__icon">
+                    </button>
+                </div>
+            </div>
+            <div class="promo-cards">
+                <article class="promo-card">
+                    <div class="promo-card__inner">
+                        <h3 class="promo-card__title">Акция на автокурсы категории «B»</h3>
+                        <p class="promo-card__discount">-10%</p>
+                        <p class="promo-card__date">скидка действительна до 31.03.2026</p>
+                    </div>
+                </article>
+                <article class="promo-card">
+                    <div class="promo-card__inner">
+                        <h3 class="promo-card__title">Акция 1+1 на обучение автомобиль+мотоцикл</h3>
+                        <p class="promo-card__discount">-15%</p>
+                        <p class="promo-card__date">скидка действительна до 31.03.2026</p>
+                    </div>
+                </article>
+                <article class="promo-card">
+                    <div class="promo-card__inner">
+                        <h3 class="promo-card__title">Акция на курсы водителя квадроцикла</h3>
+                        <p class="promo-card__discount">-50%</p>
+                        <p class="promo-card__date">скидка действительна до 15.04.2026</p>
+                    </div>
+                </article>
             </div>
         </section>
 
-        <!-- Карточки курсов -->
-        <section class="courses container">
-            <div class="cards">
-                <!-- Развёрнутая карточка по умолчанию -->
-                <div class="card card--expanded" data-category="b">
-                    <div class="card__content">
-                        <img src="../images/car1.svg" alt="Автомобиль" class="card__img-small">
-                        <div class="card__info">
-                            <h3 class="card__title">Обучение на автомобиль с МКПП</h3>
-                            <p class="card__category">Категория "B"</p>
-                        </div>
-                        <div class="card__visual">
-                            <img src="../images/gray1.svg" alt="Автомобиль" class="card__img-big">
-                        </div>
-                    </div>
-                    <button class="btn btn--detail">Узнать подробнее <span class="arrow"></span></button>
+        <!-- Постоянные скидки -->
+        <section id="regular" class="regular-discounts container">
+            <h2 class="regular-discounts__title">Наши постоянные скидки</h2>
+            <div class="discount-list">
+                <div class="discount-item">
+                    <span class="discount-item__name">«День рождения»</span>
+                    <span class="discount-item__value">-1000 руб.</span>
+                    <span class="discount-item__desc">при заключении договора в день рождения</span>
                 </div>
-
-                <!-- Свёрнутые карточки -->
-                <div class="card card--collapsed2" data-category="a">
-                    <div class="card__collapsed-content">
-                        <img src="../images/gray2.svg" alt="Мотоцикл" class="card__icon">
-                    </div>
+                <div class="discount-item">
+                    <span class="discount-item__name">«Друзья»</span>
+                    <span class="discount-item__value">-1000 руб.</span>
+                    <span class="discount-item__desc">приводи друга и получи скидку для себя и друга</span>
                 </div>
-                <div class="card card--collapsed1" data-category="b">
-                    <div class="card__collapsed-content">
-                        <img src="../images/gray3.svg" alt="Машина АКПП" class="card__icon">
-                    </div>
+                <div class="discount-item">
+                    <span class="discount-item__name">«Статус»</span>
+                    <span class="discount-item__value">-1000 руб.</span>
+                    <span class="discount-item__desc">студентам, школьникам, участникам боевых действий</span>
                 </div>
-                <div class="card card--collapsed2" data-category="d">
-                    <div class="card__collapsed-content">
-                        <img src="../images/gray4.svg" alt="Трактор" class="card__icon">
-                    </div>
-                </div>
-                <div class="card card--collapsed1" data-category="e">
-                    <div class="card__collapsed-content">
-                        <img src="../images/gray5.svg" alt="Квадроцикл" class="card__icon">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- О центре -->
-        <section id="about" class="about container">
-            <h2 class="about__title">О центре</h2>
-            <div class="about__content">
-                <p class="about__text about__text--main">
-                    Учебный центр «Лидер» не просто автошкола, а настоящий старт для тысяч водителей. Наша история началась более 10 лет назад, и за это время мы выросли в крупный образовательный центр. Сейчас у нас есть множество направлений от классической автошколы до курсов по управлению спецтехникой и дорожно-строительными машинами
-                </p>
-                <div class="about__stats">
-                    <div class="stat-box">
-                        <span class="stat-box__value">&gt;10</span>
-                        <span class="stat-box__label">лет на рынке</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="stat-box__value">15+</span>
-                        <span class="stat-box__label">инструкторов</span>
-                    </div>
-                </div>
-            </div>
-            <div class="about__bottom">
-                <div class="about__stats about__stats--row">
-                    <div class="stat-box">
-                        <span class="stat-box__value">18</span>
-                        <span class="stat-box__label">курсов обучения</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="stat-box__value">6</span>
-                        <span class="stat-box__label">офисов по городу</span>
-                    </div>
-                </div>
-                <p class="about__text about__text--secondary">
-                    Теоретические занятия проходят в филиалах по всему городу, вы легко выберете тот, что ближе к дому или работе. А для отработки практических навыков у нас есть собственный автодром, где под руководством опытных инструкторов вы освоите тонкости вождения
-                </p>
-            </div>
-        </section>
-
-        <!-- Филиалы -->
-        <section id="branches" class="branches container">
-            <h2 class="branches__title">Филиалы</h2>
-            <div class="branches__grid">
-                <div class="branch-card">
-                    <img src="../images/office1.svg" alt="Офис на пр. Победы, 384" class="branch-card__img">
-                    <p class="branch-card__caption">Офис на пр. Победы, 384</p>
-                </div>
-                <div class="branch-card">
-                    <img src="../images/office2.svg" alt="Офис на Комсомольском пр., 80" class="branch-card__img">
-                    <p class="branch-card__caption">Офис на Комсомольском пр., 80</p>
-                </div>
-                <div class="branch-card">
-                    <img src="../images/office3.svg" alt="Офис на ул. Комарова, 114" class="branch-card__img">
-                    <p class="branch-card__caption">Офис на ул. Комарова, 114</p>
-                </div>
-                <div class="branch-card">
-                    <img src="../images/office4.svg" alt="Офис на ул. Сталеваров, 5а" class="branch-card__img">
-                    <p class="branch-card__caption">Офис на ул. Сталеваров, 5а</p>
-                </div>
-                <div class="branch-card">
-                    <img src="../images/office5.svg" alt="Офис на ул. 60 лет Октября, 18" class="branch-card__img">
-                    <p class="branch-card__caption">Офис на ул. 60 лет Октября, 18</p>
-                </div>
-                <div class="branch-card">
-                    <img src="../images/office6.svg" alt="Офис на шоссе Металлургов, 51" class="branch-card__img">
-                    <p class="branch-card__caption">Офис на шоссе Металлургов, 51</p>
+                <div class="discount-item">
+                    <span class="discount-item__name">«Теория 100%»</span>
+                    <span class="discount-item__value">-1000 руб.</span>
+                    <span class="discount-item__desc">при 100% оплате теоретической части</span>
                 </div>
             </div>
         </section>
 
-        <!-- Схема проезда -->
-        <section id="map" class="map-section container">
-            <h2 class="map-section__title">Схема проезда</h2>
-            <div class="map-section__map">
-                <div id="yandex-map" class="yandex-map__container"></div>
+        <!-- Призыв к действию (на всю ширину) -->
+        <section class="cta-block">
+            <div class="cta-block__inner container">
+                <div class="cta-block__text">
+                    <p class="cta-block__heading">Успей записаться на обучение<br>до повышения цен!</p>
+                    <a href="#" class="btn btn--cta">Записаться</a>
+                </div>
+            </div>
+            <div class="cta-block__images">
+                <img src="../images/sale-car.svg" alt="" class="cta-block__img cta-block__img--front">
+                <img src="../images/sale-moto.svg" alt="" class="cta-block__img cta-block__img--back">
+                <p class="cta-block__note">*Старые цены действительны до конца мая 2026 года</p>
             </div>
         </section>
     </main>
@@ -261,9 +228,5 @@
             </div>
         </div>
     </footer>
-    <!-- Yandex Maps API -->
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=422b52c4-aa7b-400d-9fd7-07c79fdf32c4&lang=ru_RU" type="text/javascript"></script>
-    <!-- Твой скрипт для карты -->
-    <script src="../js/map.js"></script>
 </body>
 </html>
