@@ -1,0 +1,364 @@
+/* ========================
+   Базовые настройки (шрифты уже подключены в main.css)
+   ======================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+    background-color: #fcfcfc;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* ========================
+   Основной контент
+   ======================== */
+.info-main {
+    margin-top: 135px;
+    padding-top: 0;
+}
+
+/* ========================
+   Хлебные крошки
+   ======================== */
+.breadcrumbs {
+    font-size: 18px;
+    font-weight: 400;
+    color: #929292;
+    margin-bottom: 60px;
+    padding-top: 0;
+}
+
+.breadcrumbs a {
+    color: #929292;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumbs a:hover {
+    color: #D90D26;
+}
+
+.breadcrumbs__sep {
+    margin: 0 2px;
+}
+
+.breadcrumbs__current {
+    color: #929292;
+}
+
+/* ========================
+   Заголовок и описание
+   ======================== */
+.info-hero__title {
+    font-size: 50px;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 30px;
+    color: #000;
+}
+
+.info-hero__desc {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.5;
+    max-width: 1200px;
+    margin-bottom: 60px;
+    color: #000;
+}
+
+/* ========================
+   Этапы обучения
+   ======================== */
+.steps {
+    margin-bottom: 60px;
+}
+
+.steps__title {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.steps__grid {
+    display: flex;
+    gap: 30px;
+}
+
+.steps__col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.step__badge {
+    width: 167px;
+    height: 90px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fcfcfc;          /* фон совпадает с фоном страницы – без заливки */
+    position: relative;
+    z-index: 0;
+}
+
+/* Градиентная обводка через псевдоэлемент */
+.step__badge::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 3px;                 /* толщина обводки */
+    z-index: -1;
+}
+
+.step__num {
+    font-size: 35px;
+    font-weight: 500;
+    color: #171717;               /* исправлен цвет */
+    line-height: 1.2;
+}
+
+.step__label {
+    font-size: 18px;
+    font-weight: 300;
+    color: #171717;               /* исправлен цвет */
+}
+
+.step__desc {
+    width: 398px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #000;
+}
+
+/* ========================
+   Преимущества
+   ======================== */
+.advantages {
+    margin-bottom: 60px;
+}
+
+.advantages__title {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.advantages__box {
+    width: 1200px;
+    height: 246px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 30px;
+    gap: 30px;
+}
+
+.advantage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+    flex: 1;                      /* равномерная ширина */
+    min-width: 0;                 /* чтобы не переполнять */
+}
+
+.advantage__icon-wrap {
+    height: 67px;                 /* фиксированная высота для выравнивания иконок по нижнему краю */
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.advantage__icon {
+    display: block;
+    max-height: 100%;
+    width: auto;
+}
+
+.advantage__text {
+    font-size: 16px;              /* уменьшено для размещения в 2 строки */
+    font-weight: 300;
+    color: #000;
+    line-height: 1.3;
+    min-height: 48px;             /* одинаковая высота подписей */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 226px;
+    padding: 0 2px;
+}
+
+/* ========================
+   Водительские права категории А
+   ======================== */
+.rights {
+    margin-bottom: 0;             /* убираем большой отступ, теперь отступ зададим через .cta */
+}
+
+.rights__title {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.rights__text {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #000;
+    max-width: 1200px;
+    margin-bottom: 20px;
+}
+
+.rights__list {
+    margin: 20px 0 20px 20px;
+    font-size: 18px;
+    font-weight: 300;
+    color: #000;
+    line-height: 1.6;
+    max-width: 620px;
+}
+
+.rights__list li {
+    margin-bottom: 5px;
+}
+
+/* ========================
+   Блок призыва к действию с мотоциклом
+   ======================== */
+.cta {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    gap: 35px;
+    margin-top: 20px;             /* отступ сверху 20px */
+}
+
+.cta__left {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 718px;
+}
+
+.cta__slogan {
+    font-size: 18px;
+    font-weight: 300;
+    width: 680px;
+    color: #000;
+    line-height: 1.4;
+}
+
+.cta__actions {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+/* Бейджи с градиентной обводкой и градиентным текстом */
+.badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 70px;
+    padding: 0 30px;
+    border-radius: 10px;
+    background-color: #fcfcfc;
+    font-size: 20px;
+    font-weight: 500;
+    color: transparent;
+    background-image: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    -webkit-background-clip: text;
+    background-clip: text;
+    white-space: nowrap;          /* "Рассрочка 0%" в одну строку */
+    z-index: 0;
+}
+
+.badge::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 3px;
+    z-index: -1;
+}
+
+/* Кнопка "Записаться" – 280x70, жирность 400 */
+.btn--cta {
+    width: 320px;
+    height: 70px;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    cursor: pointer;
+    color: #fcfcfc;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    border-radius: 10px;
+    transition: opacity 0.3s, transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.btn--cta:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.cta__img {
+    width: 506px;
+    height: 500px;
+    object-fit: contain;
+    margin-top: -300px;
+    align-self: flex-start;
+    transform: scaleX(-1);        /* зеркальное отражение */
+}

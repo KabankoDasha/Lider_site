@@ -1,0 +1,272 @@
+/* ========================
+   Базовые настройки (шрифты уже подключены в main.css)
+   ======================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+    background-color: #fcfcfc;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* ========================
+   Основной контент
+   ======================== */
+.register-main {
+    margin-top: 135px;
+    padding-top: 0;
+}
+
+/* ========================
+   Хлебные крошки
+   ======================== */
+.breadcrumbs {
+    font-size: 18px;
+    font-weight: 400;
+    color: #929292;
+    margin-bottom: 60px;
+    padding-top: 0;
+}
+
+.breadcrumbs a {
+    color: #929292;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumbs a:hover {
+    color: #D90D26;
+}
+
+.breadcrumbs__sep {
+    margin: 0 2px;
+}
+
+.breadcrumbs__current {
+    color: #929292;
+}
+
+/* ========================
+   Обёртка для формы
+   ======================== */
+.register-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+/* ========================
+   Прямоугольник формы
+   ======================== */
+.register-box {
+    width: 1000px;
+    height: 719px;
+    background-color: #F0F0F0;
+    border-radius: 10px;
+    padding: 40px 40px 0;   /* верхний отступ 40px, боковые 40px */
+    position: relative;
+    text-align: center;
+}
+
+.register-box__title {
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    color: #000;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* ========================
+   Ряд из двух полей
+   ======================== */
+.register-row {
+    display: flex;
+    gap: 40px;                /* расстояние между полями 40px */
+    margin-bottom: 30px;
+}
+
+.register-field {
+    flex: 1;
+    text-align: left;
+}
+
+.register-field__label {
+    display: block;
+    font-size: 20px;
+    font-weight: 400;
+    color: #717171;
+    margin-bottom: 5px;
+}
+
+.register-field__input {
+    width: 100%;
+    height: 64px;
+    background-color: #FCFCFC;
+    border: 1px solid #9B9B9B;
+    border-radius: 10px;
+    padding: 20px 30px;      /* верх/низ 20px, лево 30px */
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+    outline: none;
+}
+
+.register-field__input::placeholder {
+    color: #9B9B9B;
+}
+
+/* ========================
+   Чекбокс согласия
+   ======================== */
+.register-consent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.register-consent__checkbox {
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    background-color: #FCFCFC;
+    border: 1px solid #9B9B9B;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.register-consent__checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 4px;
+    width: 10px;
+    height: 16px;
+    border: solid #D90D26;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.register-consent__text {
+    font-size: 16px;
+    font-weight: 500;
+    color: #717171;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* ========================
+   Кнопка Зарегистрироваться
+   ======================== */
+.register-box__btn {
+    width: 317px;
+    height: 60px;
+    border-radius: 10px;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    color: #FCFCFC;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 30px;
+    transition: opacity 0.3s, transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-box__btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* ========================
+   Ссылка на вход
+   ======================== */
+.register-box__has-account {
+    font-size: 20px;
+    font-weight: 400;
+    color: #717171;
+    margin-bottom: 5px;
+}
+
+.register-box__login-link {
+    font-size: 20px;
+    font-weight: 400;
+    color: transparent;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-decoration: underline;
+    display: inline-block;
+    margin-bottom: 40px;
+    transition: opacity 0.3s;
+}
+
+.register-box__login-link:hover {
+    opacity: 0.8;
+}
+
+/* ========================
+   Оверлей успешной регистрации
+   ======================== */
+.register-overlay {
+    display: none;
+    position: fixed;               /* фиксированное позиционирование относительно окна браузера */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2); /* затемнение */
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.register-overlay.active {
+    display: flex;                 /* активируем flex‑центрирование */
+}
+
+.register-overlay__box {
+    width: 600px;
+    height: 345px;
+    background-color: #FCFCFC;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 0;
+}
+
+.register-overlay__icon {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 30px;
+    display: block;
+}
+
+.register-overlay__text {
+    font-size: 25px;
+    font-weight: 500;
+    color: #000;
+    text-align: center;
+    margin: 0;
+}

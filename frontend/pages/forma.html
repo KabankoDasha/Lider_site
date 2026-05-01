@@ -1,0 +1,90 @@
+<!-- Оверлей формы записи -->
+<div class="form-overlay" id="form-overlay">
+    <div class="form-container">
+        <button class="form-container__close" id="close-form-btn">
+            <img src="../images/close.svg" alt="Закрыть">
+        </button>
+
+        <h2 class="form-container__title">Запись на обучение</h2>
+
+        <div class="form-row">
+            <div class="form-field">
+                <label class="form-field__label" for="form-name">Имя*</label>
+                <input type="text" id="form-name" class="form-field__input" placeholder="Иван">
+            </div>
+            <div class="form-field">
+                <label class="form-field__label" for="form-phone">Номер телефона*</label>
+                <input type="tel" id="form-phone" class="form-field__input" placeholder="89991110033">
+            </div>
+        </div>
+
+        <!-- Кастомный выпадающий список -->
+        <div class="form-field">
+            <div class="custom-select">
+                <select id="course-select" class="custom-select__native">
+                    <option value="" disabled selected>Выберите курс обучения</option>
+                    <option value="Автомобиль с МКПП — категория «B»">Автомобиль с МКПП — категория «B»</option>
+                    <option value="Автомобиль с АКПП — категория «B» автомат">Автомобиль с АКПП — категория «B» автомат</option>
+                    <option value="Мотоцикл — категория «A»">Мотоцикл — категория «A»</option>
+                    <option value="Погрузчик — категории «B», «C», «D»">Погрузчик — категории «B», «C», «D»</option>
+                    <option value="Экскаватор — категории «C», «E», «D»">Экскаватор — категории «C», «E», «D»</option>
+                    <option value="Трактор — категории «B», «C», «E», «D»">Трактор — категории «B», «C», «E», «D»</option>
+                    <option value="Бульдозер — категория «E» с 19 лет">Бульдозер — категория «E» с 19 лет</option>
+                    <option value="Автогрейдер — категории «C», «D» с 19 лет">Автогрейдер — категории «C», «D» с 19 лет</option>
+                    <option value="Автомобильный кран">Автомобильный кран</option>
+                    <option value="Мостовой кран">Мостовой кран</option>
+                    <option value="Автовышка и автогидроподъемник">Автовышка и автогидроподъемник</option>
+                    <option value="Квадроцикл и снегоход — категория «AI» с 16 лет">Квадроцикл и снегоход — категория «AI» с 16 лет</option>
+                    <option value="Внедорожные автотранспортные средства — категория «All» с 19 лет">Внедорожные автотранспортные средства — категория «All» с 19 лет</option>
+                    <option value="Внедорожные автотранспортные средства — категория «All» (БелАЗ)">Внедорожные автотранспортные средства — категория «All» (БелАЗ)</option>
+                    <option value="Машинист катка — категория «C»">Машинист катка — категория «C»</option>
+                    <option value="Машинист уплотняющей машины «Ратрак» — категория «E»">Машинист уплотняющей машины «Ратрак» — категория «E»</option>
+                    <option value="Машинист крана на самоходном ходу">Машинист крана на самоходном ходу</option>
+                </select>
+                <div class="custom-select__trigger">
+                    <span class="custom-select__selected">Выберите курс обучения</span>
+                    <img src="../images/arrow3.svg" alt="" class="custom-select__arrow">
+                </div>
+                <ul class="custom-select__options">
+                    <li data-value="Автомобиль с МКПП — категория «B»">Автомобиль с МКПП — категория «B»</li>
+                    <li data-value="Автомобиль с АКПП — категория «B» автомат">Автомобиль с АКПП — категория «B» автомат</li>
+                    <li data-value="Мотоцикл — категория «A»">Мотоцикл — категория «A»</li>
+                    <li data-value="Погрузчик — категории «B», «C», «D»">Погрузчик — категории «B», «C», «D»</li>
+                    <li data-value="Экскаватор — категории «C», «E», «D»">Экскаватор — категории «C», «E», «D»</li>
+                    <li data-value="Трактор — категории «B», «C», «E», «D»">Трактор — категории «B», «C», «E», «D»</li>
+                    <li data-value="Бульдозер — категория «E» с 19 лет">Бульдозер — категория «E» с 19 лет</li>
+                    <li data-value="Автогрейдер — категории «C», «D» с 19 лет">Автогрейдер — категории «C», «D» с 19 лет</li>
+                    <li data-value="Автомобильный кран">Автомобильный кран</li>
+                    <li data-value="Мостовой кран">Мостовой кран</li>
+                    <li data-value="Автовышка и автогидроподъемник">Автовышка и автогидроподъемник</li>
+                    <li data-value="Квадроцикл и снегоход — категория «AI» с 16 лет">Квадроцикл и снегоход — категория «AI» с 16 лет</li>
+                    <li data-value="Внедорожные автотранспортные средства — категория «All» с 19 лет">Внедорожные автотранспортные средства — категория «All» с 19 лет</li>
+                    <li data-value="Внедорожные автотранспортные средства — категория «All» (БелАЗ)">Внедорожные автотранспортные средства — категория «All» (БелАЗ)</li>
+                    <li data-value="Машинист катка — категория «C»">Машинист катка — категория «C»</li>
+                    <li data-value="Машинист уплотняющей машины «Ратрак» — категория «E»">Машинист уплотняющей машины «Ратрак» — категория «E»</li>
+                    <li data-value="Машинист крана на самоходном ходу">Машинист крана на самоходном ходу</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Поле комментария -->
+        <textarea class="form-textarea" placeholder="Дополнительный комментарий/вопросы"></textarea>
+
+        <!-- Чекбоксы -->
+        <div class="form-checkboxes">
+            <label class="form-check">
+                <input type="checkbox" class="form-check__input">
+                <span class="form-check__box"></span>
+                <span class="form-check__text">Соглашаюсь с обработкой персональных данных</span>
+            </label>
+            <label class="form-check">
+                <input type="checkbox" class="form-check__input">
+                <span class="form-check__box"></span>
+                <span class="form-check__text">Соглашаюсь с политикой конфиденциальности</span>
+            </label>
+        </div>
+
+        <!-- Кнопка отправки -->
+        <button class="btn form-submit-btn" id="form-submit-btn">Отправить</button>
+    </div>
+</div>

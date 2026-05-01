@@ -89,6 +89,7 @@ main {
     align-items: center;
     justify-content: center;
     font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
 }
 
 .btn:hover {
@@ -504,8 +505,12 @@ main {
 
 .footer__social {
     display: flex;
-    gap: 30px;
+    gap: 25px;
     margin-top: 45px;
+}
+
+.footer__social a:hover .footer__icon--social {
+    filter: invert(10%) sepia(6000%) saturate(4000%) hue-rotate(175deg) brightness(100%) contrast(70%);
 }
 
 .footer__icon--social {

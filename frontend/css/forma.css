@@ -1,0 +1,308 @@
+/* ========================
+   Оверлей формы записи
+   ======================== */
+.form-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.form-overlay.active {
+    display: flex;
+}
+
+/* Контейнер формы */
+.form-container {
+    width: 1000px;
+    height: 700px;
+    background-color: #FCFCFC;
+    border-radius: 10px;
+    position: relative;
+    padding: 50px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+/* Кнопка закрытия */
+.form-container__close {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.form-container__close img {
+    width: 100%;
+    height: auto;
+}
+
+/* Заголовок */
+.form-container__title {
+    font-size: 30px;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* Строка с двумя полями */
+.form-row {
+    display: flex;
+    gap: 40px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.form-field {
+    flex: 1;
+    text-align: left;
+}
+
+.form-field__label {
+    display: block;
+    font-size: 20px;
+    font-weight: 400;
+    color: #717171;
+    margin-bottom: 5px;
+}
+
+.form-field__input {
+    width: 100%;
+    height: 64px;
+    background-color: #F0F0F0;
+    border: 1px solid #9B9B9B;
+    border-radius: 10px;
+    padding: 20px 30px;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+    outline: none;
+}
+
+.form-field__input::placeholder {
+    color: #9B9B9B;
+}
+
+/* Кастомный селект */
+.custom-select {
+    position: relative;
+    width: 920px;                
+    margin-bottom: 30px;
+}
+
+.custom-select__native {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.custom-select__trigger {
+    width: 100%;
+    height: 65px;
+    background-color: #F0F0F0;
+    border: 1px solid #9B9B9B;
+    border-radius: 10px;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+}
+
+.custom-select__selected.placeholder {
+    color: #9B9B9B;
+}
+
+.custom-select__arrow {
+    width: 14px;
+    height: auto;
+    transition: transform 0.3s;
+}
+
+.custom-select.open .custom-select__arrow {
+    transform: rotate(180deg);
+}
+
+.custom-select__options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #FCFCFC;
+    border-radius: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-height: 245px;
+    overflow-y: auto;
+}
+
+.custom-select.open .custom-select__options {
+    display: block;
+}
+
+.custom-select__options li {
+    padding: 12px 30px;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+}
+
+.custom-select__options li:hover {
+    background-color: #F0F0F0;
+}
+
+/* Текстовая область */
+.form-textarea {
+    width: 920px;
+    height: 140px;
+    background-color: #F0F0F0;
+    border: 1px solid #9B9B9B;
+    border-radius: 10px;
+    padding: 20px 30px;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+    outline: none;
+    resize: none;
+    margin-bottom: 30px;
+}
+
+.form-textarea::placeholder {
+    color: #9B9B9B;
+}
+
+/* Чекбоксы */
+.form-checkboxes {
+    display: flex;
+    gap: 78px;
+    margin-bottom: 45px;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.form-check__input {
+    display: none;
+}
+
+.form-check__box {
+    width: 30px;
+    height: 30px;
+    background-color: #FCFCFC;
+    border: 1px solid #9B9B9B;
+    border-radius: 4px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.form-check__input:checked + .form-check__box::after {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 4px;
+    width: 10px;
+    height: 16px;
+    border: solid #D90D26;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.form-check__text {
+    font-size: 15px;
+    font-weight: 400;
+    color: #000;
+}
+
+/* Кнопка отправки */
+.form-submit-btn {
+    width: 223px;
+    height: 60px;
+    border-radius: 10px;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    font-size: 22px;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    color: #FCFCFC;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.2s;
+}
+
+.form-submit-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* Оверлей успеха */
+.success-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.success-overlay.active {
+    display: flex;
+}
+
+.success-overlay__box {
+    width: 600px;
+    height: 345px;
+    background-color: #FCFCFC;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 0;
+}
+
+.success-overlay__icon {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 30px;
+}
+
+.success-overlay__text {
+    font-size: 25px;
+    font-weight: 500;
+    color: #000;
+    text-align: center;
+    line-height: 1.3;
+}

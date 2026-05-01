@@ -267,18 +267,19 @@ body {
 }
 
 /* ========================
-   Призыв к действию (фоновый блок на всю ширину)
+   Призыв к действию
    ======================== */
 .cta-block {
-    position: relative;
+    display: flex;
+    justify-content: flex-end;   /* все элементы уходят вправо */
+    align-items: flex-start;
+    gap: 158px;                  /* отступ между текстом и картинками */
     margin-bottom: 100px;
-    height: 360px;                
 }
 
-.cta-block__inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0;
+.cta-block__text {
+    max-width: 460px;
+    flex-shrink: 0;             /* текст не сжимается */
 }
 
 .cta-block__heading {
@@ -287,7 +288,6 @@ body {
     line-height: 1.2;
     margin-bottom: 30px;
     width: 660px;
-    height: auto;
 }
 
 .btn--cta {
@@ -296,9 +296,16 @@ body {
 }
 
 .cta-block__images {
-    position: absolute;
-    left: 665px;                  /* строго от левого края экрана */
-    top: 20px;                    /* подстрой по высоте */
+    position: relative;         /* для абсолютных позиций внутри */
+    width: 580px;               /* ширина, как у передней картинки */
+    height: auto;               /* замени height:500px, чтобы не фиксировать */
+    flex-shrink: 0;
+    display: block;
+}
+
+.cta-block__img {
+    display: block;
+    border-radius: 10px;
 }
 
 .cta-block__img--front {
@@ -313,8 +320,8 @@ body {
     height: auto;
     object-fit: cover;
     position: absolute;
-    top: 0;
-    left: -180px;                  /* заезжает за машину */
+    top: 10px;
+    left: -180px;                /* остаётся перекрытие */
     z-index: 1;
 }
 

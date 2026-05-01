@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Автошкола Лидер</title>
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/sale.css">
+    <link rel="stylesheet" href="../css/account.css">
     <link rel="stylesheet" href="../css/forma.css">
 </head>
 <body>
@@ -25,103 +25,116 @@
                     <li><a href="../pages/contact.html">Контакты</a></li>
                 </ul>
             </nav>
-            <a href="../pages/login.html" class="btn btn--login">Войти</a>
+            <a href="../pages/account.html" class="btn--account">Личный кабинет</a>
         </div>
     </header>
 
-    <main class="sale-main">
+    <main class="account-main">
         <!-- Хлебные крошки -->
         <div class="breadcrumbs container">
             <a href="../pages/main.html">Главная</a>
             <span class="breadcrumbs__sep">/</span>
-            <span class="breadcrumbs__current">Акции</span>
+            <span class="breadcrumbs__current">Личный кабинет</span>
         </div>
 
-        <!-- Заголовок и описание -->
-        <section class="sale-hero container">
-            <h1 class="sale-hero__title">Акции и скидки на обучение</h1>
-            <p class="sale-hero__desc">
-                Мы стараемся сделать обучение в нашем центре доступным всем, поэтому часто проводим специальные акции и предлагаем скидки. Для уточнения информации по поводу акций вы можете связаться с нами по номеру телефона +7(351) 700-74-00 или<br>в любом удобном для вас мессенджере. Акции и скидки не суммируются
-            </p>
+        <!-- Заголовок -->
+        <section class="account-hero container">
+            <h1 class="account-hero__title">Личный кабинет</h1>
         </section>
 
-        <!-- Актуальные акции -->
-        <section id="promo" class="promo-section container">
-            <div class="promo-section__header">
-                <h2 class="promo-section__title">Актуальные акции</h2>
-                <div class="promo-section__controls">
-                    <button class="promo-arrow promo-arrow--left" aria-label="Листать влево">
-                        <img src="../images/arrow.svg" alt="" class="promo-arrow__icon">
+        <!-- Основной блок личного кабинета -->
+        <div class="account-layout container">
+            <!-- Левая боковая панель -->
+            <aside class="account-sidebar">
+                <div class="sidebar-profile">
+                    <img src="../images/account.svg" alt="Аватар" class="sidebar-avatar">
+                    <h2 class="sidebar-name">Иван Иванов</h2>
+                </div>
+                <nav class="sidebar-nav">
+                    <ul class="sidebar-menu">
+                        <li class="sidebar-menu__item sidebar-menu__item--active">
+                            <span class="sidebar-indicator"></span>
+                            <a href="#" class="sidebar-link">Мои заявки</a>
+                        </li>
+                        <li class="sidebar-menu__item">
+                            <a href="#" class="sidebar-link">Мои отзывы</a>
+                        </li>
+                        <li class="sidebar-menu__item">
+                            <a href="#" class="sidebar-link">Редактировать профиль</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="sidebar-actions">
+                    <button class="btn--delete-account" id="delete-account-btn">Удалить аккаунт</button>
+                    <button class="btn--logout" id="logout-btn">Выйти</button>
+                </div>
+            </aside>
+
+            <!-- Правая область контента -->
+            <section class="account-content">
+                <div class="content-header">
+                    <h3 class="content-title">Мои заявки</h3>
+                    <button class="content-add-btn open-form-trigger" id="open-form-btn">
+                        <img src="../images/close.svg" alt="Добавить заявку" class="content-add-icon">
                     </button>
-                    <button class="promo-arrow promo-arrow--right" aria-label="Листать вправо">
-                        <img src="../images/arrow.svg" alt="" class="promo-arrow__icon">
+                </div>
+
+                <!-- Карточка заявки -->
+                <article class="application-card">
+                    <div class="application-header">
+                        <h4 class="application-number">Заявка №1</h4>
+                        <span class="application-status">в обработке</span>
+                    </div>
+                    <p class="application-course">Обучение на автомобиль МКПП</p>
+                    <p class="application-message">Добрый день! Хочу записаться к вам в автошколу на обучение на автомобиле МКПП, подскажите пожалуйста когда ближайший старт групп и в какое время будут занятия?</p>
+                    <time class="application-date">от 6 марта 2026</time>
+                    <button class="application-delete-btn" id="delete-app-btn">
+                        <img src="../images/krest.svg" alt="Удалить заявку">
                     </button>
-                </div>
-            </div>
-            <div class="promo-cards">
-                <article class="promo-card">
-                    <div class="promo-card__inner">
-                        <h3 class="promo-card__title">Акция на автокурсы категории «B»</h3>
-                        <p class="promo-card__discount">-10%</p>
-                        <p class="promo-card__date">скидка действительна до 31.03.2026</p>
-                    </div>
                 </article>
-                <article class="promo-card">
-                    <div class="promo-card__inner">
-                        <h3 class="promo-card__title">Акция 1+1 на обучение автомобиль+мотоцикл</h3>
-                        <p class="promo-card__discount">-15%</p>
-                        <p class="promo-card__date">скидка действительна до 31.03.2026</p>
-                    </div>
-                </article>
-                <article class="promo-card">
-                    <div class="promo-card__inner">
-                        <h3 class="promo-card__title">Акция на курсы водителя квадроцикла</h3>
-                        <p class="promo-card__discount">-50%</p>
-                        <p class="promo-card__date">скидка действительна до 15.04.2026</p>
-                    </div>
-                </article>
-            </div>
-        </section>
+            </section>
+        </div>
 
-        <!-- Постоянные скидки -->
-        <section id="regular" class="regular-discounts container">
-            <h2 class="regular-discounts__title">Наши постоянные скидки</h2>
-            <div class="discount-list">
-                <div class="discount-item">
-                    <span class="discount-item__name">«День рождения»</span>
-                    <span class="discount-item__value">-1000 руб.</span>
-                    <span class="discount-item__desc">при заключении договора в день рождения</span>
-                </div>
-                <div class="discount-item">
-                    <span class="discount-item__name">«Друзья»</span>
-                    <span class="discount-item__value">-1000 руб.</span>
-                    <span class="discount-item__desc">приводи друга и получи скидку для себя и друга</span>
-                </div>
-                <div class="discount-item">
-                    <span class="discount-item__name">«Статус»</span>
-                    <span class="discount-item__value">-1000 руб.</span>
-                    <span class="discount-item__desc">студентам, школьникам, участникам боевых действий</span>
-                </div>
-                <div class="discount-item">
-                    <span class="discount-item__name">«Теория 100%»</span>
-                    <span class="discount-item__value">-1000 руб.</span>
-                    <span class="discount-item__desc">при 100% оплате теоретической части</span>
+        <!-- Оверлей удаления заявки -->
+        <div class="delete-overlay" id="delete-overlay">
+            <div class="delete-overlay__box">
+                <p class="delete-overlay__text">Вы уверены, что хотите<br>удалить заявку?</p>
+                <div class="delete-overlay__buttons">
+                    <button class="btn--cancel" id="cancel-delete">Отмена</button>
+                    <button class="btn--confirm-delete" id="confirm-delete">Удалить</button>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Призыв к действию -->
-        <section class="cta-block container">
-            <div class="cta-block__text">
-                <p class="cta-block__heading">Успей записаться на обучение<br>до повышения цен!</p>
-                <button id="open-form-btn" class="btn btn--cta">Записаться</button>
+        <!-- Оверлей успешного удаления -->
+        <div class="success-overlay" id="success-delete-overlay">
+            <div class="success-overlay__box">
+                <img src="../images/done.svg" alt="" class="success-overlay__icon">
+                <p class="success-overlay__text">Заявка успешно удалена!</p>
             </div>
-            <div class="cta-block__images">
-                <img src="../images/sale-car.svg" alt="Машина" class="cta-block__img cta-block__img--front">
-                <img src="../images/sale-moto.svg" alt="Мотоцикл" class="cta-block__img cta-block__img--back">
-                <p class="cta-block__note">*Старые цены действительны до конца мая 2026 года</p>
+        </div>
+
+        <!-- Оверлей выхода -->
+        <div class="delete-overlay" id="logout-overlay">
+            <div class="delete-overlay__box">
+                <p class="delete-overlay__text">Вы уверены, что хотите<br>выйти из личного кабинета?</p>
+                <div class="delete-overlay__buttons">
+                    <button class="btn--cancel" id="cancel-logout">Отмена</button>
+                    <button class="btn--confirm-action" id="confirm-logout">Выйти</button>
+                </div>
             </div>
-        </section>
+        </div>
+
+        <!-- Оверлей удаления аккаунта -->
+        <div class="delete-overlay" id="delete-account-overlay">
+            <div class="delete-overlay__box">
+                <p class="delete-overlay__text">Вы уверены, что хотите<br>удалить учётную запись?</p>
+                <div class="delete-overlay__buttons">
+                    <button class="btn--cancel" id="cancel-delete-account">Отмена</button>
+                    <button class="btn--confirm-action" id="confirm-delete-account">Удалить</button>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- Подвал сайта -->
@@ -229,5 +242,6 @@
     </footer>
 
     <script src="../js/load-form.js"></script>
+    <script src="../js/account.js"></script>
 </body>
 </html>

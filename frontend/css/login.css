@@ -1,0 +1,167 @@
+/* ========================
+   Базовые настройки (шрифты уже подключены в main.css)
+   ======================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+    background-color: #fcfcfc;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* ========================
+   Основной контент
+   ======================== */
+.login-main {
+    margin-top: 135px;        /* отступ под фиксированную шапку */
+    padding-top: 0;
+}
+
+/* ========================
+   Хлебные крошки
+   ======================== */
+.breadcrumbs {
+    font-size: 18px;
+    font-weight: 400;
+    color: #929292;
+    margin-bottom: 60px;
+    padding-top: 0;
+}
+
+.breadcrumbs a {
+    color: #929292;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumbs a:hover {
+    color: #D90D26;
+}
+
+.breadcrumbs__sep {
+    margin: 0 2px;
+}
+
+.breadcrumbs__current {
+    color: #929292;
+}
+
+/* ========================
+   Обёртка для центрирования формы
+   ======================== */
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 100px;   /* отступ до подвала */
+}
+
+/* ========================
+   Прямоугольник формы
+   ======================== */
+.login-box {
+    width: 600px;
+    height: 529px;
+    background-color: #F0F0F0;
+    border-radius: 10px;
+    padding: 40px 0 0;      /* верхний отступ 40px, боковые будем задавать отдельно */
+    text-align: center;
+}
+
+.login-box__title {
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    color: #000;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.login-box__label {
+    display: block;
+    text-align: left;
+    margin-left: 30px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #717171;
+    margin-bottom: 5px;
+}
+
+.login-box__input {
+    width: 540px;           /* 600 - 30*2 */
+    height: 64px;
+    background-color: #FCFCFC;
+    border: 1px solid #9B9B9B;
+    border-radius: 10px;
+    padding: 20px 30px;     /* левый отступ 30px, верх/низ 20px */
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+    outline: none;
+    margin-bottom: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-box__input::placeholder {
+    color: #9B9B9B;
+}
+
+.login-box__btn {
+    width: 150px;
+    height: 60px;
+    border-radius: 10px;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    color: #FCFCFC;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 30px;
+    transition: opacity 0.3s, transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-box__btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.login-box__no-account {
+    font-size: 20px;
+    font-weight: 400;
+    color: #717171;
+    margin-bottom: 5px;
+}
+
+.login-box__register-link {
+    font-size: 20px;
+    font-weight: 400;
+    color: transparent;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-decoration: underline;
+    display: inline-block;
+    margin-bottom: 40px;   /* отступ снизу */
+    transition: opacity 0.3s;
+}
+
+.login-box__register-link:hover {
+    opacity: 0.8;
+}

@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Автошкола Лидер</title>
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/sale.css">
-    <link rel="stylesheet" href="../css/forma.css">
+    <link rel="stylesheet" href="../css/register.css">
 </head>
 <body>
     <!-- Шапка -->
@@ -29,99 +28,77 @@
         </div>
     </header>
 
-    <main class="sale-main">
+    <main class="register-main">
         <!-- Хлебные крошки -->
         <div class="breadcrumbs container">
             <a href="../pages/main.html">Главная</a>
             <span class="breadcrumbs__sep">/</span>
-            <span class="breadcrumbs__current">Акции</span>
+            <span class="breadcrumbs__current">Регистрация</span>
         </div>
 
-        <!-- Заголовок и описание -->
-        <section class="sale-hero container">
-            <h1 class="sale-hero__title">Акции и скидки на обучение</h1>
-            <p class="sale-hero__desc">
-                Мы стараемся сделать обучение в нашем центре доступным всем, поэтому часто проводим специальные акции и предлагаем скидки. Для уточнения информации по поводу акций вы можете связаться с нами по номеру телефона +7(351) 700-74-00 или<br>в любом удобном для вас мессенджере. Акции и скидки не суммируются
-            </p>
-        </section>
+        <!-- Форма регистрации -->
+        <div class="register-wrapper container">
+            <div class="register-box">
+                <h2 class="register-box__title">Регистрация</h2>
 
-        <!-- Актуальные акции -->
-        <section id="promo" class="promo-section container">
-            <div class="promo-section__header">
-                <h2 class="promo-section__title">Актуальные акции</h2>
-                <div class="promo-section__controls">
-                    <button class="promo-arrow promo-arrow--left" aria-label="Листать влево">
-                        <img src="../images/arrow.svg" alt="" class="promo-arrow__icon">
-                    </button>
-                    <button class="promo-arrow promo-arrow--right" aria-label="Листать вправо">
-                        <img src="../images/arrow.svg" alt="" class="promo-arrow__icon">
-                    </button>
+                <!-- Строка 1: Имя и Фамилия -->
+                <div class="register-row">
+                    <div class="register-field">
+                        <label class="register-field__label" for="reg-name">Имя*</label>
+                        <input type="text" id="reg-name" class="register-field__input" placeholder="Иван">
+                    </div>
+                    <div class="register-field">
+                        <label class="register-field__label" for="reg-surname">Фамилия*</label>
+                        <input type="text" id="reg-surname" class="register-field__input" placeholder="Иванов">
+                    </div>
                 </div>
-            </div>
-            <div class="promo-cards">
-                <article class="promo-card">
-                    <div class="promo-card__inner">
-                        <h3 class="promo-card__title">Акция на автокурсы категории «B»</h3>
-                        <p class="promo-card__discount">-10%</p>
-                        <p class="promo-card__date">скидка действительна до 31.03.2026</p>
-                    </div>
-                </article>
-                <article class="promo-card">
-                    <div class="promo-card__inner">
-                        <h3 class="promo-card__title">Акция 1+1 на обучение автомобиль+мотоцикл</h3>
-                        <p class="promo-card__discount">-15%</p>
-                        <p class="promo-card__date">скидка действительна до 31.03.2026</p>
-                    </div>
-                </article>
-                <article class="promo-card">
-                    <div class="promo-card__inner">
-                        <h3 class="promo-card__title">Акция на курсы водителя квадроцикла</h3>
-                        <p class="promo-card__discount">-50%</p>
-                        <p class="promo-card__date">скидка действительна до 15.04.2026</p>
-                    </div>
-                </article>
-            </div>
-        </section>
 
-        <!-- Постоянные скидки -->
-        <section id="regular" class="regular-discounts container">
-            <h2 class="regular-discounts__title">Наши постоянные скидки</h2>
-            <div class="discount-list">
-                <div class="discount-item">
-                    <span class="discount-item__name">«День рождения»</span>
-                    <span class="discount-item__value">-1000 руб.</span>
-                    <span class="discount-item__desc">при заключении договора в день рождения</span>
+                <!-- Строка 2: Email и Телефон -->
+                <div class="register-row">
+                    <div class="register-field">
+                        <label class="register-field__label" for="reg-email">Email*</label>
+                        <input type="email" id="reg-email" class="register-field__input" placeholder="example@mail.ru">
+                    </div>
+                    <div class="register-field">
+                        <label class="register-field__label" for="reg-phone">Номер телефона*</label>
+                        <input type="tel" id="reg-phone" class="register-field__input" placeholder="8999110033">
+                    </div>
                 </div>
-                <div class="discount-item">
-                    <span class="discount-item__name">«Друзья»</span>
-                    <span class="discount-item__value">-1000 руб.</span>
-                    <span class="discount-item__desc">приводи друга и получи скидку для себя и друга</span>
-                </div>
-                <div class="discount-item">
-                    <span class="discount-item__name">«Статус»</span>
-                    <span class="discount-item__value">-1000 руб.</span>
-                    <span class="discount-item__desc">студентам, школьникам, участникам боевых действий</span>
-                </div>
-                <div class="discount-item">
-                    <span class="discount-item__name">«Теория 100%»</span>
-                    <span class="discount-item__value">-1000 руб.</span>
-                    <span class="discount-item__desc">при 100% оплате теоретической части</span>
-                </div>
-            </div>
-        </section>
 
-        <!-- Призыв к действию -->
-        <section class="cta-block container">
-            <div class="cta-block__text">
-                <p class="cta-block__heading">Успей записаться на обучение<br>до повышения цен!</p>
-                <button id="open-form-btn" class="btn btn--cta">Записаться</button>
+                <!-- Строка 3: Пароль и Повтор пароля -->
+                <div class="register-row">
+                    <div class="register-field">
+                        <label class="register-field__label" for="reg-password">Придумайте пароль*</label>
+                        <input type="password" id="reg-password" class="register-field__input" placeholder="••••••••">
+                    </div>
+                    <div class="register-field">
+                        <label class="register-field__label" for="reg-password-repeat">Повторите пароль*</label>
+                        <input type="password" id="reg-password-repeat" class="register-field__input" placeholder="••••••••">
+                    </div>
+                </div>
+
+                <!-- Чекбокс согласия -->
+                <div class="register-consent">
+                    <input type="checkbox" id="reg-consent" class="register-consent__checkbox">
+                    <label for="reg-consent" class="register-consent__text">Соглашаюсь с условиями обработки персональных данных</label>
+                </div>
+
+                <!-- Кнопка отправки -->
+                <button type="submit" class="btn register-box__btn" id="register-submit">Зарегистрироваться</button>
+
+                <!-- Ссылка на вход -->
+                <p class="register-box__has-account">Уже есть аккаунт?</p>
+                <a href="../pages/login.html" class="register-box__login-link">Войти в личный кабинет</a>
+
+                <!-- Оверлей успешной регистрации (затемняет весь экран) -->
+                <div class="register-overlay" id="register-overlay">
+                    <div class="register-overlay__box">
+                        <img src="../images/done.svg" alt="Успешно" class="register-overlay__icon">
+                        <p class="register-overlay__text">Регистрация прошла успешно!</p>
+                    </div>
+                </div>
             </div>
-            <div class="cta-block__images">
-                <img src="../images/sale-car.svg" alt="Машина" class="cta-block__img cta-block__img--front">
-                <img src="../images/sale-moto.svg" alt="Мотоцикл" class="cta-block__img cta-block__img--back">
-                <p class="cta-block__note">*Старые цены действительны до конца мая 2026 года</p>
-            </div>
-        </section>
+        </div>
     </main>
 
     <!-- Подвал сайта -->
@@ -197,8 +174,8 @@
                     <div class="footer__sitemap-col">
                         <p class="footer__sitemap-heading"><a href="../pages/login.html">Личный кабинет</a></p>
                         <ul>
-                            <li><a href="../pages/login.html#login">Вход</a></li>
-                            <li><a href="../pages/login.html#register">Регистрация</a></li>
+                            <li><a href="../pages/login.html">Вход</a></li>
+                            <li><a href="../pages/register.html">Регистрация</a></li>
                         </ul>
                         <p class="footer__sitemap-heading1"><a href="#" id="open-form-btn">Записаться на обучение</a></p>
                         <p class="footer__sitemap-heading1"><a href="../pages/data.html">Реквизиты компании</a></p>
@@ -227,7 +204,18 @@
             </div>
         </div>
     </footer>
-
-    <script src="../js/load-form.js"></script>
+    
+    <!-- Скрипт для демонстрации оверлея (замени на реальную логику регистрации) -->
+    <script>
+        document.getElementById('register-submit').addEventListener('click', function() {
+            document.getElementById('register-overlay').classList.add('active');
+        });
+        // Закрытие оверлея при клике вне белого блока
+        document.getElementById('register-overlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>

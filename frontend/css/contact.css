@@ -1,0 +1,211 @@
+/* ========================
+   Базовые настройки (шрифты уже подключены в main.css)
+   ======================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+    background-color: #fcfcfc;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* ========================
+   Основной контент
+   ======================== */
+.contact-main {
+    margin-top: 135px;
+    padding-top: 0;
+}
+
+/* ========================
+   Хлебные крошки
+   ======================== */
+.breadcrumbs {
+    font-size: 18px;
+    font-weight: 400;
+    color: #929292;
+    margin-bottom: 60px;
+    padding-top: 0;
+}
+
+.breadcrumbs a {
+    color: #929292;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumbs a:hover {
+    color: #D90D26;
+}
+
+.breadcrumbs__sep {
+    margin: 0 2px;
+}
+
+.breadcrumbs__current {
+    color: #929292;
+}
+
+/* ========================
+   Заголовок и описание
+   ======================== */
+.contact-hero__title {
+    font-size: 50px;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 30px;
+    color: #000;
+}
+
+/* ========================
+   Футер (подвал)
+   ======================== */
+.footer {
+    background-color: #24486B;
+    color: #FCFCFC;
+    padding: 60px 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.footer__inner {
+    width: 100%;
+}
+
+/* Верхний блок с колонками */
+.footer__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+    margin-bottom: 60px;
+}
+
+.footer__col {
+    flex: 1 1 0;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer__col--contacts {
+    gap: 25px;
+}
+
+.footer__contact-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.footer__icon--email {
+    width: 43px;
+    height: 29px;
+}
+
+.footer__icon--phone {
+    width: 35px;
+    height: 36px;
+}
+
+.footer__social2 {
+    display: flex;
+    gap: 25px;
+    margin-top: 45px;
+}
+
+.footer__social2 a {
+    transition: opacity 0.2s;
+}
+.footer__social2 a:hover {
+    opacity: 0.8;
+}
+
+.footer__icon--social {
+    width: 49px;
+    height: 49px;
+}
+
+.footer__col--hours {
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #000;
+}
+
+.footer__subtitle {
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+.footer__text {
+    margin-bottom: 20px;
+    font-weight: 200;
+    color: #000;
+}
+
+.footer__text2 {
+    line-height: 30px;
+    font-weight: 200;
+    color: #000;
+}
+
+.footer__city {
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: auto;
+    color: #000;
+}
+
+.footer__col--addresses {
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #000;
+}
+
+/* ========================
+   Секция "Схема проезда"
+   ======================== */
+.map-section {
+    margin-bottom: 100px;
+}
+
+.map-section__title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 50px;
+    margin-bottom: 30px;
+}
+
+.map-section__map {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 600px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #eee;
+}
+
+.yandex-map__container {
+    width: 100%;
+    height: 600px;
+    background: #eee; /* фон на время загрузки */
+    border-radius: 10px;
+    overflow: hidden;
+}
