@@ -1,5 +1,5 @@
 /* ========================
-   Базовые настройки (шрифты уже подключены в main.css)
+   Базовые настройки
    ======================== */
 *,
 *::before,
@@ -22,165 +22,458 @@ body {
     padding: 0;
 }
 
-/* ========================
-   Основной контент
-   ======================== */
 .account-main {
     margin-top: 135px;
-    padding-top: 0;
 }
 
-/* ========================
-   Хлебные крошки
-   ======================== */
+/* Кнопка "Личный кабинет" в шапке */
+.btn--account {
+    display: inline-flex;
+    align-items: center;
+    width: 207px;
+    height: 60px;
+    border: 2px solid #D90D26;
+    border-radius: 10px;
+    background: transparent;
+    color: #000;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    font-family: 'Montserrat', sans-serif;
+    padding: 0 10px 0 15px;
+    gap: 7px;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+.btn--account:hover {
+    background-color: #f5f5f5;
+}
+
+.btn--account__icon {
+    width: 37px;
+    height: 37px;
+    flex-shrink: 0;
+}
+
+/* Хлебные крошки */
 .breadcrumbs {
     font-size: 18px;
     font-weight: 400;
     color: #929292;
     margin-bottom: 60px;
-    padding-top: 0;
+}
+.breadcrumbs a { 
+    color: #929292; 
+    text-decoration: none; 
+    transition: color 0.2s; 
+}
+.breadcrumbs a:hover { 
+    color: #D90D26; 
+}
+.breadcrumbs__sep { 
+    margin: 0 2px; 
+}
+.breadcrumbs__current { 
+    color: #929292; 
 }
 
-.breadcrumbs a {
-    color: #929292;
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.breadcrumbs a:hover {
-    color: #D90D26;
-}
-
-.breadcrumbs__sep {
-    margin: 0 2px;
-}
-
-.breadcrumbs__current {
-    color: #929292;
-}
-
-/* ========================
-   Заголовок
-   ======================== */
 .account-hero__title {
     font-size: 50px;
     font-weight: 500;
-    font-family: 'Montserrat', sans-serif;
     margin-bottom: 30px;
     color: #000;
 }
 
-/* ========================
-   Основная раскладка
-   ======================== */
+/* Основная раскладка */
 .account-layout {
     display: flex;
     gap: 15px;
     margin-bottom: 100px;
+    align-items: flex-start;      /* чтобы боковая панель не растягивалась */
 }
 
-/* ========================
-   Левая боковая панель
-   ======================== */
+/* Левая боковая панель */
 .account-sidebar {
     width: 477px;
-    height: 645px;
+    min-height: 645px;
     background-color: #F0F0F0;
     border: 4px solid #D6D6D6;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    padding: 60px 0 60px;
+    padding: 60px 0;
+    flex-shrink: 0;
+    align-self: flex-start;       /* НЕ растягивается по высоте */
 }
 
 .sidebar-avatar {
-    width: 150px;
+    width: 150px; 
     height: 150px;
     object-fit: cover;
-    margin-bottom: 30px;
-    margin: 0 163px 30px 164px;
+    margin: 0 auto 30px;
+    display: block;
 }
 
 .sidebar-name {
-    font-size: 25px;
+    font-size: 25px; 
     font-weight: 500;
-    margin-bottom: 43px;
     text-align: center;
+    margin-bottom: 43px;
 }
 
 /* Меню */
 .sidebar-menu {
-    list-style: none;
+    list-style: none; 
     width: 100%;
 }
 
 .sidebar-menu__item {
     position: relative;
-    display: flex;
+    display: flex; 
     align-items: center;
     height: 60px;
     background-color: transparent;
     cursor: pointer;
 }
 
-.sidebar-menu__item:last-child {
-    margin-bottom: 32px;
-}
-
-.sidebar-menu__item--active {
+.sidebar-menu__item.active {
     background-color: #E7E7E7;
 }
 
+.sidebar-indicator {
+    position: absolute; 
+    left: -4px; 
+    top: 0;
+    height: 100%; 
+    width: 4px;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    border-radius: 0 2px 2px 0;
+    display: none;
+}
+
+.sidebar-menu__item.active .sidebar-indicator { 
+    display: block; 
+}
+
 .sidebar-link {
-    display: block;
+    display: block; 
     width: 100%;
     padding: 18px 0 18px 60px;
-    font-size: 20px;
+    font-size: 20px; 
     font-weight: 400;
-    color: #000;
+    color: #000; 
     text-decoration: none;
     z-index: 1;
 }
 
-/* Индикатор активного пункта */
-.sidebar-indicator {
-    position: absolute;
-    left: -4px;
-    top: 0;
-    height: 100%;
-    width: 4px;
-    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
-    border-radius: 0 2px 2px 0;
-}
-
-/* Кнопки */
+/* Кнопки в сайдбаре */
 .sidebar-actions {
-    display: flex;
+    display: flex; 
     gap: 21px;
     margin-top: auto;
+    padding: 0 60px;
 }
 
 .btn--delete-account {
-    width: 214px;
+    width: 214px; 
     height: 56px;
-    margin-left: 60px;
     background-color: #E7E7E7;
-    border: none;
+    border: none; 
     border-radius: 10px;
-    font-size: 18px;
+    font-size: 18px; 
     font-weight: 400;
-    color: #000;
+    color: #000; 
     cursor: pointer;
     transition: opacity 0.2s;
     font-family: 'Montserrat', sans-serif;
 }
-
-.btn--delete-account:hover {
-    opacity: 0.7;
+.btn--delete-account:hover { 
+    opacity: 0.7; 
 }
 
 .btn--logout {
-    width: 122px;
+    width: 122px; 
+    height: 56px;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    border: none; 
+    border-radius: 10px;
+    font-size: 18px; 
+    font-weight: 500;
+    color: #FCFCFC; 
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-family: 'Montserrat', sans-serif;
+}
+.btn--logout:hover { 
+    opacity: 0.8; 
+}
+
+/* Правая область контента */
+.account-content {
+    width: 708px;
+    min-height: 645px;
+    background-color: #F0F0F0;
+    border-radius: 10px;
+    padding: 30px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.content-panel { display: none; }
+.content-panel.active { display: block; }
+
+.content-header {
+    display: flex; 
+    align-items: center;
+    gap: 10px; 
+    margin-bottom: 30px;
+}
+
+.content-title { 
+    font-size: 22px; 
+    font-weight: 500; 
+}
+
+.content-add-btn {
+    background: none; 
+    border: none;
+    cursor: pointer; 
+    padding: 10px;
+    display: flex;
+}
+.content-add-icon {
+    width: 24px; 
+    height: 24px;
+    transform: rotate(45deg);
+    transition: opacity 0.2s;
+}
+.content-add-btn:hover .content-add-icon { opacity: 0.7; }
+
+/* Карточка заявки и отзыва – расстояние 10px */
+.application-card,
+.review-card {
+    margin-bottom: 30px;
+}
+
+.application-card {
+    position: relative;
+    width: 648px;
+    background-color: #FCFCFC;
+    border-radius: 10px;
+    padding: 20px;
+    min-height: 200px;
+}
+
+.application-header {
+    display: flex; 
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.application-number { 
+    font-size: 22px; 
+    font-weight: 400; 
+    margin-bottom: 3px; 
+}
+
+.application-status {
+    width: 145px; 
+    height: 35px;
+    background: linear-gradient(-42deg, #FFBB3D, #FFC96C, #FFBB3D);
+    border-radius: 10px;
+    font-size: 18px; 
+    font-weight: 400;
+    color: #946000;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.application-course {
+    font-size: 16px; 
+    font-weight: 400;
+    color: #7A7A7A; 
+    margin-bottom: 15px;
+}
+
+.application-message {
+    font-size: 18px; 
+    font-weight: 300;
+    line-height: 1.4; 
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.application-date {
+    position: absolute; 
+    bottom: 20px; 
+    right: 20px;
+    font-size: 16px; 
+    font-weight: 400; 
+    color: #7A7A7A;
+}
+
+/* Кружок удаления (общий для заявок и отзывов) */
+.application-delete-btn {
+    position: absolute;
+    top: -19.5px; 
+    right: -19.5px;
+    width: 39px; 
+    height: 39px;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    border: none; 
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+.application-delete-btn img { width: 15px; height: 15px; }
+.application-delete-btn:hover { opacity: 0.8; }
+
+/* Карточка отзыва */
+.review-card {
+    position: relative;
+    width: 648px;
+    background-color: #FCFCFC;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.review-card__header {
+    display: flex; 
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.review-card__name { font-size: 20px; font-weight: 500; margin-bottom: 3px; }
+.review-card__course { font-size: 16px; font-weight: 400; color: #7A7A7A; }
+
+.review-card__stars {
+    display: flex; 
+    gap: 0;
+    margin-top: 3px;
+}
+
+.star {
+    display: block;
+    width: 30px; 
+    height: 30px;
+    position: relative;
+}
+.star--active::before {
+    content: '★';
+    font-size: 30px; 
+    line-height: 1;
+    color: transparent;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+.star:not(.star--active)::before {
+    content: '★';
+    font-size: 30px; 
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px #D90D26;
+}
+
+.review-card__text {
+    font-size: 18px; 
+    font-weight: 400;
+    line-height: 1.4; 
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.review-card__date {
+    font-size: 16px; 
+    font-weight: 400;
+    color: #7A7A7A;
+    display: block; 
+    text-align: right;
+    margin-top: 20px;
+}
+
+/* Профиль – поля вертикально, выровнены по левому краю */
+.profile-form { 
+    margin-top: 30px;
+    padding: 0;       /* отступы слева/справа 30px, снизу 30px */
+}
+
+.profile-field {
+    margin-bottom: 0;
+}
+
+.profile-field__label {
+    display: block;
+    font-size: 20px;
+    font-weight: 400;
+    color: #717171;
+    margin-top: 30px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+/* Убираем лишний верхний отступ у первой метки */
+.profile-field:first-child .profile-field__label {
+    margin-top: 0;
+}
+
+.profile-field__input {
+    width: 100%;
+    height: 64px;
+    background-color: #FCFCFC;
+    border: 1px solid #9B9B9B;
+    border-radius: 10px;
+    padding: 0 30px;            /* слева и справа 30px, текст по центру вертикали */
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    color: #000;                /* фактический введённый текст чёрный */
+    outline: none;
+}
+
+.profile-field__input::placeholder {
+    color: #717171;             /* подсказка серым */
+}
+
+/* Кнопки в низу формы */
+.profile-form__actions {
+    display: flex;
+    justify-content: space-between;   /* левая – кнопка Отменить, правая – Сохранить */
+    align-items: center;
+    margin-top: 30px;
+    padding: 0;                    
+}
+
+/* Новая кнопка Отменить (профиль) */
+.btn--cancel-profile {
+    width: 154px;
+    height: 56px;
+    background-color: #D6D6D6;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    color: #000000;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn--cancel-profile:hover {
+    opacity: 0.7;
+}
+
+/* Кнопка Сохранить */
+.profile-save-btn {
+    width: 161px;
     height: 56px;
     background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
     border: none;
@@ -189,297 +482,326 @@ body {
     font-weight: 500;
     color: #FCFCFC;
     cursor: pointer;
-    transition: opacity 0.2s;
     font-family: 'Montserrat', sans-serif;
-    margin-bottom: 60px;
-    margin-right: 60px;
-}
-
-.btn--logout:hover {
-    opacity: 0.8;
-}
-
-/* ========================
-   Правая область контента
-   ======================== */
-.account-content {
-    width: 708px;
-    height: 645px;
-    border-radius: 10px;
-    padding: 30px;
-    background-color: #F0F0F0;
-}
-
-.content-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 30px;
-}
-
-.content-title {
-    font-size: 22px;
-    font-weight: 500;
-}
-
-.content-add-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    display: flex;
-}
-
-.content-add-icon {
-    width: 24px;
-    height: 24px;
-    transform: rotate(45deg);
     transition: opacity 0.2s;
 }
 
-.content-add-btn:hover .content-add-icon {
-    opacity: 0.7;
-}
-
-/* Карточка заявки */
-.application-card {
-    position: relative;
-    width: 648px;
-    height: 200px;
-    background-color: #FCFCFC;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 0 auto;
-}
-
-.application-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.application-number {
-    font-size: 22px;
-    font-weight: 400;
-    margin-bottom: 3px;
-}
-
-.application-status {
-    width: 145px;
-    height: 35px;
-    background: linear-gradient(-42deg, #FFBB3D, #FFC96C, #FFBB3D);
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: 400;
-    color: #946000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.application-course {
-    font-size: 16px;
-    font-weight: 400;
-    color: #7A7A7A;
-    margin-bottom: 15px;
-}
-
-.application-message {
-    width: 608px;
-    font-size: 18px;
-    font-weight: 300;
-    line-height: 1.4;
-    color: #000;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-}
-
-.application-date {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #7A7A7A;
-}
-
-/* Кружок удаления заявки */
-.application-delete-btn {
-    position: absolute;
-    top: -19.5px;
-    right: -19.5px;
-    width: 39px;
-    height: 39px;
-    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.2s;
-}
-
-.application-delete-btn img {
-    width: 15px;
-    height: 15px;
-}
-
-.application-delete-btn:hover {
+.profile-save-btn:hover {
     opacity: 0.8;
 }
 
-/* ========================
-   Оверлеи (общие)
-   ======================== */
-.delete-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.2);
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-}
-
-.delete-overlay.active {
-    display: flex;
-}
-
-.delete-overlay__box {
-    width: 600px;
-    height: 345px;
-    background: #fff;
-    border-radius: 10px;
-    padding: 50px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.delete-overlay__text {
-    font-size: 25px;
-    font-weight: 500;
-    line-height: 1.3;
-    margin-bottom: 40px;
-}
-
-.delete-overlay__buttons {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-}
-
-/* Кнопка Отмена */
+/* Кнопка Отмена (уже в оверлеях) */
 .btn--cancel {
-    width: 187px;
+    width: 187px; 
     height: 60px;
-    background: transparent;          /* убираем любой фоновый цвет */
-    border: none;                     /* убираем стандартную рамку */
+    background: transparent; 
+    border: none; 
     border-radius: 10px;
-    font-size: 18px;
+    font-size: 18px; 
     font-weight: 500;
     font-family: 'Montserrat', sans-serif;
     cursor: pointer;
     position: relative;
-    display: inline-flex;
-    align-items: center;
+    display: inline-flex; 
+    align-items: center; 
     justify-content: center;
-    color: transparent;               /* базовый цвет скрыт */
+    color: transparent;
     background-image: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
     -webkit-background-clip: text;
-    background-clip: text;            /* градиентный текст */
+    background-clip: text;
     transition: opacity 0.2s;
     z-index: 0;
 }
-
-/* Градиентная обводка через псевдоэлемент */
 .btn--cancel::after {
     content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
     border-radius: inherit;
     background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    padding: 1px;                     /* толщина обводки */
+    padding: 1px;
     z-index: -1;
 }
+.btn--cancel:hover { opacity: 0.7; }
 
-.btn--cancel:hover {
-    opacity: 0.7;                     /* лёгкая прозрачность */
-}
-
-/* Кнопка Удалить (основная) */
+/* Кнопка Удалить / Выйти (основная) */
 .btn--confirm-delete,
 .btn--confirm-action {
-    width: 193px;
+    width: 193px; 
     height: 60px;
     background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
-    border: none;
+    border: none; 
     border-radius: 10px;
-    font-size: 18px;
+    font-size: 18px; 
     color: #fcfcfc;
-    cursor: pointer;
+    cursor: pointer; 
     font-family: 'Montserrat', sans-serif;
     transition: opacity 0.2s;
 }
-
 .btn--confirm-delete:hover,
-.btn--confirm-action:hover {
-    opacity: 0.8;
+.btn--confirm-action:hover { opacity: 0.8; }
+
+/* Оверлеи удаления / выхода */
+.delete-overlay {
+    display: none; 
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+    justify-content: center; 
+    align-items: center;
+    z-index: 999;
+}
+.delete-overlay.active { display: flex; }
+
+.delete-overlay__box {
+    width: 600px; 
+    min-height: 345px;
+    background: #fff; 
+    border-radius: 10px;
+    padding: 50px; 
+    text-align: center;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+}
+
+.delete-overlay__text {
+    font-size: 25px; 
+    font-weight: 500; 
+    line-height: 1.3;
+    margin-bottom: 40px;
+}
+
+.delete-overlay__buttons {
+    display: flex; 
+    gap: 30px; 
+    justify-content: center;
 }
 
 /* Оверлей успеха */
 .success-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    display: none; 
+    position: fixed; 
+    top: 0; left: 0;
+    width: 100%; 
     height: 100%;
     background: rgba(0,0,0,0.2);
-    justify-content: center;
+    justify-content: center; 
     align-items: center;
     z-index: 1000;
 }
-
-.success-overlay.active {
-    display: flex;
-}
+.success-overlay.active { display: flex; }
 
 .success-overlay__box {
-    width: 720px;
+    width: 720px; 
     height: 387px;
-    background-color: #FCFCFC;
+    background-color: #FCFCFC; 
     border-radius: 10px;
-    display: flex;
+    display: flex; 
     flex-direction: column;
-    align-items: center;
+    align-items: center; 
     justify-content: center;
     padding: 100px 0;
 }
 
 .success-overlay__icon {
-    width: 120px;
-    height: 120px;
+    width: 120px; 
+    height: 120px; 
     margin-bottom: 30px;
 }
 
 .success-overlay__text {
-    font-size: 30px;
-    font-weight: 500;
+    font-size: 30px; 
+    font-weight: 500; 
     color: #000;
-    text-align: center;
+    text-align: center; 
     line-height: 1.3;
+}
+
+/* ========================
+   Оверлей формы отзыва
+   ======================== */
+.review-form-overlay {
+    display: none; 
+    position: fixed; 
+    top: 0; left: 0;
+    width: 100%; 
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+    justify-content: center; 
+    align-items: center;
+    z-index: 999;
+}
+.review-form-overlay.active { display: flex; }
+
+.review-form-container {
+    width: 1200px;
+    height: 640px;
+    background-color: #F0F0F0;
+    border-radius: 10px;
+    padding: 46px 0 0 40px;
+    position: relative;
+    display: flex; 
+    flex-direction: column; 
+    gap: 30px;
+}
+
+.review-form-row {
+    display: flex; 
+    align-items: center;
+}
+
+.review-form-label {
+    
+    font-size: 22px; 
+    font-weight: 400;
+    color: #000;
+    text-align: left;
+    margin-right: 15px;
+}
+
+.review-form-input {
+    width: 841px; 
+    height: 52px;
+    background-color: #FCFCFC;
+    border: 1px solid #9B9B9B;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 20px; 
+    font-weight: 400;
+    color: #000;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+}
+.review-form-input::placeholder {
+    color: #717171;
+}
+
+.review-form-textarea {
+    width: 1120px; 
+    height: 150px;
+    background-color: #FCFCFC;
+    border: 1px solid #9B9B9B;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 20px; 
+    font-weight: 400;
+    color: #000;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    resize: none;
+}
+.review-form-textarea::placeholder {
+    color: #717171;
+}
+
+/* Кастомный селект формы отзыва */
+.review-custom-select {
+    position: relative;
+    width: 835px;
+}
+
+.review-custom-select--grade {
+    width: 276px;
+}
+
+.review-custom-select__native {
+    position: absolute; 
+    opacity: 0; 
+    pointer-events: none;
+}
+
+.review-custom-select__trigger {
+    width: 100%; 
+    height: 52px;
+    background-color: #FCFCFC;
+    border: 1px solid #9B9B9B;
+    border-radius: 10px;
+    padding: 0 10px 0 15px;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 20px; 
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+}
+
+.review-custom-select__selected.placeholder {
+    color: #717171;
+}
+
+.review-custom-select__arrow {
+    width: 20px; 
+    height: 12px;
+    margin-right: 15px;
+    transition: transform 0.3s;
+}
+
+.review-custom-select.open .review-custom-select__arrow {
+    transform: rotate(180deg);
+}
+
+.review-custom-select__options {
+    position: absolute; 
+    top: 100%; left: 0; 
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 10px;
+    list-style: none; 
+    padding: 0; 
+    margin: 0;
+    display: none; 
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-height: 200px; 
+    overflow-y: auto;
+}
+
+.review-custom-select.open .review-custom-select__options { display: block; }
+
+.review-custom-select__options li {
+    padding: 12px 15px;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+}
+.review-custom-select__options li:hover { background-color: #F0F0F0; }
+
+/* Кнопка Добавить отзыв */
+.review-submit-btn {
+    width: 210px; 
+    height: 60px;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    border: none; 
+    border-radius: 10px;
+    font-size: 20px; 
+    font-weight: 400;
+    color: #FCFCFC; 
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    align-self: flex-end;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    transition: opacity 0.2s;
+}
+.review-submit-btn:hover { opacity: 0.9; }
+
+/* Кнопка закрытия в форме отзыва */
+.review-form-container .form-container__close {
+    position: absolute; 
+    background: none; 
+    border: none;
+    cursor: pointer; 
+    padding: 0;
+}
+.review-form-container .form-container__close img {
+    width: 24px; 
+    height: 24px;
 }

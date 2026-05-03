@@ -22,27 +22,28 @@
                     <li><a href="../pages/instructors.html">Инструкторы</a></li>
                     <li><a href="../pages/faq.html">Вопросы</a></li>
                     <li><a href="../pages/otzyv.html">Отзывы</a></li>
-                    <li><a href="../pages/contact.html">Контакты</a></li>
+                    <li><a href="../pages/admin.html">Контакты</a></li>
                 </ul>
             </nav>
-            <a href="../pages/account.html" class="btn--account">Личный кабинет</a>
+            <!-- Кнопка "Личный кабинет" (активная, пользователь уже в кабинете) -->
+            <a href="../pages/account.html" class="btn--account">
+                <span class="btn--account__text">Личный кабинет</span>
+                <img src="../images/user.svg" alt="Иконка пользователя" class="btn--account__icon">
+            </a>
         </div>
     </header>
 
     <main class="account-main">
-        <!-- Хлебные крошки -->
         <div class="breadcrumbs container">
             <a href="../pages/main.html">Главная</a>
             <span class="breadcrumbs__sep">/</span>
             <span class="breadcrumbs__current">Личный кабинет</span>
         </div>
 
-        <!-- Заголовок -->
         <section class="account-hero container">
             <h1 class="account-hero__title">Личный кабинет</h1>
         </section>
 
-        <!-- Основной блок личного кабинета -->
         <div class="account-layout container">
             <!-- Левая боковая панель -->
             <aside class="account-sidebar">
@@ -51,15 +52,17 @@
                     <h2 class="sidebar-name">Иван Иванов</h2>
                 </div>
                 <nav class="sidebar-nav">
-                    <ul class="sidebar-menu">
-                        <li class="sidebar-menu__item sidebar-menu__item--active">
+                    <ul class="sidebar-menu" id="sidebar-menu">
+                        <li class="sidebar-menu__item active" data-target="applications">
                             <span class="sidebar-indicator"></span>
                             <a href="#" class="sidebar-link">Мои заявки</a>
                         </li>
-                        <li class="sidebar-menu__item">
+                        <li class="sidebar-menu__item" data-target="reviews">
+                            <span class="sidebar-indicator"></span>
                             <a href="#" class="sidebar-link">Мои отзывы</a>
                         </li>
-                        <li class="sidebar-menu__item">
+                        <li class="sidebar-menu__item" data-target="profile">
+                            <span class="sidebar-indicator"></span>
                             <a href="#" class="sidebar-link">Редактировать профиль</a>
                         </li>
                     </ul>
@@ -71,34 +74,105 @@
             </aside>
 
             <!-- Правая область контента -->
-            <section class="account-content">
-                <div class="content-header">
-                    <h3 class="content-title">Мои заявки</h3>
-                    <button class="content-add-btn open-form-trigger" id="open-form-btn">
-                        <img src="../images/close.svg" alt="Добавить заявку" class="content-add-icon">
-                    </button>
+            <section class="account-content" id="account-content">
+
+                <!-- Панель "Мои заявки" -->
+                <div class="content-panel active" id="panel-applications">
+                    <div class="content-header">
+                        <h3 class="content-title">Мои заявки</h3>
+                        <button id="open-form-btn" class="content-add-btn open-form-trigger">
+                            <img src="../images/close.svg" alt="Добавить заявку" class="content-add-icon">
+                        </button>
+                    </div>
+                    <!-- Карточки заявок -->
+                    <div class="cards-wrapper" id="applications-container">
+                        <article class="application-card">
+                            <div class="application-header">
+                                <h4 class="application-number">Заявка №1</h4>
+                                <span class="application-status">в обработке</span>
+                            </div>
+                            <p class="application-course">Обучение на автомобиль МКПП</p>
+                            <p class="application-message">Добрый день! Хочу записаться к вам в автошколу на обучение на автомобиле МКПП, подскажите пожалуйста когда ближайший старт групп и в какое время будут занятия?</p>
+                            <time class="application-date">от 6 марта 2026</time>
+                            <button class="application-delete-btn delete-item-btn" data-type="application">
+                                <img src="../images/krest.svg" alt="Удалить заявку">
+                            </button>
+                        </article>
+                    </div>
                 </div>
 
-                <!-- Карточка заявки -->
-                <article class="application-card">
-                    <div class="application-header">
-                        <h4 class="application-number">Заявка №1</h4>
-                        <span class="application-status">в обработке</span>
+                <!-- Панель "Мои отзывы" -->
+                <div class="content-panel" id="panel-reviews">
+                    <div class="content-header">
+                        <h3 class="content-title">Мои отзывы</h3>
+                        <button class="content-add-btn" id="open-review-form">
+                            <img src="../images/close.svg" alt="Добавить отзыв" class="content-add-icon">
+                        </button>
                     </div>
-                    <p class="application-course">Обучение на автомобиль МКПП</p>
-                    <p class="application-message">Добрый день! Хочу записаться к вам в автошколу на обучение на автомобиле МКПП, подскажите пожалуйста когда ближайший старт групп и в какое время будут занятия?</p>
-                    <time class="application-date">от 6 марта 2026</time>
-                    <button class="application-delete-btn" id="delete-app-btn">
-                        <img src="../images/krest.svg" alt="Удалить заявку">
-                    </button>
-                </article>
+                    <div class="cards-wrapper" id="reviews-container">
+                        <article class="review-card">
+                            <div class="review-card__header">
+                                <div>
+                                    <h4 class="review-card__name">Софья</h4>
+                                    <p class="review-card__course">Обучение на автомобиль МКПП</p>
+                                </div>
+                                <div class="review-card__stars">
+                                    <span class="star star--active"></span>
+                                    <span class="star star--active"></span>
+                                    <span class="star star--active"></span>
+                                    <span class="star star--active"></span>
+                                    <span class="star star--active"></span>
+                                </div>
+                            </div>
+                            <p class="review-card__text">Замечательная автошкола, очень позитивная атмосфера во время занятий. На любые вопросы отвечают оперативно, с пониманием относятся к тому, что чего-то не понимаешь? Отдельное спасибо инструктору, Алексею Ярушину, он просто лучший! Очень спокойный, добрый, с ним сразу появилось чувство, что вождение - это не сложно. Всегда помогает и поддерживает</p>
+                            <time class="review-card__date">2 декабря 2025</time>
+                            <button class="application-delete-btn delete-item-btn" data-type="review">
+                                <img src="../images/krest.svg" alt="Удалить отзыв">
+                            </button>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Панель "Редактировать профиль" -->
+                <div class="content-panel" id="panel-profile">
+                    <div class="content-header">
+                        <h3 class="content-title">Редактировать профиль</h3>
+                    </div>
+                    <form class="profile-form">
+                        <div class="profile-field">
+                            <label class="profile-field__label" for="profile-name">Имя</label>
+                            <input type="text" id="profile-name" class="profile-field__input" value="Иван" placeholder="Иван">
+                        </div>
+                        <div class="profile-field">
+                            <label class="profile-field__label" for="profile-surname">Фамилия</label>
+                            <input type="text" id="profile-surname" class="profile-field__input" value="Иванов" placeholder="Иванов">
+                        </div>
+                        <div class="profile-field">
+                            <label class="profile-field__label" for="profile-phone">Номер телефона</label>
+                            <input type="tel" id="profile-phone" class="profile-field__input" value="89991110033" placeholder="89991110033">
+                        </div>
+                        <div class="profile-field">
+                            <label class="profile-field__label" for="profile-email">Email</label>
+                            <input type="email" id="profile-email" class="profile-field__input" value="example@mail.ru" placeholder="example@mail.ru">
+                        </div>
+                        <div class="profile-field">
+                            <label class="profile-field__label" for="profile-password">Пароль</label>
+                            <input type="password" id="profile-password" class="profile-field__input" value="**********" placeholder="**********">
+                        </div>
+                        <div class="profile-form__actions">
+                            <button type="button" class="btn--cancel-profile">Отменить</button>
+                            <button type="submit" class="profile-save-btn">Сохранить</button>
+                        </div>
+                    </form>
+                </div>
+
             </section>
         </div>
 
-        <!-- Оверлей удаления заявки -->
+        <!-- Оверлей удаления заявки/отзыва -->
         <div class="delete-overlay" id="delete-overlay">
             <div class="delete-overlay__box">
-                <p class="delete-overlay__text">Вы уверены, что хотите<br>удалить заявку?</p>
+                <p class="delete-overlay__text" id="delete-overlay-text">Вы уверены, что хотите<br>удалить заявку?</p>
                 <div class="delete-overlay__buttons">
                     <button class="btn--cancel" id="cancel-delete">Отмена</button>
                     <button class="btn--confirm-delete" id="confirm-delete">Удалить</button>
@@ -133,6 +207,101 @@
                     <button class="btn--cancel" id="cancel-delete-account">Отмена</button>
                     <button class="btn--confirm-action" id="confirm-delete-account">Удалить</button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Оверлей формы отзыва -->
+        <div class="form-overlay" id="review-form-overlay">
+            <div class="review-form-container">
+                <button class="form-container__close" id="close-review-form-btn">
+                    <img src="../images/close.svg" alt="Закрыть">
+                </button>
+
+                <div class="review-form-row">
+                    <label class="review-form-label">Имя:</label>
+                    <input type="text" class="review-form-input" id="review-name" placeholder="Введите ваше имя">
+                </div>
+
+                <div class="review-form-row">
+                    <label class="review-form-label">Курс:</label>
+                    <div class="review-custom-select" id="review-course-select">
+                        <select class="review-custom-select__native" id="review-course">
+                            <option value="" disabled selected>Выберите курс на котором вы обучались</option>
+                            <option value="Автомобиль с МКПП — категория «B»">Автомобиль с МКПП — категория «B»</option>
+                            <option value="Автомобиль с АКПП — категория «B» автомат">Автомобиль с АКПП — категория «B» автомат</option>
+                            <option value="Мотоцикл — категория «A»">Мотоцикл — категория «A»</option>
+                            <option value="Погрузчик — категории «B», «C», «D»">Погрузчик — категории «B», «C», «D»</option>
+                            <option value="Экскаватор — категории «C», «E», «D»">Экскаватор — категории «C», «E», «D»</option>
+                            <option value="Трактор — категории «B», «C», «E», «D»">Трактор — категории «B», «C», «E», «D»</option>
+                            <option value="Бульдозер — категория «E» с 19 лет">Бульдозер — категория «E» с 19 лет</option>
+                            <option value="Автогрейдер — категории «C», «D» с 19 лет">Автогрейдер — категории «C», «D» с 19 лет</option>
+                            <option value="Автомобильный кран">Автомобильный кран</option>
+                            <option value="Мостовой кран">Мостовой кран</option>
+                            <option value="Автовышка и автогидроподъемник">Автовышка и автогидроподъемник</option>
+                            <option value="Квадроцикл и снегоход — категория «AI» с 16 лет">Квадроцикл и снегоход — категория «AI» с 16 лет</option>
+                            <option value="Внедорожные автотранспортные средства — категория «All» с 19 лет">Внедорожные автотранспортные средства — категория «All» с 19 лет</option>
+                            <option value="Внедорожные автотранспортные средства — категория «All» (БелАЗ)">Внедорожные автотранспортные средства — категория «All» (БелАЗ)</option>
+                            <option value="Машинист катка — категория «C»">Машинист катка — категория «C»</option>
+                            <option value="Машинист уплотняющей машины «Ратрак» — категория «E»">Машинист уплотняющей машины «Ратрак» — категория «E»</option>
+                            <option value="Машинист крана на самоходном ходу">Машинист крана на самоходном ходу</option>
+                        </select>
+                        <div class="review-custom-select__trigger">
+                            <span class="review-custom-select__selected placeholder">Выберите курс на котором вы обучались</span>
+                            <img src="../images/arrow3.svg" alt="" class="review-custom-select__arrow">
+                        </div>
+                        <ul class="review-custom-select__options">
+                            <li data-value="Автомобиль с МКПП — категория «B»">Автомобиль с МКПП — категория «B»</li>
+                            <li data-value="Автомобиль с АКПП — категория «B» автомат">Автомобиль с АКПП — категория «B» автомат</li>
+                            <li data-value="Мотоцикл — категория «A»">Мотоцикл — категория «A»</li>
+                            <li data-value="Погрузчик — категории «B», «C», «D»">Погрузчик — категории «B», «C», «D»</li>
+                            <li data-value="Экскаватор — категории «C», «E», «D»">Экскаватор — категории «C», «E», «D»</li>
+                            <li data-value="Трактор — категории «B», «C», «E», «D»">Трактор — категории «B», «C», «E», «D»</li>
+                            <li data-value="Бульдозер — категория «E» с 19 лет">Бульдозер — категория «E» с 19 лет</li>
+                            <li data-value="Автогрейдер — категории «C», «D» с 19 лет">Автогрейдер — категории «C», «D» с 19 лет</li>
+                            <li data-value="Автомобильный кран">Автомобильный кран</li>
+                            <li data-value="Мостовой кран">Мостовой кран</li>
+                            <li data-value="Автовышка и автогидроподъемник">Автовышка и автогидроподъемник</li>
+                            <li data-value="Квадроцикл и снегоход — категория «AI» с 16 лет">Квадроцикл и снегоход — категория «AI» с 16 лет</li>
+                            <li data-value="Внедорожные автотранспортные средства — категория «All» с 19 лет">Внедорожные автотранспортные средства — категория «All» с 19 лет</li>
+                            <li data-value="Внедорожные автотранспортные средства — категория «All» (БелАЗ)">Внедорожные автотранспортные средства — категория «All» (БелАЗ)</li>
+                            <li data-value="Машинист катка — категория «C»">Машинист катка — категория «C»</li>
+                            <li data-value="Машинист уплотняющей машины «Ратрак» — категория «E»">Машинист уплотняющей машины «Ратрак» — категория «E»</li>
+                            <li data-value="Машинист крана на самоходном ходу">Машинист крана на самоходном ходу</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="review-form-row">
+                    <label class="review-form-label">Отзыв:</label>
+                </div>
+                <textarea class="review-form-textarea" id="review-text" placeholder="Напишите отзыв"></textarea>
+
+                <div class="review-form-row">
+                    <label class="review-form-label">Оценка:</label>
+                    <div class="review-custom-select review-custom-select--grade" id="review-grade-select">
+                        <select class="review-custom-select__native" id="review-grade">
+                            <option value="" disabled selected>Поставьте оценку</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                        </select>
+                        <div class="review-custom-select__trigger">
+                            <span class="review-custom-select__selected placeholder">Поставьте оценку</span>
+                            <img src="../images/arrow3.svg" alt="" class="review-custom-select__arrow">
+                        </div>
+                        <ul class="review-custom-select__options">
+                            <li data-value="5">5</li>
+                            <li data-value="4">4</li>
+                            <li data-value="3">3</li>
+                            <li data-value="2">2</li>
+                            <li data-value="1">1</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button class="btn--confirm-action review-submit-btn" id="submit-review-btn">Добавить</button>
             </div>
         </div>
     </main>

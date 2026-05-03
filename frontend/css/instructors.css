@@ -103,7 +103,7 @@ body {
     gap: 30px;
 }
 
-/* Стрелки (как на странице Акции) */
+/* Стрелки */
 .section-arrow {
     width: 74px;
     height: 34px;
@@ -115,17 +115,12 @@ body {
     background: transparent;
     border: none;
     padding: 0;
-    transition: opacity 0.2s;
+    transition: background-color 0.2s; /* для левой кнопки */
     position: relative;
-}
-
-.section-arrow:hover {
-    opacity: 0.8;
 }
 
 .section-arrow--left {
     background: #fcfcfc;
-    border: none;
 }
 
 .section-arrow--left::before {
@@ -140,8 +135,17 @@ body {
     z-index: -1;
 }
 
+.section-arrow--left:hover {
+    background-color: #f5f5f5;
+    opacity: 1;                 /* перекрывает возможное общее значение */
+}
+
 .section-arrow--right {
     background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+}
+
+.section-arrow--right:hover {
+    opacity: 0.8;              /* правая кнопка остаётся с лёгкой прозрачностью */
 }
 
 .section-arrow__icon {

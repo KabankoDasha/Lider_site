@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Автошкола Лидер – Личный кабинет администратора</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container header__inner">
+            <a href="../pages/main.html" class="logo">
+                <img src="../images/logo.svg" alt="Автошкола Лидер" class="logo__img">
+            </a>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li><a href="../pages/study.html">Обучение</a></li>
+                    <li><a href="../pages/sale.html">Акции</a></li>
+                    <li><a href="../pages/instructors.html">Инструкторы</a></li>
+                    <li><a href="../pages/faq.html">Вопросы</a></li>
+                    <li><a href="../pages/otzyv.html">Отзывы</a></li>
+                    <li><a href="../pages/contact.html">Контакты</a></li>
+                </ul>
+            </nav>
+            <a href="../pages/admin.html" class="btn--account">
+                <span class="btn--account__text">Личный кабинет</span>
+                <img src="../images/user.svg" alt="Иконка пользователя" class="btn--account__icon">
+            </a>
+        </div>
+    </header>
+
+    <main class="account-main">
+        <div class="breadcrumbs container">
+            <a href="../pages/main.html">Главная</a>
+            <span class="breadcrumbs__sep">/</span>
+            <span class="breadcrumbs__current">Личный кабинет</span>
+        </div>
+
+        <section class="account-hero container">
+            <h1 class="account-hero__title">Личный кабинет</h1>
+        </section>
+
+        <div class="account-layout container">
+            <!-- Левая боковая панель -->
+            <aside class="account-sidebar">
+                <div class="sidebar-profile">
+                    <img src="../images/account.svg" alt="Аватар" class="sidebar-avatar">
+                    <h2 class="sidebar-name">Иван Иванов</h2>
+                </div>
+                <nav class="sidebar-nav">
+                    <ul class="sidebar-menu" id="sidebar-menu">
+                        <li class="sidebar-menu__item active" data-target="applications">
+                            <span class="sidebar-indicator"></span>
+                            <a href="#" class="sidebar-link">
+                                Заявки на обучение
+                                <span class="counter-badge">10</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-menu__item" data-target="reviews">
+                            <span class="sidebar-indicator"></span>
+                            <a href="#" class="sidebar-link">
+                                Модерация отзывов
+                                <span class="counter-badge">5</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-menu__item" data-target="content">
+                            <span class="sidebar-indicator"></span>
+                            <a href="#" class="sidebar-link">Управление контентом</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="sidebar-actions">
+                    <button class="btn--delete-account" id="delete-account-btn">Удалить аккаунт</button>
+                    <button class="btn--logout" id="logout-btn">Выйти</button>
+                </div>
+            </aside>
+
+            <!-- Правая область контента -->
+            <section class="account-content" id="account-content">
+                <!-- Панель "Заявки на обучение" -->
+                <div class="content-panel active" id="panel-applications">
+                    <div class="content-header">
+                        <h3 class="content-title">Заявки на обучение</h3>
+                        <div class="tabs">
+                            <button class="tab active" data-tab="active">Активные</button>
+                            <button class="tab" data-tab="processed">Обработанные</button>
+                        </div>
+                    </div>
+                    <div class="cards-wrapper" id="applications-container">
+                        <!-- Активные заявки -->
+                        <article class="application-card new" data-id="1" data-status="new">
+                            <div class="application-header">
+                                <h4 class="application-number">Заявка №1</h4>
+                                <span class="application-status">в обработке</span>
+                            </div>
+                            <p class="application-course">Обучение на автомобиль МКПП</p>
+                            <p class="application-message">Добрый день! Хочу записаться к вам в автошколу на обучение на автомобиле МКПП, подскажите пожалуйста когда ближайший старт групп и в какое время будут занятия?</p>
+                            <time class="application-date">от 6 марта 2026</time>
+                            <span class="new-indicator"></span>
+                        </article>
+                        <article class="application-card new" data-id="2" data-status="new">
+                            <div class="application-header">
+                                <h4 class="application-number">Заявка №2</h4>
+                                <span class="application-status">в обработке</span>
+                            </div>
+                            <p class="application-course">Обучение на мотоцикл</p>
+                            <p class="application-message">Здравствуйте, если мне сейчас 17 лет, могу ли я пройти обучение на мотоцикл и потом сдать экзамен?</p>
+                            <time class="application-date">от 20 марта 2026</time>
+                            <span class="new-indicator"></span>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Панель "Модерация отзывов" -->
+                <div class="content-panel" id="panel-reviews">
+                    <div class="content-header">
+                        <h3 class="content-title">Модерация отзывов</h3>
+                    </div>
+                    <div class="cards-wrapper" id="reviews-container">
+                        <article class="review-card" data-id="1">
+                            <div class="review-card__header">
+                                <div>
+                                    <h4 class="review-card__name">Софья</h4>
+                                    <p class="review-card__course">Обучение на автомобиль МКПП</p>
+                                </div>
+                                <div class="review-card__stars">
+                                    <span class="star star--active"></span>
+                                    <span class="star star--active"></span>
+                                    <span class="star star--active"></span>
+                                    <span class="star star--active"></span>
+                                    <span class="star star--active"></span>
+                                </div>
+                            </div>
+                            <p class="review-card__text">Замечательная автошкола, очень позитивная атмосфера во время занятий. На любые вопросы отвечают оперативно, с пониманием относятся к тому, что чего-то не понимаешь! Отдельное спасибо инструктору, Алексею Ярушину, он просто лучший! Очень спокойный, добрый, с ним сразу появилось чувство, что вождение - это не сложно.</p>
+                            <time class="review-card__date">2 декабря 2025</time>
+                        </article>
+                        <article class="review-card" data-id="2">
+                            <div class="review-card__header">
+                                <div>
+                                    <h4 class="review-card__name">Владимир</h4>
+                                    <p class="review-card__course">Обучение на мотоцикл</p>
+                                </div>
+                                <div class="review-card__stars">
+                                    <span class="star star--active"></span>
+                                    <span class="star star--active"></span>
+                                    <span class="star star--active"></span>
+                                    <span class="star star--active"></span>
+                                    <span class="star star--active"></span>
+                                </div>
+                            </div>
+                            <p class="review-card__text">Учусь в учебном центре, теорию преподают отлично, практику тоже отлично преподают Валерий Анатольевич Гриб отличный преподаватель по вождению, посоветовал автошколу знакомый, все понравилось рекомендую.</p>
+                            <time class="review-card__date">8 февраля 2026</time>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Панель "Управление контентом" -->
+                <div class="content-panel" id="panel-content">
+                    <div class="content-header">
+                        <h3 class="content-title">Управление контентом</h3>
+                    </div>
+                    <div class="content-pages">
+                        <div class="content-page-item">
+                            <span>Страница «Обучение»</span>
+                            <button class="btn--edit" data-page="study">Редактировать</button>
+                        </div>
+                        <div class="content-page-item">
+                            <span>Страница «Акции»</span>
+                            <button class="btn--edit" data-page="sale">Редактировать</button>
+                        </div>
+                        <div class="content-page-item">
+                            <span>Страница «Инструкторы»</span>
+                            <button class="btn--edit" data-page="instructors">Редактировать</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Оверлей деталей заявки (изменение статуса) -->
+        <div class="delete-overlay" id="application-detail-overlay">
+            <div class="delete-overlay__box">
+                <p class="delete-overlay__text">Изменить статус заявки</p>
+                <select class="status-select" id="status-select">
+                    <option value="new">новая</option>
+                    <option value="processing">в обработке</option>
+                    <option value="confirmed">подтверждена</option>
+                    <option value="rejected">отклонена</option>
+                </select>
+                <div class="delete-overlay__buttons">
+                    <button class="btn--cancel" id="cancel-application">Отмена</button>
+                    <button class="btn--confirm-action" id="save-application">Сохранить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Оверлей деталей отзыва -->
+        <div class="delete-overlay" id="review-detail-overlay">
+            <div class="delete-overlay__box review-detail">
+                <div id="review-detail-content">
+                    <h4 class="review-card__name">Софья</h4>
+                    <p class="review-card__course">Обучение на автомобиль МКПП</p>
+                    <div class="review-card__stars">
+                        <span class="star star--active"></span>
+                        <span class="star star--active"></span>
+                        <span class="star star--active"></span>
+                        <span class="star star--active"></span>
+                        <span class="star star--active"></span>
+                    </div>
+                    <p class="review-card__text">Замечательная автошкола, очень позитивная атмосфера...</p>
+                </div>
+                <div class="delete-overlay__buttons">
+                    <button class="btn--cancel" id="cancel-review">Отмена</button>
+                    <button class="btn--confirm-action" id="approve-review">Добавить</button>
+                    <button class="btn--confirm-delete" id="delete-review">Удалить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Оверлей редактирования контента (общий) -->
+        <div class="delete-overlay" id="content-edit-overlay">
+            <div class="delete-overlay__box content-edit">
+                <p class="delete-overlay__text">Редактирование контента</p>
+                <div id="content-edit-area">
+                    <!-- Динамически заполняется js -->
+                </div>
+                <div class="delete-overlay__buttons">
+                    <button class="btn--cancel" id="cancel-content">Отмена</button>
+                    <button class="btn--confirm-action" id="save-content">Сохранить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Оверлей выхода -->
+        <div class="delete-overlay" id="logout-overlay">
+            <div class="delete-overlay__box">
+                <p class="delete-overlay__text">Вы уверены, что хотите<br>выйти из личного кабинета?</p>
+                <div class="delete-overlay__buttons">
+                    <button class="btn--cancel" id="cancel-logout">Отмена</button>
+                    <button class="btn--confirm-action" id="confirm-logout">Выйти</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Оверлей удаления аккаунта -->
+        <div class="delete-overlay" id="delete-account-overlay">
+            <div class="delete-overlay__box">
+                <p class="delete-overlay__text">Вы уверены, что хотите<br>удалить учётную запись?</p>
+                <div class="delete-overlay__buttons">
+                    <button class="btn--cancel" id="cancel-delete-account">Отмена</button>
+                    <button class="btn--confirm-action" id="confirm-delete-account">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал сайта -->
+    <footer class="footer">
+        <div class="container footer__inner">
+            <div class="footer__top">
+                <div class="footer__col footer__col--contacts">
+                    <div class="footer__contact-item">
+                        <img src="../images/email.svg" alt="Иконка почты" class="footer__icon footer__icon--email">
+                        <span>info@lider-center.com</span>
+                    </div>
+                    <div class="footer__contact-item">
+                        <img src="../images/phone.svg" alt="Иконка телефона" class="footer__icon footer__icon--phone">
+                        <span>+7(351) 700-74-00</span>
+                    </div>
+                    <div class="footer__social">
+                        <a href="https://api.whatsapp.com/send?phone=79089364611"><img src="../images/whatsapp.svg" alt="Автошкола Лидер в WhatsApp" class="footer__icon footer__icon--social"></a>
+                        <a href="https://t.me/centr_lider"><img src="../images/telegram.svg" alt="Автошкола Лидер в Telegram" class="footer__icon footer__icon--social"></a>
+                        <a href="https://vk.com/lider.drive"><img src="../images/vk.svg" alt="Автошкола Лидер в ВК" class="footer__icon footer__icon--social"></a>
+                    </div>
+                </div>
+                <div class="footer__col footer__col--hours">
+                    <p class="footer__subtitle">Режим работы:</p>
+                    <p class="footer__text">пн — чт с 9:00 до 18:00<br>пт с 9:00 до 17:00<br>сб, вс — выходные<br>перерыв с 13:00 до 14:00</p>
+                    <p class="footer__city">г. Челябинск</p>
+                </div>
+                <div class="footer__col footer__col--addresses">
+                    <p class="footer__subtitle">Наши адреса:</p>
+                    <p class="footer__text2">ул. 60 лет Октября, д. 18<br>ул. Сталеваров, д. 5а (ДК «Восток»)<br>шоссе Металлургов, д. 51<br>проспект Победы, д. 384<br>Комсомольский проспект, д. 80<br>ул. Комарова, д. 114</p>
+                </div>
+            </div>
+
+            <!-- Карта сайта -->
+            <div class="footer__sitemap">
+                <h3 class="footer__sitemap-title">Карта сайта</h3>
+                <hr class="footer__divider">
+                <div class="footer__sitemap-columns">
+                    <div class="footer__sitemap-col">
+                        <p class="footer__sitemap-heading"><a href="../pages/main.html">Главная страница</a></p>
+                        <ul>
+                            <li><a href="../pages/main.html#about">О центре</a></li>
+                            <li><a href="../pages/main.html#branches">Филиалы</a></li>
+                            <li><a href="../pages/main.html#map">Схема проезда</a></li>
+                        </ul>
+                        <p class="footer__sitemap-heading"><a href="../pages/study.html">Обучение</a></p>
+                        <ul>
+                            <li><a href="../pages/study.html#auto">Автошкола</a></li>
+                            <li><a href="../pages/study.html#special">Спецтехника</a></li>
+                        </ul>
+                        <p class="footer__sitemap-heading"><a href="../pages/sale.html">Акции</a></p>
+                        <ul>
+                            <li><a href="../pages/sale.html#promo">Акции</a></li>
+                            <li><a href="../pages/sale.html#regular">Скидки</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__sitemap-col">
+                        <p class="footer__sitemap-heading"><a href="../pages/faq.html">Вопросы</a></p>
+                        <ul>
+                            <li><a href="../pages/faq.html#enrollment">О зачислении в автошколу</a></li>
+                            <li><a href="../pages/faq.html#training">Об обучении</a></li>
+                            <li><a href="../pages/faq.html#exams">Об экзаменах</a></li>
+                        </ul>
+                        <p class="footer__sitemap-heading1"><a href="../pages/otzyv.html">Отзывы</a></p>
+                        <p class="footer__sitemap-heading"><a href="../pages/contact.html">Контакты</a></p>
+                        <ul>
+                            <li><a href="../pages/contact.html#map">Схема проезда</a></li>
+                            <li><a href="../pages/contact.html#addresses">Адреса филиалов</a></li>
+                            <li><a href="../pages/contact.html#hours">Режим работы</a></li>
+                            <li><a href="../pages/contact.html#contacts">Контакты для связи</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__sitemap-col">
+                        <p class="footer__sitemap-heading"><a href="../pages/login.html">Личный кабинет</a></p>
+                        <ul>
+                            <li><a href="../pages/login.html#login">Вход</a></li>
+                            <li><a href="../pages/login.html#register">Регистрация</a></li>
+                        </ul>
+                        <p class="footer__sitemap-heading1"><a href="#" id="open-form-btn">Записаться на обучение</a></p>
+                        <p class="footer__sitemap-heading1"><a href="../pages/data.html">Реквизиты компании</a></p>
+                        <p class="footer__sitemap-heading"><a href="../pages/instructors.html">Инструкторы</a></p>
+                        <ul>
+                            <li><a href="../pages/instructors.html#theory">Преподаватели по теории</a></li>
+                            <li><a href="../pages/instructors.html#driving">Инструкторы по вождению</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="footer__divider">
+                <div class="footer__legal">
+                    <a href="../policy.pdf">Политика обработки персональных данных</a>
+                    <a href="../oferta.pdf">Оферта</a>
+                    <a href="../agree.pdf">Согласие на обработку персональных данных</a>
+                </div>
+                <div class="footer__search">
+                    <div class="search-box">
+                        <input type="text" placeholder="Поиск" class="search-box__input">
+                        <button type="submit" class="search-box__btn">
+                            <img src="../images/search.svg" alt="" class="search-box__icon">
+                        </button>
+                    </div>
+                    <p class="footer__copyright">©АНО ДПО «Учебный центр Лидер» 2026</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/admin.js"></script>
+</body>
+</html>

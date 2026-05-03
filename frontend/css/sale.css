@@ -114,18 +114,12 @@ body {
     background: transparent;
     border: none;
     padding: 0;
-    transition: opacity 0.2s;
+    transition: background-color 0.2s; /* для левой кнопки */
     position: relative;
-}
-
-.promo-arrow:hover {
-    opacity: 0.8;
 }
 
 .promo-arrow--left {
     background: #fcfcfc;
-    border: 5px;
-    border-color: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
 }
 
 .promo-arrow--left::before {
@@ -140,8 +134,17 @@ body {
     z-index: -1;
 }
 
+.promo-arrow--left:hover {
+    background-color: #f5f5f5;
+    opacity: 1;                 /* перекрывает возможное общее значение */
+}
+
 .promo-arrow--right {
     background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+}
+
+.promo-arrow--right:hover {
+    opacity: 0.8;              /* правая кнопка остаётся с лёгкой прозрачностью */
 }
 
 /* Иконка стрелки */
