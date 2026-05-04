@@ -1,0 +1,199 @@
+/* ========================
+   Базовые настройки
+   ======================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+    background-color: #fcfcfc;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* ========================
+   Основной контент
+   ======================== */
+.distant-main {
+    margin-top: 135px;
+    padding-top: 0;
+}
+
+/* ========================
+   Хлебные крошки
+   ======================== */
+.breadcrumbs {
+    font-size: 18px;
+    font-weight: 400;
+    color: #929292;
+    margin-bottom: 60px;
+    padding-top: 0;
+}
+
+.breadcrumbs a {
+    color: #929292;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumbs a:hover {
+    color: #D90D26;
+}
+
+.breadcrumbs__sep {
+    margin: 0 2px;
+}
+
+.breadcrumbs__current {
+    color: #929292;
+}
+
+/* ========================
+   Заголовок и описание
+   ======================== */
+
+.distant-hero {
+    margin-bottom: 60px;
+}
+
+.distant-hero__title {
+    font-size: 50px;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 30px;
+    color: #000;
+}
+
+.distant-hero__desc {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.5;
+    max-width: 1200px;
+    margin-bottom: 60px;
+    color: #000;
+}
+
+.distant-section__title {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.distant-section__title2 {
+    font-size: 25px;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.distant-hero__text {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.5;
+    max-width: 1200px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    color: #000;
+}
+
+.distant__list li {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    padding: 5px;
+    margin-left: 40px;
+}
+
+.distant-list {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.distant-list p {
+    margin-bottom: 10px;
+    margin-left: 30px;
+}
+
+/* ========================
+   Призыв к действию
+   ======================== */
+.cta-block {
+    display: flex;
+    justify-content: flex-end;   
+    align-items: flex-start;
+    gap: 158px;                  
+    margin-bottom: 100px;
+}
+
+.cta-block__text {
+    max-width: 460px;
+    flex-shrink: 0;             
+}
+
+.cta-block__heading {
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 30px;
+    width: 660px;
+}
+
+.btn--cta {
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.cta-block__images {
+    position: relative;         
+    width: 580px;              
+    height: auto;               
+    flex-shrink: 0;
+    display: block;
+}
+
+.cta-block__img {
+    display: block;
+    border-radius: 10px;
+}
+
+.cta-block__img--front {
+    width: 580px;
+    height: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.cta-block__img--back {
+    width: 346px;
+    height: auto;
+    object-fit: cover;
+    position: absolute;
+    top: 10px;
+    left: -180px;                
+    z-index: 1;
+}
+
+.cta-block__note {
+    font-size: 18px;
+    font-weight: 300;
+    color: #000;
+    text-align: right;
+    position: absolute;
+    bottom: -20px;
+    right: 10px;
+    white-space: nowrap;
+    z-index: 3;
+}

@@ -1,5 +1,5 @@
 /* ========================
-   Базовые настройки (шрифты уже подключены в main.css)
+   Базовые настройки 
    ======================== */
 *,
 *::before,
@@ -118,7 +118,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #fcfcfc;          /* фон совпадает с фоном страницы – без заливки */
+    background: #fcfcfc;          
     position: relative;
     z-index: 0;
 }
@@ -137,21 +137,21 @@ body {
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    padding: 3px;                 /* толщина обводки */
+    padding: 3px;               
     z-index: -1;
 }
 
 .step__num {
     font-size: 35px;
     font-weight: 500;
-    color: #171717;               /* исправлен цвет */
+    color: #171717;              
     line-height: 1.2;
 }
 
 .step__label {
     font-size: 18px;
     font-weight: 300;
-    color: #171717;               /* исправлен цвет */
+    color: #171717;             
 }
 
 .step__desc {
@@ -193,12 +193,12 @@ body {
     align-items: center;
     text-align: center;
     gap: 15px;
-    flex: 1;                      /* равномерная ширина */
-    min-width: 0;                 /* чтобы не переполнять */
+    flex: 1;                      
+    min-width: 0;                
 }
 
 .advantage__icon-wrap {
-    height: 67px;                 /* фиксированная высота для выравнивания иконок по нижнему краю */
+    height: 67px;                 
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -211,11 +211,11 @@ body {
 }
 
 .advantage__text {
-    font-size: 16px;              /* уменьшено для размещения в 2 строки */
+    font-size: 16px;             
     font-weight: 300;
     color: #000;
     line-height: 1.3;
-    min-height: 48px;             /* одинаковая высота подписей */
+    min-height: 48px;           
     display: flex;
     align-items: center;
     justify-content: center;
@@ -228,7 +228,7 @@ body {
    Водительские права категории А
    ======================== */
 .rights {
-    margin-bottom: 0;             /* убираем большой отступ, теперь отступ зададим через .cta */
+    margin-bottom: 0;             
 }
 
 .rights__title {
@@ -268,7 +268,7 @@ body {
     justify-content: space-between;
     margin-bottom: 40px;
     gap: 35px;
-    margin-top: 20px;             /* отступ сверху 20px */
+    margin-top: 20px;            
 }
 
 .cta__left {
@@ -292,7 +292,7 @@ body {
     align-items: center;
 }
 
-/* Бейджи с градиентной обводкой и градиентным текстом */
+/* Бейджи */
 .badge {
     position: relative;
     display: inline-flex;
@@ -309,7 +309,7 @@ body {
     background-image: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
     -webkit-background-clip: text;
     background-clip: text;
-    white-space: nowrap;          /* "Рассрочка 0%" в одну строку */
+    white-space: nowrap;         
     z-index: 0;
 }
 
@@ -330,7 +330,7 @@ body {
     z-index: -1;
 }
 
-/* Кнопка "Записаться" – 280x70, жирность 400 */
+/* Кнопка Записаться */
 .btn--cta {
     width: 320px;
     height: 70px;
@@ -359,6 +359,5 @@ body {
     height: 500px;
     object-fit: contain;
     margin-top: -300px;
-    align-self: flex-start;
-    transform: scaleX(-1);        /* зеркальное отражение */
+    align-self: flex-start;      
 }

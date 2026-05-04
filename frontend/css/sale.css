@@ -103,6 +103,7 @@ body {
     gap: 30px;
 }
 
+/* Стрелки (актуальные акции) */
 .promo-arrow {
     width: 74px;
     height: 34px;
@@ -111,43 +112,48 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    background: transparent;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26); 
     border: none;
     padding: 0;
-    transition: background-color 0.2s; /* для левой кнопки */
     position: relative;
+    box-sizing: border-box;
 }
 
-.promo-arrow--left {
-    background: #fcfcfc;
-}
-
-.promo-arrow--left::before {
+/* Обводка для неактивной кнопки – внутри границ */
+.promo-arrow.disabled::before {
     content: '';
     position: absolute;
-    top: -1px;
-    left: -1px;
-    right: -1px;
-    bottom: -1px;
-    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     border-radius: 5px;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 1px;
     z-index: -1;
 }
 
-.promo-arrow--left:hover {
-    background-color: #f5f5f5;
-    opacity: 1;                 /* перекрывает возможное общее значение */
+/* Неактивное состояние */
+.promo-arrow.disabled {
+    background: transparent;
+    cursor: default;
+    pointer-events: none;
 }
 
-.promo-arrow--right {
-    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+/* Наведение на неактивную кнопку не меняет её вид */
+.promo-arrow.disabled:hover {
+    background: transparent;
+    opacity: 1;
 }
 
-.promo-arrow--right:hover {
-    opacity: 0.8;              /* правая кнопка остаётся с лёгкой прозрачностью */
+.promo-arrow:hover {
+    opacity: 0.8;
 }
 
-/* Иконка стрелки */
 .promo-arrow__icon {
     display: block;
     width: 50px;
@@ -155,16 +161,12 @@ body {
     object-fit: contain;
 }
 
+/* Отражаем иконку для левой кнопки */
 .promo-arrow--left .promo-arrow__icon {
     transform: scaleX(-1);
 }
 
 /* Карточки акций */
-.promo-cards {
-    display: flex;
-    gap: 40px;
-}
-
 .promo-card {
     width: 373px;
     height: 320px;
@@ -211,8 +213,19 @@ body {
     margin-top: auto;
 }
 
+/* Слайдер для промо-карточек */
+.promo-slider {
+    overflow: hidden;
+}
+
+.promo-slider__track {
+    display: flex;
+    gap: 40px;
+    transition: transform 0.3s ease;
+}
+
 /* ========================
-   Постоянные скидки (исправленная сетка)
+   Постоянные скидки 
    ======================== */
 .regular-discounts {
     margin-bottom: 60px;
@@ -237,7 +250,7 @@ body {
     align-items: center;
     height: 86px;
     padding: 0 30px;
-    gap: 40px;                    /* фиксированный зазор между названием и суммой */
+    gap: 40px;                    
 }
 
 .discount-item__name {
@@ -274,15 +287,15 @@ body {
    ======================== */
 .cta-block {
     display: flex;
-    justify-content: flex-end;   /* все элементы уходят вправо */
+    justify-content: flex-end;   
     align-items: flex-start;
-    gap: 158px;                  /* отступ между текстом и картинками */
+    gap: 158px;                  
     margin-bottom: 100px;
 }
 
 .cta-block__text {
     max-width: 460px;
-    flex-shrink: 0;             /* текст не сжимается */
+    flex-shrink: 0;             
 }
 
 .cta-block__heading {
@@ -299,9 +312,9 @@ body {
 }
 
 .cta-block__images {
-    position: relative;         /* для абсолютных позиций внутри */
-    width: 580px;               /* ширина, как у передней картинки */
-    height: auto;               /* замени height:500px, чтобы не фиксировать */
+    position: relative;         
+    width: 580px;              
+    height: auto;               
     flex-shrink: 0;
     display: block;
 }
@@ -324,7 +337,7 @@ body {
     object-fit: cover;
     position: absolute;
     top: 10px;
-    left: -180px;                /* остаётся перекрытие */
+    left: -180px;                
     z-index: 1;
 }
 

@@ -1,5 +1,5 @@
 /* ========================
-   Базовые настройки (шрифты уже подключены в main.css)
+   Базовые настройки
    ======================== */
 *,
 *::before,
@@ -22,17 +22,13 @@ body {
     padding: 0;
 }
 
-/* ========================
-   Основной контент
-   ======================== */
+/* Основной контент */
 .instructor-main {
     margin-top: 135px;
     padding-top: 0;
 }
 
-/* ========================
-   Хлебные крошки
-   ======================== */
+/* Хлебные крошки */
 .breadcrumbs {
     font-size: 18px;
     font-weight: 400;
@@ -40,28 +36,22 @@ body {
     margin-bottom: 60px;
     padding-top: 0;
 }
-
 .breadcrumbs a {
     color: #929292;
     text-decoration: none;
     transition: color 0.2s;
 }
-
 .breadcrumbs a:hover {
     color: #D90D26;
 }
-
 .breadcrumbs__sep {
     margin: 0 2px;
 }
-
 .breadcrumbs__current {
     color: #929292;
 }
 
-/* ========================
-   Заголовок и описание
-   ======================== */
+/* Заголовок и описание */
 .instructor-hero__title {
     font-size: 50px;
     font-weight: 500;
@@ -69,7 +59,6 @@ body {
     margin-bottom: 30px;
     color: #000;
 }
-
 .instructor-hero__desc {
     font-size: 18px;
     font-weight: 300;
@@ -79,9 +68,7 @@ body {
     color: #000;
 }
 
-/* ========================
-   Секции инструкторов (общие)
-   ======================== */
+/* Секции инструкторов */
 .instructor-section {
     margin-bottom: 60px;
 }
@@ -112,42 +99,47 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    background: transparent;
+    /* активный фон */
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
     border: none;
     padding: 0;
-    transition: background-color 0.2s; /* для левой кнопки */
     position: relative;
+    transition: background 0.2s, opacity 0.2s;
+    box-sizing: border-box;   /* гарантирует фиксированные размеры */
 }
 
-.section-arrow--left {
-    background: #fcfcfc;
-}
-
-.section-arrow--left::before {
+/* Обводка для неактивной кнопки – внутри границ */
+.section-arrow.disabled::before {
     content: '';
     position: absolute;
-    top: -1px;
-    left: -1px;
-    right: -1px;
-    bottom: -1px;
-    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     border-radius: 5px;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 1px;            /* толщина обводки */
     z-index: -1;
 }
 
-.section-arrow--left:hover {
-    background-color: #f5f5f5;
-    opacity: 1;                 /* перекрывает возможное общее значение */
+/* Неактивное состояние */
+.section-arrow.disabled {
+    background: transparent;
+    cursor: default;
+    pointer-events: none;
 }
 
-.section-arrow--right {
-    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+/* Наведение на неактивную кнопку не меняет её вид */
+.section-arrow.disabled:hover {
+    background: transparent;
+    opacity: 1;
 }
 
-.section-arrow--right:hover {
-    opacity: 0.8;              /* правая кнопка остаётся с лёгкой прозрачностью */
-}
-
+/* Иконка внутри */
 .section-arrow__icon {
     display: block;
     width: 50px;
@@ -155,14 +147,22 @@ body {
     object-fit: contain;
 }
 
+/* Отражаем иконку для левой кнопки */
 .section-arrow--left .section-arrow__icon {
     transform: scaleX(-1);
 }
 
-/* Сетка карточек */
-.instructor-cards {
+/* ========================
+   Слайдер
+   ======================== */
+.instructor-slider {
+    overflow: hidden;
+}
+
+.instructor-slider__track {
     display: flex;
     gap: 40px;
+    transition: transform 0.3s ease;
 }
 
 /* Карточка инструктора */
@@ -182,7 +182,6 @@ body {
     gap: 30px;
 }
 
-/* Обёртка для фото с серым фоном */
 .instructor-card__photo-wrapper {
     width: 177px;
     height: 226px;
@@ -192,7 +191,6 @@ body {
     overflow: hidden;
 }
 
-/* Сама фотография */
 .instructor-card__photo {
     width: 100%;
     height: 100%;
@@ -224,14 +222,56 @@ body {
 }
 
 .stars {
-    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
+    display: flex;                  
+    gap: 4px;                         
+}
+
+.star {
+    display: block;
+    width: 30px;
+    height: 30px;
+    position: relative;
+}
+
+/* Активная (полная) звезда */
+.star--active::before {
+    content: '★';
     font-size: 30px;
     line-height: 1;
-    letter-spacing: 2px;
+    color: transparent;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-stroke: 1.5px #D90D26;
+}
+
+/* Пустая звезда (обводка) */
+.star:not(.star--active):not(.star--partial)::before {
+    content: '★';
+    font-size: 30px;
+    line-height: 1;
+    -webkit-text-stroke: 1.5px #D90D26;
+    color: #D90D26;
+    -webkit-text-fill-color: transparent;
+}
+
+
+
+/* Частично заполненная звезда */
+.star--partial::before {
+    content: '★';
+    font-size: 30px;
+    line-height: 1;
+    background: linear-gradient(
+        to right,
+        #D90D26 0%, #E94055 var(--star-fill),
+        transparent var(--star-fill), transparent 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-stroke: 1.5px #D90D26;
+    paint-order: stroke fill;
 }
 
 .rating-value {
@@ -270,7 +310,6 @@ body {
     border-radius: 0 10px 0 0;
 }
 
-/* Чтобы текстовые детали не перекрывались авто, если нужно, но по макету авто заходит снизу, текст выше */
 .instructor-card--with-car .instructor-card__details {
     position: relative;
     z-index: 1;

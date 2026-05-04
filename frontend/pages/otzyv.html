@@ -6,6 +6,7 @@
     <title>Автошкола Лидер</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/otzyv.css">
+    <link rel="stylesheet" href="../css/forma.css">
 </head>
 <body>
     <!-- Шапка -->
@@ -63,9 +64,9 @@
         </div>
 
         <!-- Список отзывов -->
-        <section class="reviews-list container">
+        <section class="reviews-list container" id="reviews-container">
             <!-- 1. Гузэль -->
-            <article class="review-card">
+            <article class="review-card" data-date="2026-02-10" data-rating="4">
                 <div class="review-card__header">
                     <div>
                         <h3 class="review-card__name">Гузэль</h3>
@@ -84,7 +85,7 @@
             </article>
 
             <!-- 2. Софья -->
-            <article class="review-card">
+            <article class="review-card" data-date="2025-12-02" data-rating="5">
                 <div class="review-card__header">
                     <div>
                         <h3 class="review-card__name">Софья</h3>
@@ -103,7 +104,7 @@
             </article>
 
             <!-- 3. Павел -->
-            <article class="review-card">
+            <article class="review-card" data-date="2026-03-05" data-rating="5">
                 <div class="review-card__header">
                     <div>
                         <h3 class="review-card__name">Павел</h3>
@@ -122,7 +123,7 @@
             </article>
 
             <!-- 4. Владимир -->
-            <article class="review-card">
+            <article class="review-card" data-date="2026-02-08" data-rating="5">
                 <div class="review-card__header">
                     <div>
                         <h3 class="review-card__name">Владимир</h3>
@@ -141,7 +142,7 @@
             </article>
 
             <!-- 5. Анастасия -->
-            <article class="review-card">
+            <article class="review-card" data-date="2026-03-12" data-rating="5">
                 <div class="review-card__header">
                     <div>
                         <h3 class="review-card__name">Анастасия</h3>
@@ -159,8 +160,46 @@
                 <span class="review-card__date">12 марта 2026</span>
             </article>
 
+            <!-- Дополнительные отзывы для подгрузки (изначально скрыты) -->
+            <article class="review-card" data-date="2026-03-20" data-rating="5">
+                <div class="review-card__header">
+                    <div>
+                        <h3 class="review-card__name">Максим</h3>
+                        <p class="review-card__course">Обучение на автомобиль МКПП</p>
+                    </div>
+                    <div class="review-card__stars" aria-label="Оценка 5 из 5">
+                        <span class="star star--active"></span>
+                        <span class="star star--active"></span>
+                        <span class="star star--active"></span>
+                        <span class="star star--active"></span>
+                        <span class="star star--active"></span>
+                    </div>
+                </div>
+                <p class="review-card__text">Отличная автошкола! Инструктор Алексей очень грамотно всё объяснял. Сдал с первого раза.</p>
+                <span class="review-card__date">20 марта 2026</span>
+            </article>
+
+            <article class="review-card" data-date="2026-03-25" data-rating="4">
+                <div class="review-card__header">
+                    <div>
+                        <h3 class="review-card__name">Ольга</h3>
+                        <p class="review-card__course">Обучение на автомобиль АКПП</p>
+                    </div>
+                    <div class="review-card__stars" aria-label="Оценка 4 из 5">
+                        <span class="star star--active"></span>
+                        <span class="star star--active"></span>
+                        <span class="star star--active"></span>
+                        <span class="star star--active"></span>
+                        <span class="star"></span>
+                    </div>
+                </div>
+                <p class="review-card__text">Училась на автомате, всё понравилось. Теория интересная, практика интенсивная.</p>
+                <span class="review-card__date">25 марта 2026</span>
+            </article>
+
             <!-- Кнопка «Показать ещё» -->
-            <button class="reviews-load-more">Показать ещё</button>
+            <button class="reviews-load-more" id="load-more-btn">Показать ещё</button>
+            <p id="no-more-message" class="no-more-message">Больше отзывов нет</p>
         </section>
         
     </main>
@@ -218,6 +257,7 @@
                             <li><a href="../pages/sale.html#promo">Акции</a></li>
                             <li><a href="../pages/sale.html#regular">Скидки</a></li>
                         </ul>
+                        <p class="footer__sitemap-heading1"><a href="../pages/oplata.html">Оплата обучения</a></p>
                     </div>
                     <div class="footer__sitemap-col">
                         <p class="footer__sitemap-heading"><a href="../pages/faq.html">Вопросы</a></p>
@@ -225,29 +265,30 @@
                             <li><a href="../pages/faq.html#enrollment">О зачислении в автошколу</a></li>
                             <li><a href="../pages/faq.html#training">Об обучении</a></li>
                             <li><a href="../pages/faq.html#exams">Об экзаменах</a></li>
+                            <li><a href="../pages/faq.html#special">Об обучении на спецтехнику</a></li>
                         </ul>
                         <p class="footer__sitemap-heading1"><a href="../pages/otzyv.html">Отзывы</a></p>
                         <p class="footer__sitemap-heading"><a href="../pages/contact.html">Контакты</a></p>
                         <ul>
-                            <li><a href="../pages/contact.html#map">Схема проезда</a></li>
                             <li><a href="../pages/contact.html#addresses">Адреса филиалов</a></li>
                             <li><a href="../pages/contact.html#hours">Режим работы</a></li>
                             <li><a href="../pages/contact.html#contacts">Контакты для связи</a></li>
                         </ul>
+                        <p class="footer__sitemap-heading1"><a href="../Реквизиты_компании.pdf">Реквизиты компании</a></p>
                     </div>
                     <div class="footer__sitemap-col">
                         <p class="footer__sitemap-heading"><a href="../pages/login.html">Личный кабинет</a></p>
                         <ul>
-                            <li><a href="../pages/login.html">Вход</a></li>
+                            <li><a href="../pages/login.html#login">Вход</a></li>
                             <li><a href="../pages/register.html">Регистрация</a></li>
                         </ul>
-                        <p class="footer__sitemap-heading1"><a href="#" id="open-form-btn">Записаться на обучение</a></p>
-                        <p class="footer__sitemap-heading1"><a href="../pages/data.html">Реквизиты компании</a></p>
                         <p class="footer__sitemap-heading"><a href="../pages/instructors.html">Инструкторы</a></p>
                         <ul>
                             <li><a href="../pages/instructors.html#theory">Преподаватели по теории</a></li>
                             <li><a href="../pages/instructors.html#driving">Инструкторы по вождению</a></li>
                         </ul>
+                        <p class="footer__sitemap-heading1"><a href="../pages/distant.html">Дистанционное обучение</a></p>
+                        <p class="footer__sitemap-heading1"><a href="#" id="open-form-btn">Записаться на обучение</a></p>
                     </div>
                 </div>
                 <hr class="footer__divider">
@@ -268,18 +309,9 @@
             </div>
         </div>
     </footer>
-    <script>
-        document.getElementById('filter-btn').addEventListener('click', function(e) {
-            e.stopPropagation();
-            document.getElementById('filter-overlay').classList.toggle('active');
-        });
-        // Закрытие при клике вне оверлея
-        document.addEventListener('click', function(e) {
-            var overlay = document.getElementById('filter-overlay');
-            if (!overlay.contains(e.target) && e.target !== document.getElementById('filter-btn')) {
-                overlay.classList.remove('active');
-            }
-        });
-    </script>
+    
+
+    <script src="../js/load-form.js"></script>
+    <script src="../js/otzyv.js"></script>
 </body>
 </html>

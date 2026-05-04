@@ -50,36 +50,60 @@
             <div class="promo-section__header">
                 <h2 class="promo-section__title">Актуальные акции</h2>
                 <div class="promo-section__controls">
-                    <button class="promo-arrow promo-arrow--left" aria-label="Листать влево">
+                    <button class="promo-arrow promo-arrow--left disabled" aria-label="Листать влево" data-slider="promo">
                         <img src="../images/arrow.svg" alt="" class="promo-arrow__icon">
                     </button>
-                    <button class="promo-arrow promo-arrow--right" aria-label="Листать вправо">
+                    <button class="promo-arrow promo-arrow--right" aria-label="Листать вправо" data-slider="promo">
                         <img src="../images/arrow.svg" alt="" class="promo-arrow__icon">
                     </button>
                 </div>
             </div>
-            <div class="promo-cards">
-                <article class="promo-card">
-                    <div class="promo-card__inner">
-                        <h3 class="promo-card__title">Акция на автокурсы категории «B»</h3>
-                        <p class="promo-card__discount">-10%</p>
-                        <p class="promo-card__date">скидка действительна до 31.03.2026</p>
-                    </div>
-                </article>
-                <article class="promo-card">
-                    <div class="promo-card__inner">
-                        <h3 class="promo-card__title">Акция 1+1 на обучение автомобиль+мотоцикл</h3>
-                        <p class="promo-card__discount">-15%</p>
-                        <p class="promo-card__date">скидка действительна до 31.03.2026</p>
-                    </div>
-                </article>
-                <article class="promo-card">
-                    <div class="promo-card__inner">
-                        <h3 class="promo-card__title">Акция на курсы водителя квадроцикла</h3>
-                        <p class="promo-card__discount">-50%</p>
-                        <p class="promo-card__date">скидка действительна до 15.04.2026</p>
-                    </div>
-                </article>
+            <div class="promo-slider" id="promo-slider">
+                <div class="promo-slider__track">
+                    <!-- Карточки акций (теперь их 7) -->
+                    <article class="promo-card">
+                        <div class="promo-card__inner">
+                            <h3 class="promo-card__title">Акция на автокурсы категории «B»</h3>
+                            <p class="promo-card__discount">-10%</p>
+                            <p class="promo-card__date">скидка действительна до 31.03.2026</p>
+                        </div>
+                    </article>
+                    <article class="promo-card">
+                        <div class="promo-card__inner">
+                            <h3 class="promo-card__title">Акция 1+1 на обучение автомобиль+мотоцикл</h3>
+                            <p class="promo-card__discount">-15%</p>
+                            <p class="promo-card__date">скидка действительна до 31.03.2026</p>
+                        </div>
+                    </article>
+                    <article class="promo-card">
+                        <div class="promo-card__inner">
+                            <h3 class="promo-card__title">Акция на курсы водителя квадроцикла</h3>
+                            <p class="promo-card__discount">-50%</p>
+                            <p class="promo-card__date">скидка действительна до 15.04.2026</p>
+                        </div>
+                    </article>
+                    <article class="promo-card">
+                        <div class="promo-card__inner">
+                            <h3 class="promo-card__title">Скидка на обучение на спецтехнику</h3>
+                            <p class="promo-card__discount">-20%</p>
+                            <p class="promo-card__date">скидка действительна до 30.06.2026</p>
+                        </div>
+                    </article>
+                    <article class="promo-card">
+                        <div class="promo-card__inner">
+                            <h3 class="promo-card__title">Раннее бронирование</h3>
+                            <p class="promo-card__discount">-15%</p>
+                            <p class="promo-card__date">действует до 31.05.2026</p>
+                        </div>
+                    </article>
+                    <article class="promo-card">
+                        <div class="promo-card__inner">
+                            <h3 class="promo-card__title">Семейная скидка</h3>
+                            <p class="promo-card__discount">-10%</p>
+                            <p class="promo-card__date">при обучении двух членов семьи</p>
+                        </div>
+                    </article>
+                </div>
             </div>
         </section>
 
@@ -177,6 +201,7 @@
                             <li><a href="../pages/sale.html#promo">Акции</a></li>
                             <li><a href="../pages/sale.html#regular">Скидки</a></li>
                         </ul>
+                        <p class="footer__sitemap-heading1"><a href="../pages/oplata.html">Оплата обучения</a></p>
                     </div>
                     <div class="footer__sitemap-col">
                         <p class="footer__sitemap-heading"><a href="../pages/faq.html">Вопросы</a></p>
@@ -184,29 +209,30 @@
                             <li><a href="../pages/faq.html#enrollment">О зачислении в автошколу</a></li>
                             <li><a href="../pages/faq.html#training">Об обучении</a></li>
                             <li><a href="../pages/faq.html#exams">Об экзаменах</a></li>
+                            <li><a href="../pages/faq.html#special">Об обучении на спецтехнику</a></li>
                         </ul>
                         <p class="footer__sitemap-heading1"><a href="../pages/otzyv.html">Отзывы</a></p>
                         <p class="footer__sitemap-heading"><a href="../pages/contact.html">Контакты</a></p>
                         <ul>
-                            <li><a href="../pages/contact.html#map">Схема проезда</a></li>
                             <li><a href="../pages/contact.html#addresses">Адреса филиалов</a></li>
                             <li><a href="../pages/contact.html#hours">Режим работы</a></li>
                             <li><a href="../pages/contact.html#contacts">Контакты для связи</a></li>
                         </ul>
+                        <p class="footer__sitemap-heading1"><a href="../Реквизиты_компании.pdf">Реквизиты компании</a></p>
                     </div>
                     <div class="footer__sitemap-col">
                         <p class="footer__sitemap-heading"><a href="../pages/login.html">Личный кабинет</a></p>
                         <ul>
                             <li><a href="../pages/login.html#login">Вход</a></li>
-                            <li><a href="../pages/login.html#register">Регистрация</a></li>
+                            <li><a href="../pages/register.html">Регистрация</a></li>
                         </ul>
-                        <p class="footer__sitemap-heading1"><a href="#" id="open-form-btn">Записаться на обучение</a></p>
-                        <p class="footer__sitemap-heading1"><a href="../pages/data.html">Реквизиты компании</a></p>
                         <p class="footer__sitemap-heading"><a href="../pages/instructors.html">Инструкторы</a></p>
                         <ul>
                             <li><a href="../pages/instructors.html#theory">Преподаватели по теории</a></li>
                             <li><a href="../pages/instructors.html#driving">Инструкторы по вождению</a></li>
                         </ul>
+                        <p class="footer__sitemap-heading1"><a href="../pages/distant.html">Дистанционное обучение</a></p>
+                        <p class="footer__sitemap-heading1"><a href="#" id="open-form-btn">Записаться на обучение</a></p>
                     </div>
                 </div>
                 <hr class="footer__divider">
@@ -229,5 +255,6 @@
     </footer>
 
     <script src="../js/load-form.js"></script>
+    <script src="../js/sale.js"></script>
 </body>
 </html>

@@ -109,7 +109,7 @@ body {
     align-items: center;
     min-height: 150px;
     transition: box-shadow 0.3s, transform 0.2s;
-    position: relative;                  /* для оверлея ссылки */
+    position: relative;                  
     overflow: hidden;
     gap: 0;
 }
@@ -127,7 +127,6 @@ body {
     width: 100%;
     height: 100%;
     z-index: 1;
-    /* Никакого фона, просто прозрачная ссылка */
 }
 
 /* Увеличиваем z-index для кнопки, чтобы она была кликабельна */
@@ -178,7 +177,7 @@ body {
 /* Блок цен */
 .course-card__prices {
     display: flex;
-    flex-direction: column;              /* опции идут вертикально */
+    flex-direction: column;             
     gap: 5px;
     margin-left: 70px;
     flex-shrink: 0;
@@ -188,9 +187,9 @@ body {
 
 .price-option {
     display: flex;
-    flex-direction: column;              /* метка над ценой */
+    flex-direction: column;              
     align-items: flex-start;
-    gap: 5px;                           /* между меткой и ценой */
+    gap: 5px;                          
 }
 
 .price-option__label {
@@ -230,12 +229,12 @@ body {
     width: 100%;
     height: 1px;
     background-color: #D90D26;
-    transform: none;                     /* убираем наклон */
+    transform: none;                    
 }
 
 /* Одиночный блок цен (спецтехника) */
 .course-card__prices--single {
-    flex-direction: row;                 /* цена и старая в строку */
+    flex-direction: row;               
     align-items: center;
     gap: 15px;
 }

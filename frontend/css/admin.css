@@ -564,16 +564,492 @@ body {
     justify-content: flex-start; 
 }
 
-/* Статус-селект */
-.status-select {
-    width: 100%; 
-    height: 52px;
-    background-color: #FCFCFC; 
-    border: 1px solid #9B9B9B;
-    border-radius: 10px; 
-    padding: 0 15px;
-    font-size: 20px; 
+/* Детали заявки */
+.app-detail-box {
+    width: 1200px;
+    height: 777px;
+    background-color: #F0F0F0;
+    border-radius: 10px;
+    padding: 40px 40px 40px 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.app-detail-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.app-detail-label {
+    font-size: 22px;
+    font-weight: 400;
+    color: #000;
+    white-space: nowrap;
+}
+
+.app-detail-value {
+    width: auto;
+    height: 37px;
+    background-color: #FCFCFC;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    font-size: 22px;
+    font-weight: 400;
+    color: #000;
+    white-space: nowrap;
+}
+
+.app-detail-comment {
+    width: 1120px;
+    height: 145px;
+    background-color: #FCFCFC;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #000;
+    line-height: 1.4;
+}
+
+.app-save-btn {
+    width: 190px;
+    height: 60px;
+    margin: 0 0 0 auto;
+    font-size: 18px;
+    font-weight: 400;
     font-family: 'Montserrat', sans-serif;
+}
+
+/* Статусы заявок */
+.application-status[data-status="confirmed"] {
+    background: linear-gradient(-42deg, #80D34D, #8DDE62, #80D34D);
+    color: #247E00;
+    width: 169px;
+    height: 35px;
+}
+.application-status[data-status="rejected"] {
+    background: linear-gradient(-42deg, #FF743D, #FF966C, #FF743D);
+    color: #942F00;
+    width: 129px;
+    height: 35px;
+}
+.application-status[data-status="processing"] {
+    background: linear-gradient(-42deg, #FFBB3D, #FFC96C, #FFBB3D);
+    color: #946000;
+}
+
+/* Кастомный селект статуса */
+.status-select {
+    position: relative;
+    width: 216px;
+}
+.status-select__native {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.status-select__trigger {
+    width: 100%;
+    height: 45px;
+    background-color: #FCFCFC;
+    border: 1px solid #9B9B9B;
+    border-radius: 10px;
+    padding: 0 10px 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+}
+.status-select__selected.placeholder {
+    color: #9B9B9B;
+}
+.status-select__arrow {
+    width: 20px;
+    height: auto;
+    transition: transform 0.3s;
+}
+.status-select.open .status-select__arrow {
+    transform: rotate(180deg);
+}
+.status-select__options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-height: 200px;
+    overflow-y: auto;
+}
+.status-select.open .status-select__options {
+    display: block;
+}
+.status-select__options li {
+    padding: 10px 12px;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+}
+.status-select__options li:hover {
+    background-color: #F0F0F0;
+}
+
+/* Кнопка закрытия оверлея с иконкой krest */
+.form-container__close {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.form-container__close img {
+    width: 30px;
+    height: 30px;
+}
+
+.delete-overlay.active {
+    display: flex !important;
+}
+
+/* Блок для кнопок в деталях отзыва */
+.app-detail-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: auto;
+}
+
+/* Серая кнопка «Удалить» */
+.btn--delete-review {
+    width: 180px;
+    height: 60px;
+    background-color: #D6D6D6;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #000;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn--confirm-action {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn--delete-review:hover {
+    opacity: 0.7;
+}
+
+/* Оверлей успеха (общий) */
+.success-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.success-overlay.active {
+    display: flex;
+}
+
+.success-overlay__box {
+    width: 720px;
+    height: 387px;
+    background-color: #FCFCFC;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 0;
+}
+
+.success-overlay__icon {
+    width: 120px;
+    height: 120px;
     margin-bottom: 30px;
 }
 
+.success-overlay__text {
+    font-size: 30px;
+    font-weight: 500;
+    color: #000;
+    text-align: center;
+    line-height: 1.3;
+}
+
+/* Модификатор высоты для оверлея отзыва */
+.app-detail-box--review {
+    height: 640px;
+}
+
+/* Кнопки в деталях отзыва */
+.app-detail-actions {
+    display: flex;
+    justify-content: space-between;   
+    gap: 15px;
+    margin-top: auto;
+}
+
+button, 
+.btn--delete-review,
+.btn--confirm-action,
+.btn--cancel,
+.btn--confirm-delete,
+.btn--edit,
+.btn--logout,
+.btn--delete-account {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Управление контентом */
+.content-edit-box {
+    width: 1200px;
+    height: 751px;
+    background-color: #F0F0F0;
+    border-radius: 10px;
+    padding: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.content-back-btn {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    color: #717171;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 0;
+    margin-bottom: 30px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.content-edit-scroll {
+    display: flex;
+    gap: 10px;
+    height: 480px; /* 3 карточки по 150 + отступы */
+}
+
+.content-edit-cards {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.content-edit-cards::-webkit-scrollbar {
+    display: none;
+}
+
+.course-edit-card {
+    background-color: #FCFCFC;
+    border-radius: 10px;
+    padding: 0 40px 0 30px;
+    display: flex;
+    align-items: center;
+    height: 150px;
+    margin-bottom: 15px;
+    gap: 30px;
+}
+
+.course-edit-card__name {
+    font-size: 20px;
+    font-weight: 400;
+    flex: 2;
+}
+
+.course-edit-card__duration {
+    font-size: 20px;
+    font-weight: 400;
+    width: 120px;
+    text-align: center;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.course-edit-card__prices {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.price-option {
+    display: flex;
+    flex-direction: column;     
+    align-items: flex-start;
+    gap: 5px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.price-option__label {
+    color: #969696;
+    width: 120px;
+    order: -1;
+    margin-bottom: 2px;
+}
+
+.price-option__values {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.price-old {
+    color: #b9b9b9;
+    text-decoration: line-through;
+    text-decoration-color: #D90D26;
+    font-size: 18px;
+}
+
+/* Для единичного блока цены (без разделения) – оставляем строку */
+.course-edit-card__prices .price-option:only-child {
+    flex-direction: row;
+    align-items: center;
+}
+.course-edit-card__prices .price-option:only-child .price-option__label {
+    display: none;
+}
+
+.course-edit-card__delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.course-edit-card__delete img {
+    width: 27px;
+    height: 28px;
+}
+
+/* Кастомный скроллбар */
+.content-edit-scrollbar {
+    width: 7px;
+    height: 480px;
+    background-color: #E2E2E2;
+    border-radius: 2px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.content-edit-thumb {
+    width: 100%;
+    height: 120px;
+    background-color: #C5C5C5;
+    border-radius: 2px;
+    position: absolute;
+    top: 0;
+}
+
+.content-edit-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+    margin-top: auto;
+}
+
+.btn--add-course {
+    width: 210px;
+    height: 60px;
+    border: 2px solid;
+    border-color: #D90D26;
+    border-radius: 10px;
+    background: transparent;
+    color: #D90D26;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn--add-course:hover {
+    opacity: 0.7;
+}
+
+.btn--add-course::before {
+    display: none;
+}
+
+/* Оверлей добавления курса */
+.add-course-box {
+    width: 862px;
+    height: 721px;
+    background-color: #F0F0F0;
+    border-radius: 10px;
+    padding: 40px;
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.add-course-title {
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.add-course-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.add-course-input {
+    height: 52px;
+    background-color: #FCFCFC;
+    border: 1px solid #9B9B9B;
+    border-radius: 10px;
+    padding: 0 15px;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+    outline: none;
+}
+
+.add-course-save-btn {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    width: 180px;
+    height: 60px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.content-back-icon {
+    width: 40px;
+    height: auto;
+}

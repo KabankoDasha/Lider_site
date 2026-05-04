@@ -95,9 +95,9 @@ body {
 .faq-list {
     display: flex;
     flex-direction: column;
-    gap: 15px;
 }
 
+/* Вопрос */
 .faq-item {
     background-color: #F0F0F0;
     border-radius: 10px;
@@ -106,12 +106,20 @@ body {
     justify-content: space-between;
     height: 86px;
     padding: 0 30px;
-    transition: box-shadow 0.3s;
+    transition: box-shadow 0.3s, border-radius 0.3s, margin-bottom 0.3s;
     cursor: pointer;
+    
 }
 
 .faq-item:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Активный вопрос */
+.faq-item.active {
+    margin-bottom: 0;
+    border-radius: 10px;
+    box-shadow: none;
 }
 
 .faq-item__text {
@@ -126,4 +134,48 @@ body {
     height: 24px;
     margin-left: 40px;
     flex-shrink: 0;
+    transition: transform 0.3s;
 }
+
+.faq-item.active .faq-item__icon {
+    transform: rotate(180deg);
+}
+
+/* Ответ – плавное раскрытие */
+.faq-answer {
+    max-height: 0;                   
+    overflow: hidden;
+    margin-top: 0;
+    margin-bottom: 15px;             /* отступ до следующего вопроса */
+    padding: 0 30px;                 
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 25px;
+    color: #000;
+    background: transparent;
+    transition: max-height 0.4s ease, padding 0.4s ease, margin 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+}
+
+.faq-answer p {
+    padding-bottom: 15px;
+    line-height: 30px;
+}
+
+.faq-answer a {
+    color: #D90D26;
+}
+
+.faq__list li {
+    padding: 5px;
+    margin-left: 40px;
+}
+
+/* Когда вопрос активен, ответ раскрывается */
+.faq-item.active + .faq-answer {
+    max-height: 800px;               /* большое значение, чтобы вместить любой текст */
+    padding: 30px 30px 35px 30px;    /* внутренние отступы */
+    margin-bottom: 35px;             /* отступ после ответа */
+    opacity: 1;
+}
+

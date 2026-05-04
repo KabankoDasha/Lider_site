@@ -229,6 +229,10 @@ main {
     margin: 0;
 }
 
+.card--expanded .card__img-big {
+    opacity: 0.4;  /* лёгкая прозрачность */
+}
+
 .btn--detail {
     position: absolute;
     bottom: 20px;
@@ -297,6 +301,15 @@ main {
     align-items: center;
     gap: 15px;
     white-space: nowrap;
+}
+
+.card--expanded .card__content {
+    animation: fadeInContent 0.7s ease;
+}
+
+@keyframes fadeInContent {
+    from { opacity: 0; transform: translateX(5px); }
+    to   { opacity: 1; transform: translateX(0); }
 }
 
 /* ========================
@@ -418,6 +431,118 @@ main {
     text-align: center;
     color: #000;
     font-family: 'Montserrat', sans-serif;
+}
+
+/* ========================
+   Филиалы: hover-эффект с иконкой
+   ======================== */
+.branch-card__img-wrap {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    display: block;
+}
+.branch-card__img {
+    display: block;
+    width: 373px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: filter 0.3s;
+}
+.branch-card__img-wrap:hover .branch-card__img {
+    filter: brightness(0.6);
+    cursor: pointer;
+}
+.branch-card__img-wrap::after {
+    content: url('../images/increase.svg');
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+.branch-card__img-wrap:hover::after {
+    opacity: 1;
+}
+
+/* ========================
+   Оверлей галереи
+   ======================== */
+.gallery-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(33, 33, 33, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+.gallery-overlay.active {
+    display: flex;
+}
+.gallery-container {
+    position: relative;
+    width: 850px;
+    height: 500px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Прозрачные области для листания */
+.gallery-area {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    z-index: 5;
+    cursor: pointer;
+}
+.gallery-area--left {
+    left: 0;
+}
+.gallery-area--right {
+    right: 0;
+}
+
+.gallery-slides {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    transition: transform 0.3s;
+}
+.gallery-slides img {
+    width: 850px;
+    height: 500px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* Точки */
+.gallery-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.gallery-dot {
+    width: 14px;         
+    height: 14px;
+    border-radius: 50%;
+    background: #f0f0f0;  
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.gallery-dot.active {
+    background: #717171;   
+    transform: scale(1.3);
 }
 
 /* ========================

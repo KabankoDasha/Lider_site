@@ -66,7 +66,7 @@
                         <img src="../images/gray2.svg" alt="Мотоцикл" class="card__icon">
                     </div>
                 </div>
-                <div class="card card--collapsed1" data-category="b">
+                <div class="card card--collapsed1" data-category="akpp">
                     <div class="card__collapsed-content">
                         <img src="../images/gray3.svg" alt="Машина АКПП" class="card__icon">
                     </div>
@@ -124,31 +124,58 @@
             <h2 class="branches__title">Филиалы</h2>
             <div class="branches__grid">
                 <div class="branch-card">
-                    <img src="../images/office1.svg" alt="Офис на пр. Победы, 384" class="branch-card__img">
+                    <div class="branch-card__img-wrap" data-gallery="office1" data-images='["../images/1f1.webp","../images/1f2.webp","../images/1f3.webp","../images/1f4.jpg"]'>
+                        <img src="../images/office1.svg" alt="Офис на пр. Победы, 384" class="branch-card__img">
+                    </div>
                     <p class="branch-card__caption">Офис на пр. Победы, 384</p>
                 </div>
                 <div class="branch-card">
-                    <img src="../images/office2.svg" alt="Офис на Комсомольском пр., 80" class="branch-card__img">
+                    <div class="branch-card__img-wrap" data-gallery="office2" data-images='["../images/2f1.webp","../images/2f2.webp","../images/2f3.jpg","../images/2f4.jpeg"]'>
+                        <img src="../images/office2.svg" alt="Офис на Комсомольском пр., 80" class="branch-card__img">
+                    </div>
                     <p class="branch-card__caption">Офис на Комсомольском пр., 80</p>
                 </div>
                 <div class="branch-card">
-                    <img src="../images/office3.svg" alt="Офис на ул. Комарова, 114" class="branch-card__img">
+                    <div class="branch-card__img-wrap" data-gallery="office3" data-images='["../images/3f1.jpg","../images/3f2.webp","../images/3f3.webp","../images/3f4.jpeg"]'>
+                        <img src="../images/office3.svg" alt="Офис на ул. Комарова, 114" class="branch-card__img">
+                    </div>
                     <p class="branch-card__caption">Офис на ул. Комарова, 114</p>
                 </div>
                 <div class="branch-card">
-                    <img src="../images/office4.svg" alt="Офис на ул. Сталеваров, 5а" class="branch-card__img">
+                    <div class="branch-card__img-wrap" data-gallery="office4" data-images='["../images/4f1.webp","../images/4f2.webp","../images/4f3.webp","../images/4f4.webp"]'>
+                        <img src="../images/office4.svg" alt="Офис на ул. Сталеваров, 5а" class="branch-card__img">
+                    </div>
                     <p class="branch-card__caption">Офис на ул. Сталеваров, 5а</p>
                 </div>
                 <div class="branch-card">
-                    <img src="../images/office5.svg" alt="Офис на ул. 60 лет Октября, 18" class="branch-card__img">
+                    <div class="branch-card__img-wrap" data-gallery="office5" data-images='["../images/5f1.webp","../images/5f2.webp","../images/5f3.jpg","../images/5f4.jpg"]'>
+                        <img src="../images/office5.svg" alt="Офис на ул. 60 лет Октября, 18" class="branch-card__img">
+                    </div>
                     <p class="branch-card__caption">Офис на ул. 60 лет Октября, 18</p>
                 </div>
                 <div class="branch-card">
-                    <img src="../images/office6.svg" alt="Офис на шоссе Металлургов, 51" class="branch-card__img">
+                    <div class="branch-card__img-wrap" data-gallery="office6" data-images='["../images/6f1.jpg","../images/6f2.jpg","../images/6f3.jpg","../images/6f4.webp"]'>
+                        <img src="../images/office6.svg" alt="Офис на шоссе Металлургов, 51" class="branch-card__img">
+                    </div>
                     <p class="branch-card__caption">Офис на шоссе Металлургов, 51</p>
                 </div>
             </div>
         </section>
+
+        <!-- Оверлей галереи филиалов -->
+        <div class="gallery-overlay" id="gallery-overlay">
+            <div class="gallery-container">
+                <!-- Зона для листания влево (левая половина) -->
+                <div class="gallery-area gallery-area--left" id="gallery-area-left"></div>
+                <!-- Зона для листания вправо (правая половина) -->
+                <div class="gallery-area gallery-area--right" id="gallery-area-right"></div>
+
+                <div class="gallery-slides" id="gallery-slides">
+                    <!-- Слайды будут заполнены из JS -->
+                </div>
+                <div class="gallery-dots" id="gallery-dots"></div>
+            </div>
+        </div>
 
         <!-- Схема проезда -->
         <section id="map" class="map-section container">
@@ -212,6 +239,7 @@
                             <li><a href="../pages/sale.html#promo">Акции</a></li>
                             <li><a href="../pages/sale.html#regular">Скидки</a></li>
                         </ul>
+                        <p class="footer__sitemap-heading1"><a href="../pages/oplata.html">Оплата обучения</a></p>
                     </div>
                     <div class="footer__sitemap-col">
                         <p class="footer__sitemap-heading"><a href="../pages/faq.html">Вопросы</a></p>
@@ -219,29 +247,30 @@
                             <li><a href="../pages/faq.html#enrollment">О зачислении в автошколу</a></li>
                             <li><a href="../pages/faq.html#training">Об обучении</a></li>
                             <li><a href="../pages/faq.html#exams">Об экзаменах</a></li>
+                            <li><a href="../pages/faq.html#special">Об обучении на спецтехнику</a></li>
                         </ul>
                         <p class="footer__sitemap-heading1"><a href="../pages/otzyv.html">Отзывы</a></p>
                         <p class="footer__sitemap-heading"><a href="../pages/contact.html">Контакты</a></p>
                         <ul>
-                            <li><a href="../pages/contact.html#map">Схема проезда</a></li>
                             <li><a href="../pages/contact.html#addresses">Адреса филиалов</a></li>
                             <li><a href="../pages/contact.html#hours">Режим работы</a></li>
                             <li><a href="../pages/contact.html#contacts">Контакты для связи</a></li>
                         </ul>
+                        <p class="footer__sitemap-heading1"><a href="../Реквизиты_компании.pdf">Реквизиты компании</a></p>
                     </div>
                     <div class="footer__sitemap-col">
                         <p class="footer__sitemap-heading"><a href="../pages/login.html">Личный кабинет</a></p>
                         <ul>
                             <li><a href="../pages/login.html#login">Вход</a></li>
-                            <li><a href="../pages/login.html#register">Регистрация</a></li>
+                            <li><a href="../pages/register.html">Регистрация</a></li>
                         </ul>
-                        <p class="footer__sitemap-heading1"><a href="#" id="open-form-btn">Записаться на обучение</a></p>
-                        <p class="footer__sitemap-heading1"><a href="../pages/data.html">Реквизиты компании</a></p>
                         <p class="footer__sitemap-heading"><a href="../pages/instructors.html">Инструкторы</a></p>
                         <ul>
                             <li><a href="../pages/instructors.html#theory">Преподаватели по теории</a></li>
                             <li><a href="../pages/instructors.html#driving">Инструкторы по вождению</a></li>
                         </ul>
+                        <p class="footer__sitemap-heading1"><a href="../pages/distant.html">Дистанционное обучение</a></p>
+                        <p class="footer__sitemap-heading1"><a href="#" id="open-form-btn">Записаться на обучение</a></p>
                     </div>
                 </div>
                 <hr class="footer__divider">
@@ -265,9 +294,10 @@
 
     <!-- Yandex Maps API -->
     <script src="https://api-maps.yandex.ru/2.1/?apikey=422b52c4-aa7b-400d-9fd7-07c79fdf32c4&lang=ru_RU" type="text/javascript"></script>
-    <!-- Твой скрипт для карты -->
+    <!-- Скрипт для карты -->
     <script src="../js/map.js"></script>
 
     <script src="../js/load-form.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 </html>

@@ -1,18 +1,44 @@
 (function() {
-    // Функция инициализации формы
     function initForm() {
-        const openButtons = document.querySelectorAll('.btn--cta, #open-form-btn');
+        const openButtons = document.querySelectorAll('.btn--cta, #open-form-btn, .course-card__btn');
         const overlay = document.getElementById('form-overlay');
         const closeBtn = document.getElementById('close-form-btn');
         const successOverlay = document.getElementById('success-overlay');
 
-        if (!overlay || !successOverlay) return; // форма ещё не вставлена
+        if (!overlay || !successOverlay) return;
 
-        // Открытие формы
+        // Открытие формы и предустановка курса
         function openForm(e) {
             e.preventDefault();
             overlay.classList.add('active');
             successOverlay.classList.remove('active');
+
+            // Получаем атрибут data-course у кнопки, если есть
+            const btn = e.currentTarget;
+            const course = btn.dataset.course;
+            if (course) {
+                setSelectValue(course);
+            }
+        }
+
+        // Функция установки значения кастомного селекта
+        function setSelectValue(value) {
+            const select = document.getElementById('course-select');
+            const customSelect = select.closest('.custom-select');
+            const selectedSpan = customSelect.querySelector('.custom-select__selected');
+            const options = customSelect.querySelectorAll('.custom-select__options li');
+
+            // Проверяем, есть ли такое значение в селекте
+            for (let option of options) {
+                if (option.dataset.value === value) {
+                    select.value = value;
+                    selectedSpan.textContent = value;
+                    selectedSpan.classList.remove('placeholder');
+                    // Закрываем выпадающий список, если был открыт
+                    customSelect.classList.remove('open');
+                    return;
+                }
+            }
         }
 
         openButtons.forEach(btn => btn.addEventListener('click', openForm));
@@ -67,7 +93,6 @@
         });
     }
 
-    // Запускаем инициализацию, когда DOM готов (если скрипт динамический)
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initForm);
     } else {

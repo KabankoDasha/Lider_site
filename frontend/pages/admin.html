@@ -6,6 +6,7 @@
     <title>Автошкола Лидер – Личный кабинет администратора</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/forma.css">
 </head>
 <body>
     <!-- Шапка -->
@@ -90,20 +91,20 @@
                     </div>
                     <div class="cards-wrapper" id="applications-container">
                         <!-- Активные заявки -->
-                        <article class="application-card new" data-id="1" data-status="new">
+                        <article class="application-card new" data-id="1" data-status="processing">
                             <div class="application-header">
                                 <h4 class="application-number">Заявка №1</h4>
-                                <span class="application-status">в обработке</span>
+                                <span class="application-status" data-status="processing">в обработке</span>
                             </div>
                             <p class="application-course">Обучение на автомобиль МКПП</p>
                             <p class="application-message">Добрый день! Хочу записаться к вам в автошколу на обучение на автомобиле МКПП, подскажите пожалуйста когда ближайший старт групп и в какое время будут занятия?</p>
                             <time class="application-date">от 6 марта 2026</time>
                             <span class="new-indicator"></span>
                         </article>
-                        <article class="application-card new" data-id="2" data-status="new">
+                        <article class="application-card new" data-id="2" data-status="processing">
                             <div class="application-header">
                                 <h4 class="application-number">Заявка №2</h4>
-                                <span class="application-status">в обработке</span>
+                                <span class="application-status" data-status="processing">в обработке</span>
                             </div>
                             <p class="application-course">Обучение на мотоцикл</p>
                             <p class="application-message">Здравствуйте, если мне сейчас 17 лет, могу ли я пройти обучение на мотоцикл и потом сдать экзамен?</p>
@@ -179,57 +180,186 @@
             </section>
         </div>
 
-        <!-- Оверлей деталей заявки (изменение статуса) -->
+        <!-- Оверлей деталей заявки -->
         <div class="delete-overlay" id="application-detail-overlay">
-            <div class="delete-overlay__box">
-                <p class="delete-overlay__text">Изменить статус заявки</p>
-                <select class="status-select" id="status-select">
-                    <option value="new">новая</option>
-                    <option value="processing">в обработке</option>
-                    <option value="confirmed">подтверждена</option>
-                    <option value="rejected">отклонена</option>
-                </select>
-                <div class="delete-overlay__buttons">
-                    <button class="btn--cancel" id="cancel-application">Отмена</button>
-                    <button class="btn--confirm-action" id="save-application">Сохранить</button>
+            <div class="app-detail-box">
+                <button class="form-container__close" id="close-application-overlay">
+                    <img src="../images/close.svg" alt="Закрыть">
+                </button>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Заявка:</span>
+                    <div class="app-detail-value" style="width:65px;">№<span id="app-number">1</span></div>
                 </div>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Имя:</span>
+                    <div class="app-detail-value" style="width:90px;" id="app-name">Иван</div>
+                </div>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Номер телефона:</span>
+                    <div class="app-detail-value" style="width:162px;" id="app-phone">89991110033</div>
+                </div>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Курс:</span>
+                    <div class="app-detail-value" style="width:401px;" id="app-course">Обучение на автомобиль МКПП</div>
+                </div>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Комментарий:</span>
+                </div>
+                <div class="app-detail-comment" id="app-comment">Добрый день! Хочу записаться к вам в автошколу...</div>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Дата:</span>
+                    <div class="app-detail-value" style="width:176px;" id="app-date">6 марта 2026</div>
+                </div>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Статус:</span>
+                    <div class="status-select" id="app-status-select">
+                        <select id="app-status" class="status-select__native">
+                            <option value="в обработке">в обработке</option>
+                            <option value="подтверждена">подтверждена</option>
+                            <option value="отклонена">отклонена</option>
+                        </select>
+                        <div class="status-select__trigger">
+                            <span class="status-select__selected" id="app-status-selected">в обработке</span>
+                            <img src="../images/arrow3.svg" alt="" class="status-select__arrow">
+                        </div>
+                        <ul class="status-select__options">
+                            <li data-value="в обработке">в обработке</li>
+                            <li data-value="подтверждена">подтверждена</li>
+                            <li data-value="отклонена">отклонена</li>
+                        </ul>
+                    </div>
+                </div>
+                <button class="btn--confirm-action app-save-btn" id="save-application">Сохранить</button>
             </div>
         </div>
 
         <!-- Оверлей деталей отзыва -->
         <div class="delete-overlay" id="review-detail-overlay">
-            <div class="delete-overlay__box review-detail">
-                <div id="review-detail-content">
-                    <h4 class="review-card__name">Софья</h4>
-                    <p class="review-card__course">Обучение на автомобиль МКПП</p>
-                    <div class="review-card__stars">
-                        <span class="star star--active"></span>
-                        <span class="star star--active"></span>
-                        <span class="star star--active"></span>
-                        <span class="star star--active"></span>
-                        <span class="star star--active"></span>
-                    </div>
-                    <p class="review-card__text">Замечательная автошкола, очень позитивная атмосфера...</p>
+            <div class="app-detail-box app-detail-box--review">
+                <button class="form-container__close" id="close-review-overlay">
+                    <img src="../images/close.svg" alt="Закрыть">
+                </button>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Имя:</span>
+                    <div class="app-detail-value" id="review-name">Софья</div>
                 </div>
-                <div class="delete-overlay__buttons">
-                    <button class="btn--cancel" id="cancel-review">Отмена</button>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Курс:</span>
+                    <div class="app-detail-value" id="review-course">Обучение на автомобиль МКПП</div>
+                </div>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Отзыв:</span>
+                </div>
+                <div class="app-detail-comment" id="review-text">Замечательная автошкола, очень позитивная атмосфера...</div>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Оценка:</span>
+                    <div class="app-detail-value" id="review-rating">5</div>
+                </div>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Дата:</span>
+                    <div class="app-detail-value" id="review-date">2 декабря 2025</div>
+                </div>
+                <div class="app-detail-actions">
+                    <button class="btn--delete-review" id="delete-review">Удалить</button>
                     <button class="btn--confirm-action" id="approve-review">Добавить</button>
-                    <button class="btn--confirm-delete" id="delete-review">Удалить</button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Оверлей подтверждения удаления отзыва -->
+        <div class="delete-overlay" id="confirm-delete-review-overlay">
+            <div class="delete-overlay__box">
+                <p class="delete-overlay__text">Вы уверены, что хотите<br>удалить отзыв?</p>
+                <div class="delete-overlay__buttons">
+                    <button class="btn--cancel" id="cancel-delete-review">Отмена</button>
+                    <button class="btn--confirm-delete" id="confirm-delete-review">Удалить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Оверлей успешного результата (публикация/удаление отзыва) -->
+        <div class="success-overlay" id="review-success-overlay">
+            <div class="success-overlay__box">
+                <img src="../images/done.svg" alt="" class="success-overlay__icon">
+                <p class="success-overlay__text" id="success-message">Отзыв успешно опубликован!</p>
             </div>
         </div>
 
         <!-- Оверлей редактирования контента (общий) -->
         <div class="delete-overlay" id="content-edit-overlay">
-            <div class="delete-overlay__box content-edit">
-                <p class="delete-overlay__text">Редактирование контента</p>
-                <div id="content-edit-area">
-                    <!-- Динамически заполняется js -->
+            <div class="content-edit-box">
+                <button class="content-back-btn" id="content-back-btn">
+                    <img src="../images/arrow-back.svg" alt="Назад" class="content-back-icon">
+                    <span>Назад</span>
+                </button>
+                <div class="content-edit-scroll">
+                    <div class="content-edit-cards" id="content-edit-cards">
+                        <!-- Карточки будут заполнены из JS -->
+                    </div>
+                    <div class="content-edit-scrollbar">
+                        <div class="content-edit-thumb" id="content-edit-thumb"></div>
+                    </div>
                 </div>
+                <div class="content-edit-actions">
+                    <button class="btn--add-course" id="add-course-btn">Добавить</button>
+                    <button class="btn--confirm-action" id="save-content-btn">Сохранить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Оверлей добавления нового курса -->
+        <div class="delete-overlay" id="add-course-overlay">
+            <div class="add-course-box">
+                <button class="form-container__close" id="close-add-course">
+                    <img src="../images/close.svg" alt="Закрыть">
+                </button>
+                <h2 class="add-course-title">Добавление нового курса</h2>
+                <div class="add-course-form">
+                    <div class="app-detail-row">
+                        <span class="app-detail-label">Название курса:</span>
+                        <input type="text" class="add-course-input" id="new-course-name" value="Автомобиль с МКПП — категория «B»" style="width:480px;">
+                    </div>
+                    <div class="app-detail-row">
+                        <span class="app-detail-label">Длительность:</span>
+                        <input type="text" class="add-course-input" id="new-course-duration" value="2,5" style="width:120px;">
+                    </div>
+                    <div class="app-detail-row">
+                        <span class="app-detail-label">Стоимость за дистанционное обучение:</span>
+                        <input type="text" class="add-course-input" id="new-course-distance" value="46700" style="width:200px;">
+                    </div>
+                    <div class="app-detail-row">
+                        <span class="app-detail-label">Стоимость за дистанционное обучение (без скидки):</span>
+                        <input type="text" class="add-course-input" id="new-course-distance-old" value="48700" style="width:200px;">
+                    </div>
+                    <div class="app-detail-row">
+                        <span class="app-detail-label">Стоимость за очное обучение:</span>
+                        <input type="text" class="add-course-input" id="new-course-fulltime" value="49700" style="width:200px;">
+                    </div>
+                    <div class="app-detail-row">
+                        <span class="app-detail-label">Стоимость за очное обучение (без скидки):</span>
+                        <input type="text" class="add-course-input" id="new-course-fulltime-old" value="51700" style="width:200px;">
+                    </div>
+                </div>
+                <button class="btn--confirm-action add-course-save-btn" id="save-new-course">Сохранить</button>
+            </div>
+        </div>
+
+        <!-- Оверлей подтверждения удаления курса -->
+        <div class="delete-overlay" id="confirm-delete-course-overlay">
+            <div class="delete-overlay__box">
+                <p class="delete-overlay__text">Вы уверены, что хотите<br>удалить курс?</p>
                 <div class="delete-overlay__buttons">
-                    <button class="btn--cancel" id="cancel-content">Отмена</button>
-                    <button class="btn--confirm-action" id="save-content">Сохранить</button>
+                    <button class="btn--cancel" id="cancel-delete-course">Отмена</button>
+                    <button class="btn--confirm-delete" id="confirm-delete-course">Удалить</button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Оверлей успешного удаления курса -->
+        <div class="success-overlay" id="course-success-overlay">
+            <div class="success-overlay__box">
+                <img src="../images/done.svg" alt="" class="success-overlay__icon">
+                <p class="success-overlay__text" id="course-success-message">Курс успешно удалён!</p>
             </div>
         </div>
 
@@ -254,11 +384,111 @@
                 </div>
             </div>
         </div>
+
+        <!-- Оверлей формы записи -->
+        <div class="form-overlay" id="form-overlay">
+            <div class="form-container">
+                <button class="form-container__close" id="close-form-btn">
+                    <img src="../images/close.svg" alt="Закрыть">
+                </button>
+
+                <h2 class="form-container__title">Запись на обучение</h2>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label class="form-field__label" for="form-name">Имя*</label>
+                        <input type="text" id="form-name" class="form-field__input" placeholder="Иван">
+                    </div>
+                    <div class="form-field">
+                        <label class="form-field__label" for="form-phone">Номер телефона*</label>
+                        <input type="tel" id="form-phone" class="form-field__input" placeholder="89991110033">
+                    </div>
+                </div>
+
+                <!-- Кастомный выпадающий список -->
+                <div class="form-field">
+                    <div class="custom-select">
+                        <select id="course-select" class="custom-select__native">
+                            <option value="" disabled selected>Выберите курс обучения</option>
+                            <option value="Автомобиль с МКПП — категория «B»">Автомобиль с МКПП — категория «B»</option>
+                            <option value="Автомобиль с АКПП — категория «B» автомат">Автомобиль с АКПП — категория «B» автомат</option>
+                            <option value="Мотоцикл — категория «A»">Мотоцикл — категория «A»</option>
+                            <option value="Погрузчик — категории «B», «C», «D»">Погрузчик — категории «B», «C», «D»</option>
+                            <option value="Экскаватор — категории «C», «E», «D»">Экскаватор — категории «C», «E», «D»</option>
+                            <option value="Трактор — категории «B», «C», «E», «D»">Трактор — категории «B», «C», «E», «D»</option>
+                            <option value="Бульдозер — категория «E» с 19 лет">Бульдозер — категория «E» с 19 лет</option>
+                            <option value="Автогрейдер — категории «C», «D» с 19 лет">Автогрейдер — категории «C», «D» с 19 лет</option>
+                            <option value="Автомобильный кран">Автомобильный кран</option>
+                            <option value="Мостовой кран">Мостовой кран</option>
+                            <option value="Автовышка и автогидроподъемник">Автовышка и автогидроподъемник</option>
+                            <option value="Квадроцикл и снегоход — категория «AI» с 16 лет">Квадроцикл и снегоход — категория «AI» с 16 лет</option>
+                            <option value="Внедорожные автотранспортные средства — категория «All» с 19 лет">Внедорожные автотранспортные средства — категория «All» с 19 лет</option>
+                            <option value="Внедорожные автотранспортные средства — категория «All» (БелАЗ)">Внедорожные автотранспортные средства — категория «All» (БелАЗ)</option>
+                            <option value="Машинист катка — категория «C»">Машинист катка — категория «C»</option>
+                            <option value="Машинист уплотняющей машины «Ратрак» — категория «E»">Машинист уплотняющей машины «Ратрак» — категория «E»</option>
+                            <option value="Машинист крана на самоходном ходу">Машинист крана на самоходном ходу</option>
+                        </select>
+                        <div class="custom-select__trigger">
+                            <span class="custom-select__selected">Выберите курс обучения</span>
+                            <img src="../images/arrow3.svg" alt="" class="custom-select__arrow">
+                        </div>
+                        <ul class="custom-select__options">
+                            <li data-value="Автомобиль с МКПП — категория «B»">Автомобиль с МКПП — категория «B»</li>
+                            <li data-value="Автомобиль с АКПП — категория «B» автомат">Автомобиль с АКПП — категория «B» автомат</li>
+                            <li data-value="Мотоцикл — категория «A»">Мотоцикл — категория «A»</li>
+                            <li data-value="Погрузчик — категории «B», «C», «D»">Погрузчик — категории «B», «C», «D»</li>
+                            <li data-value="Экскаватор — категории «C», «E», «D»">Экскаватор — категории «C», «E», «D»</li>
+                            <li data-value="Трактор — категории «B», «C», «E», «D»">Трактор — категории «B», «C», «E», «D»</li>
+                            <li data-value="Бульдозер — категория «E» с 19 лет">Бульдозер — категория «E» с 19 лет</li>
+                            <li data-value="Автогрейдер — категории «C», «D» с 19 лет">Автогрейдер — категории «C», «D» с 19 лет</li>
+                            <li data-value="Автомобильный кран">Автомобильный кран</li>
+                            <li data-value="Мостовой кран">Мостовой кран</li>
+                            <li data-value="Автовышка и автогидроподъемник">Автовышка и автогидроподъемник</li>
+                            <li data-value="Квадроцикл и снегоход — категория «AI» с 16 лет">Квадроцикл и снегоход — категория «AI» с 16 лет</li>
+                            <li data-value="Внедорожные автотранспортные средства — категория «All» с 19 лет">Внедорожные автотранспортные средства — категория «All» с 19 лет</li>
+                            <li data-value="Внедорожные автотранспортные средства — категория «All» (БелАЗ)">Внедорожные автотранспортные средства — категория «All» (БелАЗ)</li>
+                            <li data-value="Машинист катка — категория «C»">Машинист катка — категория «C»</li>
+                            <li data-value="Машинист уплотняющей машины «Ратрак» — категория «E»">Машинист уплотняющей машины «Ратрак» — категория «E»</li>
+                            <li data-value="Машинист крана на самоходном ходу">Машинист крана на самоходном ходу</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Поле комментария -->
+                <textarea class="form-textarea" placeholder="Дополнительный комментарий/вопросы"></textarea>
+
+                <!-- Чекбоксы -->
+                <div class="form-checkboxes">
+                    <label class="form-check">
+                        <input type="checkbox" class="form-check__input">
+                        <span class="form-check__box"></span>
+                        <span class="form-check__text">Соглашаюсь с обработкой персональных данных</span>
+                    </label>
+                    <label class="form-check">
+                        <input type="checkbox" class="form-check__input">
+                        <span class="form-check__box"></span>
+                        <span class="form-check__text">Соглашаюсь с политикой конфиденциальности</span>
+                    </label>
+                </div>
+
+                <!-- Кнопка отправки -->
+                <button class="btn form-submit-btn" id="form-submit-btn">Отправить</button>
+            </div>
+        </div>
+
+        <!-- Оверлей успешной отправки -->
+        <div class="success-overlay" id="success-overlay">
+            <div class="success-overlay__box">
+                <img src="../images/done.svg" alt="" class="success-overlay__icon">
+                <p class="success-overlay__text">Спасибо!<br>Ваша заявка отправлена!</p>
+            </div>
+        </div>
     </main>
 
     <!-- Подвал сайта -->
     <footer class="footer">
         <div class="container footer__inner">
+            <!-- Верхняя часть с контактами -->
             <div class="footer__top">
                 <div class="footer__col footer__col--contacts">
                     <div class="footer__contact-item">
@@ -308,6 +538,7 @@
                             <li><a href="../pages/sale.html#promo">Акции</a></li>
                             <li><a href="../pages/sale.html#regular">Скидки</a></li>
                         </ul>
+                        <p class="footer__sitemap-heading1"><a href="../pages/oplata.html">Оплата обучения</a></p>
                     </div>
                     <div class="footer__sitemap-col">
                         <p class="footer__sitemap-heading"><a href="../pages/faq.html">Вопросы</a></p>
@@ -315,29 +546,30 @@
                             <li><a href="../pages/faq.html#enrollment">О зачислении в автошколу</a></li>
                             <li><a href="../pages/faq.html#training">Об обучении</a></li>
                             <li><a href="../pages/faq.html#exams">Об экзаменах</a></li>
+                            <li><a href="../pages/faq.html#special">Об обучении на спецтехнику</a></li>
                         </ul>
                         <p class="footer__sitemap-heading1"><a href="../pages/otzyv.html">Отзывы</a></p>
                         <p class="footer__sitemap-heading"><a href="../pages/contact.html">Контакты</a></p>
                         <ul>
-                            <li><a href="../pages/contact.html#map">Схема проезда</a></li>
                             <li><a href="../pages/contact.html#addresses">Адреса филиалов</a></li>
                             <li><a href="../pages/contact.html#hours">Режим работы</a></li>
                             <li><a href="../pages/contact.html#contacts">Контакты для связи</a></li>
                         </ul>
+                        <p class="footer__sitemap-heading1"><a href="../Реквизиты_компании.pdf">Реквизиты компании</a></p>
                     </div>
                     <div class="footer__sitemap-col">
                         <p class="footer__sitemap-heading"><a href="../pages/login.html">Личный кабинет</a></p>
                         <ul>
                             <li><a href="../pages/login.html#login">Вход</a></li>
-                            <li><a href="../pages/login.html#register">Регистрация</a></li>
+                            <li><a href="../pages/register.html">Регистрация</a></li>
                         </ul>
-                        <p class="footer__sitemap-heading1"><a href="#" id="open-form-btn">Записаться на обучение</a></p>
-                        <p class="footer__sitemap-heading1"><a href="../pages/data.html">Реквизиты компании</a></p>
                         <p class="footer__sitemap-heading"><a href="../pages/instructors.html">Инструкторы</a></p>
                         <ul>
                             <li><a href="../pages/instructors.html#theory">Преподаватели по теории</a></li>
                             <li><a href="../pages/instructors.html#driving">Инструкторы по вождению</a></li>
                         </ul>
+                        <p class="footer__sitemap-heading1"><a href="../pages/distant.html">Дистанционное обучение</a></p>
+                        <p class="footer__sitemap-heading1"><a href="#" id="open-form-btn">Записаться на обучение</a></p>
                     </div>
                 </div>
                 <hr class="footer__divider">
@@ -360,5 +592,6 @@
     </footer>
 
     <script src="../js/admin.js"></script>
+    <script src="../js/forma.js"></script>
 </body>
 </html>
