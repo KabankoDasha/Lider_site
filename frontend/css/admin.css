@@ -14,6 +14,10 @@ body {
     overflow-x: hidden;
 }
 
+body.no-scroll {
+    overflow: hidden;
+}
+
 .container { 
     max-width: 1200px; 
     margin: 0 auto; 
@@ -443,6 +447,8 @@ body {
     font-size: 18px;
 }
 
+.btn--edit-instr,
+.btn--edit-sale,
 .btn--edit {
     width: 191px; 
     height: 47px;
@@ -458,6 +464,8 @@ body {
 }
 
 .btn--edit:hover { opacity: 0.7; }
+.btn--edit-sale:hover { opacity: 0.7; }
+.btn--edit-instr:hover { opacity: 0.7; }
 
 /* Оверлеи и кнопки */
 .delete-overlay {
@@ -885,7 +893,7 @@ button,
 .course-edit-card__name {
     font-size: 20px;
     font-weight: 400;
-    flex: 2;
+    flex: 2.5;
 }
 
 .course-edit-card__duration {
@@ -898,7 +906,7 @@ button,
 }
 
 .course-edit-card__prices {
-    flex: 2;
+    flex: 1.5;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -933,12 +941,12 @@ button,
     font-size: 18px;
 }
 
-/* Для единичного блока цены (без разделения) – оставляем строку */
-.course-edit-card__prices .price-option:only-child {
+/* Для единичного блока цены (спецтехника без разделения) */
+.course-edit-card__prices .price-option.single-price {
     flex-direction: row;
     align-items: center;
 }
-.course-edit-card__prices .price-option:only-child .price-option__label {
+.course-edit-card__prices .price-option.single-price .price-option__label {
     display: none;
 }
 
@@ -953,6 +961,19 @@ button,
 .course-edit-card__delete img {
     width: 27px;
     height: 28px;
+}
+
+.course-edit-card__edit {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.course-edit-card__edit img {
+    width: 26px;
+    height: 26px;
 }
 
 /* Кастомный скроллбар */
@@ -1035,8 +1056,15 @@ button,
     padding: 0 15px;
     font-size: 18px;
     font-family: 'Montserrat', sans-serif;
-    color: #000;
+    color: #000;                /* введённый текст будет чёрным */
     outline: none;
+    width: 100%;
+}
+
+/* Подсказка (placeholder) – серый цвет */
+.add-course-input::placeholder {
+    color: #717171;
+    opacity: 1;                 
 }
 
 .add-course-save-btn {
@@ -1052,4 +1080,224 @@ button,
 .content-back-icon {
     width: 40px;
     height: auto;
+}
+
+/* Карточка акции: период проведения */
+.sale-period {
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 1.4;
+    color: #000;
+    flex-shrink: 0;
+}
+
+/* Для карточек акций – уменьшаем блок названия */
+#sale-edit-cards .course-edit-card__name {
+  flex: 1.5;                
+  max-width: 320px;       
+}
+
+#sale-edit-cards .course-edit-card__edit {
+    margin-left: auto;
+}
+
+/* Инструкторы */
+
+/* Левая колонка: ФИО, стаж, авто/образование */
+.instructor-card-left {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.instructor-name {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.instructor-experience {
+    font-size: 18px;
+    font-weight: 400;
+    color: #000;
+}
+
+.instructor-car,
+.instructor-education {
+    font-size: 18px;
+    font-weight: 400;
+    color: #7A7A7A;
+}
+
+/* Правая колонка: рейтинг и статус фото в одной строке */
+.instructor-card-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    margin-right: 40px;
+}
+
+.instructor-rating {
+    font-size: 20px;      
+    font-weight: 400;
+    margin-right: 120px;
+    color: #000;
+}
+
+.instructor-photo-status {
+    font-size: 16px;
+    font-weight: 400;
+    color: #7A7A7A;
+    white-space: nowrap;
+}
+
+/* выпадающий список */
+#instructor-category-select {
+    position: relative;
+    width: 100%;
+}
+
+#instructor-category-select .custom-select__trigger {
+    height: 52px;
+    width: 100%;
+    background-color: #FCFCFC;
+    border: 1px solid #9B9B9B;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+    cursor: pointer;
+}
+
+/* Стрелка – без лишнего margin-right */
+#instructor-category-select .custom-select__arrow {
+    width: 20px;
+    height: auto;
+    transition: transform 0.3s;
+}
+
+/* Опции */
+#instructor-category-select .custom-select__options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+    z-index: 20;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#instructor-category-select.open .custom-select__options {
+    display: block;
+}
+
+#instructor-category-select.open .custom-select__arrow {
+    transform: rotate(180deg);
+}
+
+.custom-select__arrow {
+    margin-right: 10px;
+    width: 10px;
+    height: auto;
+}
+
+#instructor-category-select .custom-select__options li {
+    padding: 10px 12px;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+}
+
+#instructor-category-select .custom-select__options li:hover {
+    background-color: #F0F0F0;
+}
+
+.instructor-photo-row {
+      
+    align-items: center;
+}
+
+/* Подсветка ошибок валидации */
+.input-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Текст ошибки */
+.field-error-text {
+    position: absolute;          
+    right: 8px;
+    bottom: 4px;
+    color: #D90D26;
+    font-size: 12px;
+    background: #FCFCFC;         /* фон как у инпута */
+    padding: 0 4px;
+    display: none;                /* по умолчанию скрыт */
+    pointer-events: none;         
+    white-space: nowrap;
+}
+
+/* Показываем ошибку, когда у соседнего инпута есть класс .error */
+.input-wrapper .add-course-input.error ~ .field-error-text {
+    display: block;
+}
+
+.add-course-input.error + .field-error-text {
+    display: block;
+}
+
+.add-course-input.error {
+    border-color: #D90D26;
+}
+
+/* Кнопка выбора файла */
+.photo-upload-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.photo-upload-btn {
+    width: 179px;
+    height: 40px;
+    background-color: #FCFCFC;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #717171;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.photo-upload-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.photo-upload-input {
+    display: none;          /* скрыт, кликаем по кнопке-имитатору */
+}
+
+.instructor-photo-row {
+    margin-top: -30px;
 }

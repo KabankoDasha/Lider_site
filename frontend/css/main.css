@@ -814,6 +814,45 @@ main {
     color: #7291ad;
 }
 
+/* Кнопка «Наверх» */
+.scroll-to-top {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    width: 63px;
+    height: 63px;
+    border-radius: 50%;
+    border: 2px solid #D90D26;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+    z-index: 900;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.scroll-to-top--visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top:hover {
+    background: rgba(255, 255, 255, 0.7);
+    transform: scale(1.05);
+}
+
+.scroll-to-top__icon {
+    width: 24px;
+    height: auto;
+    transform: rotate(180deg);   
+}
+
 /* ========================
    Адаптивность
    ======================== */

@@ -207,20 +207,9 @@
             </div>
         </div>
     </footer>
-    
-    <!-- Скрипт для демонстрации оверлея (замени на реальную логику регистрации) -->
-    <script>
-        document.getElementById('register-submit').addEventListener('click', function() {
-            document.getElementById('register-overlay').classList.add('active');
-        });
-        // Закрытие оверлея при клике вне белого блока
-        document.getElementById('register-overlay').addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.classList.remove('active');
-            }
-        });
-    </script>
 
     <script src="../js/load-form.js"></script>
+    <script src="../js/scroll-to-top.js"></script>
+    <script src="../js/register.js"></script>
 </body>
 </html>

@@ -306,3 +306,49 @@
     text-align: center;
     line-height: 1.3;
 }
+
+/* Обёртка для полей с ошибкой */
+.input-wrapper {
+    position: relative;
+    flex: 1;
+}
+
+/* Красная обводка при ошибке */
+.form-field__input.error,
+.custom-select__trigger.error {
+    border-color: #D90D26 !important;
+}
+
+.field-error-text {
+    position: absolute;
+    right: 8px;
+    bottom: 4px;
+    color: #D90D26;
+    font-size: 12px;
+    padding: 0 4px;
+    display: none;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.input-wrapper .form-field__input.error ~ .field-error-text,
+.input-wrapper .custom-select__trigger.error ~ .field-error-text {
+    display: block;
+}
+
+/* Контейнер чекбоксов – теперь с позиционированием для ошибки */
+.form-checkboxes {
+    position: relative;
+}
+
+/* Ошибка чекбоксов – абсолютно внутри, у правого нижнего угла */
+.checkbox-error-text {
+    position: absolute;
+    right: 0;
+    bottom: -20px;           /* отступ 10px от нижнего края блока чекбоксов */
+    color: #D90D26;
+    font-size: 12px;
+    white-space: nowrap;
+    display: none;           /* скрыто по умолчанию */
+    pointer-events: none;
+}

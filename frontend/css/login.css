@@ -165,3 +165,48 @@ body {
 .login-box__register-link:hover {
     opacity: 0.8;
 }
+
+/* Валидация (ошибки) */
+
+/* Обёртка для позиционирования ошибки */
+.input-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.login-box .input-wrapper {
+    position: relative;
+    display: block;          
+    margin-bottom: 30px;    
+}
+
+.login-box .input-wrapper .login-box__input {
+    margin-bottom: 0;
+}
+
+/* Красная обводка */
+.login-box__input.error {
+    border-color: #D90D26 !important;
+}
+
+/* Текст ошибки */
+.login-box .field-error-text {
+    position: absolute; 
+    right: 35px;
+    bottom: 4px;
+    color: #D90D26;
+    font-size: 12px;
+    background: #FCFCFC;     
+    padding: 0 4px;
+    display: none;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+/* Показываем ошибку, если у соседнего инпута есть класс .error */
+.login-box .input-wrapper .login-box__input.error ~ .field-error-text {
+    display: block;
+}

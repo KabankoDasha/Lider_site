@@ -73,10 +73,10 @@ body {
    ======================== */
 .register-box {
     width: 1000px;
-    height: 719px;
+    min-height: 719px;          
     background-color: #F0F0F0;
     border-radius: 10px;
-    padding: 40px 40px 0;   /* верхний отступ 40px, боковые 40px */
+    padding: 40px 40px 0;    
     position: relative;
     text-align: center;
 }
@@ -269,4 +269,58 @@ body {
     color: #000;
     text-align: center;
     margin: 0;
+}
+
+/* Валидация */
+
+/* Обёртка для позиционирования ошибки */
+.register-field .input-wrapper {
+    position: relative;
+    display: block;
+}
+
+/* Красная обводка */
+.register-field__input.error {
+    border-color: #D90D26 !important;
+}
+
+/* Текст ошибки внутри поля (справа-внизу) */
+.register-field .field-error-text {
+    position: absolute;
+    right: 5px;
+    bottom: 4px;
+    color: #D90D26;
+    font-size: 12px;
+    background: #FCFCFC;
+    padding: 0 4px;
+    display: none;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+.register-field .input-wrapper .register-field__input.error ~ .field-error-text {
+    display: block;
+}
+
+.register-consent {
+    display: flex;
+    flex-wrap: wrap;            
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.register-consent .consent-error-text {
+    width: 60%;                
+    text-align: right;
+    display: none;
+    color: #D90D26;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.register-consent.error-text .consent-error-text {
+    display: block;
 }

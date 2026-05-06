@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Автошкола Лидер – Личный кабинет администратора</title>
+    <title>Автошкола Лидер</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/admin.css">
     <link rel="stylesheet" href="../css/forma.css">
@@ -169,11 +169,11 @@
                         </div>
                         <div class="content-page-item">
                             <span>Страница «Акции»</span>
-                            <button class="btn--edit" data-page="sale">Редактировать</button>
+                            <button class="btn--edit-sale" data-page="sale">Редактировать</button>
                         </div>
                         <div class="content-page-item">
                             <span>Страница «Инструкторы»</span>
-                            <button class="btn--edit" data-page="instructors">Редактировать</button>
+                            <button class="btn--edit-instr" data-page="instructors">Редактировать</button>
                         </div>
                     </div>
                 </div>
@@ -285,7 +285,7 @@
             </div>
         </div>
 
-        <!-- Оверлей редактирования контента (общий) -->
+        <!-- Оверлей редактирования курсов -->
         <div class="delete-overlay" id="content-edit-overlay">
             <div class="content-edit-box">
                 <button class="content-back-btn" id="content-back-btn">
@@ -317,27 +317,27 @@
                 <div class="add-course-form">
                     <div class="app-detail-row">
                         <span class="app-detail-label">Название курса:</span>
-                        <input type="text" class="add-course-input" id="new-course-name" value="Автомобиль с МКПП — категория «B»" style="width:480px;">
+                        <input type="text" class="add-course-input" id="new-course-name" value="Автомобиль с МКПП — категория «B»">
                     </div>
                     <div class="app-detail-row">
                         <span class="app-detail-label">Длительность:</span>
-                        <input type="text" class="add-course-input" id="new-course-duration" value="2,5" style="width:120px;">
+                        <input type="text" class="add-course-input" id="new-course-duration" value="2,5 месяца">
                     </div>
                     <div class="app-detail-row">
                         <span class="app-detail-label">Стоимость за дистанционное обучение:</span>
-                        <input type="text" class="add-course-input" id="new-course-distance" value="46700" style="width:200px;">
+                        <input type="text" class="add-course-input" id="new-course-distance" value="46 700">
                     </div>
                     <div class="app-detail-row">
-                        <span class="app-detail-label">Стоимость за дистанционное обучение (без скидки):</span>
-                        <input type="text" class="add-course-input" id="new-course-distance-old" value="48700" style="width:200px;">
+                        <span class="app-detail-label">Стоимость за дистанционное обучение <br>(без скидки):</span>
+                        <input type="text" class="add-course-input" id="new-course-distance-old" value="48 700">
                     </div>
                     <div class="app-detail-row">
                         <span class="app-detail-label">Стоимость за очное обучение:</span>
-                        <input type="text" class="add-course-input" id="new-course-fulltime" value="49700" style="width:200px;">
+                        <input type="text" class="add-course-input" id="new-course-fulltime" value="49 700">
                     </div>
                     <div class="app-detail-row">
-                        <span class="app-detail-label">Стоимость за очное обучение (без скидки):</span>
-                        <input type="text" class="add-course-input" id="new-course-fulltime-old" value="51700" style="width:200px;">
+                        <span class="app-detail-label">Стоимость за очное обучение <br>(без скидки):</span>
+                        <input type="text" class="add-course-input" id="new-course-fulltime-old" value="51 700">
                     </div>
                 </div>
                 <button class="btn--confirm-action add-course-save-btn" id="save-new-course">Сохранить</button>
@@ -360,6 +360,162 @@
             <div class="success-overlay__box">
                 <img src="../images/done.svg" alt="" class="success-overlay__icon">
                 <p class="success-overlay__text" id="course-success-message">Курс успешно удалён!</p>
+            </div>
+        </div>
+
+        <!-- Оверлей редактирования акций -->
+        <div class="delete-overlay" id="sale-edit-overlay">
+            <div class="content-edit-box">
+                <button class="content-back-btn" id="sale-back-btn">
+                    <img src="../images/arrow-back.svg" alt="Назад" class="content-back-icon">
+                    <span>Назад</span>
+                </button>
+                <div class="content-edit-scroll">
+                    <div class="content-edit-cards" id="sale-edit-cards">
+                        <!-- Карточки акций будут заполнены из JS -->
+                    </div>
+                    <div class="content-edit-scrollbar">
+                        <div class="content-edit-thumb" id="sale-edit-thumb"></div>
+                    </div>
+                </div>
+                <div class="content-edit-actions">
+                    <button class="btn--add-course" id="add-sale-btn">Добавить</button>
+                    <button class="btn--confirm-action" id="save-sales-btn">Сохранить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Оверлей добавления/редактирования акции -->
+        <div class="delete-overlay" id="add-sale-overlay">
+            <div class="add-course-box">
+                <button class="form-container__close" id="close-add-sale">
+                    <img src="../images/close.svg" alt="Закрыть">
+                </button>
+                <h2 class="add-course-title" id="add-sale-title">Добавление новой акции</h2>
+                <div class="add-course-form">
+                    <div class="app-detail-row">
+                        <span class="app-detail-label">Название акции:</span>
+                        <input type="text" class="add-course-input" id="new-sale-name" placeholder="Название акции">
+                    </div>
+                    <div class="app-detail-row">
+                        <span class="app-detail-label">Скидка в процентах:</span>
+                        <input type="text" class="add-course-input" id="new-sale-discount" placeholder="-10%">
+                    </div>
+                    <div class="app-detail-row">
+                        <span class="app-detail-label">Сроки проведения акции <br>(до какого числа):</span>
+                        <input type="text" class="add-course-input" id="new-sale-date" placeholder="до 31.03.2026">
+                    </div>
+                </div>
+                <button class="btn--confirm-action add-course-save-btn" id="save-new-sale">Сохранить</button>
+            </div>
+        </div>
+
+        <!-- Оверлей подтверждения удаления акции -->
+        <div class="delete-overlay" id="confirm-delete-sale-overlay">
+            <div class="delete-overlay__box">
+                <p class="delete-overlay__text">Вы уверены, что хотите<br>удалить акцию?</p>
+                <div class="delete-overlay__buttons">
+                    <button class="btn--cancel" id="cancel-delete-sale">Отмена</button>
+                    <button class="btn--confirm-delete" id="confirm-delete-sale">Удалить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Оверлей редактирования инструкторов -->
+        <div class="delete-overlay" id="instructor-edit-overlay">
+            <div class="content-edit-box">
+                <button class="content-back-btn" id="instructor-back-btn">
+                    <img src="../images/arrow-back.svg" alt="Назад" class="content-back-icon">
+                    <span>Назад</span>
+                </button>
+                <div class="content-edit-scroll">
+                    <div class="content-edit-cards" id="instructor-edit-cards">
+                        <!-- Карточки будут заполнены из JS -->
+                    </div>
+                    <div class="content-edit-scrollbar">
+                        <div class="content-edit-thumb" id="instructor-edit-thumb"></div>
+                    </div>
+                </div>
+                <div class="content-edit-actions">
+                    <button class="btn--add-course" id="add-instructor-btn">Добавить</button>
+                    <button class="btn--confirm-action" id="save-instructors-btn">Сохранить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Оверлей добавления/редактирования инструктора -->
+        <div class="delete-overlay" id="add-instructor-overlay">
+            <div class="add-course-box">
+                <button class="form-container__close" id="close-add-instructor">
+                    <img src="../images/close.svg" alt="Закрыть">
+                </button>
+                <h2 class="add-course-title" id="add-instructor-title">Добавление нового инструктора</h2>
+                <div class="add-course-form">
+                    <div class="app-detail-row">
+                        <span class="app-detail-label">ФИО:</span>
+                        <div class="input-wrapper">
+                            <input type="text" class="add-course-input" id="new-instructor-name" placeholder="ФИО">
+                        </div>
+                    </div>
+                    <div class="app-detail-row">
+                        <span class="app-detail-label">Стаж вождения:</span>
+                        <div class="input-wrapper">
+                            <input type="text" class="add-course-input" id="new-instructor-experience" placeholder="10 лет">
+                        </div>
+                    </div>
+                    <div class="app-detail-row">
+                        <span class="app-detail-label">Автомобиль:</span>
+                        <div class="input-wrapper">
+                            <input type="text" class="add-course-input" id="new-instructor-car" placeholder="Hyundai Accent">
+                        </div>
+                    </div>
+                    <div class="app-detail-row">
+                        <span class="app-detail-label">Образование:</span>
+                        <div class="input-wrapper">
+                            <input type="text" class="add-course-input" id="new-instructor-education" placeholder="Высшее">
+                        </div>
+                    </div>
+                    <div class="app-detail-row">
+                        <span class="app-detail-label">Рейтинг:</span>
+                        <input type="text" class="add-course-input" id="new-instructor-rating" placeholder="4.8">
+                    </div>
+
+                    <!-- Выпадающий список категории -->
+                    <div class="app-detail-row">
+                        <div class="custom-select" id="instructor-category-select">
+                            <select class="custom-select__native">
+                                <option value="Инструктор по вождению">Инструктор по вождению</option>
+                                <option value="Преподаватель по теории">Преподаватель по теории</option>
+                            </select>
+                            <div class="custom-select__trigger">
+                                <span class="custom-select__selected">Инструктор по вождению</span>
+                                <img src="../images/arrow3.svg" alt="" class="custom-select__arrow">
+                            </div>
+                            <ul class="custom-select__options">
+                                <li data-value="Инструктор по вождению">Инструктор по вождению</li>
+                                <li data-value="Преподаватель по теории">Преподаватель по теории</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Загрузка фотографии -->
+                    <div class="app-detail-row instructor-photo-row">
+                        <span class="app-detail-label">Загрузить фотографию:</span>
+                        <button class="photo-upload-btn" id="upload-photo-btn">Выбрать файл</button>
+                    </div>
+                </div>
+                <button class="btn--confirm-action add-course-save-btn" id="save-new-instructor">Сохранить</button>
+            </div>
+        </div>
+
+        <!-- Оверлей подтверждения удаления инструктора -->
+        <div class="delete-overlay" id="confirm-delete-instructor-overlay">
+            <div class="delete-overlay__box">
+                <p class="delete-overlay__text">Вы уверены, что хотите<br>удалить инструктора?</p>
+                <div class="delete-overlay__buttons">
+                    <button class="btn--cancel" id="cancel-delete-instructor">Отмена</button>
+                    <button class="btn--confirm-delete" id="confirm-delete-instructor">Удалить</button>
+                </div>
             </div>
         </div>
 
@@ -593,5 +749,6 @@
 
     <script src="../js/admin.js"></script>
     <script src="../js/forma.js"></script>
+    <script src="../js/scroll-to-top.js"></script>
 </body>
 </html>
