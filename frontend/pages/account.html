@@ -219,7 +219,9 @@
 
                 <div class="review-form-row">
                     <label class="review-form-label">Имя:</label>
-                    <input type="text" class="review-form-input" id="review-name" placeholder="Введите ваше имя">
+                    <div class="review-input-wrapper">
+                        <input type="text" class="review-form-input" id="review-name" placeholder="Введите ваше имя">
+                    </div>
                 </div>
 
                 <div class="review-form-row">
@@ -274,7 +276,9 @@
                 <div class="review-form-row">
                     <label class="review-form-label">Отзыв:</label>
                 </div>
-                <textarea class="review-form-textarea" id="review-text" placeholder="Напишите отзыв"></textarea>
+                <div class="review-input-wrapper">
+                    <textarea class="review-form-textarea" id="review-text" placeholder="Напишите отзыв"></textarea>
+                </div>
 
                 <div class="review-form-row">
                     <label class="review-form-label">Оценка:</label>
@@ -302,6 +306,14 @@
                 </div>
 
                 <button class="btn--confirm-action review-submit-btn" id="submit-review-btn">Добавить</button>
+            </div>
+        </div>
+
+        <!-- Оверлей успеха для отзыва -->
+        <div class="success-overlay" id="review-success-overlay">
+            <div class="success-overlay__box">
+                <img src="../images/done.svg" alt="" class="success-overlay__icon">
+                <p class="success-overlay__text">Отзыв отправлен на модерацию! <br>Скоро он появится на сайте!</p>
             </div>
         </div>
     </main>

@@ -165,9 +165,56 @@
 
                 if (!isValid) return;
 
-                // Успех
+                // === ДОБАВЛЕНИЕ ЗАЯВКИ В ЛИЧНЫЙ КАБИНЕТ ===
+                const applicationsContainer = document.getElementById('applications-container');
+                if (applicationsContainer) {
+                    const course = document.getElementById('course-select').value || 'Курс не выбран';
+                    const name = nameInput.value.trim() || 'Без имени';
+                    const phone = phoneInput.value.trim() || 'Без телефона';
+                    const comment = document.querySelector('.form-textarea').value.trim() || 'Без комментариев';
+
+                    const today = new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+                    const card = document.createElement('article');
+                    card.className = 'application-card';
+                    card.innerHTML = `
+                        <div class="application-header">
+                            <h4 class="application-number">Заявка №${Date.now().toString().slice(-4)}</h4>
+                            <span class="application-status">в обработке</span>
+                        </div>
+                        <p class="application-course">${course}</p>
+                        <p class="application-message">${comment}</p>
+                        <time class="application-date">от ${today}</time>
+                        <button class="application-delete-btn delete-item-btn" data-type="application">
+                            <img src="../images/krest.svg" alt="Удалить заявку" style="width:15px;height:15px;">
+                        </button>
+                    `;
+                    applicationsContainer.appendChild(card);
+                }
+
+                // Закрываем форму и показываем success
                 overlay.classList.remove('active');
                 successOverlay.classList.add('active');
+
+                // Очищаем поля (опционально)
+                nameInput.value = '';
+                phoneInput.value = '';
+                document.querySelector('.form-textarea').value = '';
+                const nativeSelect = document.getElementById('course-select');
+                if (nativeSelect) nativeSelect.value = '';
+                const selected = customSelect.querySelector('.custom-select__selected');
+                if (selected) {
+                    selected.textContent = 'Выберите курс обучения';
+                    selected.classList.add('placeholder');
+                }
+
+                // Снимаем галочки с чекбоксов
+                document.querySelectorAll('.form-check__input').forEach(cb => cb.checked = false);
+                if (checkboxErrorEl) checkboxErrorEl.style.display = 'none';
+
+                // Диспатчим событие (если нужно для других целей)
+                document.dispatchEvent(new CustomEvent('applicationSubmited', {
+                    detail: { course, name, phone, comment }
+                }));
             });
         }
 

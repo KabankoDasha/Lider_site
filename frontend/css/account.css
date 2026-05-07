@@ -805,3 +805,71 @@ body {
     width: 24px; 
     height: 24px;
 }
+
+.floating-message {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #24486B;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 18px;
+    z-index: 2000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    animation: fadeInUp 0.3s ease;
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translate(-50%, 20px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* Ошибки в форме отзыва */
+.review-input-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+/* Красная обводка */
+.review-form-input.error,
+.review-form-textarea.error,
+.review-custom-select__trigger.error {
+    border-color: #D90D26 !important;
+}
+
+/* Ошибка внутри поля */
+.review-input-wrapper .field-error-text {
+    position: absolute;
+    right: 260px;
+    bottom: 7px;
+    display: block !important;         
+    color: #D90D26;
+    font-size: 12px;
+    padding: 0 4px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Ошибка под селектом */
+.review-custom-select .field-error-text {
+    position: absolute;
+    bottom: -18px;
+    right: 0;
+    display: block !important;          
+    color: #D90D26;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+/* Специальная ошибка для textarea – под полем, прижата к правому краю */
+.review-input-wrapper .field-error-text.field-error-text--textarea {
+    position: absolute;
+    right: 50px;
+    bottom: 12px;
+    white-space: nowrap;
+}
+
+

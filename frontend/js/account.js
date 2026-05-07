@@ -21,27 +21,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const cancelDeleteBtn = document.getElementById('cancel-delete');
     const successOverlay = document.getElementById('success-delete-overlay');
 
+    let currentDeleteElement = null;
+
     document.body.addEventListener('click', (e) => {
         const deleteBtn = e.target.closest('.delete-item-btn');
         if (!deleteBtn) return;
+        
         const type = deleteBtn.dataset.type;
         deleteOverlayText.innerHTML = `Вы уверены, что хотите<br>удалить ${type === 'review' ? 'отзыв' : 'заявку'}?`;
         successOverlay.querySelector('.success-overlay__text').textContent = 
             type === 'review' ? 'Ваш отзыв удалён!' : 'Заявка успешно удалена!';
-        deleteOverlay.dataset.itemElement = '';
-        deleteOverlay.dataset.itemElement = deleteBtn.closest('.application-card, .review-card');
+        
+        currentDeleteElement = deleteBtn.closest('.application-card, .review-card');
         deleteOverlay.classList.add('active');
     });
 
-    cancelDeleteBtn.addEventListener('click', () => deleteOverlay.classList.remove('active'));
+    cancelDeleteBtn.addEventListener('click', () => {
+        deleteOverlay.classList.remove('active');
+        currentDeleteElement = null;
+    });
 
     confirmDeleteBtn.addEventListener('click', () => {
-        const cardElement = deleteOverlay.dataset.itemElement;
-        if (cardElement && cardElement.parentNode) {
-            cardElement.parentNode.removeChild(cardElement);
+        if (currentDeleteElement && currentDeleteElement.parentNode) {
+            currentDeleteElement.parentNode.removeChild(currentDeleteElement);
         }
         deleteOverlay.classList.remove('active');
         successOverlay.classList.add('active');
+        currentDeleteElement = null;
     });
 
     successOverlay.addEventListener('click', (e) => {
@@ -95,20 +101,118 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitReviewBtn = document.getElementById('submit-review-btn');
     const reviewSuccessOverlay = document.getElementById('review-success-overlay');
 
-    openReviewBtn.addEventListener('click', () => reviewFormOverlay.classList.add('active'));
-    closeReviewBtn.addEventListener('click', () => reviewFormOverlay.classList.remove('active'));
+    // --- Функция сброса ошибок формы отзыва ---
+    function clearReviewFormErrors() {
+        document.querySelectorAll('#review-form-overlay .review-form-input.error, #review-form-overlay .review-form-textarea.error, #review-form-overlay .review-custom-select__trigger.error')
+            .forEach(el => el.classList.remove('error'));
+        document.querySelectorAll('#review-form-overlay .field-error-text').forEach(el => el.remove());
+    }
+
+    openReviewBtn.addEventListener('click', () => {
+        clearReviewFormErrors();
+        reviewFormOverlay.classList.add('active');
+    });
+    closeReviewBtn.addEventListener('click', () => {
+        clearReviewFormErrors();
+        reviewFormOverlay.classList.remove('active');
+    });
     reviewFormOverlay.addEventListener('click', (e) => {
-        if (e.target === reviewFormOverlay) reviewFormOverlay.classList.remove('active');
+        if (e.target === reviewFormOverlay) {
+            clearReviewFormErrors();
+            reviewFormOverlay.classList.remove('active');
+        }
     });
 
-    // Инициализация кастомных селектов отзыва
     document.querySelectorAll('.review-custom-select').forEach(select => initReviewSelect(select));
 
+    // Универсальная функция показа ошибки
+    function showFieldError(element, message) {
+        let wrapper = null;
+        
+        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+            wrapper = element.closest('.review-input-wrapper');
+            if (!wrapper) {
+                wrapper = document.createElement('div');
+                wrapper.className = 'review-input-wrapper';
+                element.parentNode.insertBefore(wrapper, element);
+                wrapper.appendChild(element);
+            }
+        } else {
+            wrapper = element.closest('.review-custom-select') || element.parentNode;
+        }
+        
+        if (!wrapper) return;
+        
+        const oldErr = wrapper.querySelector('.field-error-text');
+        if (oldErr) oldErr.remove();
+
+        const errorEl = document.createElement('span');
+        errorEl.className = 'field-error-text';
+        
+        if (element.tagName === 'TEXTAREA') {
+            errorEl.classList.add('field-error-text--textarea');
+        }
+        errorEl.textContent = message;
+        wrapper.appendChild(errorEl);
+    }
+
     submitReviewBtn.addEventListener('click', () => {
-        const name = document.getElementById('review-name').value.trim() || 'Аноним';
-        const course = document.getElementById('review-course').value || 'Курс не выбран';
-        const text = document.getElementById('review-text').value.trim() || 'Без текста';
-        const grade = parseInt(document.getElementById('review-grade').value) || 5;
+        // Сброс ошибок перед валидацией
+        clearReviewFormErrors();
+
+        let isValid = true;
+
+        const nameInput = document.getElementById('review-name');
+        const courseSelect = document.getElementById('review-course');
+        const reviewText = document.getElementById('review-text');
+        const gradeSelect = document.getElementById('review-grade');
+
+        // Имя
+        if (!nameInput.value.trim()) {
+            nameInput.classList.add('error');
+            showFieldError(nameInput, 'Заполните поле');
+            isValid = false;
+        }
+
+        // Курс
+        if (!courseSelect.value) {
+            const trigger = document.querySelector('#review-course-select .review-custom-select__trigger');
+            if (trigger) {
+                trigger.classList.add('error');
+                showFieldError(trigger, 'Выберите курс');
+            }
+            isValid = false;
+        }
+
+        // Текст отзыва
+        const textValue = reviewText.value.trim();
+        if (!textValue) {
+            reviewText.classList.add('error');
+            showFieldError(reviewText, 'Заполните поле');
+            isValid = false;
+        } else if (textValue.length < 10) {
+            reviewText.classList.add('error');
+            showFieldError(reviewText, 'Минимум 10 символов');
+            isValid = false;
+        }
+
+        // Оценка
+        if (!gradeSelect.value) {
+            const trigger = document.querySelector('#review-grade-select .review-custom-select__trigger');
+            if (trigger) {
+                trigger.classList.add('error');
+                showFieldError(trigger, 'Поставьте оценку');
+            }
+            isValid = false;
+        }
+
+        if (!isValid) return;
+
+        // --- Создание карточки отзыва ---
+        const name = nameInput.value.trim() || 'Аноним';
+        const course = courseSelect.value || 'Курс не выбран';
+        const text = textValue || 'Без текста';
+        const grade = parseInt(gradeSelect.value) || 5;
 
         const starsHtml = Array.from({ length: 5 }, (_, i) =>
             `<span class="star ${i < grade ? 'star--active' : ''}"></span>`
@@ -120,12 +224,12 @@ document.addEventListener('DOMContentLoaded', () => {
         card.innerHTML = `
             <div class="review-card__header">
                 <div>
-                    <h4 class="review-card__name">${name}</h4>
-                    <p class="review-card__course">${course}</p>
+                    <h4 class="review-card__name">${escapeHtml(name)}</h4>
+                    <p class="review-card__course">${escapeHtml(course)}</p>
                 </div>
                 <div class="review-card__stars">${starsHtml}</div>
             </div>
-            <p class="review-card__text">${text}</p>
+            <p class="review-card__text">${escapeHtml(text)}</p>
             <time class="review-card__date">${today}</time>
             <button class="application-delete-btn delete-item-btn" data-type="review">
                 <img src="../images/krest.svg" alt="Удалить отзыв">
@@ -154,86 +258,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === reviewSuccessOverlay) reviewSuccessOverlay.classList.remove('active');
     });
 
-    // --- Добавление заявки из формы записи (после её загрузки) ---
-    function setupFormApplication() {
-        const formSubmitBtn = document.getElementById('form-submit-btn');
-        if (!formSubmitBtn) {
-            // Форма ещё не загружена, ждём
-            setTimeout(setupFormApplication, 200);
-            return;
-        }
-
-        // Удаляем старые обработчики (если были) заменой кнопки
-        formSubmitBtn.replaceWith(formSubmitBtn.cloneNode(true));
-        const newSubmitBtn = document.getElementById('form-submit-btn');
-
-        newSubmitBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('form-name')?.value.trim() || 'Без имени';
-            const course = document.getElementById('course-select')?.value || 'Курс не выбран';
-            const phone = document.getElementById('form-phone')?.value.trim() || 'Без телефона';
-            const comment = document.querySelector('.form-textarea')?.value.trim() || '';
-
-            const today = new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
-            const card = document.createElement('article');
-            card.className = 'application-card';
-            card.innerHTML = `
-                <div class="application-header">
-                    <h4 class="application-number">Заявка №${Date.now().toString().slice(-4)}</h4>
-                    <span class="application-status">создана</span>
-                </div>
-                <p class="application-course">${course}</p>
-                <p class="application-message">${comment || 'Без дополнительных комментариев'}</p>
-                <time class="application-date">${today}</time>
-                <button class="application-delete-btn delete-item-btn" data-type="application">
-                    <img src="../images/krest.svg" alt="Удалить заявку">
-                </button>
-            `;
-            document.getElementById('applications-container').appendChild(card);
-
-            // Закрываем форму (оверлей) и показываем уведомление
-            const formOverlay = document.getElementById('form-overlay');
-            if (formOverlay) formOverlay.classList.remove('active');
-            const successOverlayForm = document.getElementById('success-overlay'); // success-overlay из forma, но на странице аккаунта overlay id другой. 
-            // Используем success-delete-overlay? Лучше показать текст "Заявка создана". Но в forma.css success-overlay может быть не подключён. Создадим универсальное уведомление.
-            alert('Заявка успешно создана!');
-        });
-
-        // Восстанавливаем работу кастомного селекта формы записи (если он перестал открываться)
-        const customSelect = document.querySelector('#form-overlay .custom-select');
-        if (customSelect) {
-            const trigger = customSelect.querySelector('.custom-select__trigger');
-            const selected = customSelect.querySelector('.custom-select__selected');
-            const options = customSelect.querySelectorAll('.custom-select__options li');
-            const nativeSelect = customSelect.querySelector('.custom-select__native');
-            trigger.addEventListener('click', () => customSelect.classList.toggle('open'));
-            options.forEach(opt => {
-                opt.addEventListener('click', () => {
-                    const value = opt.dataset.value;
-                    selected.textContent = value;
-                    selected.classList.remove('placeholder');
-                    nativeSelect.value = value;
-                    customSelect.classList.remove('open');
-                });
-            });
-            document.addEventListener('click', (e) => {
-                if (!customSelect.contains(e.target)) customSelect.classList.remove('open');
-            });
-        }
-    }
-
-    // Запускаем настройку формы, когда она появится в DOM
-    setupFormApplication();
-
-    // Открытие формы записи из панели заявок
-    window.openFormOverlay = function() {
-        const formOverlay = document.getElementById('form-overlay');
-        if (formOverlay) formOverlay.classList.add('active');
-    };
-
-    // Связываем кнопку "плюс" в заявках с открытием формы
+    // --- Открытие формы записи из панели заявок ---
     const openFormBtn = document.getElementById('open-form-btn');
     if (openFormBtn) {
-        openFormBtn.addEventListener('click', () => window.openFormOverlay());
+        openFormBtn.addEventListener('click', () => {
+            const formOverlay = document.getElementById('form-overlay');
+            if (formOverlay) formOverlay.classList.add('active');
+        });
+    }
+
+    // Простая защита от XSS
+    function escapeHtml(str) {
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
     }
 });

@@ -2,7 +2,7 @@
 
 // --- Данные карточек курсов ---
 const coursesData = {
-  a: { // Мотоцикл
+  a: {
     title: 'Обучение на мотоцикл',
     categoryText: 'Категория "A"',
     imgSmall: '../images/moto.svg',
@@ -11,7 +11,7 @@ const coursesData = {
     collapsedImg: '../images/gray2.svg',
     collapsedClass: 'card--collapsed2'
   },
-  b: { // МКПП
+  b: {
     title: 'Обучение на автомобиль с МКПП',
     categoryText: 'Категория "B"',
     imgSmall: '../images/car1.svg',
@@ -20,7 +20,7 @@ const coursesData = {
     collapsedImg: '../images/gray1.svg',
     collapsedClass: 'card--collapsed1'
   },
-  akpp: { // АКПП 
+  akpp: {
     title: 'Обучение на автомобиль с АКПП',
     categoryText: 'Категория "B" автомат',
     imgSmall: '../images/car2.svg',
@@ -73,9 +73,10 @@ function generateExpandedCard(category, data) {
           </div>`;
 }
 
-// --- Переключение карточек курсов ---
-const cardsContainer = document.querySelector('.cards');
-if (cardsContainer) {
+// --- Десктопное переключение карточек ---
+function initDesktopCards() {
+  const cardsContainer = document.querySelector('.cards');
+  if (!cardsContainer) return;
   cardsContainer.addEventListener('click', (e) => {
     const card = e.target.closest('.card');
     if (!card || card.classList.contains('card--expanded')) return;
@@ -96,60 +97,103 @@ if (cardsContainer) {
   });
 }
 
+// --- Мобильный слайдер карточек ---
+function initMobileCardsSlider() {
+  const cards = document.querySelector('.cards');
+  if (!cards) return;
+
+  // Формируем карточки из данных
+  const categories = ['b', 'a', 'akpp', 'd', 'e'];
+  cards.innerHTML = categories.map(cat => generateExpandedCard(cat, coursesData[cat])).join('');
+
+  const cardElements = cards.querySelectorAll('.card');
+  let currentIndex = 0;
+  const dotsContainer = document.getElementById('cards-dots');
+  dotsContainer.innerHTML = '';
+
+  cardElements.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.className = 'card-dot';
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  function goToSlide(index) {
+    currentIndex = index;
+    cards.style.transform = `translateX(-${index * 100}%)`;
+    document.querySelectorAll('.card-dot').forEach((d, i) => d.classList.toggle('active', i === index));
+  }
+
+  // Поддержка свайпа пальцем
+  let startPos = 0;
+  cards.addEventListener('touchstart', e => {
+    startPos = e.touches[0].clientX;
+  });
+  cards.addEventListener('touchend', e => {
+    const diff = startPos - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0 && currentIndex < cardElements.length - 1) {
+        goToSlide(currentIndex + 1);
+      } else if (diff < 0 && currentIndex > 0) {
+        goToSlide(currentIndex - 1);
+      }
+    }
+  });
+}
+
 // --- Галерея филиалов ---
-document.addEventListener('DOMContentLoaded', function() {
+function initGallery() {
   const galleryOverlay = document.getElementById('gallery-overlay');
   const gallerySlides = document.getElementById('gallery-slides');
   const galleryDots = document.getElementById('gallery-dots');
   const areaLeft = document.getElementById('gallery-area-left');
   const areaRight = document.getElementById('gallery-area-right');
+  if (!galleryOverlay || !gallerySlides) return;
+
   let currentSlide = 0;
   let images = [];
 
-// Открытие галереи при клике на обёртку с картинкой
-document.querySelectorAll('.branch-card__img-wrap').forEach(wrap => {
+  document.querySelectorAll('.branch-card__img-wrap').forEach(wrap => {
     wrap.addEventListener('click', () => {
-        const json = wrap.dataset.images;
-        if (json) {
-            try {
-                images = JSON.parse(json);
-            } catch (e) {
-                console.error('Ошибка в data-images:', e);
-                return;
-            }
-            currentSlide = 0;
-            renderGallery();
-            galleryOverlay.classList.add('active');
+      const json = wrap.dataset.images;
+      if (json) {
+        try {
+          images = JSON.parse(json);
+        } catch (e) {
+          console.error('Ошибка в data-images:', e);
+          return;
         }
+        currentSlide = 0;
+        renderGallery();
+        galleryOverlay.classList.add('active');
+      }
     });
-});
+  });
 
-  // Закрытие галереи при клике на фон (оверлей)
   galleryOverlay.addEventListener('click', (e) => {
     if (e.target === galleryOverlay) {
       galleryOverlay.classList.remove('active');
     }
   });
 
-  // Переключение слайдов по клику на левую / правую половину
   function goToSlide(index) {
     currentSlide = index;
     gallerySlides.style.transform = `translateX(-${index * 100}%)`;
     updateDots();
   }
-  areaLeft.addEventListener('click', (e) => {
+
+  areaLeft?.addEventListener('click', (e) => {
     e.stopPropagation();
     if (currentSlide > 0) goToSlide(currentSlide - 1);
   });
-  areaRight.addEventListener('click', (e) => {
+  areaRight?.addEventListener('click', (e) => {
     e.stopPropagation();
     if (currentSlide < images.length - 1) goToSlide(currentSlide + 1);
   });
 
-  // Отрисовка галереи
   function renderGallery() {
     gallerySlides.innerHTML = images.map(src => `<img src="${src}" alt="">`).join('');
-    // Точки
     galleryDots.innerHTML = '';
     images.forEach((_, i) => {
       const dot = document.createElement('span');
@@ -166,4 +210,48 @@ document.querySelectorAll('.branch-card__img-wrap').forEach(wrap => {
       dot.classList.toggle('active', i === currentSlide);
     });
   }
+}
+
+// --- Мобильное меню ---
+function initMobileMenu() {
+  const burger = document.getElementById('burger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (burger && mobileMenu) {
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+    });
+    document.querySelectorAll('.mobile-menu__link').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+      });
+    });
+  }
+}
+
+// --- Инициализация в зависимости от экрана ---
+function initCards() {
+  if (window.innerWidth <= 768) {
+    initMobileCardsSlider();
+  } else {
+    initDesktopCards();
+  }
+}
+
+// --- Запуск всего после загрузки DOM ---
+document.addEventListener('DOMContentLoaded', () => {
+  initCards();
+  initGallery();
+  initMobileMenu();
+
+  // При ресайзе перезагружаем страницу, если пересечена граница 768px
+  window.addEventListener('resize', () => {
+    if (
+      (window.innerWidth <= 768 && !document.getElementById('cards-dots')?.children.length) ||
+      (window.innerWidth > 768 && document.getElementById('cards-dots')?.children.length)
+    ) {
+      location.reload();
+    }
+  });
 });

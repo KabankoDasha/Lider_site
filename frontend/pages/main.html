@@ -14,6 +14,18 @@
             <a href="../pages/main.html" class="logo">
                 <img src="../images/logo.svg" alt="Автошкола Лидер" class="logo__img">
             </a>
+            <!-- Мобильный телефон -->
+            <a href="tel:+73517007400" class="header__phone mobile-only">
+                <img src="../images/phone2.svg" alt="Телефон" class="header__phone-icon">
+                +7(351) 700-74-00
+            </a>
+            <!-- Бургер-меню -->
+            <button class="burger mobile-only" id="burger-btn" aria-label="Меню">
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+            </button>
+            <!-- Десктопная навигация -->
             <nav class="nav">
                 <ul class="nav__list">
                     <li><a href="../pages/study.html">Обучение</a></li>
@@ -24,9 +36,23 @@
                     <li><a href="../pages/contact.html">Контакты</a></li>
                 </ul>
             </nav>
-            <a href="../pages/login.html" class="btn btn--login">Войти</a>
+            <!-- Кнопка "Войти" скрыта на мобильных -->
+            <a href="../pages/login.html" class="btn btn--login desktop-only">Войти</a>
         </div>
     </header>
+
+    <!-- Мобильное меню (бургер) -->
+    <div class="mobile-menu" id="mobile-menu">
+        <nav class="mobile-menu__nav">
+            <a href="../pages/study.html" class="mobile-menu__link">Обучение</a>
+            <a href="../pages/sale.html" class="mobile-menu__link">Акции</a>
+            <a href="../pages/instructors.html" class="mobile-menu__link">Инструкторы</a>
+            <a href="../pages/faq.html" class="mobile-menu__link">Вопросы</a>
+            <a href="../pages/otzyv.html" class="mobile-menu__link">Отзывы</a>
+            <a href="../pages/contact.html" class="mobile-menu__link">Контакты</a>
+            <a href="../pages/login.html" class="mobile-menu__link mobile-menu__link--login">Войти</a>
+        </nav>
+    </div>
 
     <!-- Основной контент -->
     <main>
@@ -44,43 +70,46 @@
 
         <!-- Карточки курсов -->
         <section class="courses container">
-            <div class="cards">
-                <!-- Развёрнутая карточка по умолчанию -->
-                <div class="card card--expanded" data-category="b">
-                    <div class="card__content">
-                        <img src="../images/car1.svg" alt="Автомобиль" class="card__img-small">
-                        <div class="card__info">
-                            <h3 class="card__title">Обучение на автомобиль с МКПП</h3>
-                            <p class="card__category">Категория "B"</p>
+            <div class="cards-wrapper">
+                <div class="cards">
+                    <!-- Развёрнутая карточка по умолчанию -->
+                    <div class="card card--expanded" data-category="b">
+                        <div class="card__content">
+                            <img src="../images/car1.svg" alt="Автомобиль" class="card__img-small">
+                            <div class="card__info">
+                                <h3 class="card__title">Обучение на автомобиль с МКПП</h3>
+                                <p class="card__category">Категория "B"</p>
+                            </div>
+                            <div class="card__visual">
+                                <img src="../images/gray1.svg" alt="Автомобиль" class="card__img-big">
+                            </div>
                         </div>
-                        <div class="card__visual">
-                            <img src="../images/gray1.svg" alt="Автомобиль" class="card__img-big">
+                        <a href="../pages/course/courses-data.html?course=auto" class="btn btn--detail">Узнать подробнее <span class="arrow"></span></a>
+                    </div>
+                    <!-- Свёрнутые карточки -->
+                    <div class="card card--collapsed2" data-category="a">
+                        <div class="card__collapsed-content">
+                            <img src="../images/gray2.svg" alt="Мотоцикл" class="card__icon">
                         </div>
                     </div>
-                    <a href="../pages/course/courses-data.html?course=auto" class="btn btn--detail">Узнать подробнее <span class="arrow"></span></a>
-                </div>
-
-                <!-- Свёрнутые карточки -->
-                <div class="card card--collapsed2" data-category="a">
-                    <div class="card__collapsed-content">
-                        <img src="../images/gray2.svg" alt="Мотоцикл" class="card__icon">
+                    <div class="card card--collapsed1" data-category="akpp">
+                        <div class="card__collapsed-content">
+                            <img src="../images/gray3.svg" alt="Машина АКПП" class="card__icon">
+                        </div>
+                    </div>
+                    <div class="card card--collapsed2" data-category="d">
+                        <div class="card__collapsed-content">
+                            <img src="../images/gray4.svg" alt="Трактор" class="card__icon">
+                        </div>
+                    </div>
+                    <div class="card card--collapsed1" data-category="e">
+                        <div class="card__collapsed-content">
+                            <img src="../images/gray5.svg" alt="Квадроцикл" class="card__icon">
+                        </div>
                     </div>
                 </div>
-                <div class="card card--collapsed1" data-category="akpp">
-                    <div class="card__collapsed-content">
-                        <img src="../images/gray3.svg" alt="Машина АКПП" class="card__icon">
-                    </div>
-                </div>
-                <div class="card card--collapsed2" data-category="d">
-                    <div class="card__collapsed-content">
-                        <img src="../images/gray4.svg" alt="Трактор" class="card__icon">
-                    </div>
-                </div>
-                <div class="card card--collapsed1" data-category="e">
-                    <div class="card__collapsed-content">
-                        <img src="../images/gray5.svg" alt="Квадроцикл" class="card__icon">
-                    </div>
-                </div>
+                <!-- Точки слайдера (только на мобильной) -->
+                <div class="cards-dots" id="cards-dots"></div>
             </div>
         </section>
 
@@ -165,14 +194,9 @@
         <!-- Оверлей галереи филиалов -->
         <div class="gallery-overlay" id="gallery-overlay">
             <div class="gallery-container">
-                <!-- Зона для листания влево (левая половина) -->
                 <div class="gallery-area gallery-area--left" id="gallery-area-left"></div>
-                <!-- Зона для листания вправо (правая половина) -->
                 <div class="gallery-area gallery-area--right" id="gallery-area-right"></div>
-
-                <div class="gallery-slides" id="gallery-slides">
-                    <!-- Слайды будут заполнены из JS -->
-                </div>
+                <div class="gallery-slides" id="gallery-slides"></div>
                 <div class="gallery-dots" id="gallery-dots"></div>
             </div>
         </div>
@@ -189,7 +213,6 @@
     <!-- Подвал сайта -->
     <footer class="footer">
         <div class="container footer__inner">
-            <!-- Верхняя часть с контактами -->
             <div class="footer__top">
                 <div class="footer__col footer__col--contacts">
                     <div class="footer__contact-item">
@@ -201,9 +224,9 @@
                         <span>+7(351) 700-74-00</span>
                     </div>
                     <div class="footer__social">
-                        <a href="https://api.whatsapp.com/send?phone=79089364611"><img src="../images/whatsapp.svg" alt="Автошкола Лидер в WhatsApp" class="footer__icon footer__icon--social"></a>
-                        <a href="https://t.me/centr_lider"><img src="../images/telegram.svg" alt="Автошкола Лидер в Telegram" class="footer__icon footer__icon--social"></a>
-                        <a href="https://vk.com/lider.drive"><img src="../images/vk.svg" alt="Автошкола Лидер в ВК" class="footer__icon footer__icon--social"></a>
+                        <a href="https://api.whatsapp.com/send?phone=79089364611"><img src="../images/whatsapp.svg" alt="WhatsApp" class="footer__icon footer__icon--social"></a>
+                        <a href="https://t.me/centr_lider"><img src="../images/telegram.svg" alt="Telegram" class="footer__icon footer__icon--social"></a>
+                        <a href="https://vk.com/lider.drive"><img src="../images/vk.svg" alt="ВКонтакте" class="footer__icon footer__icon--social"></a>
                     </div>
                 </div>
                 <div class="footer__col footer__col--hours">
@@ -217,7 +240,6 @@
                 </div>
             </div>
 
-            <!-- Карта сайта -->
             <div class="footer__sitemap">
                 <h3 class="footer__sitemap-title">Карта сайта</h3>
                 <hr class="footer__divider">
@@ -294,9 +316,7 @@
 
     <!-- Yandex Maps API -->
     <script src="https://api-maps.yandex.ru/2.1/?apikey=422b52c4-aa7b-400d-9fd7-07c79fdf32c4&lang=ru_RU" type="text/javascript"></script>
-    <!-- Скрипт для карты -->
     <script src="../js/map.js"></script>
-
     <script src="../js/load-form.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/scroll-to-top.js"></script>
