@@ -14,6 +14,26 @@
         const submitBtn = document.getElementById('register-submit');
         const overlay = document.getElementById('register-overlay');
 
+        // Переключение видимости пароля 
+        document.querySelectorAll('.password-toggle-icon').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const wrapper = this.closest('.input-wrapper');
+                if (!wrapper) return;
+                const input = wrapper.querySelector('input');
+                if (!input) return;
+
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    this.src = '../images/visible.svg';
+                    this.alt = 'Скрыть пароль';
+                } else {
+                    input.type = 'password';
+                    this.src = '../images/hidden.svg';
+                    this.alt = 'Показать пароль';
+                }
+            });
+        });
+
         // Функция оборачивания инпута
         function wrapInWrapper(input) {
             if (!input.parentNode.classList.contains('input-wrapper')) {
@@ -157,22 +177,55 @@
                     consentErr.textContent = 'Необходимо согласие';
                     consentWrapper.appendChild(consentErr);
                 }
-                consentWrapper.classList.add('error-text'); // ключевая строка!
+                consentWrapper.classList.add('error-text');
                 isValid = false;
             }
 
             if (!isValid) return;
 
-            // Все проверки пройдены – показываем оверлей успеха
-            overlay.classList.add('active');
-            // Через 2 секунды перенаправляем на страницу входа
-            setTimeout(() => {
-                overlay.classList.remove('active');
-                window.location.href = '../pages/login.html';
-            }, 2000);
+            // Отправка данных на сервер 
+            const name = nameInput.value.trim();
+            const surname = surnameInput.value.trim();
+
+            fetch('http://localhost:3001/api/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: name,
+                    surname: surname,
+                    email: email,
+                    phone: phone,
+                    password: password
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.token) {
+                    // Сохраняем токен и данные пользователя (автоматический вход после регистрации)
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+
+                    // Показываем оверлей успеха
+                    overlay.classList.add('active');
+                    // Через 2 секунды перенаправляем в личный кабинет
+                    setTimeout(() => {
+                        overlay.classList.remove('active');
+                        window.location.href = '../pages/account.html';
+                    }, 2000);
+                } else {
+                    // Ошибка от сервера (например, email уже существует)
+                    clearErrors();
+                    showFieldError(wrappers.email, emailInput, data.message || 'Ошибка регистрации');
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                clearErrors();
+                showFieldError(wrappers.email, emailInput, 'Ошибка соединения с сервером');
+            });
         });
 
-        // Закрытие оверлея при клике вне белого блока (немедленный переход)
+        // Закрытие оверлея при клике вне белого блока
         overlay.addEventListener('click', function(e) {
             if (e.target === overlay) {
                 overlay.classList.remove('active');

@@ -1,6 +1,241 @@
+(function() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = '../pages/login.html';
+    }
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Переключение вкладок
+    const userData = JSON.parse(localStorage.getItem('user'));
+    if (userData) {
+        const fullName = (userData.name || '') + (userData.surname ? ' ' + userData.surname : '');
+        const nameElement = document.querySelector('.sidebar-name');
+        if (nameElement) nameElement.textContent = fullName || 'Пользователь';
+    }
+
+    // === Глобальная переменная для хранения исходных данных профиля ===
+    let originalProfile = {};
+
+    // --- Загрузка заявок с сервера ---
+    async function loadApplications() {
+        const container = document.getElementById('applications-container');
+        if (!container) return;
+
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        // Показываем индикатор загрузки
+        container.classList.add('cards-wrapper--loading');
+
+        try {
+            const response = await fetch('http://localhost:3001/api/applications', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (!response.ok) throw new Error('Ошибка загрузки');
+            const apps = await response.json();
+
+            // Очищаем контейнер и рендерим заново
+            container.innerHTML = '';
+
+            apps.forEach(app => {
+                const date = new Date(app.created_at).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+                const card = document.createElement('article');
+                card.className = 'application-card';
+                card.dataset.id = app.id;
+                card.dataset.status = app.status;
+                card.innerHTML = `
+                    <div class="application-header">
+                        <h4 class="application-number">Заявка №${app.id}</h4>
+                        <span class="application-status" data-status="${app.status}">
+                            ${app.status === 'processing' ? 'в обработке' : app.status}
+                        </span>
+                    </div>
+                    <p class="application-course">${escapeHtml(app.course || '')}</p>
+                    <p class="application-message">${escapeHtml(app.comment || '')}</p>
+                    <time class="application-date">от ${date}</time>
+                    <button class="application-delete-btn delete-item-btn" data-type="application">
+                        <img src="../images/krest.svg" alt="Удалить заявку">
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+        } catch (err) {
+            console.error('Не удалось загрузить заявки:', err);
+            container.innerHTML = '<p style="text-align:center; color:#717171;">Не удалось загрузить заявки</p>';
+        } finally {
+            container.classList.remove('cards-wrapper--loading');
+        }
+    }
+
+    function escapeHtml(str) {
+        return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]);
+    }
+
+    // Загрузка отзывов с сервера
+    async function loadReviews() {
+        const container = document.getElementById('reviews-container');
+        if (!container) return;
+
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        try {
+            const response = await fetch('http://localhost:3001/api/reviews/my', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (!response.ok) throw new Error('Ошибка загрузки');
+            const reviews = await response.json();
+
+            container.innerHTML = '';
+
+            reviews.forEach(review => {
+                const starsHtml = Array.from({ length: 5 }, (_, i) =>
+                    `<span class="star ${i < review.rating ? 'star--active' : ''}"></span>`
+                ).join('');
+
+                const dateStr = new Date(review.created_at).toLocaleDateString('ru-RU', {
+                    day: 'numeric', month: 'long', year: 'numeric'
+                });
+
+                const card = document.createElement('article');
+                card.className = 'review-card';
+                card.dataset.id = review.id;
+                card.innerHTML = `
+                    <div class="review-card__header">
+                        <div>
+                            <h4 class="review-card__name">${escapeHtml(review.name)}</h4>
+                            <p class="review-card__course">${escapeHtml(review.course || '')}</p>
+                        </div>
+                        <div class="review-card__stars">${starsHtml}</div>
+                    </div>
+                    <p class="review-card__text">${escapeHtml(review.text)}</p>
+                    <time class="review-card__date">${dateStr}</time>
+                    <button class="application-delete-btn delete-item-btn" data-type="review">
+                        <img src="../images/krest.svg" alt="Удалить отзыв">
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+        } catch (err) {
+            console.error('Не удалось загрузить отзывы:', err);
+        }
+    }
+
+    // --- Загрузка профиля ---
+    async function loadProfile() {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        try {
+            const response = await fetch('http://localhost:3001/api/auth/me', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (!response.ok) throw new Error('Ошибка загрузки профиля');
+            const user = await response.json();
+
+            // Сохраняем исходные данные для кнопки «Отменить»
+            originalProfile = {
+                name: user.name || '',
+                surname: user.surname || '',
+                phone: user.phone || '',
+                email: user.email || ''
+            };
+
+            document.getElementById('profile-name').value = originalProfile.name;
+            document.getElementById('profile-surname').value = originalProfile.surname;
+            document.getElementById('profile-phone').value = originalProfile.phone;
+            document.getElementById('profile-email').value = originalProfile.email;
+        } catch (err) {
+            console.error('Не удалось загрузить профиль:', err);
+        }
+    }
+
+    // Первоначальная загрузка
+    loadApplications();
+    loadReviews();
+    loadProfile();
+
+    // --- Перезагрузка заявок при событии из формы ---
+    document.addEventListener('applicationSubmitted', () => {
+        console.log('Событие applicationSubmitted получено, перезагружаю заявки');
+        loadApplications();
+    });
+
+    // --- Обработчик кнопки «Отменить» в профиле ---
+    const cancelProfileBtn = document.querySelector('.btn--cancel-profile');
+    if (cancelProfileBtn) {
+        cancelProfileBtn.addEventListener('click', () => {
+            if (originalProfile) {
+                document.getElementById('profile-name').value = originalProfile.name;
+                document.getElementById('profile-surname').value = originalProfile.surname;
+                document.getElementById('profile-phone').value = originalProfile.phone;
+                document.getElementById('profile-email').value = originalProfile.email;
+            }
+        });
+    }
+
+    // --- Обработчик отправки формы профиля ---
+    const profileForm = document.querySelector('.profile-form');
+    if (profileForm) {
+        profileForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('profile-name').value.trim();
+            const surname = document.getElementById('profile-surname').value.trim();
+            const phone = document.getElementById('profile-phone').value.trim();
+            const email = document.getElementById('profile-email').value.trim();
+
+            if (!name || !email) {
+                alert('Имя и Email обязательны');
+                return;
+            }
+
+            const token = localStorage.getItem('token');
+            try {
+                const response = await fetch('http://localhost:3001/api/auth/me', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ name, surname, email, phone })
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Обновляем данные в localStorage
+                    const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
+                    storedUser.name = data.user.name;
+                    storedUser.surname = data.user.surname;
+                    storedUser.email = data.user.email;
+                    storedUser.phone = data.user.phone;
+                    localStorage.setItem('user', JSON.stringify(storedUser));
+
+                    // Обновляем имя в сайдбаре
+                    const fullName = (data.user.name || '') + (data.user.surname ? ' ' + data.user.surname : '');
+                    const nameEl = document.querySelector('.sidebar-name');
+                    if (nameEl) nameEl.textContent = fullName || 'Пользователь';
+
+                    // Показываем кастомное уведомление
+                    const profileSuccessOverlay = document.getElementById('profile-success-overlay');
+                    if (profileSuccessOverlay) {
+                        profileSuccessOverlay.classList.add('active');
+                        setTimeout(() => {
+                            profileSuccessOverlay.classList.remove('active');
+                        }, 2000);
+                    }
+                } else {
+                    alert(data.message || 'Ошибка обновления');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Ошибка соединения с сервером');
+            }
+        });
+    }
+
+    // --- Переключение вкладок ---
     const menuItems = document.querySelectorAll('.sidebar-menu__item');
     const panels = document.querySelectorAll('.content-panel');
 
@@ -41,9 +276,50 @@ document.addEventListener('DOMContentLoaded', () => {
         currentDeleteElement = null;
     });
 
-    confirmDeleteBtn.addEventListener('click', () => {
-        if (currentDeleteElement && currentDeleteElement.parentNode) {
-            currentDeleteElement.parentNode.removeChild(currentDeleteElement);
+    confirmDeleteBtn.addEventListener('click', async () => {
+        if (!currentDeleteElement) return;
+
+        const card = currentDeleteElement;
+        const id = card.dataset.id;
+        const type = card.classList.contains('review-card') ? 'review' : 'application';
+
+        if (type === 'application' && id) {
+            const token = localStorage.getItem('token');
+            try {
+                const response = await fetch(`http://localhost:3001/api/applications/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!response.ok) throw new Error('Ошибка удаления');
+            } catch (err) {
+                console.error(err);
+                alert('Не удалось удалить заявку');
+                deleteOverlay.classList.remove('active');
+                currentDeleteElement = null;
+                return;
+            }
+        }
+
+        if (type === 'review' && id) {
+            const token = localStorage.getItem('token');
+            try {
+                const response = await fetch(`http://localhost:3001/api/reviews/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!response.ok) throw new Error('Ошибка удаления');
+            } catch (err) {
+                console.error(err);
+                alert('Не удалось удалить отзыв');
+                deleteOverlay.classList.remove('active');
+                currentDeleteElement = null;
+                return;
+            }
+        }
+
+        // Удаляем из DOM
+        if (card && card.parentNode) {
+            card.parentNode.removeChild(card);
         }
         deleteOverlay.classList.remove('active');
         successOverlay.classList.add('active');
@@ -59,6 +335,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('logout-btn').addEventListener('click', () => logoutOverlay.classList.add('active'));
     document.getElementById('cancel-logout').addEventListener('click', () => logoutOverlay.classList.remove('active'));
     document.getElementById('confirm-logout').addEventListener('click', () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
         window.location.href = '../pages/login.html';
     });
 
@@ -70,6 +348,16 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Аккаунт удалён');
         deleteAccountOverlay.classList.remove('active');
     });
+
+    // --- Оверлей успеха обновления профиля (закрытие по клику) ---
+    const profileSuccessOverlay = document.getElementById('profile-success-overlay');
+    if (profileSuccessOverlay) {
+        profileSuccessOverlay.addEventListener('click', function(e) {
+            if (e.target === profileSuccessOverlay) {
+                profileSuccessOverlay.classList.remove('active');
+            }
+        });
+    }
 
     // --- Форма отзыва (кастомные селекты) ---
     function initReviewSelect(container) {
@@ -110,6 +398,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     openReviewBtn.addEventListener('click', () => {
         clearReviewFormErrors();
+        // Автозаполнение имени, если пользователь авторизован
+        const token = localStorage.getItem('token');
+        if (token) {
+            const userData = JSON.parse(localStorage.getItem('user') || '{}');
+            if (userData.name) {
+                const fullName = userData.name || '';
+                document.getElementById('review-name').value = fullName;
+            }
+        }
         reviewFormOverlay.classList.add('active');
     });
     closeReviewBtn.addEventListener('click', () => {
@@ -120,6 +417,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === reviewFormOverlay) {
             clearReviewFormErrors();
             reviewFormOverlay.classList.remove('active');
+        }
+    });
+
+    // Закрытие оверлея успеха отзыва при клике на фон
+    reviewSuccessOverlay.addEventListener('click', function(e) {
+        if (e.target === reviewSuccessOverlay) {
+            reviewSuccessOverlay.classList.remove('active');
         }
     });
 
@@ -156,7 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
         wrapper.appendChild(errorEl);
     }
 
-    submitReviewBtn.addEventListener('click', () => {
+    submitReviewBtn.addEventListener('click', async () => {
         // Сброс ошибок перед валидацией
         clearReviewFormErrors();
 
@@ -211,51 +515,47 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- Создание карточки отзыва ---
         const name = nameInput.value.trim() || 'Аноним';
         const course = courseSelect.value || 'Курс не выбран';
-        const text = textValue || 'Без текста';
+        const text = reviewText.value.trim();
         const grade = parseInt(gradeSelect.value) || 5;
 
-        const starsHtml = Array.from({ length: 5 }, (_, i) =>
-            `<span class="star ${i < grade ? 'star--active' : ''}"></span>`
-        ).join('');
+        const token = localStorage.getItem('token');
 
-        const today = new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
-        const card = document.createElement('article');
-        card.className = 'review-card';
-        card.innerHTML = `
-            <div class="review-card__header">
-                <div>
-                    <h4 class="review-card__name">${escapeHtml(name)}</h4>
-                    <p class="review-card__course">${escapeHtml(course)}</p>
-                </div>
-                <div class="review-card__stars">${starsHtml}</div>
-            </div>
-            <p class="review-card__text">${escapeHtml(text)}</p>
-            <time class="review-card__date">${today}</time>
-            <button class="application-delete-btn delete-item-btn" data-type="review">
-                <img src="../images/krest.svg" alt="Удалить отзыв">
-            </button>
-        `;
+        try {
+            const response = await fetch('http://localhost:3001/api/reviews', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ name, course, text, rating: grade })
+            });
+            const data = await response.json();
+            if (!response.ok) {
+                alert(data.message || 'Ошибка добавления отзыва');
+                return;
+            }
 
-        document.getElementById('reviews-container').appendChild(card);
+            // Перезагружаем список отзывов
+            loadReviews();
 
-        // Очистка формы
-        document.getElementById('review-name').value = '';
-        document.getElementById('review-course').value = '';
-        document.getElementById('review-text').value = '';
-        document.getElementById('review-grade').value = '';
-        const selects = reviewFormOverlay.querySelectorAll('.review-custom-select__selected');
-        selects.forEach(sel => {
-            sel.textContent = sel.closest('.review-custom-select').classList.contains('review-custom-select--grade')
-                ? 'Поставьте оценку' : 'Выберите курс на котором вы обучались';
-            sel.classList.add('placeholder');
-        });
+            // Очистка формы (как раньше)
+            document.getElementById('review-name').value = '';
+            document.getElementById('review-course').value = '';
+            document.getElementById('review-text').value = '';
+            document.getElementById('review-grade').value = '';
+            const selects = reviewFormOverlay.querySelectorAll('.review-custom-select__selected');
+            selects.forEach(sel => {
+                sel.textContent = sel.closest('.review-custom-select').classList.contains('review-custom-select--grade')
+                    ? 'Поставьте оценку' : 'Выберите курс на котором вы обучались';
+                sel.classList.add('placeholder');
+            });
 
-        reviewFormOverlay.classList.remove('active');
-        reviewSuccessOverlay.classList.add('active');
-    });
-
-    reviewSuccessOverlay.addEventListener('click', (e) => {
-        if (e.target === reviewSuccessOverlay) reviewSuccessOverlay.classList.remove('active');
+            reviewFormOverlay.classList.remove('active');
+            reviewSuccessOverlay.classList.add('active');
+        } catch (err) {
+            console.error(err);
+            alert('Ошибка соединения с сервером');
+        }
     });
 
     // --- Открытие формы записи из панели заявок ---

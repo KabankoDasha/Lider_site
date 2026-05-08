@@ -26,7 +26,7 @@
                 </ul>
             </nav>
             <!-- Кнопка "Личный кабинет" (активная, пользователь уже в кабинете) -->
-            <a href="../pages/account.html" class="btn--account">
+            <a href="../pages/account.html" class="auth-btn btn--account">
                 <span class="btn--account__text">Личный кабинет</span>
                 <img src="../images/user.svg" alt="Иконка пользователя" class="btn--account__icon">
             </a>
@@ -84,20 +84,8 @@
                             <img src="../images/close.svg" alt="Добавить заявку" class="content-add-icon">
                         </button>
                     </div>
-                    <!-- Карточки заявок -->
                     <div class="cards-wrapper" id="applications-container">
-                        <article class="application-card">
-                            <div class="application-header">
-                                <h4 class="application-number">Заявка №1</h4>
-                                <span class="application-status">в обработке</span>
-                            </div>
-                            <p class="application-course">Обучение на автомобиль МКПП</p>
-                            <p class="application-message">Добрый день! Хочу записаться к вам в автошколу на обучение на автомобиле МКПП, подскажите пожалуйста когда ближайший старт групп и в какое время будут занятия?</p>
-                            <time class="application-date">от 6 марта 2026</time>
-                            <button class="application-delete-btn delete-item-btn" data-type="application">
-                                <img src="../images/krest.svg" alt="Удалить заявку">
-                            </button>
-                        </article>
+                        <!-- Пустой контейнер для заявок -->
                     </div>
                 </div>
 
@@ -316,6 +304,14 @@
                 <p class="success-overlay__text">Отзыв отправлен на модерацию! <br>Скоро он появится на сайте!</p>
             </div>
         </div>
+
+        <!-- Оверлей успеха обновления профиля -->
+        <div class="success-overlay" id="profile-success-overlay">
+            <div class="success-overlay__box">
+                <img src="../images/done.svg" alt="" class="success-overlay__icon">
+                <p class="success-overlay__text">Данные обновлены</p>
+            </div>
+        </div>
     </main>
 
     <!-- Подвал сайта -->
@@ -427,5 +423,6 @@
     <script src="../js/load-form.js"></script>
     <script src="../js/scroll-to-top.js"></script>
     <script src="../js/account.js"></script>
+    <script src="../js/auth-check.js"></script>
 </body>
 </html>

@@ -855,6 +855,40 @@ main {
     transform: rotate(180deg);   
 }
 
+/* Кнопка «Личный кабинет» (глобальная) */
+.btn--account {
+    display: inline-flex;
+    align-items: center;
+    width: 207px;
+    height: 60px;
+    border: 2px solid #D90D26;
+    border-radius: 10px;
+    background: transparent;
+    color: #000;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    font-family: 'Montserrat', sans-serif;
+    padding: 0 10px 0 15px;
+    gap: 7px;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+.btn--account:hover {
+    background-color: #f5f5f5;
+}
+.btn--account__icon {
+    width: 37px;
+    height: 37px;
+    flex-shrink: 0;
+}
+
+.auth-btn {
+    visibility: hidden;
+}
+
 /* Видимость элементов в зависимости от версии */
 .mobile-only { display: none; }
 .desktop-only { display: block; }

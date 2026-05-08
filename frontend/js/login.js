@@ -5,6 +5,27 @@
 
         const emailInput = document.getElementById('login-email');
         const passwordInput = document.getElementById('login-password');
+
+        // Переключение видимости пароля
+        document.querySelectorAll('.password-toggle-icon').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const wrapper = this.closest('.input-wrapper');
+                if (!wrapper) return;
+                const input = wrapper.querySelector('input');
+                if (!input) return;
+
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    this.src = '../images/visible.svg';
+                    this.alt = 'Скрыть пароль';
+                } else {
+                    input.type = 'password';
+                    this.src = '../images/hidden.svg';
+                    this.alt = 'Показать пароль';
+                }
+            });
+        });
+        
         const submitBtn = document.getElementById('login-submit-btn');
 
         // Оборачиваем инпуты во врапперы для позиционирования ошибки
@@ -70,8 +91,38 @@
 
             if (!isValid) return;
 
-            // Все проверки пройдены – переход в кабинет
-            window.location.href = '../pages/account.html';  // или admin.html, смотря куда надо
+            // Все проверки пройдены – отправляем запрос на сервер
+            const loginData = { email, password };
+
+            fetch('http://localhost:3001/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(loginData)
+            })
+            .then(response => response.json())
+            .then(data => {
+            if (data.token) {
+                // Сохраняем токен и данные пользователя
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+
+                // Перенаправляем в личный кабинет (или админку, в зависимости от роли)
+                if (data.user.role === 'admin') {
+                window.location.href = '../pages/admin.html';
+                } else {
+                window.location.href = '../pages/account.html';
+                }
+            } else {
+                // Ошибка от сервера: неверный email или пароль
+                clearErrors();
+                showError(emailWrapper, emailInput, 'Неверный email или пароль');
+                showError(passwordWrapper, passwordInput, 'Неверный email или пароль');
+                }
+            })
+            .catch(err => {
+            console.error(err);
+            alert('Ошибка соединения с сервером');
+            });
         });
     }
 

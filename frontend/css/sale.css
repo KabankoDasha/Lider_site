@@ -170,10 +170,10 @@ body {
 .promo-card {
     width: 373px;
     height: 320px;
-    background-color: #F0F0F0;
+    background-color: #fcfcfc;
     border-radius: 10px;
-    overflow: hidden;
     flex-shrink: 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .promo-card__inner {
@@ -213,9 +213,16 @@ body {
     margin-top: auto;
 }
 
+/* Обёртка слайдера для отображения тени */
+.promo-slider-clip {
+    overflow: hidden;
+    padding: 20px;      /* даём место для тени */
+    margin: -20px;      /* компенсируем, чтобы не раздвинулся контейнер */
+}
+
 /* Слайдер для промо-карточек */
 .promo-slider {
-    overflow: hidden;
+    overflow: visible;
 }
 
 .promo-slider__track {
@@ -244,7 +251,7 @@ body {
 }
 
 .discount-item {
-    background-color: #F0F0F0;
+    background-color: #f5f5f5;
     border-radius: 10px;
     display: flex;
     align-items: center;

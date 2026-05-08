@@ -113,9 +113,9 @@ body {
     top: 50px;
     right: 0;                       
     width: 241px;
-    background-color: #F0F0F0;
+    background-color: #fcfcfc;
     border-radius: 10px;
-    padding: 20px 30px;
+    padding: 20px 30px 10px;
     z-index: 50;
     display: none;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
@@ -148,13 +148,12 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
 }
 
 .filter-overlay__option {
     background: none;
     border: none;
-    padding: 0;
+    padding: 12px 0;            
     font-size: 16px;
     font-weight: 300;               
     color: #7A7A7A;
@@ -162,10 +161,16 @@ body {
     text-align: left;
     transition: color 0.2s;
     font-family: 'Montserrat', sans-serif;
+    display: block; 
+    width: calc(100% + 60px);
+    margin-left: -30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    box-sizing: border-box;
 }
 
 .filter-overlay__option:hover {
-    color: #D90D26;
+    background-color: #F0F0F0;
 }
 
 /* ========================
@@ -174,23 +179,18 @@ body {
 .reviews-list {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 30px;
 }
 
 .review-card {
-    border: 2px solid #24486B;
     border-radius: 10px;
     padding: 30px;
     position: relative;
     display: flex;
     flex-direction: column;
     min-height: 220px;
-    background: #fff;
-    transition: box-shadow 0.3s;
-}
-
-.review-card:hover {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    background: #fcfcfc;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .review-card__header {
@@ -276,7 +276,7 @@ body {
     border: none;
     align-self: flex-end;
     cursor: pointer;
-    padding: 14px 36px;          /* комфортные отступы внутри */
+    padding: 14px 36px;          
     margin-top: 30px;
     margin-bottom: 100px;
     border-radius: 10px;

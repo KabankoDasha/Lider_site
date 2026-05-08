@@ -42,11 +42,17 @@
             <div class="login-box">
                 <h2 class="login-box__title">Вход в личный кабинет</h2>
 
+                <!-- Блок полей ввода -->
                 <label class="login-box__label" for="login-email">Логин</label>
-                <input type="email" id="login-email" class="login-box__input" placeholder="example@mail.ru">
+                <div class="input-wrapper">
+                    <input type="email" id="login-email" class="login-box__input" placeholder="example@mail.ru">
+                </div>
 
                 <label class="login-box__label" for="login-password">Пароль</label>
-                <input type="password" id="login-password" class="login-box__input" placeholder="••••••••">
+                <div class="input-wrapper">
+                    <input type="password" id="login-password" class="login-box__input input--with-icon" placeholder="••••••••">
+                    <img src="../images/hidden.svg" alt="Показать пароль" class="password-toggle-icon">
+                </div>
 
                 <button type="button" class="btn login-box__btn" id="login-submit-btn">Войти</button>
 

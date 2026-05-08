@@ -99,7 +99,7 @@ body {
 
 /* Вопрос */
 .faq-item {
-    background-color: #F0F0F0;
+    background-color: #f5f5f5;
     border-radius: 10px;
     display: flex;
     align-items: center;

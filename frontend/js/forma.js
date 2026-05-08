@@ -7,20 +7,30 @@
 
         if (!overlay || !successOverlay) return;
 
-        // --- Динамически создаём элемент для ошибки чекбоксов, если его нет ---
-        const checkboxContainer = document.querySelector('.form-checkboxes');
+        // --- Элемент для инлайн-ошибок (серверные и сетевые) ---
+        let formErrorEl = overlay.querySelector('.form-error');
+        if (!formErrorEl) {
+            formErrorEl = document.createElement('div');
+            formErrorEl.className = 'form-error';
+            // Вставляем перед кнопкой отправки
+            const submitBtnContainer = overlay.querySelector('#form-submit-btn').parentNode;
+            submitBtnContainer.insertBefore(formErrorEl, overlay.querySelector('#form-submit-btn'));
+        }
+
+        // --- Динамически создаём элемент для ошибки чекбоксов ---
+        const checkboxContainer = overlay.querySelector('.form-checkboxes');
         let checkboxErrorEl = checkboxContainer.querySelector('.checkbox-error-text');
         if (!checkboxErrorEl && checkboxContainer) {
             checkboxErrorEl = document.createElement('span');
             checkboxErrorEl.className = 'checkbox-error-text';
             checkboxErrorEl.textContent = 'Необходимо согласие';
-            checkboxContainer.appendChild(checkboxErrorEl);  // теперь внутрь контейнера
+            checkboxContainer.appendChild(checkboxErrorEl);
         }
 
-        // --- Оборачиваем поля, чтобы позиционировать текст ошибки внутри ---
+        // --- Оборачиваем поля для позиционирования ошибки ---
         const nameInput = document.getElementById('form-name');
         const phoneInput = document.getElementById('form-phone');
-        const customSelect = document.querySelector('.custom-select');
+        const customSelect = overlay.querySelector('.custom-select');
 
         function wrapInWrapper(el) {
             if (!el) return null;
@@ -45,11 +55,18 @@
             overlay.classList.add('active');
             successOverlay.classList.remove('active');
             clearErrors();
-
             const btn = e.currentTarget;
             const course = btn.dataset.course;
-            if (course) {
-                setSelectValue(course);
+            if (course) setSelectValue(course);
+
+            // Автозаполнение, если пользователь авторизован
+            const token = localStorage.getItem('token');
+            if (token) {
+                const userData = JSON.parse(localStorage.getItem('user') || '{}');
+                if (userData.name) {
+                    nameInput.value = userData.name;
+                }
+                if (userData.phone) phoneInput.value = userData.phone;
             }
         }
 
@@ -57,7 +74,6 @@
             const select = document.getElementById('course-select');
             const selectedSpan = customSelect.querySelector('.custom-select__selected');
             const options = customSelect.querySelectorAll('.custom-select__options li');
-
             for (let option of options) {
                 if (option.dataset.value === value) {
                     select.value = value;
@@ -72,9 +88,7 @@
         openButtons.forEach(btn => btn.addEventListener('click', openForm));
 
         // --- Закрытие формы ---
-        if (closeBtn) {
-            closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
-        }
+        if (closeBtn) closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
         overlay.addEventListener('click', (e) => {
             if (e.target === overlay) overlay.classList.remove('active');
         });
@@ -110,6 +124,7 @@
                 .forEach(el => el.classList.remove('error'));
             document.querySelectorAll('.field-error-text').forEach(el => el.remove());
             if (checkboxErrorEl) checkboxErrorEl.style.display = 'none';
+            if (formErrorEl) formErrorEl.textContent = '';
         }
 
         // --- Показать ошибку под полем ---
@@ -121,6 +136,13 @@
             err.className = 'field-error-text';
             err.textContent = 'Заполните поле';
             wrapper.appendChild(err);
+        }
+
+        // --- Показать общую ошибку (сервер/сеть) ---
+        function showFormError(message) {
+            if (formErrorEl) {
+                formErrorEl.textContent = message;
+            }
         }
 
         // --- Отправка формы ---
@@ -152,12 +174,10 @@
                     isValid = false;
                 }
 
-                // Чекбоксы – общая проверка
+                // Чекбоксы
                 const checkboxes = document.querySelectorAll('.form-check__input');
                 let allChecked = true;
-                checkboxes.forEach(cb => {
-                    if (!cb.checked) allChecked = false;
-                });
+                checkboxes.forEach(cb => { if (!cb.checked) allChecked = false; });
                 if (!allChecked) {
                     if (checkboxErrorEl) checkboxErrorEl.style.display = 'block';
                     isValid = false;
@@ -165,56 +185,69 @@
 
                 if (!isValid) return;
 
-                // === ДОБАВЛЕНИЕ ЗАЯВКИ В ЛИЧНЫЙ КАБИНЕТ ===
-                const applicationsContainer = document.getElementById('applications-container');
-                if (applicationsContainer) {
-                    const course = document.getElementById('course-select').value || 'Курс не выбран';
-                    const name = nameInput.value.trim() || 'Без имени';
-                    const phone = phoneInput.value.trim() || 'Без телефона';
-                    const comment = document.querySelector('.form-textarea').value.trim() || 'Без комментариев';
+                // --- Отправка данных на сервер ---
+                const name = nameInput.value.trim();
+                const phone = phoneInput.value.trim();
+                const course = document.getElementById('course-select').value || 'Курс не выбран';
+                const comment = document.querySelector('.form-textarea').value.trim();
 
-                    const today = new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
-                    const card = document.createElement('article');
-                    card.className = 'application-card';
-                    card.innerHTML = `
-                        <div class="application-header">
-                            <h4 class="application-number">Заявка №${Date.now().toString().slice(-4)}</h4>
-                            <span class="application-status">в обработке</span>
-                        </div>
-                        <p class="application-course">${course}</p>
-                        <p class="application-message">${comment}</p>
-                        <time class="application-date">от ${today}</time>
-                        <button class="application-delete-btn delete-item-btn" data-type="application">
-                            <img src="../images/krest.svg" alt="Удалить заявку" style="width:15px;height:15px;">
-                        </button>
-                    `;
-                    applicationsContainer.appendChild(card);
+                // Индикация загрузки
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Отправка...';
+                submitBtn.disabled = true;
+
+                // Очищаем предыдущие серверные ошибки
+                showFormError('');
+
+                const token = localStorage.getItem('token');
+                const headers = { 'Content-Type': 'application/json' };
+                if (token) {
+                    headers['Authorization'] = `Bearer ${token}`;
                 }
 
-                // Закрываем форму и показываем success
-                overlay.classList.remove('active');
-                successOverlay.classList.add('active');
+                fetch('http://localhost:3001/api/applications', {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify({ name, phone, course, comment })
+                })
+                .then(async (response) => {
+                    const data = await response.json();
+                    if (!response.ok) {
+                        throw new Error(data.message || 'Ошибка сервера');
+                    }
+                    return data;
+                })
+                .then((data) => {
+                    // Закрываем форму и показываем успех
+                    overlay.classList.remove('active');
+                    successOverlay.classList.add('active');
 
-                // Очищаем поля (опционально)
-                nameInput.value = '';
-                phoneInput.value = '';
-                document.querySelector('.form-textarea').value = '';
-                const nativeSelect = document.getElementById('course-select');
-                if (nativeSelect) nativeSelect.value = '';
-                const selected = customSelect.querySelector('.custom-select__selected');
-                if (selected) {
-                    selected.textContent = 'Выберите курс обучения';
-                    selected.classList.add('placeholder');
-                }
+                    // Очистка полей
+                    nameInput.value = '';
+                    phoneInput.value = '';
+                    document.querySelector('.form-textarea').value = '';
+                    const nativeSelect = document.getElementById('course-select');
+                    if (nativeSelect) nativeSelect.value = '';
+                    const selected = customSelect.querySelector('.custom-select__selected');
+                    if (selected) {
+                        selected.textContent = 'Выберите курс обучения';
+                        selected.classList.add('placeholder');
+                    }
+                    document.querySelectorAll('.form-check__input').forEach(cb => cb.checked = false);
+                    if (checkboxErrorEl) checkboxErrorEl.style.display = 'none';
 
-                // Снимаем галочки с чекбоксов
-                document.querySelectorAll('.form-check__input').forEach(cb => cb.checked = false);
-                if (checkboxErrorEl) checkboxErrorEl.style.display = 'none';
-
-                // Диспатчим событие (если нужно для других целей)
-                document.dispatchEvent(new CustomEvent('applicationSubmited', {
-                    detail: { course, name, phone, comment }
-                }));
+                    // Сообщаем личному кабинету, что появилась новая заявка
+                    document.dispatchEvent(new CustomEvent('applicationSubmitted'));
+                })
+                .catch((error) => {
+                    // Показываем инлайн-ошибку
+                    showFormError(error.message || 'Ошибка соединения с сервером');
+                    console.error(error);
+                })
+                .finally(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
             });
         }
 

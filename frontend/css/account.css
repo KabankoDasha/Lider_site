@@ -92,21 +92,22 @@ body {
     display: flex;
     gap: 15px;
     margin-bottom: 100px;
-    align-items: flex-start;      /* чтобы боковая панель не растягивалась */
+    align-items: flex-start;      
 }
 
 /* Левая боковая панель */
 .account-sidebar {
     width: 477px;
     min-height: 645px;
-    background-color: #F0F0F0;
-    border: 4px solid #D6D6D6;
+    background-color: #f5f5f5;
+    //border: 4px solid #D6D6D6;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     padding: 60px 0;
     flex-shrink: 0;
-    align-self: flex-start;       /* НЕ растягивается по высоте */
+    align-self: flex-start;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);       
 }
 
 .sidebar-avatar {
@@ -140,7 +141,7 @@ body {
 }
 
 .sidebar-menu__item.active {
-    background-color: #E7E7E7;
+    background-color: #ebebeb;
 }
 
 .sidebar-indicator {
@@ -215,7 +216,7 @@ body {
 .account-content {
     width: 708px;
     min-height: 645px;
-    background-color: #F0F0F0;
+    background-color: #f3f3f3;
     border-radius: 10px;
     padding: 30px;
     position: relative;
@@ -400,10 +401,10 @@ body {
     margin-top: 20px;
 }
 
-/* Профиль – поля вертикально, выровнены по левому краю */
+/* Профиль */
 .profile-form { 
     margin-top: 30px;
-    padding: 0;       /* отступы слева/справа 30px, снизу 30px */
+    padding: 0;       
 }
 
 .profile-field {
@@ -431,32 +432,32 @@ body {
     background-color: #FCFCFC;
     border: 1px solid #9B9B9B;
     border-radius: 10px;
-    padding: 0 30px;            /* слева и справа 30px, текст по центру вертикали */
+    padding: 0 30px;           
     font-size: 20px;
     font-weight: 400;
     font-family: 'Montserrat', sans-serif;
-    color: #000;                /* фактический введённый текст чёрный */
+    color: #000;               
     outline: none;
 }
 
 .profile-field__input::placeholder {
-    color: #717171;             /* подсказка серым */
+    color: #717171;             
 }
 
 /* Кнопки в низу формы */
 .profile-form__actions {
     display: flex;
-    justify-content: space-between;   /* левая – кнопка Отменить, правая – Сохранить */
+    justify-content: space-between;   
     align-items: center;
     margin-top: 30px;
     padding: 0;                    
 }
 
-/* Новая кнопка Отменить (профиль) */
+/* кнопка Отменить */
 .btn--cancel-profile {
     width: 154px;
     height: 56px;
-    background-color: #D6D6D6;
+    background-color: #e7e7e7;
     border: none;
     border-radius: 10px;
     font-size: 18px;
@@ -872,4 +873,7 @@ body {
     white-space: nowrap;
 }
 
-
+.cards-wrapper--loading {
+    opacity: 0;
+    transition: opacity 0.15s;
+}

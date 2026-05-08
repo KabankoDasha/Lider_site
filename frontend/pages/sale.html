@@ -25,7 +25,7 @@
                     <li><a href="../pages/contact.html">Контакты</a></li>
                 </ul>
             </nav>
-            <a href="../pages/login.html" class="btn btn--login">Войти</a>
+            <a href="../pages/login.html" class="auth-btn btn btn--login">Войти</a>
         </div>
     </header>
 
@@ -58,51 +58,53 @@
                     </button>
                 </div>
             </div>
-            <div class="promo-slider" id="promo-slider">
-                <div class="promo-slider__track">
-                    <!-- Карточки акций (теперь их 7) -->
-                    <article class="promo-card">
-                        <div class="promo-card__inner">
-                            <h3 class="promo-card__title">Акция на автокурсы категории «B»</h3>
-                            <p class="promo-card__discount">-10%</p>
-                            <p class="promo-card__date">скидка действительна до 31.03.2026</p>
-                        </div>
-                    </article>
-                    <article class="promo-card">
-                        <div class="promo-card__inner">
-                            <h3 class="promo-card__title">Акция 1+1 на обучение автомобиль+мотоцикл</h3>
-                            <p class="promo-card__discount">-15%</p>
-                            <p class="promo-card__date">скидка действительна до 31.03.2026</p>
-                        </div>
-                    </article>
-                    <article class="promo-card">
-                        <div class="promo-card__inner">
-                            <h3 class="promo-card__title">Акция на курсы водителя квадроцикла</h3>
-                            <p class="promo-card__discount">-50%</p>
-                            <p class="promo-card__date">скидка действительна до 15.04.2026</p>
-                        </div>
-                    </article>
-                    <article class="promo-card">
-                        <div class="promo-card__inner">
-                            <h3 class="promo-card__title">Скидка на обучение на спецтехнику</h3>
-                            <p class="promo-card__discount">-20%</p>
-                            <p class="promo-card__date">скидка действительна до 30.06.2026</p>
-                        </div>
-                    </article>
-                    <article class="promo-card">
-                        <div class="promo-card__inner">
-                            <h3 class="promo-card__title">Раннее бронирование</h3>
-                            <p class="promo-card__discount">-15%</p>
-                            <p class="promo-card__date">действует до 31.05.2026</p>
-                        </div>
-                    </article>
-                    <article class="promo-card">
-                        <div class="promo-card__inner">
-                            <h3 class="promo-card__title">Семейная скидка</h3>
-                            <p class="promo-card__discount">-10%</p>
-                            <p class="promo-card__date">при обучении двух членов семьи</p>
-                        </div>
-                    </article>
+            <div class="promo-slider-clip">
+                <div class="promo-slider" id="promo-slider">
+                    <div class="promo-slider__track">
+                        <!-- Карточки акций -->
+                        <article class="promo-card">
+                            <div class="promo-card__inner">
+                                <h3 class="promo-card__title">Акция на автокурсы категории «B»</h3>
+                                <p class="promo-card__discount">-10%</p>
+                                <p class="promo-card__date">скидка действительна до 31.03.2026</p>
+                            </div>
+                        </article>
+                        <article class="promo-card">
+                            <div class="promo-card__inner">
+                                <h3 class="promo-card__title">Акция 1+1 на обучение автомобиль+мотоцикл</h3>
+                                <p class="promo-card__discount">-15%</p>
+                                <p class="promo-card__date">скидка действительна до 31.03.2026</p>
+                            </div>
+                        </article>
+                        <article class="promo-card">
+                            <div class="promo-card__inner">
+                                <h3 class="promo-card__title">Акция на курсы водителя квадроцикла</h3>
+                                <p class="promo-card__discount">-50%</p>
+                                <p class="promo-card__date">скидка действительна до 15.04.2026</p>
+                            </div>
+                        </article>
+                        <article class="promo-card">
+                            <div class="promo-card__inner">
+                                <h3 class="promo-card__title">Скидка на обучение на спецтехнику</h3>
+                                <p class="promo-card__discount">-20%</p>
+                                <p class="promo-card__date">скидка действительна до 30.06.2026</p>
+                            </div>
+                        </article>
+                        <article class="promo-card">
+                            <div class="promo-card__inner">
+                                <h3 class="promo-card__title">Раннее бронирование</h3>
+                                <p class="promo-card__discount">-15%</p>
+                                <p class="promo-card__date">действует до 31.05.2026</p>
+                            </div>
+                        </article>
+                        <article class="promo-card">
+                            <div class="promo-card__inner">
+                                <h3 class="promo-card__title">Семейная скидка</h3>
+                                <p class="promo-card__discount">-10%</p>
+                                <p class="promo-card__date">при обучении двух членов семьи</p>
+                            </div>
+                        </article>
+                    </div>
                 </div>
             </div>
         </section>
@@ -257,5 +259,6 @@
     <script src="../js/load-form.js"></script>
     <script src="../js/scroll-to-top.js"></script>
     <script src="../js/sale.js"></script>
+    <script src="../js/auth-check.js"></script>
 </body>
 </html>

@@ -271,6 +271,27 @@ body {
     margin: 0;
 }
 
+/* Обёртка и иконка пароля */
+.register-field .input-wrapper {
+    position: relative;
+    display: block;
+}
+
+.password-toggle-icon {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.register-field__input.input--with-icon {
+    padding-right: 64px;
+}
+
 /* Валидация */
 
 /* Обёртка для позиционирования ошибки */

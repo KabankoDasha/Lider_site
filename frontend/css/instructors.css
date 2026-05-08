@@ -155,8 +155,15 @@ body {
 /* ========================
    Слайдер
    ======================== */
-.instructor-slider {
+
+.instructor-slider-clip {
     overflow: hidden;
+    padding: 20px;      /* создаём место для тени со всех сторон */
+    margin: -20px;      /* компенсируем, чтобы не раздвинулся контейнер */
+}
+
+.instructor-slider {
+    overflow: visible;
 }
 
 .instructor-slider__track {
@@ -169,12 +176,13 @@ body {
 .instructor-card {
     width: 580px;
     height: 358px;
-    background-color: #F0F0F0;
+    background-color: #fcfcfc;
     border-radius: 10px;
     padding: 30px;
     position: relative;
     overflow: hidden;
     flex-shrink: 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .instructor-card__inner {
@@ -186,7 +194,7 @@ body {
     width: 177px;
     height: 226px;
     border-radius: 10px;
-    background-color: #E7E7E7;
+    background-color: #f0f0f0;
     flex-shrink: 0;
     overflow: hidden;
 }
