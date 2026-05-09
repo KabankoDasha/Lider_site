@@ -1,6 +1,5 @@
 (function() {
     function initForm() {
-        const openButtons = document.querySelectorAll('.btn--cta, #open-form-btn, .course-card__btn');
         const overlay = document.getElementById('form-overlay');
         const closeBtn = document.getElementById('close-form-btn');
         const successOverlay = document.getElementById('success-overlay');
@@ -50,12 +49,12 @@
         }
 
         // --- Открытие формы и предустановка курса ---
-        function openForm(e) {
-            e.preventDefault();
+        function openForm(btn) {
             overlay.classList.add('active');
             successOverlay.classList.remove('active');
             clearErrors();
-            const btn = e.currentTarget;
+
+            // Предустановка курса из data-course кнопки
             const course = btn.dataset.course;
             if (course) setSelectValue(course);
 
@@ -63,9 +62,7 @@
             const token = localStorage.getItem('token');
             if (token) {
                 const userData = JSON.parse(localStorage.getItem('user') || '{}');
-                if (userData.name) {
-                    nameInput.value = userData.name;
-                }
+                if (userData.name) nameInput.value = userData.name;
                 if (userData.phone) phoneInput.value = userData.phone;
             }
         }
@@ -85,7 +82,14 @@
             }
         }
 
-        openButtons.forEach(btn => btn.addEventListener('click', openForm));
+        // Делегирование: слушаем клик на документе, проверяем, что кликнули по нужной кнопке
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.btn--cta, #open-form-btn, .course-card__btn');
+            if (btn && overlay && successOverlay) {
+                e.preventDefault();
+                openForm(btn);   // передаём именно кнопку
+            }
+        });
 
         // --- Закрытие формы ---
         if (closeBtn) closeBtn.addEventListener('click', () => overlay.classList.remove('active'));

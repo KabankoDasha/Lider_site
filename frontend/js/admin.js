@@ -1,13 +1,7 @@
-(function() {
-    const token = localStorage.getItem('token');
-    if (!token) {
-        window.location.href = '../pages/login.html';
-    }
-})();
-
 document.addEventListener('DOMContentLoaded', () => {
 
     const userData = JSON.parse(localStorage.getItem('user'));
+    const token = localStorage.getItem('token');
     if (userData && userData.name) {
         const nameElement = document.querySelector('.sidebar-name');
         if (nameElement) nameElement.textContent = userData.name;
@@ -37,7 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let allApps = [];
     let currentAppId = null;
 
-    // Инициализация кастомного селекта статуса
+    const appsBadge = document.querySelector('.sidebar-menu__item[data-target="applications"] .counter-badge');
+
     function initStatusSelect() {
         const container = document.getElementById('app-status-select');
         if (!container) return;
@@ -62,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     initStatusSelect();
 
-    // Загрузка заявок (админский эндпоинт)
     async function loadApplications() {
         const token = localStorage.getItem('token');
         if (!token) return;
@@ -72,13 +66,20 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             if (!response.ok) throw new Error('Ошибка загрузки заявок');
             allApps = await response.json();
+            updateApplicationsBadge();
             renderApplications();
         } catch (err) {
             console.error(err);
         }
     }
 
-    // Рендер карточек заявок
+    function updateApplicationsBadge() {
+        if (appsBadge) {
+            const activeCount = allApps.filter(app => app.status === 'processing').length;
+            appsBadge.textContent = activeCount;
+        }
+    }
+
     function renderApplications() {
         appContainer.innerHTML = allApps.map(app => {
             const date = new Date(app.created_at).toLocaleDateString('ru-RU', {
@@ -89,6 +90,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 confirmed: 'подтверждена',
                 rejected: 'отклонена'
             }[app.status] || 'в обработке';
+
+            const newIndicator = app.status === 'processing' ? '<span class="new-indicator"></span>' : '';
+
             return `
                 <article class="application-card" data-id="${app.id}" data-status="${app.status}">
                     <div class="application-header">
@@ -98,10 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="application-course">${escapeHtml(app.course || '')}</p>
                     <p class="application-message">${escapeHtml(app.comment || '')}</p>
                     <time class="application-date">от ${date}</time>
+                    ${newIndicator}
                 </article>`;
         }).join('');
 
-        // Навешиваем обработчики клика на карточки
         document.querySelectorAll('#applications-container .application-card').forEach(card => {
             card.addEventListener('click', (e) => {
                 const id = card.dataset.id;
@@ -135,7 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
         applyActiveTabFilter();
     }
 
-    // Фильтр по вкладкам (Активные / Обработанные)
     function applyActiveTabFilter() {
         const activeTab = document.querySelector('.tab.active');
         if (!activeTab) return;
@@ -150,7 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Переключение вкладок
     tabs.forEach(tab => {
         tab.addEventListener('click', function() {
             tabs.forEach(t => t.classList.remove('active'));
@@ -159,10 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Закрытие оверлея деталей заявки
     closeAppOverlay.addEventListener('click', () => appOverlay.classList.remove('active'));
 
-    // Сохранение статуса заявки
     saveApplicationBtn.addEventListener('click', async () => {
         if (!currentAppId) return;
         const newStatusRu = document.getElementById('app-status').value;
@@ -185,9 +185,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             if (!response.ok) throw new Error('Ошибка обновления статуса');
 
-            // Обновляем в локальном массиве
             const app = allApps.find(a => a.id == currentAppId);
             if (app) app.status = newStatus;
+            updateApplicationsBadge();
             renderApplications();
             appOverlay.classList.remove('active');
         } catch (err) {
@@ -208,10 +208,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const reviewSuccessOverlay = document.getElementById('review-success-overlay');
     const successMessage = document.getElementById('success-message');
 
+    const reviewsBadge = document.querySelector('.sidebar-menu__item[data-target="reviews"] .counter-badge');
+
     let allReviews = [];
     let currentReviewId = null;
 
-    // Загрузка отзывов (админский эндпоинт)
     async function loadReviews() {
         const token = localStorage.getItem('token');
         if (!token) return;
@@ -221,13 +222,19 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             if (!response.ok) throw new Error('Ошибка загрузки отзывов');
             allReviews = await response.json();
+            updateReviewsBadge();
             renderReviews();
         } catch (err) {
             console.error(err);
         }
     }
 
-    // Рендер карточек отзывов
+    function updateReviewsBadge() {
+        if (reviewsBadge) {
+            reviewsBadge.textContent = allReviews.length;
+        }
+    }
+
     function renderReviews() {
         reviewContainer.innerHTML = allReviews.map(review => {
             const starsHtml = Array.from({ length: 5 }, (_, i) =>
@@ -250,7 +257,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 </article>`;
         }).join('');
 
-        // Обработчики клика по карточке
         document.querySelectorAll('#reviews-container .review-card').forEach(card => {
             card.addEventListener('click', () => {
                 const id = card.dataset.id;
@@ -270,13 +276,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Закрытие оверлея отзыва
     closeReviewOverlay.addEventListener('click', () => reviewOverlay.classList.remove('active'));
     reviewOverlay.addEventListener('click', (e) => {
         if (e.target === reviewOverlay) reviewOverlay.classList.remove('active');
     });
 
-    // Одобрить отзыв (смена статуса на published)
     approveReviewBtn.addEventListener('click', async () => {
         if (!currentReviewId) return;
         const token = localStorage.getItem('token');
@@ -290,8 +294,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ status: 'published' })
             });
             if (!response.ok) throw new Error('Ошибка публикации');
-            // Удаляем из списка модерации
             allReviews = allReviews.filter(r => r.id != currentReviewId);
+            updateReviewsBadge();
             renderReviews();
             reviewOverlay.classList.remove('active');
             showReviewSuccess('Отзыв успешно опубликован!');
@@ -301,7 +305,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Открыть оверлей подтверждения удаления отзыва
     deleteReviewBtn.addEventListener('click', () => {
         confirmDeleteReviewOverlay.classList.add('active');
     });
@@ -309,7 +312,6 @@ document.addEventListener('DOMContentLoaded', () => {
         confirmDeleteReviewOverlay.classList.remove('active');
     });
 
-    // Удалить отзыв
     confirmDeleteReviewBtn.addEventListener('click', async () => {
         if (!currentReviewId) return;
         const token = localStorage.getItem('token');
@@ -320,6 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             if (!response.ok) throw new Error('Ошибка удаления');
             allReviews = allReviews.filter(r => r.id != currentReviewId);
+            updateReviewsBadge();
             renderReviews();
             reviewOverlay.classList.remove('active');
             confirmDeleteReviewOverlay.classList.remove('active');
@@ -336,16 +339,25 @@ document.addEventListener('DOMContentLoaded', () => {
         reviewSuccessOverlay.onclick = () => reviewSuccessOverlay.classList.remove('active');
     }
 
+    // =================== ОБЩАЯ ФУНКЦИЯ ДЛЯ УВЕДОМЛЕНИЙ О КОНТЕНТЕ ===================
+    function showCourseSuccess(message) {
+        const overlay = document.getElementById('course-success-overlay');
+        if (!overlay) return;
+        document.getElementById('course-success-message').textContent = message;
+        overlay.classList.add('active');
+        overlay.onclick = () => overlay.classList.remove('active');
+    }
+
     // =================== УПРАВЛЕНИЕ КОНТЕНТОМ ===================
     // ---- КУРСЫ ----
     let courses = [];
+    let currentCourseToDelete = null;
     const contentOverlay = document.getElementById('content-edit-overlay');
     const addCourseOverlay = document.getElementById('add-course-overlay');
     const cardsContainer = document.getElementById('content-edit-cards');
     const thumb = document.getElementById('content-edit-thumb');
     let editingCourseId = null;
 
-    // Загрузка курсов с сервера
     async function loadCourses() {
         const token = localStorage.getItem('token');
         try {
@@ -392,23 +404,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>`;
         }).join('');
 
-        // Удаление курса
         document.querySelectorAll('.course-edit-card__delete').forEach(btn => {
-            btn.addEventListener('click', async (e) => {
+            btn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                const id = btn.dataset.id;
-                if (confirm('Удалить курс?')) {
-                    const token = localStorage.getItem('token');
-                    await fetch(`http://localhost:3001/api/courses/${id}`, {
-                        method: 'DELETE',
-                        headers: { 'Authorization': `Bearer ${token}` }
-                    });
-                    loadCourses();
-                }
+                currentCourseToDelete = btn.dataset.id;
+                document.getElementById('confirm-delete-course-overlay').classList.add('active');
             });
         });
 
-        // Редактирование курса
         document.querySelectorAll('.course-edit-card__edit').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -440,7 +443,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Открытие оверлея контента (кнопка "Редактировать" в панели "Управление контентом")
+    document.getElementById('confirm-delete-course').addEventListener('click', async () => {
+        if (!currentCourseToDelete) return;
+        const token = localStorage.getItem('token');
+        try {
+            const response = await fetch(`http://localhost:3001/api/courses/${currentCourseToDelete}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (!response.ok) throw new Error('Ошибка удаления');
+            loadCourses();
+            document.getElementById('confirm-delete-course-overlay').classList.remove('active');
+            showCourseSuccess('Курс успешно удалён!');
+        } catch (err) {
+            console.error(err);
+            alert('Не удалось удалить курс');
+        }
+        currentCourseToDelete = null;
+    });
+
+    document.getElementById('cancel-delete-course').addEventListener('click', () => {
+        document.getElementById('confirm-delete-course-overlay').classList.remove('active');
+        currentCourseToDelete = null;
+    });
+
     document.querySelectorAll('.btn--edit').forEach(btn => {
         btn.addEventListener('click', () => {
             editingCourseId = null;
@@ -456,12 +482,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Назад из оверлея контента
     document.getElementById('content-back-btn').addEventListener('click', () => {
         contentOverlay.classList.remove('active');
     });
 
-    // Добавление нового курса (кнопка внутри оверлея)
     document.getElementById('add-course-btn').addEventListener('click', () => {
         editingCourseId = null;
         document.querySelector('.add-course-title').textContent = 'Добавление нового курса';
@@ -471,7 +495,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('new-course-distance-old').value = '';
         document.getElementById('new-course-fulltime').value = '';
         document.getElementById('new-course-fulltime-old').value = '';
-        // Установка плейсхолдеров
         document.getElementById('new-course-name').placeholder = 'Автомобиль с МКПП — категория «B»';
         document.getElementById('new-course-duration').placeholder = '2,5 месяца';
         document.getElementById('new-course-distance').placeholder = '46 700';
@@ -481,12 +504,10 @@ document.addEventListener('DOMContentLoaded', () => {
         addCourseOverlay.classList.add('active');
     });
 
-    // Закрытие оверлея добавления/редактирования
     document.getElementById('close-add-course').addEventListener('click', () => {
         addCourseOverlay.classList.remove('active');
     });
 
-    // Сохранение курса (новый или редактирование)
     document.getElementById('save-new-course').addEventListener('click', async () => {
         const token = localStorage.getItem('token');
         const data = {
@@ -512,16 +533,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         addCourseOverlay.classList.remove('active');
         loadCourses();
+        showCourseSuccess('Курс добавлен');
     });
 
-    // Сохранить (закрыть основной оверлей)
     document.getElementById('save-content-btn').addEventListener('click', () => {
         contentOverlay.classList.remove('active');
-        // Можно показать уведомление "Изменения сохранены"
+        showCourseSuccess('Изменения сохранены');
     });
 
     // ---- АКЦИИ ----
     let sales = [];
+    let currentSaleToDelete = null;
     const saleEditOverlay = document.getElementById('sale-edit-overlay');
     const addSaleOverlay = document.getElementById('add-sale-overlay');
     const saleCardsContainer = document.getElementById('sale-edit-cards');
@@ -561,17 +583,10 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
 
         document.querySelectorAll('#sale-edit-cards .course-edit-card__delete').forEach(btn => {
-            btn.addEventListener('click', async (e) => {
+            btn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                const id = btn.dataset.id;
-                if (confirm('Удалить акцию?')) {
-                    const token = localStorage.getItem('token');
-                    await fetch(`http://localhost:3001/api/sales/${id}`, {
-                        method: 'DELETE',
-                        headers: { 'Authorization': `Bearer ${token}` }
-                    });
-                    loadSales();
-                }
+                currentSaleToDelete = btn.dataset.id;
+                document.getElementById('confirm-delete-sale-overlay').classList.add('active');
             });
         });
 
@@ -603,6 +618,30 @@ document.addEventListener('DOMContentLoaded', () => {
             saleThumb.style.top = (scrollRatio * (containerHeight - saleThumb.offsetHeight)) + 'px';
         });
     }
+
+    document.getElementById('confirm-delete-sale').addEventListener('click', async () => {
+        if (!currentSaleToDelete) return;
+        const token = localStorage.getItem('token');
+        try {
+            const response = await fetch(`http://localhost:3001/api/sales/${currentSaleToDelete}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (!response.ok) throw new Error('Ошибка удаления');
+            loadSales();
+            document.getElementById('confirm-delete-sale-overlay').classList.remove('active');
+            showCourseSuccess('Акция успешно удалена!');
+        } catch (err) {
+            console.error(err);
+            alert('Не удалось удалить акцию');
+        }
+        currentSaleToDelete = null;
+    });
+
+    document.getElementById('cancel-delete-sale').addEventListener('click', () => {
+        document.getElementById('confirm-delete-sale-overlay').classList.remove('active');
+        currentSaleToDelete = null;
+    });
 
     document.querySelectorAll('.btn--edit-sale').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -648,20 +687,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         addSaleOverlay.classList.remove('active');
         loadSales();
+        showCourseSuccess('Акция добавлена');
     });
     document.getElementById('save-sales-btn').addEventListener('click', () => {
         saleEditOverlay.classList.remove('active');
+        showCourseSuccess('Изменения сохранены');
     });
 
     // ---- ИНСТРУКТОРЫ ----
     let instructors = [];
+    let currentInstructorToDelete = null;
     const instructorEditOverlay = document.getElementById('instructor-edit-overlay');
     const addInstructorOverlay = document.getElementById('add-instructor-overlay');
     const instructorCardsContainer = document.getElementById('instructor-edit-cards');
     const instructorThumb = document.getElementById('instructor-edit-thumb');
     let editingInstructorId = null;
 
-    // Загрузка с сервера
     async function loadInstructors() {
         const token = localStorage.getItem('token');
         try {
@@ -702,17 +743,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join('');
 
         document.querySelectorAll('#instructor-edit-cards .course-edit-card__delete').forEach(btn => {
-            btn.addEventListener('click', async (e) => {
+            btn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                const id = btn.dataset.id;
-                if (confirm('Удалить инструктора?')) {
-                    const token = localStorage.getItem('token');
-                    await fetch(`http://localhost:3001/api/instructors/${id}`, {
-                        method: 'DELETE',
-                        headers: { 'Authorization': `Bearer ${token}` }
-                    });
-                    loadInstructors();
-                }
+                currentInstructorToDelete = btn.dataset.id;
+                document.getElementById('confirm-delete-instructor-overlay').classList.add('active');
             });
         });
 
@@ -749,18 +783,67 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Кнопка "Редактировать" для инструкторов
+    (function() {
+        const container = document.getElementById('instructor-category-select');
+        if (!container) return;
+        const trigger = container.querySelector('.custom-select__trigger');
+        const selected = container.querySelector('.custom-select__selected');
+        const options = container.querySelectorAll('.custom-select__options li');
+        const native = container.querySelector('.custom-select__native');
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            container.classList.toggle('open');
+        });
+        options.forEach(opt => {
+            opt.addEventListener('click', (e) => {
+                e.stopPropagation();
+                selected.textContent = opt.dataset.value;
+                native.value = opt.dataset.value;
+                container.classList.remove('open');
+            });
+        });
+        document.addEventListener('click', (e) => {
+            if (!container.contains(e.target)) {
+                container.classList.remove('open');
+            }
+        });
+    })();
+
+    document.getElementById('confirm-delete-instructor').addEventListener('click', async () => {
+        if (!currentInstructorToDelete) return;
+        const token = localStorage.getItem('token');
+        try {
+            const response = await fetch(`http://localhost:3001/api/instructors/${currentInstructorToDelete}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (!response.ok) throw new Error('Ошибка удаления');
+            loadInstructors();
+            document.getElementById('confirm-delete-instructor-overlay').classList.remove('active');
+            showCourseSuccess('Инструктор успешно удалён!');
+        } catch (err) {
+            console.error(err);
+            alert('Не удалось удалить инструктора');
+        }
+        currentInstructorToDelete = null;
+    });
+
+    document.getElementById('cancel-delete-instructor').addEventListener('click', () => {
+        document.getElementById('confirm-delete-instructor-overlay').classList.remove('active');
+        currentInstructorToDelete = null;
+    });
+
     document.querySelectorAll('.btn--edit-instr').forEach(btn => {
         btn.addEventListener('click', () => {
             loadInstructors();
             instructorEditOverlay.classList.add('active');
         });
     });
+
     document.getElementById('instructor-back-btn').addEventListener('click', () => {
         instructorEditOverlay.classList.remove('active');
     });
 
-    // Добавление инструктора
     document.getElementById('add-instructor-btn').addEventListener('click', () => {
         editingInstructorId = null;
         document.getElementById('add-instructor-title').textContent = 'Добавление нового инструктора';
@@ -768,52 +851,147 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('new-instructor-experience').value = '';
         document.getElementById('new-instructor-car').value = '';
         document.getElementById('new-instructor-education').value = '';
-        document.getElementById('new-instructor-rating').value = '';
+        const ratingInput = document.getElementById('new-instructor-rating');
+        ratingInput.value = '–';
+        ratingInput.disabled = true;
+        ratingInput.style.backgroundColor = '#f0f0f0';
         document.getElementById('upload-photo-btn').textContent = 'Выбрать файл';
         document.getElementById('upload-photo-btn').dataset.photoLoaded = 'false';
-        // Сброс категории
         const selectContainer = document.getElementById('instructor-category-select');
         selectContainer.querySelector('.custom-select__selected').textContent = 'Инструктор по вождению';
         selectContainer.querySelector('.custom-select__native').value = 'Инструктор по вождению';
         addInstructorOverlay.classList.add('active');
     });
+
+    // === ЗАГРУЗКА ФОТОГРАФИИ ===
+    (function() {
+        const uploadBtn = document.getElementById('upload-photo-btn');
+        if (!uploadBtn) return;
+
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = '.jpg,.jpeg,.png,.webp';
+        fileInput.style.display = 'none';
+        document.body.appendChild(fileInput);
+
+        uploadBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            fileInput.value = '';
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', async function() {
+            if (!this.files.length) return;
+            const file = this.files[0];
+            const formData = new FormData();
+            formData.append('photo', file);
+
+            const token = localStorage.getItem('token');
+            const originalText = uploadBtn.textContent;
+            uploadBtn.textContent = 'Загрузка...';
+            uploadBtn.disabled = true;
+
+            try {
+                const response = await fetch('http://localhost:3001/api/upload/photo', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` },
+                    body: formData
+                });
+                if (!response.ok) {
+                    const errData = await response.json().catch(() => ({}));
+                    throw new Error(errData.message || 'Ошибка загрузки');
+                }
+                const data = await response.json();
+                uploadBtn.dataset.photoFilename = data.filename;
+                uploadBtn.dataset.photoLoaded = 'true';
+                uploadBtn.textContent = 'Файл выбран';
+            } catch (err) {
+                console.error(err);
+                alert('Не удалось загрузить фото: ' + err.message);
+            } finally {
+                uploadBtn.disabled = false;
+            }
+        });
+    })();
+
     document.getElementById('close-add-instructor').addEventListener('click', () => {
         addInstructorOverlay.classList.remove('active');
     });
 
-    // Сохранение инструктора
-    document.getElementById('save-new-instructor').addEventListener('click', async () => {
-        const token = localStorage.getItem('token');
-        const name = document.getElementById('new-instructor-name').value.trim();
-        const experience = document.getElementById('new-instructor-experience').value.trim();
-        const car = document.getElementById('new-instructor-car').value.trim();
-        const education = document.getElementById('new-instructor-education').value.trim();
-        const rating = parseFloat(document.getElementById('new-instructor-rating').value) || 0;
-        const category = document.querySelector('#instructor-category-select .custom-select__selected').textContent;
-        const photo = document.getElementById('upload-photo-btn').dataset.photoLoaded === 'true' ? 'photo.jpg' : null; // упрощённо
+    // === СОХРАНЕНИЕ ИНСТРУКТОРА ===
+    document.getElementById('save-new-instructor').addEventListener('click', async (e) => {
+        e.preventDefault();
+        document.querySelectorAll('#add-instructor-overlay .add-course-input.error')
+            .forEach(el => el.classList.remove('error'));
+        document.querySelectorAll('#add-instructor-overlay .field-error-text')
+            .forEach(el => el.remove());
 
-        if (!name) { alert('Имя обязательно'); return; }
+        const nameInput = document.getElementById('new-instructor-name');
+        const expInput = document.getElementById('new-instructor-experience');
+        const carInput = document.getElementById('new-instructor-car');
+        const eduInput = document.getElementById('new-instructor-education');
+        const categorySelect = document.getElementById('instructor-category-select');
+        const category = categorySelect.querySelector('.custom-select__selected').textContent;
+        const ratingInput = document.getElementById('new-instructor-rating');
+
+        const name = nameInput.value.trim();
+        const experience = expInput.value.trim();
+        const car = carInput.value.trim();
+        const education = eduInput.value.trim();
+        const rating = ratingInput.value.trim() === '–' ? 0 : (parseFloat(ratingInput.value) || 0);
+        const photo = document.getElementById('upload-photo-btn').dataset.photoFilename || null;
+
+        let isValid = true;
+
+        function setError(input, message = 'Заполните поле') {
+            input.classList.add('error');
+            const wrapper = input.closest('.input-wrapper') || input.parentNode;
+            const oldErr = wrapper.querySelector('.field-error-text');
+            if (oldErr) oldErr.remove();
+            const err = document.createElement('span');
+            err.className = 'field-error-text';
+            err.textContent = message;
+            wrapper.appendChild(err);
+        }
+
+        if (!name) { setError(nameInput); isValid = false; }
+        if (!experience) { setError(expInput); isValid = false; }
+        if (category === 'Инструктор по вождению' && !car) { setError(carInput); isValid = false; }
+        if (category === 'Преподаватель по теории' && !education) { setError(eduInput); isValid = false; }
+
+        if (!isValid) return;
+
+        const token = localStorage.getItem('token');
         const data = { name, experience, car, education, rating, category, photo };
 
-        if (editingInstructorId) {
-            await fetch(`http://localhost:3001/api/instructors/${editingInstructorId}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-                body: JSON.stringify(data)
-            });
-        } else {
-            await fetch('http://localhost:3001/api/instructors', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-                body: JSON.stringify(data)
-            });
+        try {
+            let response;
+            if (editingInstructorId) {
+                response = await fetch(`http://localhost:3001/api/instructors/${editingInstructorId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify(data)
+                });
+            } else {
+                response = await fetch('http://localhost:3001/api/instructors', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify(data)
+                });
+            }
+            if (!response.ok) throw new Error('Ошибка сохранения');
+            addInstructorOverlay.classList.remove('active');
+            loadInstructors();
+            showCourseSuccess('Инструктор добавлен');
+        } catch (err) {
+            console.error(err);
+            alert('Не удалось сохранить инструктора');
         }
-        addInstructorOverlay.classList.remove('active');
-        loadInstructors();
     });
-
     document.getElementById('save-instructors-btn').addEventListener('click', () => {
         instructorEditOverlay.classList.remove('active');
+        showCourseSuccess('Изменения сохранены');
     });
 
     // =================== ОВЕРЛЕЙ ВЫХОДА И УДАЛЕНИЯ ===================
@@ -837,9 +1015,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // =================== ИНИЦИАЛИЗАЦИЯ ===================
     loadApplications();
     loadReviews();
-    // Загрузка контента по требованию (ленивая), но можно вызвать при активации вкладки
 
-    // Простая защита от XSS
     function escapeHtml(str) {
         return str.replace(/[&<>]/g, function(m) {
             if (m === '&') return '&amp;';

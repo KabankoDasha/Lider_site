@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="application-header">
                         <h4 class="application-number">Заявка №${app.id}</h4>
                         <span class="application-status" data-status="${app.status}">
-                            ${app.status === 'processing' ? 'в обработке' : app.status}
+                            ${app.status === 'processing' ? 'в обработке' : app.status === 'confirmed' ? 'подтверждена' : app.status === 'rejected' ? 'отклонена' : app.status}
                         </span>
                     </div>
                     <p class="application-course">${escapeHtml(app.course || '')}</p>
@@ -344,9 +344,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const deleteAccountOverlay = document.getElementById('delete-account-overlay');
     document.getElementById('delete-account-btn').addEventListener('click', () => deleteAccountOverlay.classList.add('active'));
     document.getElementById('cancel-delete-account').addEventListener('click', () => deleteAccountOverlay.classList.remove('active'));
-    document.getElementById('confirm-delete-account').addEventListener('click', () => {
-        alert('Аккаунт удалён');
-        deleteAccountOverlay.classList.remove('active');
+    document.getElementById('confirm-delete-account').addEventListener('click', async () => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await fetch('http://localhost:3001/api/auth/me', {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (response.ok) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                window.location.href = '../pages/login.html';
+            } else {
+                const data = await response.json();
+                alert(data.message || 'Не удалось удалить аккаунт');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Ошибка соединения с сервером');
+        } finally {
+            deleteAccountOverlay.classList.remove('active');
+        }
     });
 
     // --- Оверлей успеха обновления профиля (закрытие по клику) ---

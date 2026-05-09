@@ -9,7 +9,7 @@ const createTable = async () => {
       course VARCHAR(150),
       text TEXT NOT NULL,
       rating INTEGER CHECK (rating >= 1 AND rating <= 5),
-      status VARCHAR(20) DEFAULT 'published',
+      status VARCHAR(20) DEFAULT 'pending',
       created_at TIMESTAMP DEFAULT NOW()
     );
   `;

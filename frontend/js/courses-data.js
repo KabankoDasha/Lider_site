@@ -27,7 +27,7 @@ const coursesData = {
     ctaBadgeDuration: '2,5 месяца',
     ctaBadgeInstallment: 'Рассрочка 0%',
     ctaBtnCourse: 'Автомобиль с МКПП — категория «B»',
-    ctaImg: '../../images/car1-info.svg',
+    ctaImg: '../images/car1-info.svg',
     ctaImgAlt: 'Автомобиль с МКПП'
   },
 
@@ -59,7 +59,7 @@ const coursesData = {
     ctaBadgeDuration: '2,5 месяца',
     ctaBadgeInstallment: 'Рассрочка 0%',
     ctaBtnCourse: 'Автомобиль с АКПП — категория «B» автомат',
-    ctaImg: '../../images/car2-info.svg',
+    ctaImg: '../images/car2-info.svg',
     ctaImgAlt: 'Автомобиль с АКПП'
   },
 
@@ -91,7 +91,7 @@ const coursesData = {
     ctaBadgeDuration: '2,5 месяца',
     ctaBadgeInstallment: 'Рассрочка 0%',
     ctaBtnCourse: 'Мотоцикл — категория «A»',
-    ctaImg: '../../images/moto-info.svg',
+    ctaImg: '../images/moto-info.svg',
     ctaImgAlt: 'Мотоцикл'
   },
 
@@ -123,7 +123,7 @@ const coursesData = {
     ctaBadgeDuration: '1,5 месяца',
     ctaBadgeInstallment: 'Рассрочка 0%',
     ctaBtnCourse: 'Погрузчик — категории «B», «C», «D»',
-    ctaImg: '../../images/pogruz.svg',       
+    ctaImg: '../images/pogruz.svg',       
     ctaImgAlt: 'Погрузчик'
   },
 
@@ -155,7 +155,7 @@ const coursesData = {
     ctaBadgeDuration: '2 месяца',
     ctaBadgeInstallment: 'Рассрочка 0%',
     ctaBtnCourse: 'Экскаватор — категории «C», «E», «D»',
-    ctaImg: '../../images/excovator.svg',       
+    ctaImg: '../images/excovator.svg',       
     ctaImgAlt: 'Экскаватор'
   },
 
@@ -187,7 +187,7 @@ const coursesData = {
     ctaBadgeDuration: '1 месяц',
     ctaBadgeInstallment: 'Рассрочка 0%',
     ctaBtnCourse: 'Трактор — категории «B», «C», «E», «D»',
-    ctaImg: '../../images/truck-info.svg',       
+    ctaImg: '../images/truck-info.svg',       
     ctaImgAlt: 'Трактор'
   },
 
@@ -219,7 +219,7 @@ const coursesData = {
     ctaBadgeDuration: '2 месяца',
     ctaBadgeInstallment: 'Рассрочка 0%',
     ctaBtnCourse: 'Бульдозер — категория «E» с 19 лет',
-    ctaImg: '../../images/buldozer.svg',       
+    ctaImg: '../images/buldozer.svg',       
     ctaImgAlt: 'Бульдозер'
   },
 
@@ -251,7 +251,7 @@ const coursesData = {
     ctaBadgeDuration: '2 месяца',
     ctaBadgeInstallment: 'Рассрочка 0%',
     ctaBtnCourse: 'Автогрейдер — категории «C», «D» с 19 лет',
-    ctaImg: '../../images/autograde.svg',       
+    ctaImg: '../images/autograde.svg',       
     ctaImgAlt: 'Автогрейдер'
   },
 
@@ -283,7 +283,7 @@ const coursesData = {
     ctaBadgeDuration: '2 месяца',
     ctaBadgeInstallment: 'Рассрочка 0%',
     ctaBtnCourse: 'Автомобильный кран',
-    ctaImg: '../../images/autocran.svg',       
+    ctaImg: '../images/autocran.svg',       
     ctaImgAlt: 'Автомобильный кран'
   },
 
@@ -315,7 +315,7 @@ const coursesData = {
     ctaBadgeDuration: '2 месяца',
     ctaBadgeInstallment: 'Рассрочка 0%',
     ctaBtnCourse: 'Мостовой кран',
-    ctaImg: '../../images/mostcran.svg',       
+    ctaImg: '../images/mostcran.svg',       
     ctaImgAlt: 'Мостовой кран'
   },
 
@@ -347,7 +347,7 @@ const coursesData = {
     ctaBadgeDuration: '2,5 месяца',
     ctaBadgeInstallment: 'Рассрочка 0%',
     ctaBtnCourse: 'Автовышка и автогидроподъемник',
-    ctaImg: '../../images/autovyshka.svg',       
+    ctaImg: '../images/autovyshka.svg',       
     ctaImgAlt: 'Автовышка'
   },
 
@@ -379,7 +379,7 @@ const coursesData = {
     ctaBadgeDuration: '1,5 месяца',
     ctaBadgeInstallment: 'Рассрочка 0%',
     ctaBtnCourse: 'Квадроцикл и снегоход — категория «AI» с 16 лет',
-    ctaImg: '../../images/kvadro-info.svg',       
+    ctaImg: '../images/kvadro-info.svg',       
     ctaImgAlt: 'Квадроцикл'
   },
 
@@ -411,7 +411,7 @@ const coursesData = {
     ctaBadgeDuration: '1,5 месяца',
     ctaBadgeInstallment: 'Рассрочка 0%',
     ctaBtnCourse: 'Внедорожные автотранспортные средства — категория «AII» с 19 лет',
-    ctaImg: '../../images/trekol.svg',       
+    ctaImg: '../images/trekol.svg',       
     ctaImgAlt: 'Трекол'
   },
 
@@ -443,7 +443,7 @@ const coursesData = {
     ctaBadgeDuration: '1,5 месяца',
     ctaBadgeInstallment: 'Рассрочка 0%',
     ctaBtnCourse: 'Внедорожные автотранспортные средства — категория «АIII» (БелАЗ)',
-    ctaImg: '../../images/belaz.svg',       
+    ctaImg: '../images/belaz.svg',       
     ctaImgAlt: 'БелАЗ'
   },
 
@@ -475,7 +475,7 @@ const coursesData = {
     ctaBadgeDuration: '2 месяца',
     ctaBadgeInstallment: 'Рассрочка 0%',
     ctaBtnCourse: 'Машинист катка — категория «C»',
-    ctaImg: '../../images/katok.svg',       
+    ctaImg: '../images/katok.svg',       
     ctaImgAlt: 'Машина-каток'
   },
 
@@ -507,7 +507,7 @@ const coursesData = {
     ctaBadgeDuration: '2 месяца',
     ctaBadgeInstallment: 'Рассрочка 0%',
     ctaBtnCourse: 'Машинист уплотняющей машины «Ратрак» — категория «E»',
-    ctaImg: '../../images/ratrak.svg',       
+    ctaImg: '../images/ratrak.svg',       
     ctaImgAlt: 'Машина «Ратрак»'
   },
 
@@ -539,7 +539,7 @@ const coursesData = {
     ctaBadgeDuration: '2,5 месяца',
     ctaBadgeInstallment: 'Рассрочка 0%',
     ctaBtnCourse: 'Машинист крана на самоходном ходу',
-    ctaImg: '../../images/samohod.svg',       
+    ctaImg: '../images/samohod.svg',       
     ctaImgAlt: 'Кран на самоходном ходу'
   },
 

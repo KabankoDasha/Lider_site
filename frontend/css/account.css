@@ -293,6 +293,20 @@ body {
     justify-content: center;
 }
 
+/* Подтверждённая заявка – зелёный */
+.application-status[data-status="confirmed"] {
+    background: linear-gradient(-42deg, #80D34D, #8DDE62, #80D34D);
+    color: #247E00;
+    width: 169px; 
+}
+
+/* Отклонённая заявка – оранжевый */
+.application-status[data-status="rejected"] {
+    background: linear-gradient(-42deg, #FF743D, #FF966C, #FF743D);
+    color: #942F00;
+    width: 129px;
+}
+
 .application-course {
     font-size: 16px; 
     font-weight: 400;

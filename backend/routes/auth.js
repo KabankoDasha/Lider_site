@@ -2,6 +2,7 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const auth = require('../middleware/auth');
 const authController = require('../controllers/authController');
+const pool = require('../db');
 
 router.post('/register', authController.register);
 router.post('/login', authController.login);
@@ -56,4 +57,18 @@ router.put('/me', auth, async (req, res) => {
   }
 });
 
+// Удаление своего аккаунта
+router.delete('/me', auth, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const result = await pool.query('DELETE FROM users WHERE id = $1 RETURNING id', [userId]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: 'Пользователь не найден' });
+    }
+    res.json({ message: 'Аккаунт успешно удалён' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Ошибка сервера' });
+  }
+});
 module.exports = router;

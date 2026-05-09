@@ -56,14 +56,14 @@
                             <span class="sidebar-indicator"></span>
                             <a href="#" class="sidebar-link">
                                 Заявки на обучение
-                                <span class="counter-badge">10</span>
+                                <span class="counter-badge">0</span>
                             </a>
                         </li>
                         <li class="sidebar-menu__item" data-target="reviews">
                             <span class="sidebar-indicator"></span>
                             <a href="#" class="sidebar-link">
                                 Модерация отзывов
-                                <span class="counter-badge">5</span>
+                                <span class="counter-badge">0</span>
                             </a>
                         </li>
                         <li class="sidebar-menu__item" data-target="content">
@@ -73,8 +73,8 @@
                     </ul>
                 </nav>
                 <div class="sidebar-actions">
-                    <button class="btn--delete-account" id="delete-account-btn">Удалить аккаунт</button>
-                    <button class="btn--logout" id="logout-btn">Выйти</button>
+                    <button type="button" class="btn--delete-account" id="delete-account-btn">Удалить аккаунт</button>
+                    <button type="button" class="btn--logout" id="logout-btn">Выйти</button>
                 </div>
             </aside>
 
@@ -90,27 +90,7 @@
                         </div>
                     </div>
                     <div class="cards-wrapper" id="applications-container">
-                        <!-- Активные заявки -->
-                        <article class="application-card new" data-id="1" data-status="processing">
-                            <div class="application-header">
-                                <h4 class="application-number">Заявка №1</h4>
-                                <span class="application-status" data-status="processing">в обработке</span>
-                            </div>
-                            <p class="application-course">Обучение на автомобиль МКПП</p>
-                            <p class="application-message">Добрый день! Хочу записаться к вам в автошколу на обучение на автомобиле МКПП, подскажите пожалуйста когда ближайший старт групп и в какое время будут занятия?</p>
-                            <time class="application-date">от 6 марта 2026</time>
-                            <span class="new-indicator"></span>
-                        </article>
-                        <article class="application-card new" data-id="2" data-status="processing">
-                            <div class="application-header">
-                                <h4 class="application-number">Заявка №2</h4>
-                                <span class="application-status" data-status="processing">в обработке</span>
-                            </div>
-                            <p class="application-course">Обучение на мотоцикл</p>
-                            <p class="application-message">Здравствуйте, если мне сейчас 17 лет, могу ли я пройти обучение на мотоцикл и потом сдать экзамен?</p>
-                            <time class="application-date">от 20 марта 2026</time>
-                            <span class="new-indicator"></span>
-                        </article>
+                        
                     </div>
                 </div>
 
@@ -120,40 +100,7 @@
                         <h3 class="content-title">Модерация отзывов</h3>
                     </div>
                     <div class="cards-wrapper" id="reviews-container">
-                        <article class="review-card" data-id="1">
-                            <div class="review-card__header">
-                                <div>
-                                    <h4 class="review-card__name">Софья</h4>
-                                    <p class="review-card__course">Обучение на автомобиль МКПП</p>
-                                </div>
-                                <div class="review-card__stars">
-                                    <span class="star star--active"></span>
-                                    <span class="star star--active"></span>
-                                    <span class="star star--active"></span>
-                                    <span class="star star--active"></span>
-                                    <span class="star star--active"></span>
-                                </div>
-                            </div>
-                            <p class="review-card__text">Замечательная автошкола, очень позитивная атмосфера во время занятий. На любые вопросы отвечают оперативно, с пониманием относятся к тому, что чего-то не понимаешь! Отдельное спасибо инструктору, Алексею Ярушину, он просто лучший! Очень спокойный, добрый, с ним сразу появилось чувство, что вождение - это не сложно.</p>
-                            <time class="review-card__date">2 декабря 2025</time>
-                        </article>
-                        <article class="review-card" data-id="2">
-                            <div class="review-card__header">
-                                <div>
-                                    <h4 class="review-card__name">Владимир</h4>
-                                    <p class="review-card__course">Обучение на мотоцикл</p>
-                                </div>
-                                <div class="review-card__stars">
-                                    <span class="star star--active"></span>
-                                    <span class="star star--active"></span>
-                                    <span class="star star--active"></span>
-                                    <span class="star star--active"></span>
-                                    <span class="star star--active"></span>
-                                </div>
-                            </div>
-                            <p class="review-card__text">Учусь в учебном центре, теорию преподают отлично, практику тоже отлично преподают Валерий Анатольевич Гриб отличный преподаватель по вождению, посоветовал автошколу знакомый, все понравилось рекомендую.</p>
-                            <time class="review-card__date">8 февраля 2026</time>
-                        </article>
+                        
                     </div>
                 </div>
 
@@ -165,15 +112,15 @@
                     <div class="content-pages">
                         <div class="content-page-item">
                             <span>Страница «Обучение»</span>
-                            <button class="btn--edit" data-page="study">Редактировать</button>
+                            <button type="button" class="btn--edit" data-page="study">Редактировать</button>
                         </div>
                         <div class="content-page-item">
                             <span>Страница «Акции»</span>
-                            <button class="btn--edit-sale" data-page="sale">Редактировать</button>
+                            <button type="button" class="btn--edit-sale" data-page="sale">Редактировать</button>
                         </div>
                         <div class="content-page-item">
                             <span>Страница «Инструкторы»</span>
-                            <button class="btn--edit-instr" data-page="instructors">Редактировать</button>
+                            <button type="button" class="btn--edit-instr" data-page="instructors">Редактировать</button>
                         </div>
                     </div>
                 </div>
@@ -188,19 +135,19 @@
                 </button>
                 <div class="app-detail-row">
                     <span class="app-detail-label">Заявка:</span>
-                    <div class="app-detail-value" style="width:65px;">№<span id="app-number">1</span></div>
+                    <div class="app-detail-value">№<span id="app-number">1</span></div>
                 </div>
                 <div class="app-detail-row">
                     <span class="app-detail-label">Имя:</span>
-                    <div class="app-detail-value" style="width:90px;" id="app-name">Иван</div>
+                    <div class="app-detail-value" id="app-name">Иван</div>
                 </div>
                 <div class="app-detail-row">
                     <span class="app-detail-label">Номер телефона:</span>
-                    <div class="app-detail-value" style="width:162px;" id="app-phone">89991110033</div>
+                    <div class="app-detail-value" id="app-phone">89991110033</div>
                 </div>
                 <div class="app-detail-row">
                     <span class="app-detail-label">Курс:</span>
-                    <div class="app-detail-value" style="width:401px;" id="app-course">Обучение на автомобиль МКПП</div>
+                    <div class="app-detail-value" id="app-course">Обучение на автомобиль МКПП</div>
                 </div>
                 <div class="app-detail-row">
                     <span class="app-detail-label">Комментарий:</span>
@@ -208,7 +155,7 @@
                 <div class="app-detail-comment" id="app-comment">Добрый день! Хочу записаться к вам в автошколу...</div>
                 <div class="app-detail-row">
                     <span class="app-detail-label">Дата:</span>
-                    <div class="app-detail-value" style="width:176px;" id="app-date">6 марта 2026</div>
+                    <div class="app-detail-value" id="app-date">6 марта 2026</div>
                 </div>
                 <div class="app-detail-row">
                     <span class="app-detail-label">Статус:</span>
@@ -229,7 +176,7 @@
                         </ul>
                     </div>
                 </div>
-                <button class="btn--confirm-action app-save-btn" id="save-application">Сохранить</button>
+                <button type="button" class="btn--confirm-action app-save-btn" id="save-application">Сохранить</button>
             </div>
         </div>
 
@@ -260,8 +207,8 @@
                     <div class="app-detail-value" id="review-date">2 декабря 2025</div>
                 </div>
                 <div class="app-detail-actions">
-                    <button class="btn--delete-review" id="delete-review">Удалить</button>
-                    <button class="btn--confirm-action" id="approve-review">Добавить</button>
+                    <button type="button" class="btn--delete-review" id="delete-review">Удалить</button>
+                    <button type="button" class="btn--confirm-action" id="approve-review">Добавить</button>
                 </div>
             </div>
         </div>
@@ -271,8 +218,8 @@
             <div class="delete-overlay__box">
                 <p class="delete-overlay__text">Вы уверены, что хотите<br>удалить отзыв?</p>
                 <div class="delete-overlay__buttons">
-                    <button class="btn--cancel" id="cancel-delete-review">Отмена</button>
-                    <button class="btn--confirm-delete" id="confirm-delete-review">Удалить</button>
+                    <button type="button" class="btn--cancel" id="cancel-delete-review">Отмена</button>
+                    <button type="button" class="btn--confirm-delete" id="confirm-delete-review">Удалить</button>
                 </div>
             </div>
         </div>
@@ -301,8 +248,8 @@
                     </div>
                 </div>
                 <div class="content-edit-actions">
-                    <button class="btn--add-course" id="add-course-btn">Добавить</button>
-                    <button class="btn--confirm-action" id="save-content-btn">Сохранить</button>
+                    <button type="button" class="btn--add-course" id="add-course-btn">Добавить</button>
+                    <button type="button" class="btn--confirm-action" id="save-content-btn">Сохранить</button>
                 </div>
             </div>
         </div>
@@ -340,7 +287,7 @@
                         <input type="text" class="add-course-input" id="new-course-fulltime-old" value="51 700">
                     </div>
                 </div>
-                <button class="btn--confirm-action add-course-save-btn" id="save-new-course">Сохранить</button>
+                <button type="button" class="btn--confirm-action add-course-save-btn" id="save-new-course">Сохранить</button>
             </div>
         </div>
 
@@ -349,8 +296,8 @@
             <div class="delete-overlay__box">
                 <p class="delete-overlay__text">Вы уверены, что хотите<br>удалить курс?</p>
                 <div class="delete-overlay__buttons">
-                    <button class="btn--cancel" id="cancel-delete-course">Отмена</button>
-                    <button class="btn--confirm-delete" id="confirm-delete-course">Удалить</button>
+                    <button type="button" class="btn--cancel" id="cancel-delete-course">Отмена</button>
+                    <button type="button" class="btn--confirm-delete" id="confirm-delete-course">Удалить</button>
                 </div>
             </div>
         </div>
@@ -379,8 +326,8 @@
                     </div>
                 </div>
                 <div class="content-edit-actions">
-                    <button class="btn--add-course" id="add-sale-btn">Добавить</button>
-                    <button class="btn--confirm-action" id="save-sales-btn">Сохранить</button>
+                    <button type="button" class="btn--add-course" id="add-sale-btn">Добавить</button>
+                    <button type="button" class="btn--confirm-action" id="save-sales-btn">Сохранить</button>
                 </div>
             </div>
         </div>
@@ -406,7 +353,7 @@
                         <input type="text" class="add-course-input" id="new-sale-date" placeholder="до 31.03.2026">
                     </div>
                 </div>
-                <button class="btn--confirm-action add-course-save-btn" id="save-new-sale">Сохранить</button>
+                <button type="button" class="btn--confirm-action add-course-save-btn" id="save-new-sale">Сохранить</button>
             </div>
         </div>
 
@@ -415,8 +362,8 @@
             <div class="delete-overlay__box">
                 <p class="delete-overlay__text">Вы уверены, что хотите<br>удалить акцию?</p>
                 <div class="delete-overlay__buttons">
-                    <button class="btn--cancel" id="cancel-delete-sale">Отмена</button>
-                    <button class="btn--confirm-delete" id="confirm-delete-sale">Удалить</button>
+                    <button type="button" class="btn--cancel" id="cancel-delete-sale">Отмена</button>
+                    <button type="button" class="btn--confirm-delete" id="confirm-delete-sale">Удалить</button>
                 </div>
             </div>
         </div>
@@ -437,8 +384,8 @@
                     </div>
                 </div>
                 <div class="content-edit-actions">
-                    <button class="btn--add-course" id="add-instructor-btn">Добавить</button>
-                    <button class="btn--confirm-action" id="save-instructors-btn">Сохранить</button>
+                    <button type="button" class="btn--add-course" id="add-instructor-btn">Добавить</button>
+                    <button type="button" class="btn--confirm-action" id="save-instructors-btn">Сохранить</button>
                 </div>
             </div>
         </div>
@@ -501,10 +448,10 @@
                     <!-- Загрузка фотографии -->
                     <div class="app-detail-row instructor-photo-row">
                         <span class="app-detail-label">Загрузить фотографию:</span>
-                        <button class="photo-upload-btn" id="upload-photo-btn">Выбрать файл</button>
+                        <button type="button" class="photo-upload-btn" id="upload-photo-btn">Выбрать файл</button>
                     </div>
                 </div>
-                <button class="btn--confirm-action add-course-save-btn" id="save-new-instructor">Сохранить</button>
+                <button type="button" class="btn--confirm-action add-course-save-btn" id="save-new-instructor">Сохранить</button>
             </div>
         </div>
 
@@ -513,8 +460,8 @@
             <div class="delete-overlay__box">
                 <p class="delete-overlay__text">Вы уверены, что хотите<br>удалить инструктора?</p>
                 <div class="delete-overlay__buttons">
-                    <button class="btn--cancel" id="cancel-delete-instructor">Отмена</button>
-                    <button class="btn--confirm-delete" id="confirm-delete-instructor">Удалить</button>
+                    <button type="button" class="btn--cancel" id="cancel-delete-instructor">Отмена</button>
+                    <button type="button" class="btn--confirm-delete" id="confirm-delete-instructor">Удалить</button>
                 </div>
             </div>
         </div>
@@ -524,8 +471,8 @@
             <div class="delete-overlay__box">
                 <p class="delete-overlay__text">Вы уверены, что хотите<br>выйти из личного кабинета?</p>
                 <div class="delete-overlay__buttons">
-                    <button class="btn--cancel" id="cancel-logout">Отмена</button>
-                    <button class="btn--confirm-action" id="confirm-logout">Выйти</button>
+                    <button type="button" class="btn--cancel" id="cancel-logout">Отмена</button>
+                    <button type="button" class="btn--confirm-action" id="confirm-logout">Выйти</button>
                 </div>
             </div>
         </div>
@@ -535,8 +482,8 @@
             <div class="delete-overlay__box">
                 <p class="delete-overlay__text">Вы уверены, что хотите<br>удалить учётную запись?</p>
                 <div class="delete-overlay__buttons">
-                    <button class="btn--cancel" id="cancel-delete-account">Отмена</button>
-                    <button class="btn--confirm-action" id="confirm-delete-account">Удалить</button>
+                    <button type="button" class="btn--cancel" id="cancel-delete-account">Отмена</button>
+                    <button type="button" class="btn--confirm-action" id="confirm-delete-account">Удалить</button>
                 </div>
             </div>
         </div>
@@ -628,7 +575,7 @@
                 </div>
 
                 <!-- Кнопка отправки -->
-                <button class="btn form-submit-btn" id="form-submit-btn">Отправить</button>
+                <button type="button" class="btn form-submit-btn" id="form-submit-btn">Отправить</button>
             </div>
         </div>
 

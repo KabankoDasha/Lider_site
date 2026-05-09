@@ -66,6 +66,7 @@ router.get('/admin', auth, adminOnly, async (req, res) => {
       SELECT r.*, u.name AS user_name, u.email AS user_email
       FROM reviews r
       LEFT JOIN users u ON r.user_id = u.id
+      WHERE r.status = 'pending'
       ORDER BY r.created_at DESC
     `);
     res.json(result.rows);
