@@ -10,6 +10,8 @@ const { createTable: createReviewsTable } = require('./models/review');
 const { createTable: createCoursesTable } = require('./models/course');
 const { createTable: createSalesTable } = require('./models/sale');
 const { createTable: createInstructorsTable } = require('./models/instructor');
+const { createTable: createAgreementsTable } = require('./models/agreement');
+const { createTable: createDocumentsTable } = require('./models/documents');
 
 const authRoutes = require('./routes/auth');
 const applicationRoutes = require('./routes/application');
@@ -18,13 +20,18 @@ const courseRoutes = require('./routes/course');
 const saleRoutes = require('./routes/sale');
 const instructorRoutes = require('./routes/instructor');
 const uploadRoutes = require('./routes/upload');
+const agreementRoutes = require('./routes/agreement');
+const documentsRouter = require('./routes/documents');
 
 const app = express();
 app.use(cors({ origin: 'http://localhost:5500' }));
 app.use(express.json());
 app.use(helmet());
 app.use('/photos', express.static(path.join(__dirname, 'public', 'photos')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/upload', uploadRoutes);
+app.use('/api/agreements', agreementRoutes);
+app.use('/api/documents', documentsRouter);
 
 // Создание таблиц
 (async () => {
@@ -35,6 +42,8 @@ app.use('/api/upload', uploadRoutes);
     await createCoursesTable();
     await createSalesTable();
     await createInstructorsTable();
+    await createAgreementsTable();
+    await createDocumentsTable();
     console.log('Все таблицы готовы');
   } catch (err) {
     console.error('Ошибка создания таблиц:', err);

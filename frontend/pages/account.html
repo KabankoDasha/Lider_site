@@ -65,6 +65,10 @@
                             <span class="sidebar-indicator"></span>
                             <a href="#" class="sidebar-link">Редактировать профиль</a>
                         </li>
+                        <li class="sidebar-menu__item" data-target="documents">
+                            <span class="sidebar-indicator"></span>
+                            <a href="#" class="sidebar-link">Документы</a>
+                        </li>
                     </ul>
                 </nav>
                 <div class="sidebar-actions">
@@ -152,6 +156,35 @@
                             <button type="submit" class="profile-save-btn">Сохранить</button>
                         </div>
                     </form>
+                </div>
+
+                <!-- Панель "Документы" -->
+                <div class="content-panel" id="panel-documents">
+                    <div class="content-header">
+                        <h3 class="content-title">Документы</h3>
+                    </div>
+                    <div style="text-align: left; margin-top: 30px; margin-bottom: 30px;">
+                        <button id="open-agreement-btn" class="btn--confirm-action" style="width: auto; padding: 0 25px; height: 60px; font-size: 18px;">
+                            Заполнить договор на обучение
+                        </button>
+                    </div>
+                    <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 20px; margin-bottom: 30px;">
+                        <div>
+                            <button id="upload-passport-btn" class="btn--edit-agreement">Загрузить скан паспорта</button>
+                            <input type="file" id="passport-file-input" accept=".jpg,.jpeg,.png,.pdf" style="display: none;">
+                        </div>
+                        <div>
+                            <button id="upload-snils-btn" class="btn--edit-agreement">Загрузить скан СНИЛСа</button>
+                            <input type="file" id="snils-file-input" accept=".jpg,.jpeg,.png,.pdf" style="display: none;">
+                        </div>
+                        <div>
+                            <button id="upload-medical-btn" class="btn--edit-agreement">Загрузить скан справки</button>
+                            <input type="file" id="medical-file-input" accept=".jpg,.jpeg,.png,.pdf" style="display: none;">
+                        </div>
+                    </div>
+                    <div class="cards-wrapper" id="agreement-container">
+                        <!-- динамическое содержимое -->
+                    </div>
                 </div>
 
             </section>
@@ -310,6 +343,91 @@
             <div class="success-overlay__box">
                 <img src="../images/done.svg" alt="" class="success-overlay__icon">
                 <p class="success-overlay__text">Данные обновлены</p>
+            </div>
+        </div>
+
+        <!-- Оверлей формы договора -->
+        <div class="delete-overlay" id="agreement-form-overlay">
+            <div class="add-course-box" style="height:auto; overflow-y:auto;">
+                <button class="form-container__close" id="close-agreement-form">
+                <img src="../images/close.svg" alt="Закрыть">
+                </button>
+                <h2 class="add-course-title">Договор на обучение</h2>
+                <div class="add-course-form">
+                <div class="app-detail-row">
+                    <span class="app-detail-label">ФИО полностью*</span>
+                    <div class="add-course-input-wrapper">
+                        <input type="text" class="add-course-input" id="agr-full-name" placeholder="Иванов Иван Иванович">
+                    </div>
+                </div>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Дата рождения*</span>
+                    <div class="add-course-input-wrapper">
+                        <input type="text" class="add-course-input" id="agr-birth-date" placeholder="01.01.2000">
+                    </div>
+                </div>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Место рождения*</span>
+                    <div class="add-course-input-wrapper">
+                        <input type="text" class="add-course-input" id="agr-birth-place" placeholder="г. Челябинск">
+                    </div>
+                </div>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Паспорт серия*</span>
+                    <div class="add-course-input-wrapper">
+                        <input type="text" class="add-course-input" id="agr-pass-series" placeholder="4518">
+                    </div>
+                </div>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Паспорт номер*</span>
+                    <div class="add-course-input-wrapper">
+                        <input type="text" class="add-course-input" id="agr-pass-number" placeholder="105632">
+                    </div>
+                </div>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Кем выдан*</span>
+                    <div class="add-course-input-wrapper">
+                        <input type="text" class="add-course-input" id="agr-pass-issued" placeholder="Отделом УФМС...">
+                    </div>
+                </div>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Дата выдачи*</span>
+                    <div class="add-course-input-wrapper">
+                        <input type="text" class="add-course-input" id="agr-pass-date" placeholder="01.01.2020">
+                    </div>
+                </div>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Адрес регистрации*</span>
+                    <div class="add-course-input-wrapper">
+                        <input type="text" class="add-course-input" id="agr-address" placeholder="г. Челябинск, ул. ..., д. ...">
+                    </div>
+                </div>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Телефон*</span>
+                    <div class="add-course-input-wrapper">
+                        <input type="text" class="add-course-input" id="agr-phone" placeholder="89512071055">
+                    </div>
+                </div>
+                <div class="app-detail-row">
+                    <span class="app-detail-label">Место работы/учёбы</span>
+                    <div class="add-course-input-wrapper">
+                        <input type="text" class="add-course-input" id="agr-workplace" placeholder="ООО 'Атлант' ">
+                    </div>
+                </div>
+                </div>
+                <div style="text-align: right; margin-top: 30px; margin-bottom: 10px;">
+                    <button type="button" class="btn--confirm-action add-course-save-btn" id="save-agreement-btn" style="width: auto; padding: 0 25px; height: 60px; font-size: 18px;">
+                        Сохранить договор
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Оверлей успеха заполнения договора -->
+        <div class="success-overlay" id="agreement-success-overlay">
+            <div class="success-overlay__box">
+                <img src="../images/done.svg" alt="" class="success-overlay__icon">
+                <p class="success-overlay__text">Договор заполнен</p>
             </div>
         </div>
     </main>

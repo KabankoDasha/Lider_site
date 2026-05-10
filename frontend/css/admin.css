@@ -94,7 +94,7 @@ body.no-scroll {
     display: flex; 
     gap: 15px; 
     margin-bottom: 100px; 
-    align-items: flex-start; 
+    align-items: stretch;
 }
 
 .account-sidebar {
@@ -129,6 +129,7 @@ body.no-scroll {
 .sidebar-menu { 
     list-style: none; 
     width: 100%; 
+    margin-bottom: 30px;
 }
 
 .sidebar-menu__item {
@@ -1301,4 +1302,65 @@ button,
 
 .instructor-photo-row {
     margin-top: -30px;
+}
+
+/* Карточка договора */
+.agreement-card {
+    background: #fcfcfc;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 15px;
+}
+
+.agreement-card__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.agreement-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.agreement-card__label {
+    font-size: 14px;
+    color: #8A8A8A;
+}
+
+.agreement-card__value {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1E1E1E;
+}
+
+.btn--doc-link,
+.btn--preview-pdf {
+    background: transparent !important;
+    border: 2px solid #D90D26 !important;
+    color: #D90D26 !important;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    background-color: transparent !important;
+    font-family: 'Montserrat', sans-serif;
+    align-items: right;
+}
+
+.btn--doc-link:hover,
+.btn--preview-pdf:hover {
+    opacity: 0.7;
+}
+
+.agreement-card__row--actions {
+  justify-content: flex-end;
 }

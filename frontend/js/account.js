@@ -235,6 +235,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Восстановление последней активной вкладки ---
+    const lastTab = localStorage.getItem('activeAccountTab') || 'applications';
+    const activeMenuItem = document.querySelector(`.sidebar-menu__item[data-target="${lastTab}"]`);
+    const activePanel = document.getElementById(`panel-${lastTab}`);
+    if (activeMenuItem && activePanel) {
+        // Убираем активность со всех
+        document.querySelectorAll('.sidebar-menu__item').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.content-panel').forEach(el => el.classList.remove('active'));
+        activeMenuItem.classList.add('active');
+        activePanel.classList.add('active');
+    }
+
     // --- Переключение вкладок ---
     const menuItems = document.querySelectorAll('.sidebar-menu__item');
     const panels = document.querySelectorAll('.content-panel');
@@ -242,10 +254,14 @@ document.addEventListener('DOMContentLoaded', () => {
     menuItems.forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
+            const target = item.dataset.target;
+            // Сохраняем выбор
+            localStorage.setItem('activeAccountTab', target);
+            // Переключаем
             menuItems.forEach(el => el.classList.remove('active'));
             item.classList.add('active');
             panels.forEach(panel => panel.classList.remove('active'));
-            document.getElementById(`panel-${item.dataset.target}`).classList.add('active');
+            document.getElementById(`panel-${target}`).classList.add('active');
         });
     });
 
@@ -585,7 +601,323 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Простая защита от XSS
+    // === ДОГОВОР ===
+    // Сброс ошибок формы договора
+    function clearAgreementErrors() {
+        document.querySelectorAll('#agreement-form-overlay .add-course-input').forEach(inp => {
+            inp.classList.remove('error');
+        });
+        document.querySelectorAll('#agreement-form-overlay .add-course-input-wrapper .field-error-text').forEach(el => el.remove());
+    }
+
+    // Показ ошибки конкретного поля
+    function showAgreementFieldError(inputElement, message) {
+        const wrapper = inputElement.closest('.add-course-input-wrapper');
+        if (!wrapper) return;
+        // Удаляем старую ошибку внутри обертки
+        const oldErr = wrapper.querySelector('.field-error-text');
+        if (oldErr) oldErr.remove();
+        const errorSpan = document.createElement('span');
+        errorSpan.className = 'field-error-text';
+        errorSpan.textContent = message;
+        wrapper.appendChild(errorSpan);
+    }
+
+    function openAgreementFormHandler() {
+        openAgreementForm(null);
+    }
+
+    async function loadAgreement() {
+        const container = document.getElementById('agreement-container');
+        if (!container) return;
+        const token = localStorage.getItem('token');
+        const openBtn = document.getElementById('open-agreement-btn');
+
+        try {
+            const res = await fetch('http://localhost:3001/api/agreements/my', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (!res.ok) throw new Error('Ошибка загрузки');
+            const agreement = await res.json();
+
+            if (agreement && agreement.id) {
+                container.innerHTML = `
+                    <div class="agreement-card">
+                        <div class="agreement-card__row">
+                            <div class="agreement-card__info">
+                                <span class="agreement-card__label">Курс</span>
+                                <span class="agreement-card__value">${escapeHtml(agreement.course)}</span>
+                            </div>
+                            <div class="agreement-card__info">
+                                <span class="agreement-card__label">ФИО</span>
+                                <span class="agreement-card__value">${escapeHtml(agreement.full_name) || 'Не заполнено'}</span>
+                            </div>
+                            <div class="agreement-card__info">
+                                <span class="agreement-card__label">Статус</span>
+                                <span class="agreement-card__value">${agreement.status === 'submitted' ? 'Отправлен' : 'Черновик'}</span>
+                            </div>
+                        </div>
+                        <div class="agreement-card__row">
+                            <button id="edit-agreement-btn" class="btn--edit-agreement">Редактировать</button>
+                            <button id="view-pdf-btn" class="btn--preview-pdf">Договор</button>
+                        </div>
+                    </div>`;
+
+                if (openBtn) {
+                    openBtn.classList.add('btn--disabled');
+                    openBtn.removeEventListener('click', openAgreementFormHandler);
+                }
+
+                document.getElementById('edit-agreement-btn').addEventListener('click', () => openAgreementForm(agreement));
+                document.getElementById('view-pdf-btn').addEventListener('click', async () => {
+                    try {
+                        const pdfRes = await fetch(`http://localhost:3001/api/agreements/${agreement.id}/pdf`, {
+                            headers: { 'Authorization': `Bearer ${token}` }
+                        });
+                        if (!pdfRes.ok) throw new Error('Ошибка загрузки PDF');
+                        const blob = await pdfRes.blob();
+                        const url = URL.createObjectURL(blob);
+                        window.open(url, '_blank');
+                    } catch (e) {
+                        alert('Не удалось открыть PDF. Проверьте права доступа.');
+                    }
+                });
+
+            } else {
+                container.innerHTML = '<p style="text-align:left;">Договор не заполнен</p>';
+                if (openBtn) {
+                    openBtn.classList.remove('btn--disabled');
+                    openBtn.removeEventListener('click', openAgreementFormHandler);
+                    openBtn.addEventListener('click', openAgreementFormHandler);
+                }
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    // --- Открытие оверлея формы договора ---
+    function openAgreementForm(existingData) {
+        const overlay = document.getElementById('agreement-form-overlay');
+        if (!overlay) return;
+        overlay.classList.add('active');
+
+        // Сброс ошибок
+        clearAgreementErrors();
+
+        const setVal = (id, val) => {
+            const el = document.getElementById(id);
+            if (el) el.value = val || '';
+        };
+
+        if (existingData) {
+            setVal('agr-full-name', existingData.full_name);
+            setVal('agr-birth-date', existingData.birth_date);
+            setVal('agr-birth-place', existingData.birth_place);
+            setVal('agr-pass-series', existingData.passport_series);
+            setVal('agr-pass-number', existingData.passport_number);
+            setVal('agr-pass-issued', existingData.passport_issued_by);
+            setVal('agr-pass-date', existingData.passport_issued_date);
+            setVal('agr-address', existingData.registration_address);
+            setVal('agr-phone', existingData.phone);
+            setVal('agr-workplace', existingData.workplace);
+        } else {
+            ['agr-full-name','agr-birth-date','agr-birth-place','agr-pass-series','agr-pass-number',
+            'agr-pass-issued','agr-pass-date','agr-address','agr-phone','agr-workplace']
+            .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+        }
+    }
+
+    // Закрытие оверлея договора
+    document.getElementById('close-agreement-form')?.addEventListener('click', () => {
+        document.getElementById('agreement-form-overlay').classList.remove('active');
+    });
+
+    // Сохранение договора с валидацией
+    document.getElementById('save-agreement-btn')?.addEventListener('click', async () => {
+        // Сброс предыдущих ошибок
+        clearAgreementErrors();
+
+        const fields = [
+            { id: 'agr-full-name' },
+            { id: 'agr-birth-date' },
+            { id: 'agr-birth-place' },
+            { id: 'agr-pass-series' },
+            { id: 'agr-pass-number' },
+            { id: 'agr-pass-issued' },
+            { id: 'agr-pass-date' },
+            { id: 'agr-address' },
+            { id: 'agr-phone' }
+        ];
+
+        let isValid = true;
+
+        for (const f of fields) {
+            const el = document.getElementById(f.id);
+            if (!el.value.trim()) {
+                el.classList.add('error');
+                showAgreementFieldError(el, 'Заполните поле');
+                isValid = false;
+            }
+        }
+
+        if (!isValid) return;
+
+        const data = {
+            course: 'Автомобиль с МКПП — категория «B»',
+            full_name: document.getElementById('agr-full-name').value.trim(),
+            birth_date: document.getElementById('agr-birth-date').value.trim(),
+            birth_place: document.getElementById('agr-birth-place').value.trim(),
+            passport_series: document.getElementById('agr-pass-series').value.trim(),
+            passport_number: document.getElementById('agr-pass-number').value.trim(),
+            passport_issued_by: document.getElementById('agr-pass-issued').value.trim(),
+            passport_issued_date: document.getElementById('agr-pass-date').value.trim(),
+            registration_address: document.getElementById('agr-address').value.trim(),
+            phone: document.getElementById('agr-phone').value.trim(),
+            workplace: document.getElementById('agr-workplace').value.trim(),
+            status: 'submitted'
+        };
+
+        const token = localStorage.getItem('token');
+        try {
+            const res = await fetch('http://localhost:3001/api/agreements/my', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(data)
+            });
+            if (res.ok) {
+                document.getElementById('agreement-form-overlay').classList.remove('active');
+                const successOverlay = document.getElementById('agreement-success-overlay');
+                if (successOverlay) {
+                    successOverlay.classList.add('active');
+                    setTimeout(() => successOverlay.classList.remove('active'), 2000);
+                }
+                loadAgreement();
+            } else {
+                const errData = await res.json().catch(() => ({}));
+                alert('Ошибка сохранения: ' + (errData.message || ''));
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Ошибка соединения с сервером');
+        }
+    });
+
+    // Первоначальная загрузка договора
+    loadAgreement();
+
+    // === ЗАГРУЗКА ДОКУМЕНТОВ ===
+    const documentState = {
+        passport: false,
+        snils: false,
+        medical: false
+    };
+
+    async function loadUserDocuments() {
+        const token = localStorage.getItem('token');
+        try {
+            const res = await fetch('http://localhost:3001/api/documents/my', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (res.ok) {
+                const docs = await res.json();
+                documentState.passport = docs.some(d => d.type === 'passport');
+                documentState.snils = docs.some(d => d.type === 'snils');
+                documentState.medical = docs.some(d => d.type === 'medical');
+                updateDocumentButtons();
+            }
+        } catch (err) {
+            console.error('Не удалось загрузить статус документов', err);
+        }
+    }
+
+    function updateDocumentButtons() {
+        const passportBtn = document.getElementById('upload-passport-btn');
+        const snilsBtn = document.getElementById('upload-snils-btn');
+        const medicalBtn = document.getElementById('upload-medical-btn');
+
+        if (documentState.passport) {
+            passportBtn.textContent = 'Паспорт загружен';
+            passportBtn.classList.add('btn--uploaded');
+        } else {
+            passportBtn.textContent = 'Загрузить скан паспорта';
+            passportBtn.classList.remove('btn--uploaded');
+        }
+        if (documentState.snils) {
+            snilsBtn.textContent = 'СНИЛС загружен';
+            snilsBtn.classList.add('btn--uploaded');
+        } else {
+            snilsBtn.textContent = 'Загрузить скан СНИЛСа';
+            snilsBtn.classList.remove('btn--uploaded');
+        }
+        if (documentState.medical) {
+            medicalBtn.textContent = 'Справка загружена';
+            medicalBtn.classList.add('btn--uploaded');
+        } else {
+            medicalBtn.textContent = 'Загрузить скан справки';
+            medicalBtn.classList.remove('btn--uploaded');
+        }
+    }
+
+    function setupDocumentUpload(buttonId, fileInputId, docType) {
+        const button = document.getElementById(buttonId);
+        const fileInput = document.getElementById(fileInputId);
+
+        button.addEventListener('click', () => {
+            if (!button.disabled) {
+                fileInput.value = '';
+                fileInput.click();
+            }
+        });
+
+        fileInput.addEventListener('change', async () => {
+            if (!fileInput.files.length) return;
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('type', docType);
+
+            const token = localStorage.getItem('token');
+            const originalText = button.textContent;
+            button.textContent = 'Загрузка...';
+
+            try {
+                const res = await fetch('http://localhost:3001/api/documents/upload', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` },
+                    body: formData
+                });
+                if (res.ok) {
+                    // Успех – обновляем локальное состояние без запроса
+                    if (docType === 'passport') documentState.passport = true;
+                    if (docType === 'snils') documentState.snils = true;
+                    if (docType === 'medical') documentState.medical = true;
+                    updateDocumentButtons();
+                } else {
+                    const errData = await res.json().catch(() => ({}));
+                    alert('Ошибка: ' + (errData.message || ''));
+                    button.disabled = false;
+                    button.textContent = originalText;
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Ошибка соединения');
+                button.disabled = false;
+                button.textContent = originalText;
+            }
+        });
+    }
+
+    // Инициализация
+    setupDocumentUpload('upload-passport-btn', 'passport-file-input', 'passport');
+    setupDocumentUpload('upload-snils-btn', 'snils-file-input', 'snils');
+    setupDocumentUpload('upload-medical-btn', 'medical-file-input', 'medical');
+    loadUserDocuments(); 
+
+    // Простая защита от XSS (оставлена для локального использования)
     function escapeHtml(str) {
         return str.replace(/[&<>]/g, function(m) {
             if (m === '&') return '&amp;';

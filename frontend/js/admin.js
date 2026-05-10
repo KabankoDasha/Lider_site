@@ -994,6 +994,96 @@ document.addEventListener('DOMContentLoaded', () => {
         showCourseSuccess('Изменения сохранены');
     });
 
+    // =================== ДОКУМЕНТЫ ===================
+    async function loadAgreements() {
+        const container = document.getElementById('agreements-container');
+        if (!container) return;
+        const token = localStorage.getItem('token');
+        try {
+            const res = await fetch('http://localhost:3001/api/agreements/admin', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (!res.ok) throw new Error('Ошибка загрузки договоров');
+            const agreements = await res.json();
+
+            // Собираем уникальные user_id
+            const userIds = [...new Set(agreements.map(a => a.user_id))];
+            // Получаем статус документов для всех пользователей одним запросом
+            const docsRes = await fetch('http://localhost:3001/api/documents/bulk-check', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ userIds })
+            });
+            const docsMap = docsRes.ok ? (await docsRes.json()) : {};
+
+            container.innerHTML = agreements.map(agr => {
+            const fullName = agr.full_name || agr.user_name || 'Не указано';
+            const statusText = agr.status === 'submitted' ? 'Отправлен' : 'Черновик';
+            const userDocs = docsMap[agr.user_id] || {};
+
+            return `
+                <div class="agreement-card" data-id="${agr.id}">
+                    <div class="agreement-card__row">
+                        <div class="agreement-card__info">
+                            <span class="agreement-card__label">Курс</span>
+                            <span class="agreement-card__value">${escapeHtml(agr.course)}</span>
+                        </div>
+                        <div class="agreement-card__info">
+                            <span class="agreement-card__label">ФИО</span>
+                            <span class="agreement-card__value">${escapeHtml(fullName)}</span>
+                        </div>
+                        <div class="agreement-card__info">
+                            <span class="agreement-card__label">Статус</span>
+                            <span class="agreement-card__value">${statusText}</span>
+                        </div>
+                    </div>
+                    <div class="agreement-card__row agreement-card__row--actions">
+                        <button class="btn--preview-pdf" data-id="${agr.id}">Договор</button>
+                        ${userDocs.passport ? `<button class="btn--doc-link" data-user="${agr.user_id}" data-type="passport">Паспорт</button>` : ''}
+                        ${userDocs.snils ? `<button class="btn--doc-link" data-user="${agr.user_id}" data-type="snils">СНИЛС</button>` : ''}
+                        ${userDocs.medical ? `<button class="btn--doc-link" data-user="${agr.user_id}" data-type="medical">Справка</button>` : ''}
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        // 1) Кнопки «Договор»
+        container.querySelectorAll('.btn--preview-pdf').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const agreementId = btn.dataset.id;
+                const token = localStorage.getItem('token');
+                try {
+                    const pdfRes = await fetch(`http://localhost:3001/api/agreements/${agreementId}/pdf`, {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    if (!pdfRes.ok) throw new Error('Ошибка загрузки PDF');
+                    const blob = await pdfRes.blob();
+                    const url = URL.createObjectURL(blob);
+                    window.open(url, '_blank');
+                } catch (e) {
+                    alert('Не удалось открыть PDF. Проверьте права доступа.');
+                }
+            });
+        });
+
+        // 2) Кнопки «Паспорт», «СНИЛС», «Справка»
+        container.querySelectorAll('.btn--doc-link').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const token = localStorage.getItem('token');
+                const userId = btn.dataset.user;
+                const docType = btn.dataset.type;
+                window.open(`http://localhost:3001/api/documents/user/${userId}/${docType}/pdf?token=${token}`, '_blank');
+            });
+        });
+
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     // =================== ОВЕРЛЕЙ ВЫХОДА И УДАЛЕНИЯ ===================
     const logoutOverlay = document.getElementById('logout-overlay');
     document.getElementById('logout-btn').addEventListener('click', () => logoutOverlay.classList.add('active'));
@@ -1015,6 +1105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // =================== ИНИЦИАЛИЗАЦИЯ ===================
     loadApplications();
     loadReviews();
+    loadAgreements();
 
     function escapeHtml(str) {
         return str.replace(/[&<>]/g, function(m) {
