@@ -25,9 +25,24 @@ router.post('/', auth, adminOnly, async (req, res) => {
 
 router.put('/:id', auth, adminOnly, async (req, res) => {
   try {
-    const instructor = await Instructor.update(req.params.id, req.body);
+    const instructor = await Instructor.findById(req.params.id);
     if (!instructor) return res.status(404).json({ message: 'Инструктор не найден' });
-    res.json(instructor);
+
+    const oldPhoto = instructor.photo; // текущее имя файла
+
+    const updated = await Instructor.update(req.params.id, req.body);
+
+    // Если загружена новая фотография и она отличается от старой, удаляем старый файл
+    if (req.body.photo && oldPhoto && req.body.photo !== oldPhoto) {
+      const fs = require('fs');
+      const path = require('path');
+      const oldPhotoPath = path.join(__dirname, '..', 'public', 'photos', oldPhoto);
+      fs.unlink(oldPhotoPath, (err) => {
+        if (err) console.error('Ошибка удаления старого фото:', err);
+      });
+    }
+
+    res.json(updated);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Ошибка сервера' });

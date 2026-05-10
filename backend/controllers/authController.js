@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const { User } = require('../models/user');
 
 exports.register = async (req, res) => {
-  const { name, surname = '', email, password, phone = '' } = req.body;  // добавили surname и phone
+  const { name, surname = '', email, password, phone = '' } = req.body;  
 
   if (!name || !email || !password) {
     return res.status(400).json({ message: 'Заполните все поля' });

@@ -889,6 +889,48 @@ main {
     visibility: hidden;
 }
 
+/* Поисковая строка и подсказки */
+.search-box {
+    position: relative;   
+}
+
+.search-suggestions {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    background: #fcfcfc;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 2000;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+.search-suggestions__item {
+    display: block;
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #000;
+    text-decoration: none;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s;
+}
+
+.search-suggestions:hover {
+    background-color: #f9f9f9;
+}
+.search-suggestions__title {
+    font-weight: 400;
+}
+.search-suggestions__no-results {
+    padding: 15px 20px;
+    color: #999;
+    font-size: 14px;
+}
+
 /* Видимость элементов в зависимости от версии */
 .mobile-only { display: none; }
 .desktop-only { display: block; }

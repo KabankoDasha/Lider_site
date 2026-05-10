@@ -870,7 +870,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const fileInput = document.createElement('input');
         fileInput.type = 'file';
-        fileInput.accept = '.jpg,.jpeg,.png,.webp';
+        fileInput.accept = '.jpg,.jpeg,.png,.webp,.svg';
         fileInput.style.display = 'none';
         document.body.appendChild(fileInput);
 
