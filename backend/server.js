@@ -27,7 +27,11 @@ const app = express();
 app.use(cors({ origin: 'http://localhost:5500' }));
 app.use(express.json());
 app.use(helmet());
-app.use('/photos', express.static(path.join(__dirname, 'public', 'photos')));
+app.use('/photos', express.static(path.join(__dirname, 'public', 'photos'), {
+  setHeaders: (res) => {
+    res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+  }
+}));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/upload', uploadRoutes);
 app.use('/api/agreements', agreementRoutes);
