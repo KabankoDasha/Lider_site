@@ -122,6 +122,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     day: 'numeric', month: 'long', year: 'numeric'
                 });
 
+                const replyBtn = document.getElementById('reply-to-application');
+                if (replyBtn) {
+                    replyBtn.style.display = app.user_id ? 'inline-flex' : 'none';
+                };
+
                 const statusMapRu = {
                     processing: 'в обработке',
                     confirmed: 'подтверждена',
@@ -1106,6 +1111,74 @@ document.addEventListener('DOMContentLoaded', () => {
     loadApplications();
     loadReviews();
     loadAgreements();
+
+    // === ОТВЕТЫ НА ЗАЯВКИ ===
+    const replyOverlay = document.getElementById('reply-overlay');
+    const replyTextarea = document.getElementById('reply-message');
+    const replyAppNumberSpan = document.getElementById('reply-app-number');
+    const replySuccessOverlay = document.getElementById('reply-success-overlay');
+    const replySuccessMessage = document.getElementById('reply-success-message');
+    let currentReplyApplicationId = null;
+
+    document.getElementById('reply-to-application').addEventListener('click', () => {
+        if (!currentAppId) {
+            console.error('currentAppId не установлен');
+            return;
+        }
+        currentReplyApplicationId = currentAppId;
+        replyAppNumberSpan.textContent = currentAppId;
+        replyTextarea.value = '';
+        replyOverlay.classList.add('active');
+    });
+
+    document.getElementById('close-reply-overlay').addEventListener('click', () => {
+        replyOverlay.classList.remove('active');
+    });
+    document.getElementById('cancel-reply').addEventListener('click', () => {
+        replyOverlay.classList.remove('active');
+    });
+
+    document.getElementById('send-reply').addEventListener('click', async () => {
+        const message = replyTextarea.value.trim();
+        if (!message) {
+            alert('Введите текст ответа');
+            return;
+        }
+        if (!currentReplyApplicationId) {
+            alert('Ошибка: ID заявки не определён');
+            return;
+        }
+        const token = localStorage.getItem('token');
+        try {
+            const response = await fetch(`http://localhost:3001/api/applications/${currentReplyApplicationId}/reply`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ message })
+            });
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.message || 'Ошибка отправки');
+            }
+            // Успех
+            replyOverlay.classList.remove('active');
+            replySuccessMessage.textContent = 'Ответ успешно отправлен!';
+            replySuccessOverlay.classList.add('active');
+            setTimeout(() => {
+                replySuccessOverlay.classList.remove('active');
+            }, 2000);
+        } catch (err) {
+            console.error('Ошибка при отправке ответа:', err);
+            alert(`Не удалось отправить ответ: ${err.message}`);
+        }
+    });
+
+    // Закрытие оверлея успеха по клику
+    replySuccessOverlay.addEventListener('click', () => {
+        replySuccessOverlay.classList.remove('active');
+    });
 
     function escapeHtml(str) {
         return str.replace(/[&<>]/g, function(m) {

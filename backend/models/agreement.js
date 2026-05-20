@@ -77,6 +77,14 @@ const Agreement = {
   async findById(id) {
     const result = await pool.query('SELECT * FROM agreements WHERE id = $1', [id]);
     return result.rows[0];
+  },
+
+  async updateCourse(id, course) {
+    const result = await pool.query(
+      'UPDATE agreements SET course = $1 WHERE id = $2 RETURNING *',
+      [course, id]
+    );
+    return result.rows[0];
   }
 };
 

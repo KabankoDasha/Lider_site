@@ -5,11 +5,11 @@ const cors = require('cors');
 const helmet = require('helmet');
 
 const { createTable: createUsersTable } = require('./models/user');
-const { createTable: createApplicationsTable } = require('./models/application');
+const { createTable: createApplicationsTable, createRepliesTable } = require('./models/application');
 const { createTable: createReviewsTable } = require('./models/review');
 const { createTable: createCoursesTable } = require('./models/course');
 const { createTable: createSalesTable } = require('./models/sale');
-const { createTable: createInstructorsTable } = require('./models/instructor');
+const { createTable: createInstructorsTable, createRatingsTable } = require('./models/instructor');
 const { createTable: createAgreementsTable } = require('./models/agreement');
 const { createTable: createDocumentsTable } = require('./models/documents');
 
@@ -42,10 +42,12 @@ app.use('/api/documents', documentsRouter);
   try {
     await createUsersTable();
     await createApplicationsTable();
+    await createRepliesTable(); 
     await createReviewsTable();
     await createCoursesTable();
     await createSalesTable();
     await createInstructorsTable();
+    await createRatingsTable(); 
     await createAgreementsTable();
     await createDocumentsTable();
     console.log('Все таблицы готовы');

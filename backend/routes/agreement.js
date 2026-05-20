@@ -29,6 +29,22 @@ router.post('/my', auth, async (req, res) => {
   }
 });
 
+// Обновить курс договора (для пользователя)
+router.patch('/:id', auth, async (req, res) => {
+  const { id } = req.params;
+  const { course } = req.body;
+  if (!course) return res.status(400).json({ message: 'Курс обязателен' });
+
+  const agreement = await Agreement.findById(id);
+  if (!agreement) return res.status(404).json({ message: 'Договор не найден' });
+  if (agreement.user_id !== req.user.id && req.user.role !== 'admin') {
+    return res.status(403).json({ message: 'Доступ запрещён' });
+  }
+
+  const updated = await Agreement.updateCourse(id, course);
+  res.json(updated);
+});
+
 // Админ: все договоры
 router.get('/admin', auth, adminOnly, async (req, res) => {
   try {

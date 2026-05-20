@@ -163,28 +163,74 @@
                     <div class="content-header">
                         <h3 class="content-title">Документы</h3>
                     </div>
-                    <div style="text-align: left; margin-top: 30px; margin-bottom: 30px;">
-                        <button id="open-agreement-btn" class="btn--confirm-action" style="width: auto; padding: 0 25px; height: 60px; font-size: 18px;">
-                            Заполнить договор на обучение
-                        </button>
-                    </div>
-                    <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 20px; margin-bottom: 30px;">
-                        <div>
-                            <button id="upload-passport-btn" class="btn--edit-agreement">Загрузить скан паспорта</button>
-                            <input type="file" id="passport-file-input" accept=".jpg,.jpeg,.png,.pdf" style="display: none;">
+
+                    <!-- Карточка договора -->
+                    <div class="agreement-card" id="agreement-card">
+                        <!-- Первая строка: Курс и ФИО -->
+                        <div class="agreement-card__row">
+                            <div class="agreement-card__info agreement-card__info--course">
+                                <span class="agreement-card__label">Курс</span>
+                                <!-- Кастомный селект (уникальные классы) -->
+                                <div class="custom-select-doc" id="course-select-doc">
+                                    <select class="custom-select-doc__native" id="course-native-doc">
+                                        <option value="">Выберите курс</option>
+                                    </select>
+                                    <div class="custom-select-doc__trigger">
+                                        <span class="custom-select-doc__selected placeholder">Выберите курс</span>
+                                        <img src="../images/arrow3.svg" alt="" class="custom-select-doc__arrow">
+                                    </div>
+                                    <ul class="custom-select-doc__options"></ul>
+                                </div>
+                            </div>
+                            <div class="agreement-card__info agreement-card__info--fio">
+                                <span class="agreement-card__label">ФИО</span>
+                                <span class="agreement-card__value" id="agreement-fullname">—</span>
+                            </div>
                         </div>
-                        <div>
-                            <button id="upload-snils-btn" class="btn--edit-agreement">Загрузить скан СНИЛСа</button>
-                            <input type="file" id="snils-file-input" accept=".jpg,.jpeg,.png,.pdf" style="display: none;">
+
+                        <!-- Вторая строка: Статус -->
+                        <div class="agreement-card__status-row">
+                            <div class="agreement-card__info">
+                                <span class="agreement-card__label">Статус</span>
+                                <span class="agreement-card__value" id="agreement-status">Не заполнен</span>
+                            </div>
                         </div>
-                        <div>
-                            <button id="upload-medical-btn" class="btn--edit-agreement">Загрузить скан справки</button>
-                            <input type="file" id="medical-file-input" accept=".jpg,.jpeg,.png,.pdf" style="display: none;">
+
+                        <!-- Блок кнопок договора -->
+                        <div class="agreement-card__actions" id="agreement-actions">
+                            <div class="agreement-card__actions-left">
+                                <button id="edit-agreement-btn" class="btn--edit-agreement" style="display: none;">Редактировать</button>
+                            </div>
+                            <div class="agreement-card__actions-right">
+                                <button id="fill-agreement-btn" class="btn--fill-agreement">Заполнить договор</button>
+                                <button id="view-agreement-btn" class="btn--view-agreement" style="display: none;">Договор</button>
+                            </div>
+                        </div>
+
+                        <!-- Блок кнопок загруженных документов (паспорт, СНИЛС, справка) -->
+                        <div class="agreement-card__docs">
+                            <div class="agreement-card__docs-left" id="agreement-docs-buttons">
+                                <!-- Сюда будут динамически добавляться кнопки: Паспорт, СНИЛС, Справка -->
+                            </div>
+                            <div class="agreement-card__docs-right">
+                                <button id="memory-btn" class="btn--memory">Памятка</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="cards-wrapper" id="agreement-container">
-                        <!-- динамическое содержимое -->
+
+                    <!-- Кнопки загрузки сканов (под карточкой) -->
+                    <div class="docs-upload-section">
+                        <div class="upload-buttons-row">
+                            <button id="upload-passport-btn" class="btn--upload-doc">Загрузить скан паспорта</button>
+                            <button id="upload-snils-btn" class="btn--upload-doc">Загрузить скан СНИЛСа</button>
+                            <button id="upload-medical-btn" class="btn--upload-doc">Загрузить скан справки</button>
+                        </div>
                     </div>
+
+                    <!-- Скрытые инпуты для загрузки файлов -->
+                    <input type="file" id="passport-file-input" accept=".jpg,.jpeg,.png,.pdf" style="display: none;">
+                    <input type="file" id="snils-file-input" accept=".jpg,.jpeg,.png,.pdf" style="display: none;">
+                    <input type="file" id="medical-file-input" accept=".jpg,.jpeg,.png,.pdf" style="display: none;">
                 </div>
 
             </section>
@@ -517,6 +563,7 @@
                         </ul>
                         <p class="footer__sitemap-heading1"><a href="../pages/distant.html">Дистанционное обучение</a></p>
                         <p class="footer__sitemap-heading1"><a href="#" id="open-form-btn">Записаться на обучение</a></p>
+                        <p class="footer__sitemap-heading1"><a href="../pages/license.html">Лицензии</a></p>
                     </div>
                 </div>
                 <hr class="footer__divider">

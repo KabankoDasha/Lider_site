@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Application } = require('../models/application');
+const { Application, ApplicationReply } = require('../models/application');
 const auth = require('../middleware/auth');
 const adminOnly = require('../middleware/adminOnly');
 const pool = require('../db');   // для JOIN-запроса
@@ -84,6 +84,49 @@ router.delete('/:id', auth, async (req, res) => {
     const deleted = await Application.delete(id, userId);
     if (!deleted) return res.status(404).json({ message: 'Заявка не найдена или нет прав' });
     res.json({ message: 'Заявка удалена' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Ошибка сервера' });
+  }
+});
+
+// Создать ответ на заявку (только админ)
+router.post('/:id/reply', auth, adminOnly, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { message } = req.body;
+    if (!message || message.trim() === '') {
+      return res.status(400).json({ message: 'Текст ответа не может быть пустым' });
+    }
+
+    const application = await Application.findById(id);
+    if (!application) return res.status(404).json({ message: 'Заявка не найдена' });
+
+    const reply = await ApplicationReply.create(id, req.user.id, message.trim());
+    res.status(201).json({ reply });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Ошибка сервера' });
+  }
+});
+
+// Получить все ответы на заявку (доступ владельцу заявки или админу)
+router.get('/:id/replies', auth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user.id;
+    const userRole = req.user.role;
+
+    const application = await Application.findById(id);
+    if (!application) return res.status(404).json({ message: 'Заявка не найдена' });
+
+    // Доступ: админ ИЛИ владелец заявки (если user_id совпадает)
+    if (userRole !== 'admin' && application.user_id !== userId) {
+      return res.status(403).json({ message: 'Доступ запрещён' });
+    }
+
+    const replies = await ApplicationReply.findByApplicationId(id);
+    res.json(replies);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Ошибка сервера' });

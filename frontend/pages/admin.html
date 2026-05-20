@@ -190,7 +190,33 @@
                         </ul>
                     </div>
                 </div>
-                <button type="button" class="btn--confirm-action app-save-btn" id="save-application">Сохранить</button>
+                <div class="app-detail-actions" style="display: flex; justify-content: space-between; margin-top: 20px;">
+                    <button type="button" class="btn--reply" id="reply-to-application">Ответить</button>
+                    <button type="button" class="btn--confirm-action app-save-btn" id="save-application">Сохранить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Оверлей отправки ответа -->
+        <div class="delete-overlay" id="reply-overlay">
+            <div class="reply-box">
+                <button class="form-container__close" id="close-reply-overlay">
+                    <img src="../images/close.svg" alt="Закрыть">
+                </button>
+                <p style="margin: 0; font-size: 20px; font-weight: 500;">Ответ на заявку №<span id="reply-app-number"></span></p>
+                <textarea id="reply-message" rows="5" placeholder="Введите ваш ответ..."></textarea>
+                <div class="reply-actions">
+                    <button type="button" class="btn--cancel" id="cancel-reply">Отмена</button>
+                    <button type="button" class="btn--confirm-action" id="send-reply">Отправить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Оверлей успешной отправки ответа -->
+        <div class="success-overlay" id="reply-success-overlay">
+            <div class="success-overlay__box">
+                <img src="../images/done.svg" alt="" class="success-overlay__icon">
+                <p class="success-overlay__text" id="reply-success-message">Ответ успешно отправлен!</p>
             </div>
         </div>
 
@@ -687,6 +713,7 @@
                         </ul>
                         <p class="footer__sitemap-heading1"><a href="../pages/distant.html">Дистанционное обучение</a></p>
                         <p class="footer__sitemap-heading1"><a href="#" id="open-form-btn">Записаться на обучение</a></p>
+                        <p class="footer__sitemap-heading1"><a href="../pages/license.html">Лицензии</a></p>
                     </div>
                 </div>
                 <hr class="footer__divider">

@@ -205,4 +205,24 @@ router.get('/user/:userId/:type/pdf', auth, adminOnly, async (req, res) => {
     }
 });
 
+// Получить документ по типу (для текущего пользователя)
+router.get('/my/:type', auth, async (req, res) => {
+  const { type } = req.params;
+  if (!['passport', 'snils', 'medical'].includes(type)) {
+    return res.status(400).json({ message: 'Неверный тип документа' });
+  }
+  const doc = await Document.findByUserIdAndType(req.user.id, type);
+  if (!doc) return res.status(404).json({ message: 'Документ не найден' });
+
+  const ext = path.extname(doc.file_path).toLowerCase();
+  const mimeTypes = {
+    '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.png': 'image/png',
+    '.pdf': 'application/pdf',
+  };
+  res.type(mimeTypes[ext] || 'application/octet-stream');
+  res.sendFile(doc.file_path);
+});
+
 module.exports = router;

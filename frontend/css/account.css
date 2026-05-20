@@ -999,83 +999,314 @@ body {
     border-radius: 2px;
 }
 
-/* Карточка договора */
+/* ========================
+   Новая карточка договора (исправленная)
+   ======================== */
+
 .agreement-card {
     background: #fcfcfc;
     border-radius: 12px;
-    padding: 20px;
-    
-    display: flex;
-    flex-direction: column;
-    gap: 16px;                     
-    margin-bottom: 15px;
+    padding: 24px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    overflow: visible;
+    position: relative;
 }
 
+/* Первая строка: курс и ФИО */
 .agreement-card__row {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 30px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
-    gap: 12px;
 }
 
-.agreement-card__info {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;                     
+.agreement-card__info--course {
+    flex: 2;
+    min-width: 220px;
+    position: relative;
+}
+
+.agreement-card__info--fio {
+    flex: 1;
+    min-width: 150px;
 }
 
 .agreement-card__label {
+    display: block;
     font-size: 14px;
     color: #8A8A8A;
+    margin-bottom: 8px;
 }
 
 .agreement-card__value {
     font-size: 16px;
     font-weight: 500;
     color: #1E1E1E;
+    word-break: break-word;
 }
 
+/* Строка статуса */
+.agreement-card__status-row {
+    margin-bottom: 20px;
+}
+.agreement-card__status-row .agreement-card__info {
+    flex: none;
+    width: auto;
+}
+
+/* Блок кнопок договора */
+.agreement-card__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.agreement-card__actions-left {
+    display: flex;
+    gap: 15px;
+}
+
+.agreement-card__actions-right {
+    display: flex;
+    gap: 15px;
+}
+
+/* Кнопки внутри карточки */
+.btn--fill-agreement,
+.btn--view-agreement,
 .btn--edit-agreement,
-.btn--preview-pdf {
-    background: transparent !important;
-    border: 2px solid #D90D26 !important;
-    color: #D90D26 !important;
+.btn--doc-preview {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 20px;
     font-size: 14px;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    height: auto;
-    min-width: auto;
-    line-height: 1.2;
-    background-color: transparent !important;
+    font-weight: 500;
     font-family: 'Montserrat', sans-serif;
-    transform: opacity 0.2s;
-}
-
-.btn--edit-agreement:hover,
-.btn--preview-pdf:hover {
-    opacity: 0.7;
-}
-
-/* Серый вариант кнопки загрузки */
-.btn--edit-agreement.btn--uploaded {
-    border-color: #c2c2c2 !important;
-    color: #c2c2c2 !important;
+    border-radius: 8px;
     cursor: pointer;
-}
-.btn--edit-agreement.btn--uploaded:hover {
-    opacity: 0.7;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+    line-height: 1;
 }
 
-/* Неактивная кнопка "Заполнить договор" */
-.btn--disabled {
-    background: #c2c2c2 !important;
-    color: #FFFFFF !important;
-    pointer-events: none;
-    cursor: not-allowed;
+.btn--view-agreement,
+.btn--doc-preview {
+    background: transparent;
+    border: 2px solid #D90D26;
+    color: #D90D26;
+}
+
+.btn--fill-agreement,
+.btn--edit-agreement {
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
     border: none;
+    color: #fff;
+}
+
+.btn--fill-agreement:hover,
+.btn--view-agreement:hover,
+.btn--edit-agreement:hover,
+.btn--doc-preview:hover {
+    opacity: 0.85;
+}
+
+/* Блок кнопок документов (Паспорт, СНИЛС, Справка, Памятка) */
+.agreement-card__docs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+    margin-top: 10px;
+}
+
+.agreement-card__docs-left {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.agreement-card__docs-right {
+    margin-left: auto;
+}
+
+/* ========== Кастомный селект для договора (уникальные классы) ========== */
+.custom-select-doc {
+    position: relative;
+    width: 100%;
+    z-index: 5;
+}
+
+.custom-select-doc__native {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.custom-select-doc__trigger {
+    width: 100%;
+    height: 44px;
+    background-color: #FCFCFC;
+    border: 1.5px solid #9B9B9B;
+    border-radius: 8px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+}
+
+.custom-select-doc__selected {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.custom-select-doc__selected.placeholder {
+    color: #aaa;
+}
+
+.custom-select-doc__arrow {
+    width: 12px;
+    height: 12px;
+    transition: transform 0.2s;
+}
+
+.custom-select-doc.open .custom-select-doc__arrow {
+    transform: rotate(180deg);
+}
+
+.custom-select-doc__options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.custom-select-doc.open .custom-select-doc__options {
+    display: block;
+}
+
+.custom-select-doc__options li {
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.custom-select-doc__options li:hover {
+    background-color: #F0F0F0;
+}
+
+/* Кнопки загрузки документов (под карточкой) */
+.btn--upload-doc {
+    background: transparent;
+    border: 2px solid #D90D26;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #D90D26;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-family: 'Montserrat', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+}
+.btn--upload-doc:hover {
     opacity: 0.7;
 }
+.btn--upload-doc.btn--uploaded {
+    border-color: #c2c2c2;
+    color: #c2c2c2;
+    cursor: default;
+}
+
+/* Кнопка "Памятка" */
+.btn--memory {
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-family: 'Montserrat', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+}
+.btn--memory:hover {
+    opacity: 0.85;
+}
+
+.memory-btn-wrapper {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.upload-buttons-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.toggle-replies-btn {
+    background: transparent;
+    border: 2px solid #D90D26;
+    border-radius: 10px;
+    color: #D90D26;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    padding: 8px 16px;
+    margin-top: 10px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+    display: inline-block;
+}
+
+.toggle-replies-btn:hover {
+    opacity: 0.7;
+}
+.application-replies {
+    margin-top: 15px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+.reply-item {
+    border-bottom: 1px solid #eee;
+    padding: 8px 0;
+}
+.reply-message { font-size: 14px; margin-bottom: 4px; }
+.reply-date { font-size: 12px; color: #888; }

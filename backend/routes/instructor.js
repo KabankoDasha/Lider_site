@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Instructor } = require('../models/instructor');
+const { Instructor, InstructorRating } = require('../models/instructor');
 const auth = require('../middleware/auth');
 const adminOnly = require('../middleware/adminOnly');
 
@@ -13,6 +13,43 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Получить оценку текущего пользователя для инструктора
+router.get('/:id/user-rating', auth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const rating = await InstructorRating.getUserRating(req.user.id, id);
+    res.json({ rating: rating || null });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Ошибка сервера' });
+  }
+});
+
+// Оценить инструктора
+router.post('/:id/rate', auth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { rating } = req.body;
+    if (!rating || rating < 1 || rating > 5) {
+      return res.status(400).json({ message: 'Оценка должна быть от 1 до 5' });
+    }
+
+    const instructor = await Instructor.findById(id);
+    if (!instructor) return res.status(404).json({ message: 'Инструктор не найден' });
+
+    await InstructorRating.createOrUpdate(req.user.id, id, rating);
+    const updatedInstructor = await Instructor.findById(id);
+    res.json({
+      rating: updatedInstructor.rating,
+      votes_count: updatedInstructor.votes_count
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Ошибка сервера' });
+  }
+});
+
+// Админские маршруты (без изменений)
 router.post('/', auth, adminOnly, async (req, res) => {
   try {
     const instructor = await Instructor.create(req.body);
@@ -28,11 +65,9 @@ router.put('/:id', auth, adminOnly, async (req, res) => {
     const instructor = await Instructor.findById(req.params.id);
     if (!instructor) return res.status(404).json({ message: 'Инструктор не найден' });
 
-    const oldPhoto = instructor.photo; // текущее имя файла
-
+    const oldPhoto = instructor.photo;
     const updated = await Instructor.update(req.params.id, req.body);
 
-    // Если загружена новая фотография и она отличается от старой, удаляем старый файл
     if (req.body.photo && oldPhoto && req.body.photo !== oldPhoto) {
       const fs = require('fs');
       const path = require('path');
@@ -41,7 +76,6 @@ router.put('/:id', auth, adminOnly, async (req, res) => {
         if (err) console.error('Ошибка удаления старого фото:', err);
       });
     }
-
     res.json(updated);
   } catch (err) {
     console.error(err);

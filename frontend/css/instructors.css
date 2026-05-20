@@ -322,3 +322,115 @@ body {
     position: relative;
     z-index: 1;
 }
+
+/* Стили для интерактивных звёзд и голосов */
+.instructor-card__rating {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.rating-value {
+    font-size: 18px;
+    font-weight: 300;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.votes-count {
+    font-size: 14px;
+    color: #7A7A7A;
+    margin-left: 5px;
+}
+
+/* Интерактивные звёзды (только для авторизованных) */
+.star.interactive {
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+.star.interactive:hover {
+    transform: scale(1.1);
+}
+
+/* ========================
+   Оверлей подтверждения (для оценки инструктора)
+   ======================== */
+.delete-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.delete-overlay.active {
+    display: flex;
+}
+
+.delete-overlay__box {
+    width: 600px;
+    min-height: 300px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 50px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+.delete-overlay__text {
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 40px;
+    line-height: 1.3;
+}
+
+.delete-overlay__buttons {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+/* Кнопки оверлея */
+.btn--cancel-rate {
+    width: 187px;
+    height: 60px;
+    background: transparent;
+    border: 2px solid #D90D26;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #D90D26;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-family: 'Montserrat', sans-serif;
+}
+.btn--cancel-rate:hover {
+    opacity: 0.7;
+}
+
+.btn--confirm-rate {
+    width: 193px;
+    height: 60px;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #fcfcfc;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-family: 'Montserrat', sans-serif;
+}
+.btn--confirm-rate:hover {
+    opacity: 0.8;
+}

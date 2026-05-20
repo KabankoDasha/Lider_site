@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Автошкола Лидер</title>
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/instructors.css">
+    <link rel="stylesheet" href="../css/license.css">
     <link rel="stylesheet" href="../css/forma.css">
 </head>
 <body>
@@ -29,82 +29,44 @@
         </div>
     </header>
 
-    <main class="instructor-main">
+    <main class="login-main">
         <!-- Хлебные крошки -->
         <div class="breadcrumbs container">
             <a href="../pages/main.html">Главная</a>
             <span class="breadcrumbs__sep">/</span>
-            <span class="breadcrumbs__current">Инструкторы</span>
+            <span class="breadcrumbs__current">Лицензии</span>
         </div>
 
-        <!-- Заголовок и описание -->
-        <section class="instructor-hero container">
-            <h1 class="instructor-hero__title">Инструкторы</h1>
-            <p class="instructor-hero__desc">
-                В этом разделе вы можете познакомиться с людьми, которые научат вас уверенно ориентироваться в знаках и принимать правильные решения за рулём. Наши инструкторы — мастера своего дела, терпеливые, внимательные и по-настоящему увлечённые своим делом. Выбирайте наставника, с которым вам будет комфортно и приходите к нам на занятия
-            </p>
+        <!-- Заголовок -->
+        <section class="license-hero container">
+            <h1 class="license-hero__title">Лицензии</h1>
         </section>
 
-        <!-- Преподаватели по теории -->
-        <section class="instructor-section container">
-            <div class="instructor-section__header">
-                <h2 class="instructor-section__title">Преподаватели по теории</h2>
+        <!-- Слайдер с документами -->
+        <section class="license-slider-section container">
+            <div class="license-slider__header">
                 <div class="section-controls">
-                    <button class="section-arrow section-arrow--left disabled" aria-label="Листать влево" data-slider="theory">
+                    <button class="section-arrow section-arrow--left disabled" id="licenseArrowLeft" aria-label="Назад">
                         <img src="../images/arrow.svg" alt="" class="section-arrow__icon">
                     </button>
-                    <button class="section-arrow section-arrow--right" aria-label="Листать вправо" data-slider="theory">
+                    <button class="section-arrow section-arrow--right" id="licenseArrowRight" aria-label="Вперёд">
                         <img src="../images/arrow.svg" alt="" class="section-arrow__icon">
                     </button>
                 </div>
             </div>
-            <div class="instructor-slider-clip">
-                <div class="instructor-slider" id="slider-theory">
-                    <div class="instructor-slider__track" id="theory-track">
-                        
+            <div class="license-slider-clip">
+                <div class="license-slider">
+                    <div class="license-slider__track" id="licenseTrack">
+                       
                     </div>
                 </div>
             </div>
         </section>
-
-        <!-- Инструкторы по вождению -->
-        <section class="instructor-section container">
-            <div class="instructor-section__header">
-                <h2 class="instructor-section__title">Инструкторы по вождению</h2>
-                <div class="section-controls">
-                    <button class="section-arrow section-arrow--left disabled" aria-label="Листать влево" data-slider="driving">
-                        <img src="../images/arrow.svg" alt="" class="section-arrow__icon">
-                    </button>
-                    <button class="section-arrow section-arrow--right" aria-label="Листать вправо" data-slider="driving">
-                        <img src="../images/arrow.svg" alt="" class="section-arrow__icon">
-                    </button>
-                </div>
-            </div>
-            <div class="instructor-slider-clip">
-                <div class="instructor-slider" id="slider-driving">
-                    <div class="instructor-slider__track" id="driving-track">
-                        
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Оверлей подтверждения оценки инструктора -->
-        <div class="delete-overlay" id="rate-instructor-overlay">
-            <div class="delete-overlay__box">
-                <p class="delete-overlay__text" id="rate-overlay-text">Оценить инструктора?</p>
-                <div class="delete-overlay__buttons">
-                    <button class="btn--cancel-rate" id="cancel-rate">Отмена</button>
-                    <button class="btn--confirm-rate" id="confirm-rate">Оценить</button>
-                </div>
-            </div>
-        </div>
     </main>
 
-    <!-- Подвал сайта -->
+    <!-- Подвал сайта (без изменений, скопирован из вашего исходного файла) -->
     <footer class="footer">
         <div class="container footer__inner">
-            <!-- Верхняя часть с контактами -->
             <div class="footer__top">
                 <div class="footer__col footer__col--contacts">
                     <div class="footer__contact-item">
@@ -116,9 +78,9 @@
                         <span>+7(351) 700-74-00</span>
                     </div>
                     <div class="footer__social">
-                        <a href="https://api.whatsapp.com/send?phone=79089364611"><img src="../images/whatsapp.svg" alt="Автошкола Лидер в WhatsApp" class="footer__icon footer__icon--social"></a>
-                        <a href="https://t.me/centr_lider"><img src="../images/telegram.svg" alt="Автошкола Лидер в Telegram" class="footer__icon footer__icon--social"></a>
-                        <a href="https://vk.com/lider.drive"><img src="../images/vk.svg" alt="Автошкола Лидер в ВК" class="footer__icon footer__icon--social"></a>
+                        <a href="https://api.whatsapp.com/send?phone=79089364611"><img src="../images/whatsapp.svg" alt="WhatsApp"></a>
+                        <a href="https://t.me/centr_lider"><img src="../images/telegram.svg" alt="Telegram"></a>
+                        <a href="https://vk.com/lider.drive"><img src="../images/vk.svg" alt="ВКонтакте"></a>
                     </div>
                 </div>
                 <div class="footer__col footer__col--hours">
@@ -131,8 +93,6 @@
                     <p class="footer__text2">ул. 60 лет Октября, д. 18<br>ул. Сталеваров, д. 5а (ДК «Восток»)<br>шоссе Металлургов, д. 51<br>проспект Победы, д. 384<br>Комсомольский проспект, д. 80<br>ул. Комарова, д. 114</p>
                 </div>
             </div>
-
-            <!-- Карта сайта -->
             <div class="footer__sitemap">
                 <h3 class="footer__sitemap-title">Карта сайта</h3>
                 <hr class="footer__divider">
@@ -199,7 +159,7 @@
                     <div class="search-box">
                         <input type="text" placeholder="Поиск" class="search-box__input">
                         <button type="submit" class="search-box__btn">
-                            <img src="../images/search.svg" alt="" class="search-box__icon">
+                            <img src="../images/search.svg" alt="">
                         </button>
                     </div>
                     <p class="footer__copyright">©АНО ДПО «Учебный центр Лидер» 2026</p>
@@ -208,12 +168,12 @@
         </div>
     </footer>
 
+    <!-- Скрипты -->
     <script src="../js/load-form.js"></script>
     <script src="../js/scroll-to-top.js"></script>
     <script src="../js/auth-check.js"></script>
-    <script src="../js/instructors.js"></script>
-    <script src="../js/instructors-dynamic.js"></script> 
     <script src="../js/search-index.js"></script>
-    <script src="../js/search.js"></script>      
+    <script src="../js/search.js"></script>
+    <script src="../js/license-slider.js"></script>
 </body>
 </html>
