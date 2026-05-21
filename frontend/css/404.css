@@ -1,0 +1,203 @@
+/* ========================
+   Страница 404
+   ======================== */
+.error-main {
+    margin-top: 250px;  
+    min-height: calc(100vh - 135px - 300px); 
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+}
+
+.error-container {
+    margin: 0 250px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 400px;
+    flex-wrap: nowrap;
+}
+
+.error-content {
+    flex: 2;
+    text-align: left;
+    min-width: 500px;
+}
+
+.error-code {
+    font-size: 120px;
+    font-weight: 700;
+    color: #D90D26;
+    line-height: 1;
+    margin-bottom: 40px;
+}
+
+.error-title {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+.error-message {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 40px;
+    line-height: 1.5;
+}
+
+.error-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 200px;
+}
+
+.btn--error-home,
+.btn--error-back {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s;
+    white-space: nowrap
+}
+
+.btn--error-home {
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    color: #fff;
+    border: none;
+    line-height: 23px;
+}
+
+.btn--error-home:hover {
+    opacity: 0.8;
+    transform: translateY(-2px);
+}
+
+.btn--error-back {
+    background: transparent;
+    border: 2px solid #D90D26;
+    color: #D90D26;
+}
+
+.btn--error-back:hover {
+    opacity: 0.8;
+    transform: translateY(-2px);
+}
+
+/* Анимация колеса */
+.error-animation {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.rolling-wheel {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    animation: rollAndMove 3s infinite alternate ease-in-out;
+}
+
+.wheel-big {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #fcfcfc;
+    border: 30px solid #000000;
+    animation: spin 2s linear infinite;
+}
+
+/* Черный круг */
+.wheel-center {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    top: 5%;
+    left: 5%;
+    background: #000000;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+/* Белый круг */
+.wheel-white {
+    position: absolute;
+    width: 20%;
+    height: 20%;
+    top: 40%;
+    left: 40%;
+    background: #fcfcfc;
+    border-radius: 50%;
+    z-index: 3;
+}
+
+/* Полукруги (зубцы) */
+.tooth {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #fcfcfc;
+    border-radius: 50% 50% 30% 30%;   /* верхние углы скруглены — получается полукруг */
+    top: 50%;
+    left: 50%;
+    margin: -20px 0 0 -10px;      /* смещение, чтобы центр вращения был на плоской стороне */
+    transform-origin: center bottom; /* вращение вокруг нижнего центра (плоской стороны) */
+    z-index: 3;
+}
+
+/* Расположение 6 полукругов по кругу */
+.t1 { transform: rotate(0deg) translateY(-65px) translateX(-5px) rotate(180deg); }
+.t2 { transform: rotate(60deg) translateY(-55px) translateX(-10px) rotate(-180deg); }
+.t3 { transform: rotate(120deg) translateY(-45px) translateX(-5px) rotate(-180deg); }
+.t4 { transform: rotate(180deg) translateY(-45px) translateX(5px) rotate(-180deg); }
+.t5 { transform: rotate(240deg) translateY(-52px) translateX(10px) rotate(-180deg); }
+.t6 { transform: rotate(300deg) translateY(-65px) translateX(5px) rotate(-180deg); }
+
+/* Вращение колеса */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Качение туда-сюда */
+@keyframes rollAndMove {
+    0% { transform: translateX(-250px); }
+    100% { transform: translateX(50px); }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .error-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+        padding: 0 20px;
+    }
+    .error-content {
+        text-align: center;
+        flex: auto;
+    }
+    .error-actions {
+        justify-content: center;
+    }
+    .error-code {
+        font-size: 80px;
+    }
+    .rolling-wheel {
+        transform: scale(0.8);
+        margin-top: 30px;
+    }
+    .btn--error-home,
+    .btn--error-back {
+        white-space: normal;
+        padding: 8px 20px;
+    }
+}

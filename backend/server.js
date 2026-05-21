@@ -63,5 +63,13 @@ app.use('/api/courses', courseRoutes);
 app.use('/api/sales', saleRoutes);
 app.use('/api/instructors', instructorRoutes);
 
+// Отдача статических HTML-страниц (если у вас так сделано)
+app.use(express.static(path.join(__dirname, 'pages')));
+
+// Обработка 404 – для любых запросов, не обработанных выше
+app.use((req, res) => {
+    res.status(404).sendFile(path.join(__dirname, 'pages', '404.html'));
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Сервер запущен на порту ${PORT}`));
