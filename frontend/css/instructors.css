@@ -434,3 +434,217 @@ body {
 .btn--confirm-rate:hover {
     opacity: 0.8;
 }
+
+/* ========================
+   Адаптивность (мобильная версия)
+   ======================== */
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none !important;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0 16px;
+        margin: 0 auto;
+    }
+
+    .instructor-main {
+        margin-top: 83px;
+    }
+
+    .breadcrumbs {
+        font-size: 12px;
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+
+    .instructor-hero__title {
+        font-size: 30px;
+        margin-bottom: 15px;
+    }
+    .instructor-hero__desc {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+    .instructor-section__title {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    /* Скрываем стрелки навигации на мобильных */
+    .section-controls {
+        display: none;
+    }
+
+    /* Слайдер – одна карточка по центру + место для тени */
+    .instructor-slider-clip {
+        width: 350px;
+        margin: 0 auto;
+        overflow: hidden;
+        padding: 10px 10px;    /* увеличиваем горизонтальные отступы для тени */
+        margin: -30px -10px auto;
+    }
+    .instructor-slider__track {
+        gap: 20px;
+        transition: transform 0.3s ease;
+    }
+
+    /* Точки слайдера */
+    .instructor-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 5px;
+        margin-bottom: 30px;
+    }
+    .instructor-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #d9d9d9;
+        cursor: pointer;
+    }
+    .instructor-dot.active {
+        background: #b5b5b5;
+        transform: scale(1.2);
+    }
+
+    /* Карточка инструктора */
+    .instructor-card {
+        width: 328px;
+        height: auto;
+        min-height: auto;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        background: #fcfcfc;
+        border-radius: 10px;
+    }
+    .instructor-card__inner {
+        display: flex;
+        gap: 12px;
+        flex-direction: row;
+        margin-bottom: 10px;
+    }
+    .instructor-card__photo-wrapper {
+        width: 141px;
+        height: 180px;
+        flex-shrink: 0;
+    }
+    .instructor-card__info {
+        flex: 1;
+        gap: 8px;
+    }
+    .instructor-card__name {
+        font-size: 14px;
+        font-weight: 400;
+        width: auto;
+        height: auto;
+        line-height: 1.3;
+    }
+    /* Рейтинг: цифра, звёзды и голоса в одну строку */
+    .instructor-card__rating {
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+        flex-wrap: nowrap;
+    }
+    .rating-value {
+        font-size: 14px;
+        line-height: 1.2;
+    }
+    .stars {
+        display: flex;
+        gap: 2px;
+        flex-shrink: 0;
+    }
+    .star {
+        width: 18px;
+        height: 18px;
+    }
+    .star::before {
+        font-size: 18px !important;
+    }
+    .votes-count {
+        font-size: 0;
+        flex-shrink: 0;
+        margin-left: 0;
+    }
+    .votes-count::before {
+        content: "| " attr(data-votes);
+        font-size: 12px;
+        color: #7A7A7A;
+        margin-left: -2px;
+        vertical-align: super;
+        line-height: 1.2;
+    }
+
+    .instructor-card__details {
+        margin-top: 10px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .instructor-detail {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+
+    /* Для инструкторов по вождению – картинка машины под текстом, справа */
+    .instructor-card--with-car {
+        overflow: visible; /* разрешаем выход за пределы */
+    }
+    .instructor-card--with-car .instructor-card__details {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .instructor-card--with-car .instructor-detail:first-child {
+        width: 100px;
+        margin-bottom: 0;
+        text-align: left;
+        margin-left: -42px;
+        margin-top: -5px;
+        z-index: 10;
+    }
+    .instructor-card--with-car .instructor-card__car {
+        width: 140px;
+        height: 97px;
+        margin-right: -15px;
+        margin-top: -115px;
+        display: block;
+        object-fit: cover;  
+    }
+    /* Скрываем строку "Автомобиль: ..." */
+    .instructor-card--with-car .car-text {
+        display: none;
+    }
+
+    /* Оверлей оценки инструктора – мобильная версия */
+    .delete-overlay__box {
+        width: 328px;
+        min-height: 150px;
+        padding: 30px 20px;
+    }
+    .delete-overlay__text {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+    .btn--cancel-rate,
+    .btn--confirm-rate {
+        width: 130px;
+        height: 45px;
+        font-size: 14px;
+    }
+    .delete-overlay__buttons {
+        gap: 15px;
+    }
+
+    /* Нижние отступы */
+    .instructor-main {
+        margin-bottom: 40px;
+    }
+}

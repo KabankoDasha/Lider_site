@@ -34,42 +34,72 @@
     // Создание HTML карточки
     function createCard(instr) {
       const photoUrl = instr.photo 
-        ? `http://localhost:3001/photos/${instr.photo}` 
-        : '../images/placeholder.jpg';
+          ? `http://localhost:3001/photos/${instr.photo}` 
+          : '../images/placeholder.jpg';
       const hasCar = instr.car && instr.car.trim() !== '';
       const cardClass = hasCar ? 'instructor-card instructor-card--with-car' : 'instructor-card';
       const carImgHtml = hasCar 
-        ? `<img src="../images/${instr.car.toLowerCase().replace(/\s+/g, '-')}.svg" alt="Машина инструктора" class="instructor-card__car">` 
-        : '';
+          ? `<img src="../images/${instr.car.toLowerCase().replace(/\s+/g, '-')}.svg" alt="Машина инструктора" class="instructor-card__car">` 
+          : '';
 
-      let detailsHtml = `<p class="instructor-detail">Стаж вождения: <span class="value">${escapeHtml(instr.experience)}</span></p>`;
+      let detailsHtml = '';
       if (hasCar) {
-        detailsHtml += `<p class="instructor-detail">Автомобиль: <span class="value">${escapeHtml(instr.car)}</span></p>`;
-      } else if (instr.education) {
-        detailsHtml += `<p class="instructor-detail">Образование: <span class="value">${escapeHtml(instr.education)}</span></p>`;
+          detailsHtml = `<p class="instructor-detail">Стаж вождения: <span class="value">${escapeHtml(instr.experience)}</span></p>
+                        <p class="instructor-detail car-text">Автомобиль: <span class="value">${escapeHtml(instr.car)}</span></p>`;
+      } else {
+          detailsHtml = `<p class="instructor-detail">Стаж вождения: <span class="value">${escapeHtml(instr.experience)}</span></p>
+                        <p class="instructor-detail">Образование: <span class="value">${escapeHtml(instr.education)}</span></p>`;
       }
 
-      return `
-        <div class="${cardClass}" data-id="${instr.id}" data-rating="${instr.rating}" data-votes="${instr.votes_count}">
-          <div class="instructor-card__inner">
-            <div class="instructor-card__photo-wrapper">
-              <img src="${photoUrl}" alt="${escapeHtml(instr.name)}" class="instructor-card__photo">
-            </div>
-            <div class="instructor-card__info">
-              <h4 class="instructor-card__name">${escapeHtml(instr.name)}</h4>
-              <div class="instructor-card__rating">
-                <span class="rating-value">${instr.rating}</span>
-                <div class="stars static-stars"></div>
-                <span class="votes-count">| Голосов: ${instr.votes_count}</span>
+      const isMobile = window.innerWidth <= 768;
+
+      if (isMobile) {
+          // Мобильная структура: детали (стаж, образование, картинка машины) внутри .instructor-card__info (под звёздами)
+          return `
+              <div class="${cardClass}" data-id="${instr.id}" data-rating="${instr.rating}" data-votes="${instr.votes_count}">
+                  <div class="instructor-card__inner">
+                      <div class="instructor-card__photo-wrapper">
+                          <img src="${photoUrl}" alt="${escapeHtml(instr.name)}" class="instructor-card__photo">
+                      </div>
+                      <div class="instructor-card__info">
+                          <h4 class="instructor-card__name">${escapeHtml(instr.name)}</h4>
+                          <div class="instructor-card__rating">
+                              <span class="rating-value">${instr.rating}</span>
+                              <div class="stars static-stars"></div>
+                              <span class="votes-count" data-votes="${instr.votes_count}">| Голосов: ${instr.votes_count}</span>
+                          </div>
+                          <div class="instructor-card__details">
+                              ${detailsHtml}
+                              ${carImgHtml}
+                          </div>
+                      </div>
+                  </div>
               </div>
-            </div>
-          </div>
-          <div class="instructor-card__details">
-            ${detailsHtml}
-          </div>
-          ${carImgHtml}
-        </div>
-      `;
+          `;
+      } else {
+          // Десктопная структура: детали после .instructor-card__inner (под фото)
+          return `
+              <div class="${cardClass}" data-id="${instr.id}" data-rating="${instr.rating}" data-votes="${instr.votes_count}">
+                  <div class="instructor-card__inner">
+                      <div class="instructor-card__photo-wrapper">
+                          <img src="${photoUrl}" alt="${escapeHtml(instr.name)}" class="instructor-card__photo">
+                      </div>
+                      <div class="instructor-card__info">
+                          <h4 class="instructor-card__name">${escapeHtml(instr.name)}</h4>
+                          <div class="instructor-card__rating">
+                              <span class="rating-value">${instr.rating}</span>
+                              <div class="stars static-stars"></div>
+                              <span class="votes-count" data-votes="${instr.votes_count}">| Голосов: ${instr.votes_count}</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="instructor-card__details">
+                      ${detailsHtml}
+                  </div>
+                  ${carImgHtml}
+              </div>
+          `;
+      }
     }
 
     if (theoryTrack) {
@@ -88,19 +118,9 @@
       if (starsContainer) renderStaticStars(rating, starsContainer);
     });
 
-    // Запускаем слайдеры
-    if (typeof initSliders === 'function') {
-      initSliders();
-    } else {
-      document.addEventListener('DOMContentLoaded', () => {
-        if (typeof initSliders === 'function') initSliders();
-      });
-    }
-
-    // ========== ИНТЕРАКТИВНЫЕ ЗВЁЗДЫ ДЛЯ АВТОРИЗОВАННЫХ ==========
+    // ========== ИНТЕРАКТИВНЫЕ ЗВЁЗДЫ ДЛЯ АВТОРИЗОВАННЫХ (десктоп и мобильные) ==========
     if (token) {
       const cards = document.querySelectorAll('.instructor-card');
-      // Загружаем оценки пользователя
       const ratingPromises = [];
       cards.forEach(card => {
         const instructorId = card.dataset.id;
@@ -122,7 +142,6 @@
       });
     }
 
-    // Функция интерактивных звёзд
     function makeStarsInteractive(card, instructorId, currentUserRating) {
       const starsContainer = card.querySelector('.static-stars');
       if (!starsContainer) return;
@@ -159,7 +178,7 @@
       });
     }
 
-    // ========== ОВЕРЛЕЙ ОЦЕНКИ (с динамической привязкой обработчиков) ==========
+    // ========== ОВЕРЛЕЙ ОЦЕНКИ ==========
     const rateOverlay = document.getElementById('rate-instructor-overlay');
     const rateText = document.getElementById('rate-overlay-text');
     let pendingInstructorId = null;
@@ -182,7 +201,6 @@
       pendingCard = null;
     }
 
-    // Храним ссылки на обработчики, чтобы их можно было удалить перед перепривязкой
     let confirmHandler = null;
     let cancelHandler = null;
 
@@ -191,11 +209,9 @@
       const cancelBtn = document.getElementById('cancel-rate');
       if (!confirmBtn || !cancelBtn) return;
 
-      // Удаляем предыдущие обработчики, если они были
       if (confirmHandler) confirmBtn.removeEventListener('click', confirmHandler);
       if (cancelHandler) cancelBtn.removeEventListener('click', cancelHandler);
 
-      // Создаём новые
       confirmHandler = async () => {
         if (!pendingInstructorId) {
           closeRatingOverlay();
@@ -219,8 +235,8 @@
           const votesSpan = card.querySelector('.votes-count');
           ratingValueSpan.textContent = data.rating;
           votesSpan.textContent = `| Голосов: ${data.votes_count}`;
+          votesSpan.setAttribute('data-votes', data.votes_count);
 
-          // Обновляем интерактивные звёзды с новой пользовательской оценкой
           const newUserRating = pendingRating;
           card.dataset.userRating = newUserRating;
           const starsContainer = card.querySelector('.static-stars');
@@ -271,9 +287,121 @@
       confirmBtn.addEventListener('click', confirmHandler);
       cancelBtn.addEventListener('click', cancelHandler);
     }
-
-    // Инициализируем обработчики (один раз, но они будут пересоздаваться при каждом открытии)
     bindOverlayHandlers();
+
+    // ========== МОБИЛЬНЫЙ СЛАЙДЕР (СВАЙП, ТОЧКИ) ==========
+    function initMobileSliders() {
+      const isMobile = window.innerWidth <= 768;
+      if (!isMobile) return;
+
+      const sliders = [
+        { trackId: 'theory-track', dotsId: 'theory-dots' },
+        { trackId: 'driving-track', dotsId: 'driving-dots' }
+      ];
+
+      sliders.forEach(({ trackId, dotsId }) => {
+        const track = document.getElementById(trackId);
+        const dotsContainer = document.getElementById(dotsId);
+        if (!track || !dotsContainer) return;
+
+        const cards = track.querySelectorAll('.instructor-card');
+        if (cards.length === 0) return;
+
+        let currentIndex = 0;          // индекс текущей карточки (0-based)
+        let startX = 0;
+        let isDragging = false;
+
+        function getStep() {
+          const cardWidth = cards[0].offsetWidth;
+          const gap = parseInt(window.getComputedStyle(track).gap) || 20;
+          return cardWidth + gap;
+        }
+
+        function updateSlider() {
+          const offset = currentIndex * getStep();
+          track.style.transform = `translateX(-${offset}px)`;
+          updateMobileDots();
+        }
+
+        function updateMobileDots() {
+          if (!dotsContainer) return;
+          const dots = dotsContainer.querySelectorAll('.instructor-dot');
+          if (dots.length === 0) return;
+          // Определяем, к какой группе (0,1,2) относится текущий индекс
+          const groupIndex = Math.floor((currentIndex / cards.length) * 3);
+          const activeGroup = Math.min(2, Math.max(0, groupIndex));
+          dots.forEach((dot, idx) => {
+            if (idx === activeGroup) {
+              dot.classList.add('active');
+            } else {
+              dot.classList.remove('active');
+            }
+          });
+        }
+
+        function nextSlide() {
+          if (currentIndex < cards.length - 1) {
+            currentIndex++;
+            updateSlider();
+          }
+        }
+
+        function prevSlide() {
+          if (currentIndex > 0) {
+            currentIndex--;
+            updateSlider();
+          }
+        }
+
+        function slideToGroup(groupIndex) {
+          const groupSize = Math.ceil(cards.length / 3);
+          let targetIndex = groupIndex * groupSize;
+          if (targetIndex >= cards.length) targetIndex = cards.length - 1;
+          currentIndex = targetIndex;
+          updateSlider();
+        }
+
+        // Создаём ровно 3 точки
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < 3; i++) {
+          const dot = document.createElement('div');
+          dot.classList.add('instructor-dot');
+          if (i === 0) dot.classList.add('active');
+          dot.addEventListener('click', () => {
+            slideToGroup(i);
+          });
+          dotsContainer.appendChild(dot);
+        }
+
+        // Обработка свайпа
+        track.addEventListener('touchstart', (e) => {
+          startX = e.touches[0].clientX;
+          isDragging = true;
+        });
+        track.addEventListener('touchmove', (e) => {
+          if (!isDragging) return;
+          const diffX = e.touches[0].clientX - startX;
+          if (Math.abs(diffX) > 50) {
+            if (diffX > 0) prevSlide();
+            else nextSlide();
+            isDragging = false;
+          }
+        });
+        track.addEventListener('touchend', () => {
+          isDragging = false;
+        });
+
+        // Начальная позиция
+        updateSlider();
+      });
+    }
+
+    // ========== ДЕСКТОПНЫЙ СЛАЙДЕР (СТРЕЛКИ) ==========
+    if (window.innerWidth > 768 && typeof initSliders === 'function') {
+      initSliders();
+    } else if (window.innerWidth <= 768) {
+      initMobileSliders();
+    }
 
   } catch (err) {
     console.error('Ошибка загрузки инструкторов:', err);

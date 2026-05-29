@@ -15,6 +15,18 @@
             <a href="../pages/main.html" class="logo">
                 <img src="../images/logo.svg" alt="Автошкола Лидер" class="logo__img">
             </a>
+            <!-- Мобильный телефон -->
+            <a href="tel:+73517007400" class="header__phone mobile-only">
+                <img src="../images/phone2.svg" alt="Телефон" class="header__phone-icon">
+                +7(351) 700-74-00
+            </a>
+            <!-- Бургер-меню -->
+            <button class="burger mobile-only" id="burger-btn" aria-label="Меню">
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+            </button>
+            <!-- Десктопная навигация -->
             <nav class="nav">
                 <ul class="nav__list">
                     <li><a href="../pages/study.html">Обучение</a></li>
@@ -25,9 +37,23 @@
                     <li><a href="../pages/contact.html">Контакты</a></li>
                 </ul>
             </nav>
-            <a href="../pages/login.html" class="btn btn--login">Войти</a>
+            <!-- Кнопка "Войти" скрыта на мобильных -->
+            <a href="../pages/login.html" class="auth-btn btn btn--login desktop-only">Войти</a>
         </div>
     </header>
+
+    <!-- Мобильное меню (бургер) -->
+    <div class="mobile-menu" id="mobile-menu">
+        <nav class="mobile-menu__nav">
+            <a href="../pages/study.html" class="mobile-menu__link">Обучение</a>
+            <a href="../pages/sale.html" class="mobile-menu__link">Акции</a>
+            <a href="../pages/instructors.html" class="mobile-menu__link">Инструкторы</a>
+            <a href="../pages/faq.html" class="mobile-menu__link">Вопросы</a>
+            <a href="../pages/otzyv.html" class="mobile-menu__link">Отзывы</a>
+            <a href="../pages/contact.html" class="mobile-menu__link">Контакты</a>
+            <a href="../pages/login.html" class="mobile-menu__link mobile-menu__link--login" id="mobile-auth-btn">Войти</a>
+        </nav>
+    </div>
 
     <main class="login-main">
         <!-- Хлебные крошки -->
@@ -95,7 +121,10 @@
 
             <!-- Карта сайта -->
             <div class="footer__sitemap">
-                <h3 class="footer__sitemap-title">Карта сайта</h3>
+                <h3 class="footer__sitemap-title">
+                    <span class="desktop-only">Карта сайта</span>
+                    <a href="../pages/sitemap.html" class="mobile-only" style="color: inherit; text-decoration: none;">Карта сайта</a>
+                </h3>
                 <hr class="footer__divider">
                 <div class="footer__sitemap-columns">
                     <div class="footer__sitemap-col">
@@ -171,6 +200,7 @@
 
     <script src="../js/load-form.js"></script>
     <script src="../js/scroll-to-top.js"></script>
+    <script src="../js/main.js"></script>
     <script src="../js/login.js"></script>
     <script src="../js/search-index.js"></script>
     <script src="../js/search.js"></script> 

@@ -361,3 +361,227 @@ body {
     margin-top: -300px;
     align-self: flex-start;      
 }
+
+/* ========================
+   Адаптивность 
+   ======================== */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 16px;
+        width: 100%;
+    }
+
+    .info-main {
+        margin-top: 83px;
+        margin-bottom: 40px;
+    }
+    .breadcrumbs {
+        font-size: 12px;
+        margin-bottom: 30px;
+    }
+    .info-hero__title {
+        font-size: 30px;
+        margin-bottom: 15px;
+    }
+    .info-hero__desc {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+
+    .steps {
+        margin-bottom: 40px;
+        width: 100%;
+    }
+    .steps__title {
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 15px;
+    }
+    .steps__grid {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+    }
+    .steps__col {
+        gap: 15px;
+    }
+    .step {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        width: 100%;
+    }
+    .step__badge {
+        width: 122px;
+        height: 65px;
+        flex-shrink: 0;
+    }
+    .step__badge::after {
+        padding: 2px;
+    }
+    .step__num {
+        font-size: 22px;
+        font-weight: 500;
+    }
+    .step__label {
+        font-size: 12px;
+        font-weight: 500;
+    }
+    .step__desc {
+        width: auto;
+        flex: 1;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.4;
+    }
+    .step__desc br {
+        display: none;
+    }
+
+    .advantages {
+        margin-bottom: 40px;
+        width: 100%;
+    }
+    .advantages__title {
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 15px;
+    }
+    .advantages__box {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        height: auto;
+        background: transparent;
+        padding: 0;
+        border-radius: 0;
+    }
+    .advantage {
+        width: 100%;
+        max-width: 328px;
+        margin: 0 auto;
+        height: auto;
+        min-height: 146px;
+        background-color: #f7f7f7;
+        border-radius: 10px;
+        padding: 20px 10px;
+        gap: 10px;
+        flex: none;
+    }
+    .advantage__icon-wrap {
+        height: 67px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .advantage__icon {
+        max-width: 80px;
+        max-height: 67px;
+        width: auto;
+        height: auto;
+    }
+
+    .advantage:nth-child(3) .advantage__icon {
+        transform: scale(1.5);
+    }
+    .advantage__text {
+        width: auto;
+        max-width: 185px;
+        font-size: 14px;
+        font-weight: 300;
+        line-height: 1.3;
+        min-height: auto;
+        text-align: center;
+        overflow: hidden;
+    }
+    .advantage__text br {
+        display: none;
+    }
+
+    .rights {
+        margin-bottom: 30px;
+        width: 100%;
+    }
+    .rights__title {
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 15px;
+    }
+    .rights__text {
+        font-size: 14px;
+        font-weight: 300;
+        margin-bottom: 15px;
+        line-height: 1.4;
+    }
+    .rights__text br {
+        display: none;
+    }
+    .rights__list {
+        margin: 10px 0 10px 20px;
+        font-size: 14px;
+    }
+
+    .cta {
+        display: grid;
+        grid-template-areas: 
+            "slogan"
+            "image"
+            "actions";
+        gap: 20px;
+        margin-bottom: 60px;
+        margin-top: 20px;
+        width: 100%;
+        align-items: center;
+        justify-items: center;
+    }
+    .cta__slogan {
+        grid-area: slogan;
+        width: 100%;
+        font-size: 14px;
+        font-weight: 300;
+        text-align: left;
+        margin-top: -10px;
+    }
+    .cta__img {
+        grid-area: image;
+        width: 288px;
+        height: auto;
+        max-height: 240px;
+        margin-top: 0;
+        margin-bottom: 0;
+        object-fit: contain;
+    }
+    .cta__left {
+        display: contents; 
+    }
+    .cta__actions {
+        grid-area: actions;
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+    .badge {
+        width: 156px;
+        height: 50px;
+        font-size: 14px;
+        font-weight: 500;
+        white-space: nowrap;
+        padding: 0 10px;
+    }
+    .badge::after {
+        padding: 2px;
+    }
+    .btn--cta {
+        width: 328px;
+        height: 50px;
+        font-size: 16px;
+        font-weight: 500;
+        margin: 0 auto;
+        margin-bottom: -10px;
+    }
+    .cta__slogan br {
+        display: none;
+    }
+}

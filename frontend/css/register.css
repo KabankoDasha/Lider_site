@@ -345,3 +345,171 @@ body {
 .register-consent.error-text .consent-error-text {
     display: block;
 }
+
+/* ========================
+   Адаптивность (мобильная версия)
+   ======================== */
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none !important;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0 16px;
+        margin: 0 auto;
+    }
+
+    .register-main {
+        margin-top: 83px;
+        margin-bottom: 40px;
+    }
+
+    .breadcrumbs {
+        font-size: 12px;
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+
+    /* Форма регистрации */
+    .register-wrapper {
+        margin-bottom: 60px;
+        padding: 0;
+    }
+
+    .register-box {
+        width: 100%;
+        max-width: 328px;
+        min-height: 670px;    
+        height: auto;
+        padding: 30px 15px 10px 15px;
+        background-color: #F0F0F0;
+        border-radius: 10px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .register-box__title {
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 25px;
+    }
+
+    /* Ряды полей */
+    .register-row {
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    /* Поля ввода */
+    .register-field {
+        width: 100%;
+        text-align: left;
+    }
+    .register-field__label {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+    .register-field__input {
+        width: 100%;
+        height: 43px;
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 8px;
+        background-color: #FCFCFC;
+    }
+
+    /* Иконка показа пароля */
+    .password-toggle-icon {
+        right: 12px;
+        width: 18px;
+        height: 18px;
+    }
+    .register-field__input.input--with-icon {
+        padding-right: 40px;
+    }
+
+        /* Чекбокс согласия */
+    .register-consent {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;  /* вместо space-between */
+        gap: 10px;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+        position: relative;
+    }
+    .register-consent__checkbox {
+        flex-shrink: 0;
+        width: 30px;
+        height: 30px;
+        margin: 0;
+    }
+    .register-consent__text {
+        flex: 0 1 auto;
+        font-size: 13px;
+        line-height: 1.3;
+        text-align: left;
+        max-width: 240px;
+    }
+    /* Ошибка чекбокса */
+    .register-consent .consent-error-text {
+        display: none;
+        width: auto;
+        text-align: right;
+        font-size: 11px;
+        color: #D90D26;
+        margin-top: -5px;
+        margin-left: auto;   
+        order: 3;
+    }
+    .register-consent.error-text .consent-error-text {
+        display: block;
+    }
+
+    /* Кнопка регистрации */
+    .register-box__btn {
+        width: 100%;
+        max-width: 298px;
+        height: 50px;
+        font-size: 16px;
+        margin-bottom: 25px;
+        border-radius: 8px;
+    }
+
+    /* Ссылки на вход */
+    .register-box__has-account {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+    .register-box__login-link {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+
+    /* Сообщения об ошибках */
+    .register-field .field-error-text {
+        right: 10px;
+        bottom: 5px;
+        font-size: 9px;
+        white-space: nowrap;
+    }
+
+    /* Оверлей успешной регистрации */
+    .register-overlay__box {
+        width: 300px;
+        height: auto;
+        padding: 30px 15px;
+        border-radius: 10px;
+    }
+    .register-overlay__icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 15px;
+    }
+    .register-overlay__text {
+        font-size: 18px;
+        line-height: 1.4;
+    }
+}

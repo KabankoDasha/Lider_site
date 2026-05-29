@@ -859,7 +859,8 @@ main {
 .btn--account {
     display: inline-flex;
     align-items: center;
-    width: 207px;
+    justify-content: center;
+    width: 210px;
     height: 60px;
     border: 2px solid #D90D26;
     border-radius: 10px;
@@ -867,22 +868,30 @@ main {
     color: #000;
     font-size: 16px;
     font-weight: 400;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
     text-decoration: none;
     transition: background-color 0.2s;
     font-family: 'Montserrat', sans-serif;
-    padding: 0 10px 0 15px;
-    gap: 7px;
+    padding: 0 15px;
+    gap: 10px;
     box-sizing: border-box;
     white-space: nowrap;
 }
 .btn--account:hover {
     background-color: #f5f5f5;
 }
+
+.btn--account__text {
+    line-height: 55px;  
+    margin-top: 2px;       
+    display: inline-block;
+}
+
 .btn--account__icon {
     width: 37px;
     height: 37px;
-    flex-shrink: 0;
+    margin-top: -5px;
+    vertical-align: middle;
 }
 
 .auth-btn {
@@ -936,11 +945,16 @@ main {
 .desktop-only { display: block; }
 
 @media (max-width: 768px) {
+    .desktop-only {
+        display: none !important;
+    }
+
     .container {
         max-width: 328px;
         padding: 0;
         margin: 0 auto;
     }
+    
     main { margin-top: 83px; }
 
     /* Шапка */
@@ -950,6 +964,7 @@ main {
         display: flex;
         align-items: center;
         background: #fcfcfc;
+        z-index: 105;
     }
     .header__inner {
         display: flex;
@@ -984,7 +999,6 @@ main {
         flex-direction: column;
         justify-content: center;
         margin-top: 0;
-        
         background: none;
         border: none;
         cursor: pointer;
@@ -1008,12 +1022,12 @@ main {
     /* Мобильное меню */
     .mobile-menu {
         position: fixed;
-        top: 63px;                     /* начинается под шапкой */
+        top: 30px;                     /* начинается под шапкой */
         left: 0;
         width: 100%;
-        height: calc(100% - 63px);     /* оставшаяся высота */
-        background: #fcfcfc;           /* сплошной белый, чтобы шапка была видна */
-        z-index: 105;
+        height: calc(100% - 30px);     /* оставшаяся высота */
+        background: #fcfcfc;           
+        z-index: 100;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -1024,11 +1038,11 @@ main {
     .mobile-menu.active { transform: translateX(0); }
     .mobile-menu__nav { display: flex; flex-direction: column; gap: 30px; text-align: center; }
     .mobile-menu__link {
-        font-size: 22px;
+        font-size: 20px;
         font-weight: 400;
         color: #000;
         text-decoration: none;
-        padding: 10px 0;
+        padding: 7px 0;
         display: block;
         width: 100%;
         transition: background-color 0.2s;
@@ -1044,6 +1058,26 @@ main {
         padding: 15px 30px;
         display: inline-block;
         width: auto;
+    }
+
+    .mobile-menu__link--account {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: transparent;
+        border: 2px solid #D90D26;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 400;
+        padding: 10px 20px;
+        text-decoration: none;
+        width: auto;
+        min-width: 200px;
+    }
+    .mobile-menu__account-icon {
+        width: 37px;
+        height: 37px;
     }
 
     .nav { display: none; }

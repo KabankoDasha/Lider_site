@@ -132,6 +132,7 @@ body {
    ======================== */
 .cta-block {
     display: flex;
+    flex-direction: row; //
     justify-content: flex-end;   
     align-items: flex-start;
     gap: 158px;                  
@@ -139,6 +140,7 @@ body {
 }
 
 .cta-block__text {
+    order: 1;
     max-width: 460px;
     flex-shrink: 0;             
 }
@@ -152,11 +154,15 @@ body {
 }
 
 .btn--cta {
+    order: 4;
+    margin-left: -1360px;
+    margin-top: 140px;
     text-decoration: none;
     font-weight: 400;
 }
 
 .cta-block__images {
+    order: 2;
     position: relative;         
     width: 580px;              
     height: auto;               
@@ -187,13 +193,137 @@ body {
 }
 
 .cta-block__note {
+    order: 3;
     font-size: 18px;
     font-weight: 300;
     color: #000;
     text-align: right;
-    position: absolute;
-    bottom: -20px;
-    right: 10px;
     white-space: nowrap;
     z-index: 3;
+    margin-top: 330px; 
+    margin-left: -540px;
+}
+
+/* ========================
+   Адаптивность
+   ======================== */
+
+@media (max-width: 768px) {
+    /* Скрываем десктопные элементы */
+    .desktop-only {
+        display: none !important;
+    }
+
+    .container {
+        max-width: 328px;
+        padding: 0;
+        margin: 0 auto;
+    }
+
+    main { margin-top: 83px; }
+
+    /* Хлебные крошки */
+    .breadcrumbs {
+        font-size: 12px;
+        font-weight: 400;
+        margin-top: -45px;
+        margin-bottom: 30px;
+    }
+
+    /* Заголовки и отступы */
+    .distant-section__title {
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 15px;
+    }
+    .distant-section__title2 {
+        font-size: 18px;
+        font-weight: 400;
+        margin-bottom: 15px;
+    }
+    .distant-hero__title {
+        font-size: 30px;
+        font-weight: 500;
+        margin-bottom: 15px;
+    }
+    .distant-hero__desc {
+        font-size: 14px;
+        font-weight: 300;
+        margin-bottom: 30px;
+    }
+    .distant-main {
+        margin-bottom: 40px;
+    }
+    .distant-hero__text {
+        font-size: 14px;
+        font-weight: 300;
+    }
+    .distant-list {
+        font-size: 14px;
+        margin-left: -10px;
+    }
+    .distant-hero li {
+        font-size: 14px;
+        margin-left: 16px;
+    }
+
+    /* Блок призыва к действию */
+    .cta-block {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 60px;
+    }
+    .cta-block__text {
+        order: 1;
+        text-align: center;
+        max-width: 100%;
+    }
+    .cta-block__heading {
+        font-size: 20px;
+        width: auto;
+        margin-bottom: 20px;
+        word-break: break-word;
+    }
+    .cta-block__images {
+        order: 2;
+        position: relative;
+        min-height: 220px;
+        margin: 10px 0;
+        margin-top: -30px;
+        width: 100%;
+    }
+    .cta-block__img--back {
+        position: absolute;
+        left: -15px;
+        top: -10px;
+        width: 166px;
+        height: auto;
+        z-index: 1;
+    }
+    .cta-block__img--front {
+        position: relative;
+        width: 258px;
+        margin-left: auto;
+        z-index: 2;
+    }
+    .cta-block__note {
+        order: 3;
+        text-align: center;
+        font-size: 14px;
+        white-space: normal;
+        width: 100%;
+        margin: 0 auto 20px;
+        margin-top: -90px;
+        position: static;  
+    }
+    .btn--cta {
+        order: 4;
+        width: 220px;
+        height: 55px;
+        font-size: 16px;
+        margin: 0 auto;
+        display: block;
+        margin-bottom: -10px;
+    }
 }

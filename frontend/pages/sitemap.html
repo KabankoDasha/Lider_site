@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Автошкола Лидер</title>
+    <title>Карта сайта | Автошкола Лидер</title>
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/otzyv.css">
+    <link rel="stylesheet" href="../css/sitemap.css">
     <link rel="stylesheet" href="../css/forma.css">
 </head>
 <body>
-    <!-- Шапка -->
+    <!-- Шапка (как на всех страницах) -->
     <header class="header">
         <div class="container header__inner">
             <a href="../pages/main.html" class="logo">
@@ -55,49 +55,108 @@
         </nav>
     </div>
 
-    <main class="otzyv-main">
-         <!-- Хлебные крошки -->
-        <div class="breadcrumbs container">
-            <a href="../pages/main.html">Главная</a>
-            <span class="breadcrumbs__sep">/</span>
-            <span class="breadcrumbs__current">Отзывы</span>
-        </div>
+    <main class="sitemap-main">
+        <div class="container">
+            <!-- Хлебные крошки -->
+            <div class="breadcrumbs">
+                <a href="../pages/main.html">Главная</a>
+                <span class="breadcrumbs__sep">/</span>
+                <span class="breadcrumbs__current">Карта сайта</span>
+            </div>
 
-        <!-- Заголовок и описание -->
-        <section class="otzyv-hero container">
-            <h1 class="otzyv-hero__title">Отзывы</h1>
-            <p class="otzyv-hero__desc">
-                В этом разделе вы можете ознакомиться с отзывами наших учеников, которые уже прошли путь до заветного водительского удостоверения. Мы благодарны каждому из вас за доверие и обратную связь, именно благодаря вам мы становимся лучше! Спасибо, что выбираете «Лидер» и до встречи на занятиях!
-            </p>
-        </section>
+            <!-- Заголовок -->
+            <h1 class="sitemap-title">Карта сайта</h1>
 
-        <!-- Фильтр отзывов -->
-        <div class="reviews-filter container">
-            <button class="reviews-filter__btn" id="filter-btn" aria-label="Фильтр отзывов">
-                <img src="../images/filter.svg" alt="" class="reviews-filter__icon">
-            </button>
-            <!-- Оверлей фильтра -->
-            <div class="filter-overlay" id="filter-overlay">
-                <p class="filter-overlay__title">Показать сначала:</p>
-                <hr class="filter-overlay__divider">
-                <ul class="filter-overlay__list">
-                    <li><button class="filter-overlay__option" data-sort="new">новые</button></li>
-                    <li><button class="filter-overlay__option" data-sort="old">старые</button></li>
-                    <li><button class="filter-overlay__option" data-sort="high">с высокой оценкой</button></li>
-                    <li><button class="filter-overlay__option" data-sort="low">с низкой оценкой</button></li>
-                </ul>
+            <!-- Содержимое карты сайта (в одну колонку) -->
+            <div class="sitemap-content">
+                <div class="sitemap-section">
+                    <h2 class="sitemap-section__title"><a href="../pages/main.html">Главная страница</a></h2>
+                    <ul class="sitemap-list">
+                        <li><a href="../pages/main.html#about">О центре</a></li>
+                        <li><a href="../pages/main.html#branches">Филиалы</a></li>
+                        <li><a href="../pages/main.html#map">Схема проезда</a></li>
+                    </ul>
+                </div>
+
+                <div class="sitemap-section">
+                    <h2 class="sitemap-section__title"><a href="../pages/study.html">Обучение</a></h2>
+                    <ul class="sitemap-list">
+                        <li><a href="../pages/study.html#auto">Автошкола</a></li>
+                        <li><a href="../pages/study.html#special">Спецтехника</a></li>
+                    </ul>
+                </div>
+
+                <div class="sitemap-section">
+                    <h2 class="sitemap-section__title"><a href="../pages/sale.html">Акции</a></h2>
+                    <ul class="sitemap-list">
+                        <li><a href="../pages/sale.html#promo">Акции</a></li>
+                        <li><a href="../pages/sale.html#regular">Скидки</a></li>
+                    </ul>
+                </div>
+
+                <div class="sitemap-section">
+                    <h2 class="sitemap-section__title"><a href="../pages/oplata.html">Оплата обучения</a></h2>
+                </div>
+
+                <div class="sitemap-section">
+                    <h2 class="sitemap-section__title"><a href="../pages/faq.html">Вопросы</a></h2>
+                    <ul class="sitemap-list">
+                        <li><a href="../pages/faq.html#enrollment">О зачислении в автошколу</a></li>
+                        <li><a href="../pages/faq.html#training">Об обучении</a></li>
+                        <li><a href="../pages/faq.html#exams">Об экзаменах</a></li>
+                        <li><a href="../pages/faq.html#special">Об обучении на спецтехнику</a></li>
+                    </ul>
+                </div>
+
+                <div class="sitemap-section">
+                    <h2 class="sitemap-section__title"><a href="../pages/otzyv.html">Отзывы</a></h2>
+                </div>
+
+                <div class="sitemap-section">
+                    <h2 class="sitemap-section__title"><a href="../pages/contact.html">Контакты</a></h2>
+                    <ul class="sitemap-list">
+                        <li><a href="../pages/contact.html#addresses">Адреса филиалов</a></li>
+                        <li><a href="../pages/contact.html#hours">Режим работы</a></li>
+                        <li><a href="../pages/contact.html#contacts">Контакты для связи</a></li>
+                    </ul>
+                </div>
+
+                <div class="sitemap-section">
+                    <h2 class="sitemap-section__title"><a href="../Реквизиты_компании.pdf" target="_blank">Реквизиты компании</a></h2>
+                </div>
+
+                <div class="sitemap-section">
+                    <h2 class="sitemap-section__title"><a href="../pages/login.html">Личный кабинет</a></h2>
+                    <ul class="sitemap-list">
+                        <li><a href="../pages/login.html#login">Вход</a></li>
+                        <li><a href="../pages/register.html">Регистрация</a></li>
+                    </ul>
+                </div>
+
+                <div class="sitemap-section">
+                    <h2 class="sitemap-section__title"><a href="../pages/instructors.html">Инструкторы</a></h2>
+                    <ul class="sitemap-list">
+                        <li><a href="../pages/instructors.html#theory">Преподаватели по теории</a></li>
+                        <li><a href="../pages/instructors.html#driving">Инструкторы по вождению</a></li>
+                    </ul>
+                </div>
+
+                <div class="sitemap-section">
+                    <h2 class="sitemap-section__title"><a href="../pages/distant.html">Дистанционное обучение</a></h2>
+                </div>
+
+                <div class="sitemap-section">
+                    <h2 class="sitemap-section__title"><a href="#" id="open-form-btn-sitemap">Записаться на обучение</a></h2>
+                </div>
+
+                <div class="sitemap-section">
+                    <h2 class="sitemap-section__title"><a href="../pages/license.html">Лицензии</a></h2>
+                </div>
             </div>
         </div>
-
-        <!-- Список отзывов -->
-        <section class="reviews-list container" id="reviews-container">
-            <button class="reviews-load-more" id="load-more-btn">Показать ещё</button>
-            <p id="no-more-message" class="no-more-message">Больше отзывов нет</p>
-        </section>
-        
     </main>
 
-    <!-- Подвал сайта -->
+    <!-- Подвал сайта (как на всех страницах) -->
     <footer class="footer">
         <div class="container footer__inner">
             <!-- Верхняя часть с контактами -->
@@ -112,9 +171,9 @@
                         <span>+7(351) 700-74-00</span>
                     </div>
                     <div class="footer__social">
-                        <a href="https://api.whatsapp.com/send?phone=79089364611"><img src="../images/whatsapp.svg" alt="Автошкола Лидер в WhatsApp" class="footer__icon footer__icon--social"></a>
-                        <a href="https://t.me/centr_lider"><img src="../images/telegram.svg" alt="Автошкола Лидер в Telegram" class="footer__icon footer__icon--social"></a>
-                        <a href="https://vk.com/lider.drive"><img src="../images/vk.svg" alt="Автошкола Лидер в ВК" class="footer__icon footer__icon--social"></a>
+                        <a href="https://api.whatsapp.com/send?phone=79089364611"><img src="../images/whatsapp.svg" alt="WhatsApp" class="footer__icon footer__icon--social"></a>
+                        <a href="https://t.me/centr_lider"><img src="../images/telegram.svg" alt="Telegram" class="footer__icon footer__icon--social"></a>
+                        <a href="https://vk.com/lider.drive"><img src="../images/vk.svg" alt="ВКонтакте" class="footer__icon footer__icon--social"></a>
                     </div>
                 </div>
                 <div class="footer__col footer__col--hours">
@@ -128,7 +187,7 @@
                 </div>
             </div>
 
-            <!-- Карта сайта -->
+            <!-- Карта сайта (ссылка внутри) -->
             <div class="footer__sitemap">
                 <h3 class="footer__sitemap-title">
                     <span class="desktop-only">Карта сайта</span>
@@ -136,6 +195,7 @@
                 </h3>
                 <hr class="footer__divider">
                 <div class="footer__sitemap-columns">
+                    <!-- Десктопные колонки для SEO (не удаляем, они скрыты на мобильных) -->
                     <div class="footer__sitemap-col">
                         <p class="footer__sitemap-heading"><a href="../pages/main.html">Главная страница</a></p>
                         <ul>
@@ -206,14 +266,21 @@
             </div>
         </div>
     </footer>
-    
 
+    <!-- Скрипты -->
     <script src="../js/load-form.js"></script>
     <script src="../js/scroll-to-top.js"></script>
-    <script src="../js/otzyv.js"></script>
-    <script src="../js/main.js"></script>
     <script src="../js/auth-check.js"></script>
     <script src="../js/search-index.js"></script>
-    <script src="../js/search.js"></script> 
+    <script src="../js/search.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        // Для кнопки "Записаться на обучение" в карте сайта
+        document.getElementById('open-form-btn-sitemap')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            const formOverlay = document.getElementById('form-overlay');
+            if (formOverlay) formOverlay.classList.add('active');
+        });
+    </script>
 </body>
 </html>

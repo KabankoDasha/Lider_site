@@ -34,8 +34,6 @@ function initSliders() {
     const rightBtn = section.querySelector('.section-arrow--right');
     const cards = track.querySelectorAll('.instructor-card');
 
-    cards.forEach(card => updateStars(card));
-
     if (cards.length <= 2) {
       leftBtn.classList.add('disabled');
       rightBtn.classList.add('disabled');

@@ -1,0 +1,156 @@
+/* ========================
+   Базовые настройки (шрифты уже подключены в main.css)
+   ======================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+    background-color: #fcfcfc;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* ========================
+   Основной контент
+   ======================== */
+.sitemap-main {
+    margin-top: 135px;
+    padding-top: 0;
+    margin-bottom: 60px;
+}
+
+/* Хлебные крошки (стили как на других страницах) */
+.breadcrumbs {
+    font-size: 18px;
+    font-weight: 400;
+    color: #929292;
+    margin-bottom: 60px;
+    padding-top: 0;
+}
+.breadcrumbs a {
+    color: #929292;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.breadcrumbs a:hover {
+    color: #D90D26;
+}
+.breadcrumbs__sep {
+    margin: 0 2px;
+}
+.breadcrumbs__current {
+    color: #929292;
+}
+
+/* Заголовок с серой полоской (как в подвале) */
+.sitemap-title {
+    font-size: 50px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #000;
+    position: relative;
+    padding-bottom: 5px;
+}
+.sitemap-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #787878;
+    border-radius: 1px;
+}
+
+/* Содержимое карты сайта (в одну колонку) */
+.sitemap-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.sitemap-section {
+    /* убираем border-bottom */
+    padding-bottom: 0;
+}
+
+.sitemap-section__title {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.sitemap-section__title a {
+    color: #000;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.sitemap-section__title a:hover {
+    color: #D90D26;
+}
+
+.sitemap-list {
+    list-style: none;
+    padding-left: 0;     
+    margin: 0;
+}
+.sitemap-list li {
+    margin-bottom: 8px;
+}
+.sitemap-list a {
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.sitemap-list a:hover {
+    color: #D90D26;
+}
+
+/* ========================
+   Адаптивность (мобильная версия)
+   ======================== */
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        padding: 0 16px;
+        margin: 0 auto;
+    }
+
+    .sitemap-main {
+        margin-top: 83px;
+        margin-bottom: 40px;
+    }
+
+    .breadcrumbs {
+        font-size: 12px;
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+
+    .sitemap-title {
+        font-size: 30px;
+        margin-bottom: 15px;
+    }
+
+    .sitemap-section__title {
+        font-size: 18px;
+    }
+
+    .sitemap-list a {
+        font-size: 14px;
+    }
+}

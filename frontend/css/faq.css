@@ -179,3 +179,85 @@ body {
     opacity: 1;
 }
 
+/* ========================
+   Адаптивность (мобильная версия)
+   ======================== */
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none !important;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0 16px;
+        margin: 0 auto;
+    }
+
+    .faq-main {
+        margin-top: 83px;
+        margin-bottom: 40px;
+    }
+
+    .breadcrumbs {
+        font-size: 12px;
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+
+    .faq-hero__title {
+        font-size: 30px;
+        margin-bottom: 15px;
+    }
+    .faq-hero__desc {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+
+    .faq-section__title {
+        font-size: 20px;
+        margin-bottom: 15px;
+        margin-top: 30px;
+    }
+
+    .faq-item__text {
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: -3%;
+        margin-left: -10px;
+    }
+
+    .faq-answer {
+        font-size: 14px;
+        font-weight: 400;
+        margin-bottom: 10px;
+    }
+
+    .faq-answer p {
+        line-height: 1.5;
+        margin-bottom: 0;
+    }
+
+    .faq-answer b {
+        font-weight: 500;
+    }
+
+    .faq-answer .faq__list li {
+        margin-left: 30px;
+    }
+
+    .faq-item__icon {
+        margin-left: 10px; /* прижимаем иконку к правому краю */
+    }
+
+    /* Уменьшаем отступ в ответе */
+    .faq-item.active + .faq-answer {
+        margin-bottom: 0;
+        max-height: 1000px; 
+    }
+
+    /* Отключаем анимацию наведения на мобильных */
+    .faq-item:hover {
+        box-shadow: none;
+        transform: none;
+    }
+}

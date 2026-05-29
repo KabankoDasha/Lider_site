@@ -163,21 +163,88 @@ body {
 .section-arrow--left .section-arrow__icon {
     transform: scaleX(-1);
 }
+
+/* ========================
+   Адаптивность (мобильная версия)
+   ======================== */
 @media (max-width: 768px) {
-    .license-slide {
-        width: 95vw;
-    }
-    .section-arrow {
-        width: 54px;
-        height: 28px;
-    }
-    .section-arrow__icon {
-        width: 36px;
-    }
+    /* Скрываем стрелки */
     .section-controls {
-        gap: 15px;
+        display: none;
     }
-    .license-slider-section {
-        margin-top: 40px;
+
+    /* Контейнер и отступы */
+    .container {
+        max-width: 100%;
+        padding: 0 16px;
+        margin: 0 auto;
+    }
+
+    .login-main {
+        margin-top: 83px;
+        margin-bottom: 40px;
+    }
+
+    .breadcrumbs {
+        font-size: 12px;
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+
+    .license-hero__title {
+        font-size: 30px;
+        margin-bottom: 15px;
+    }
+
+    /* Обёртка слайдера: центрирование, отступы для тени */
+    .license-slider-clip {
+        width: 328px;          
+        margin: 0 auto;
+        padding: 10px;
+        overflow: hidden;
+        margin-top: -30px;
+        margin-bottom: 0;
+    }
+
+    /* Карточка слайда */
+    .license-slide {
+        width: 100%;
+        max-width: 328px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        transition: none;
+    }
+    .license-slide:hover {
+        transform: none;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    /* Трек слайдера */
+    .license-slider__track {
+        gap: 20px;
+    }
+
+    /* Точки слайдера (три статические точки) */
+    .license-dots {
+        display: flex;
+        justify-content: center;
+        gap: 7px;
+        margin: 10px 0 30px;
+    }
+    .license-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #d9d9d9;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .license-dot.active {
+        background: #b5b5b5;
+        transform: scale(1.2);
+    }
+
+    /* Скрываем элементы только для десктопа */
+    .desktop-only {
+        display: none !important;
     }
 }

@@ -214,20 +214,44 @@ function initGallery() {
 
 // --- Мобильное меню ---
 function initMobileMenu() {
-  const burger = document.getElementById('burger-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  if (burger && mobileMenu) {
-    burger.addEventListener('click', () => {
-      burger.classList.toggle('active');
-      mobileMenu.classList.toggle('active');
-    });
-    document.querySelectorAll('.mobile-menu__link').forEach(link => {
-      link.addEventListener('click', () => {
-        burger.classList.remove('active');
-        mobileMenu.classList.remove('active');
-      });
-    });
-  }
+    const burger = document.getElementById('burger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const scrollBtn = document.querySelector('.scroll-to-top');
+
+    if (burger && mobileMenu) {
+        function updateScrollButtonVisibility() {
+            if (scrollBtn) {
+                if (mobileMenu.classList.contains('active')) {
+                    scrollBtn.style.opacity = '0';
+                    scrollBtn.style.visibility = 'hidden';
+                } else {
+                    scrollBtn.style.opacity = '';
+                    scrollBtn.style.visibility = '';
+                    // Восстанавливаем исходное состояние (видимость по скроллу)
+                    const isVisible = window.scrollY > 300;
+                    if (isVisible) {
+                        scrollBtn.classList.add('scroll-to-top--visible');
+                    } else {
+                        scrollBtn.classList.remove('scroll-to-top--visible');
+                    }
+                }
+            }
+        }
+
+        burger.addEventListener('click', () => {
+            burger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            updateScrollButtonVisibility();
+        });
+
+        document.querySelectorAll('.mobile-menu__link').forEach(link => {
+            link.addEventListener('click', () => {
+                burger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                updateScrollButtonVisibility();
+            });
+        });
+    }
 }
 
 // --- Инициализация в зависимости от экрана ---

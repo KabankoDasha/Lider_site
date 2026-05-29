@@ -9,11 +9,24 @@
     <link rel="stylesheet" href="../css/forma.css">
 </head>
 <body>
+    <!-- Шапка -->
     <header class="header">
         <div class="container header__inner">
             <a href="../pages/main.html" class="logo">
                 <img src="../images/logo.svg" alt="Автошкола Лидер" class="logo__img">
             </a>
+            <!-- Мобильный телефон -->
+            <a href="tel:+73517007400" class="header__phone mobile-only">
+                <img src="../images/phone2.svg" alt="Телефон" class="header__phone-icon">
+                +7(351) 700-74-00
+            </a>
+            <!-- Бургер-меню -->
+            <button class="burger mobile-only" id="burger-btn" aria-label="Меню">
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+            </button>
+            <!-- Десктопная навигация -->
             <nav class="nav">
                 <ul class="nav__list">
                     <li><a href="../pages/study.html">Обучение</a></li>
@@ -24,9 +37,23 @@
                     <li><a href="../pages/contact.html">Контакты</a></li>
                 </ul>
             </nav>
-            <a href="../pages/login.html" class="auth-btn btn btn--login">Войти</a>
+            <!-- Кнопка "Войти" скрыта на мобильных -->
+            <a href="../pages/login.html" class="auth-btn btn btn--login desktop-only">Войти</a>
         </div>
     </header>
+
+    <!-- Мобильное меню (бургер) -->
+    <div class="mobile-menu" id="mobile-menu">
+        <nav class="mobile-menu__nav">
+            <a href="../pages/study.html" class="mobile-menu__link">Обучение</a>
+            <a href="../pages/sale.html" class="mobile-menu__link">Акции</a>
+            <a href="../pages/instructors.html" class="mobile-menu__link">Инструкторы</a>
+            <a href="../pages/faq.html" class="mobile-menu__link">Вопросы</a>
+            <a href="../pages/otzyv.html" class="mobile-menu__link">Отзывы</a>
+            <a href="../pages/contact.html" class="mobile-menu__link">Контакты</a>
+            <a href="../pages/login.html" class="mobile-menu__link mobile-menu__link--login" id="mobile-auth-btn">Войти</a>
+        </nav>
+    </div>
 
     <main class="info-main">
         <div class="breadcrumbs container">
@@ -50,12 +77,11 @@
         <section class="advantages container">
             <h2 class="advantages__title">Преимущества обучения в учебном центре «Лидер»</h2>
             <div class="advantages__box">
-                <!-- преимущества статические, можно оставить как в info1.html -->
                 <div class="advantage">
                     <div class="advantage__icon-wrap">
                         <img src="../images/icon1.svg" alt="Технические оснащённые аудитории" class="advantage__icon" style="width:63px; height:67px;">
                     </div>
-                    <p class="advantage__text">Технические <br> оснащённые аудитории</p>
+                    <p class="advantage__text">Технически <br> оснащённые аудитории</p>
                 </div>
                 <div class="advantage">
                     <div class="advantage__icon-wrap">
@@ -136,7 +162,10 @@
 
             <!-- Карта сайта -->
             <div class="footer__sitemap">
-                <h3 class="footer__sitemap-title">Карта сайта</h3>
+                <h3 class="footer__sitemap-title">
+                    <span class="desktop-only">Карта сайта</span>
+                    <a href="../pages/sitemap.html" class="mobile-only" style="color: inherit; text-decoration: none;">Карта сайта</a>
+                </h3>
                 <hr class="footer__divider">
                 <div class="footer__sitemap-columns">
                     <div class="footer__sitemap-col">
@@ -210,62 +239,8 @@
         </div>
     </footer>
 
+    <script src="../js/main.js"></script>
     <script src="../js/courses-data.js"></script>
-    <script>
-        (function() {
-            const courseKey = getCourseKey();
-            const data = coursesData[courseKey] || coursesData.motorcycle; // fallback
-
-            // Заполняем контент
-            document.getElementById('breadcrumb-current').textContent = data.breadcrumb;
-            document.getElementById('hero-title').textContent = data.heroTitle;
-            document.getElementById('hero-desc').textContent = data.heroDesc;
-            document.getElementById('steps-title').textContent = data.stepsTitle;
-
-            // Строим этапы
-            const stepsGrid = document.getElementById('steps-grid');
-            stepsGrid.innerHTML = '';
-            const cols = [[], []];
-            data.steps.forEach((step, i) => cols[i % 2].push(step));
-            cols.forEach(colSteps => {
-                const colDiv = document.createElement('div');
-                colDiv.className = 'steps__col';
-                colSteps.forEach(step => {
-                    colDiv.innerHTML += `
-                        <div class="step">
-                            <div class="step__badge">
-                                <span class="step__num">${step.num}</span>
-                                <span class="step__label">этап</span>
-                            </div>
-                            <p class="step__desc">${step.text}</p>
-                        </div>`;
-                });
-                stepsGrid.appendChild(colDiv);
-            });
-
-            // Блок "Водительские права" (если есть)
-            const rightsSection = document.getElementById('rights-section');
-            if (data.rightsTitle) {
-                rightsSection.style.display = 'block';
-                document.getElementById('rights-title').textContent = data.rightsTitle;
-                const rightsTexts = document.getElementById('rights-texts');
-                rightsTexts.innerHTML = data.rightsTexts.map(t => `<p class="rights__text">${t}</p>`).join('');
-                const rightsList = document.getElementById('rights-list');
-                rightsList.innerHTML = data.rightsList.map(li => `<li>${li}</li>`).join('');
-            } else {
-                rightsSection.style.display = 'none';
-            }
-
-            // CTA
-            document.getElementById('cta-slogan').innerHTML = data.ctaSlogan;
-            document.getElementById('cta-badge-duration').textContent = data.ctaBadgeDuration;
-            document.getElementById('cta-badge-installment').textContent = data.ctaBadgeInstallment;
-            const ctaBtn = document.getElementById('open-form-btn');
-            ctaBtn.dataset.course = data.ctaBtnCourse;
-            document.getElementById('cta-img').src = data.ctaImg;
-            document.getElementById('cta-img').alt = data.ctaImgAlt;
-        })();
-    </script>
     <script src="../js/load-form.js"></script>
     <script src="../js/scroll-to-top.js"></script>
     <script src="../js/auth-check.js"></script>

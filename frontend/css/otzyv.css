@@ -298,3 +298,119 @@ body {
     font-size: 20px;             
     color: #7A7A7A;
 }
+
+/* ========================
+   Адаптивность (мобильная версия)
+   ======================== */
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none !important;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0 16px;
+        margin: 0 auto;
+    }
+
+    .otzyv-main {
+        margin-top: 83px;
+        margin-bottom: 40px;
+    }
+
+    .breadcrumbs {
+        font-size: 12px;
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+
+    .otzyv-hero__title {
+        font-size: 30px;
+        margin-bottom: 15px;
+    }
+    .otzyv-hero__desc {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+
+    .reviews-filter__icon {
+        width: 30px;
+        margin-bottom: 10px;
+    }
+
+    .filter-overlay {
+        right: 16px;
+        top: 45px;
+        width: 240px;
+    }
+
+    /* Карточка отзыва: гибкий заголовок, чтобы звёзды не выпадали */
+    .review-card__header {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: flex-start;
+        margin-bottom: 15px;
+    }
+    .review-card__header > div:first-child {
+        flex: 1;
+        min-width: 0; 
+    }
+    .review-card__name {
+        font-size: 16px;
+    }
+    .review-card__course {
+        margin-top: 10px;
+        font-size: 12px;
+        white-space: nowrap;       
+    }
+
+    .review-card__text {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .review-card__date {
+        font-size: 12px;
+    }
+
+    /* Уменьшаем звёзды */
+    .review-card__stars .star {
+        width: 20px;
+        height: 20px;
+    }
+    .star::before {
+        font-size: 20px !important;
+        line-height: 1;
+    }
+
+    /* Отступы внутри карточки и между карточками */
+    .review-card {
+        padding: 15px;
+    }
+    .reviews-list {
+        gap: 10px;
+    }
+
+    /* Кнопка «Показать ещё» на мобильных */
+    .reviews-load-more {
+        font-size: 14px;
+        padding: 10px 24px;
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+
+    /* Убираем анимацию наведения на фильтр */
+    .reviews-filter__btn:hover {
+        background: none;
+        box-shadow: none;
+        transform: none;
+    }
+
+    /* Сообщение «Больше отзывов нет» */
+    .no-more-message {
+        font-size: 14px;
+        margin-top: 20px;
+        margin-bottom: 0;
+    }
+}
