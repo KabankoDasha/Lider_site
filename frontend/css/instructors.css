@@ -594,7 +594,7 @@ body {
 
     /* Для инструкторов по вождению – картинка машины под текстом, справа */
     .instructor-card--with-car {
-        overflow: visible; /* разрешаем выход за пределы */
+        overflow: visible; 
     }
     .instructor-card--with-car .instructor-card__details {
         display: flex;
@@ -618,12 +618,12 @@ body {
         display: block;
         object-fit: cover;  
     }
-    /* Скрываем строку "Автомобиль: ..." */
+
     .instructor-card--with-car .car-text {
         display: none;
     }
 
-    /* Оверлей оценки инструктора – мобильная версия */
+    /* Оверлей оценки инструктора */
     .delete-overlay__box {
         width: 328px;
         min-height: 150px;

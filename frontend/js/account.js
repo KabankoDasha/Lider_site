@@ -962,6 +962,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById('agreement-docs-buttons');
         if (!container) return;
         container.innerHTML = '';
+        const hasAny = documentState.passport || documentState.snils || documentState.medical;
+        if (!hasAny) {
+            // Показываем сообщение, если нет ни одного документа
+            const messageSpan = document.createElement('span');
+            messageSpan.className = 'no-docs-message';
+            messageSpan.textContent = 'Нет загруженных документов';
+            container.appendChild(messageSpan);
+            return;
+        }
         if (documentState.passport) {
             addDocButton('Паспорт', 'passport', container);
         }
@@ -1098,6 +1107,55 @@ document.addEventListener('DOMContentLoaded', () => {
     setupDocumentUpload('upload-snils-btn', 'snils-file-input', 'snils');
     setupDocumentUpload('upload-medical-btn', 'medical-file-input', 'medical');
 
+    // ========== Мобильное боковое меню ==========
+    (function initMobileSidebar() {
+        const toggleBtn = document.getElementById('sidebar-toggle-mobile');
+        const sidebar = document.querySelector('.account-sidebar');
+        if (!toggleBtn || !sidebar) return;
+
+        function closeSidebar() {
+            sidebar.classList.remove('mobile-open');
+            if (toggleBtn) toggleBtn.classList.remove('active');
+        }
+
+        function openSidebar() {
+            sidebar.classList.add('mobile-open');
+            if (toggleBtn) toggleBtn.classList.add('active');
+        }
+
+        toggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (sidebar.classList.contains('mobile-open')) {
+                closeSidebar();
+            } else {
+                openSidebar();
+            }
+        });
+
+        // Закрытие при клике на пункт меню
+        const menuItems = document.querySelectorAll('.sidebar-menu__item');
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                closeSidebar();
+            });
+        });
+
+        // Закрытие при клике вне панели (по документу)
+        document.addEventListener('click', (e) => {
+            if (sidebar.classList.contains('mobile-open') && 
+                !sidebar.contains(e.target) && 
+                !toggleBtn.contains(e.target)) {
+                closeSidebar();
+            }
+        });
+
+        // При изменении ориентации экрана закрываем меню
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) return;
+            closeSidebar();
+        });
+    })();
+    
     // Простая защита от XSS (оставлена для локального использования)
     function escapeHtml(str) {
         return str.replace(/[&<>]/g, function(m) {

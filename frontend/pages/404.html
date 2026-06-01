@@ -15,6 +15,18 @@
             <a href="../pages/main.html" class="logo">
                 <img src="../images/logo.svg" alt="Автошкола Лидер" class="logo__img">
             </a>
+            <!-- Мобильный телефон -->
+            <a href="tel:+73517007400" class="header__phone mobile-only">
+                <img src="../images/phone2.svg" alt="Телефон" class="header__phone-icon">
+                +7(351) 700-74-00
+            </a>
+            <!-- Бургер-меню -->
+            <button class="burger mobile-only" id="burger-btn" aria-label="Меню">
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+            </button>
+            <!-- Десктопная навигация -->
             <nav class="nav">
                 <ul class="nav__list">
                     <li><a href="../pages/study.html">Обучение</a></li>
@@ -25,12 +37,26 @@
                     <li><a href="../pages/contact.html">Контакты</a></li>
                 </ul>
             </nav>
-            <a href="../pages/login.html" class="auth-btn btn btn--login">Войти</a>
+            <!-- Кнопка "Войти" скрыта на мобильных -->
+            <a href="../pages/login.html" class="auth-btn btn btn--login desktop-only">Войти</a>
         </div>
     </header>
 
+    <!-- Мобильное меню (бургер) -->
+    <div class="mobile-menu" id="mobile-menu">
+        <nav class="mobile-menu__nav">
+            <a href="../pages/study.html" class="mobile-menu__link">Обучение</a>
+            <a href="../pages/sale.html" class="mobile-menu__link">Акции</a>
+            <a href="../pages/instructors.html" class="mobile-menu__link">Инструкторы</a>
+            <a href="../pages/faq.html" class="mobile-menu__link">Вопросы</a>
+            <a href="../pages/otzyv.html" class="mobile-menu__link">Отзывы</a>
+            <a href="../pages/contact.html" class="mobile-menu__link">Контакты</a>
+            <a href="../pages/login.html" class="mobile-menu__link mobile-menu__link--login" id="mobile-auth-btn">Войти</a>
+        </nav>
+    </div>
+
     <main class="error-main">
-        <div class="container error-container">
+        <div class="error-container">
             <div class="error-content">
                 <div class="error-code">404</div>
                 <h1 class="error-title">Страница не найдена</h1>
@@ -63,6 +89,7 @@
     </main>
 
     <script src="../js/auth-check.js"></script>
+    <script src="../js/main.js"></script>
     <script src="../js/load-form.js"></script>
     <script src="../js/scroll-to-top.js"></script>
     <script src="../js/search-index.js"></script>

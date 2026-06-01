@@ -64,6 +64,11 @@
 
         <section class="account-hero container">
             <h1 class="account-hero__title">Личный кабинет</h1>
+            <!-- Мобильный триггер боковой панели -->
+            <div class="sidebar-toggle-mobile mobile-only" id="sidebar-toggle-mobile">
+                <span class="sidebar-toggle-mobile__text">Меню</span>
+                <img src="../images/arrow2.svg" alt="Открыть меню" class="sidebar-toggle-mobile__arrow">
+            </div>
         </section>
 
         <div class="account-layout container">
@@ -302,6 +307,7 @@
         <!-- Оверлей формы отзыва -->
         <div class="form-overlay" id="review-form-overlay">
             <div class="review-form-container">
+                <p class="review-overlay__text mobile-only">Отзыв на обучение</p>
                 <button class="form-container__close" id="close-review-form-btn">
                     <img src="../images/close.svg" alt="Закрыть">
                 </button>

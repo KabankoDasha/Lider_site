@@ -1319,10 +1319,15 @@ body {
         display: none !important;
     }
 
+    body {
+        overflow-x: visible;
+    }
+
     .container {
         max-width: 100%;
         padding: 0 16px;
         margin: 0 auto;
+        overflow-x: hidden;
     }
 
     .account-main {
@@ -1339,5 +1344,851 @@ body {
     .account-hero__title {
         font-size: 30px;
         margin-bottom: 15px;
+    }
+
+    /* ===== Мобильный триггер ===== */
+    .sidebar-toggle-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: auto;
+        max-width: 110px;
+        margin-left: -16px;
+        margin-right: 0;
+        background-color: #F0F0F0;
+        padding: 10px 16px 10px 16px;
+        border-radius: 0 12px 12px 0;
+        cursor: pointer;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+    }
+    .sidebar-toggle-mobile__text {
+        font-size: 16px;
+        font-weight: 500;
+        color: #000;
+        margin-right: 12px;
+    }
+    .sidebar-toggle-mobile__arrow {
+        width: 20px;
+        height: 20px;
+        transform: rotate(-90deg);
+    }
+
+    /* ===== Левая боковая панель (мобильная) ===== */
+    .account-sidebar {
+        position: fixed;
+        top: 83px;
+        left: -100%;
+        width: calc(100% - 16px);
+        max-width: 328px;
+        height: auto;
+        min-height: calc(100% - 150px);
+        background-color: #f5f5f5;
+        z-index: 1000;
+        transition: left 0.3s ease;
+        padding: 30px 0 0 0;
+        border-radius: 0 16px 16px 0;
+        box-shadow: 4px 0 12px rgba(0,0,0,0.1);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .account-sidebar.mobile-open {
+        left: 0;
+    }
+    .sidebar-avatar {
+        width: 95px;
+        height: 95px;
+        margin: 0 auto 15px;
+    }
+    .sidebar-name {
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    .sidebar-menu {
+        margin-bottom: 40px;
+        padding: 0;
+    }
+    .sidebar-menu__item {
+        height: auto;
+        min-height: 50px;
+        margin-bottom: 0;
+        background-color: transparent;
+    }
+    .sidebar-menu__item.active {
+        background-color: #E7E7E7;
+    }
+    .sidebar-indicator {
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+        border-radius: 0 2px 2px 0;
+    }
+    .sidebar-menu__item.active .sidebar-indicator {
+        display: block;
+    }
+    .sidebar-link {
+        padding: 14px 0 14px 30px;
+        font-size: 16px;
+        font-weight: 400;
+    }
+    .sidebar-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        padding: 0 20px;
+        margin-bottom: 30px;   
+        margin-top: 0;         
+        flex-wrap: wrap;
+    }
+    .btn--delete-account {
+        width: 167px;
+        height: 50px;
+        font-size: 16px;
+        font-weight: 400;
+        background-color: #E7E7E7;
+        margin: 0;
+    }
+    .btn--logout {
+        width: 85px;
+        height: 50px;
+        font-size: 16px;
+        font-weight: 500;
+        margin: 0;
+    }
+
+    /* ===== Правая контентная область ===== */
+    .account-layout {
+        flex-direction: column;
+        gap: 0;
+        margin-bottom: 60px;
+    }
+    .account-content {
+        width: 100%;
+        min-height: 300px;
+        background-color: #f3f3f3;
+        border-radius: 10px;
+        padding: 0;                
+        overflow: visible;
+    }
+    .content-panel.active {
+        width: 100%;
+        padding: 15px;            
+    }
+    /* Заголовок панели */
+    .content-header {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 15px;
+        padding: 0;                
+    }
+    .content-title {
+        font-size: 16px;
+        font-weight: 500;
+        margin: 0;
+    }
+    .content-add-btn {
+        padding: 0;
+        margin-left: 10px;             
+        display: flex;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    .content-add-icon {
+        width: 15px;
+        height: 15px;
+        transform: rotate(45deg);
+    }
+
+    /* Карточки заявок и отзывов */
+    .cards-wrapper {
+        overflow: visible;
+    }
+
+    .application-card,
+    .review-card {
+        width: 100%;
+        max-width: 328px;
+        margin: 0 auto 20px auto;  
+        background-color: #FCFCFC;
+        border-radius: 10px;
+        padding: 15px;
+        position: relative;
+        min-height: auto;
+        overflow: visible;          
+    }
+    .application-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 4px;
+    }
+    .application-number {
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0;
+    }
+    .application-status {
+        width: 97px;
+        height: 25px;
+        padding: 5px 10px;
+        font-size: 12px;
+        font-weight: 400;
+        border-radius: 6px;
+        display: inline-block;
+        background: linear-gradient(-42deg, #FFBB3D, #FFC96C, #FFBB3D);
+        color: #946000;
+        text-align: center;
+        white-space: nowrap;   
+        margin-top: -5px;     
+    }
+    .application-status[data-status="confirmed"] {
+        background: linear-gradient(-42deg, #80D34D, #8DDE62, #80D34D);
+        color: #247E00;
+        width: 113px;
+    }
+    .application-status[data-status="rejected"] {
+        background: linear-gradient(-42deg, #FF743D, #FF966C, #FF743D);
+        color: #942F00;
+        width: 86px;
+    }
+    .application-course {
+        max-width: 167px;
+        font-size: 12px;
+        font-weight: 400;
+        color: #7A7A7A;
+        margin-bottom: 15px;
+    }
+    .application-message {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.4;
+        margin-bottom: 15px;
+    }
+    .application-date {
+        display: block;
+        text-align: right;
+        font-size: 12px;
+        font-weight: 400;
+        color: #7A7A7A;
+        margin-top: 10px;
+    }
+    .application-delete-btn {
+        position: absolute;
+        top: -12px;
+        right: -12px;
+        width: 25px;
+        height: 25px;
+        background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+    }
+    .application-delete-btn img {
+        width: 12px;
+        height: 12px;
+    }
+
+    /* Карточка отзыва */
+    .review-card__header {
+        margin-bottom: 10px;
+    }
+    .review-card__name {
+        font-size: 16px;
+        font-weight: 400;
+        margin-bottom: 4px;
+    }
+    .review-card__course {
+        font-size: 12px;
+        font-weight: 400;
+        color: #7A7A7A;
+    }
+    .review-card__stars {
+        position: absolute;
+        top: 7px;
+        right: 15px;
+        gap: 0;
+    }
+    .star {
+        width: 20px;
+        height: 20px;
+    }
+    .star::before {
+        font-size: 20px;
+    }
+
+    .review-card .star:not(.star--active) {
+        width: 18px;
+        height: 18px;
+        padding-left: 1.5px;
+    }
+    .review-card .star:not(.star--active)::before {
+        font-size: 18px;
+        line-height: 1.1;
+    }
+
+    .review-card__text {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.4;
+        margin-bottom: 10px;
+    }
+    .review-card__date {
+        font-size: 12px;
+        font-weight: 400;
+        color: #7A7A7A;
+        text-align: right;
+        margin-top: 10px;
+    }
+
+    /* Форма профиля */
+    .profile-field__label {
+        font-size: 16px;
+        font-weight: 400;
+        color: #717171;
+        margin-top: 20px;
+        margin-bottom: 5px;
+    }
+    .profile-field__input {
+        height: 48px;
+        font-size: 14px;
+        padding: 0 15px;
+    }
+    .profile-form__actions {
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 30px;
+        gap: 15px;
+    }
+    .btn--cancel-profile {
+        width: 103px;
+        height: 47px;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0;
+    }
+    .profile-save-btn {
+        width: 109px;
+        height: 47px;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0;
+    }
+
+    /* Раздел Документы */
+    .agreement-card {
+        padding: 15px;
+        overflow: visible;
+    }
+    .agreement-card__row {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .agreement-card__info--course {
+        width: 100%;
+        max-width: 100%;
+        overflow: visible;
+    }
+    .custom-select-doc {
+        width: 100%;
+        max-width: 100%;
+        overflow: visible;
+    }
+    .custom-select-doc__trigger {
+        height: auto;
+        min-height: 44px;
+        padding: 10px 12px;
+        font-size: 14px;
+        white-space: normal;
+        word-break: break-word;
+        line-height: 1.3;
+    }
+    .custom-select-doc__selected {
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    .custom-select-doc__options {
+        max-height: 250px;
+    }
+    .custom-select-doc__options li {
+        padding: 10px 12px;
+        font-size: 14px;
+        white-space: normal;
+        word-break: break-word;
+        line-height: 1.3;
+    }
+    .agreement-card__value {
+        font-size: 14px;
+    }
+    .agreement-card__actions {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    .agreement-card__actions-left,
+    .agreement-card__actions-right {
+        display: flex;
+        gap: 10px;
+    }
+    .btn--edit-agreement,
+    .btn--view-agreement {
+        width: auto;
+        padding: 0 16px;
+        height: 44px;
+        font-size: 14px;
+    }
+
+    .no-docs-message {
+        font-size: 14px;
+        color: #999;
+        text-align: center;
+        width: 100%;
+        font-weight: 400;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Разделитель перед кнопкой "Памятка" */
+    .agreement-card__docs {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
+        border-top: 1px solid #eee;
+        padding-top: 15px;
+        margin-top: 15px;
+    }
+    .agreement-card__docs-left {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+    .agreement-card__docs-right {
+        width: 268px;
+        text-align: right;
+        gap: 15px;
+        border-top: 1px solid #eee;
+        padding-top: 15px;
+        margin-top: 15px;
+    }
+    .btn--doc-preview {
+        height: 44px;
+        font-size: 14px;
+        padding: 0 16px;
+    }
+    /* Кнопки загрузки сканов */
+    .upload-buttons-row {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 20px;
+    }
+    .btn--upload-doc {
+        width: 100%;
+        height: 44px;
+        font-size: 14px;
+        padding: 0 16px;
+        justify-content: center;
+        flex: none;
+    }
+
+    /* Оверлей удаления, выхода */
+    .delete-overlay__box {
+        width: 328px;
+        min-height: 150px;
+        padding: 30px 20px;
+    }
+    .delete-overlay__text {
+        font-size: 18px;
+        margin-bottom: 25px;
+    }
+    .delete-overlay__buttons {
+        gap: 15px;
+    }
+    .btn--cancel,
+    .btn--confirm-delete,
+    .btn--confirm-action {
+        width: 140px;
+        height: 48px;
+        font-size: 16px;
+    }
+
+    /* Оверлей формы отзыва */
+    .review-form-container {
+        width: 328px;
+        height: 490px;          
+        padding: 20px 15px 25px 15px;
+        background-color: #F0F0F0;
+        border-radius: 16px;
+        overflow-y: auto;
+        overflow-x: hidden;       
+        position: relative;
+    }
+    .review-form-container .form-container__close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .review-form-container .form-container__close img {
+        width: 15px;
+        height: 15px;
+        display: block;
+    }
+    .review-form-container .review-overlay__text {
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+        margin-top: 10px;  
+        margin-bottom: -10px;      
+    }
+
+    /* Поле "Имя" и "Курс" */
+    .review-form-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: -10px;        
+    }
+    .review-form-label {
+        font-size: 16px;
+        font-weight: 400;
+        color: #000;
+        margin: 0;
+        width: auto;
+        flex-shrink: 0;
+    }
+    .review-input-wrapper {
+        width: 249px;              
+        max-width: 249px;
+        position: relative;
+    }
+    .review-form-input {
+        width: 100%;
+        height: 37px;
+        font-size: 14px;
+        font-weight: 400;
+        padding: 10px 15px;
+        background-color: #FCFCFC;
+        border: 1px solid #9B9B9B;
+        border-radius: 10px;
+        outline: none;
+        font-family: 'Montserrat', sans-serif;
+        color: #000;
+        box-sizing: border-box;
+    }
+    .review-form-input::placeholder {
+        color: #717171;
+    }
+
+    /* Выпадающий список "Курс" */
+    .review-custom-select {
+        width: 249px;              
+        max-width: 249px;
+        position: relative;
+    }
+    .review-custom-select__trigger {
+        width: 100%;
+        height: 43px;
+        line-height: 1.1;
+        font-size: 14px;
+        font-weight: 400;
+        background-color: #FCFCFC;
+        border: 1px solid #9B9B9B;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        color: #000;
+        font-family: 'Montserrat', sans-serif;
+        padding: 0 15px;
+    }
+    .review-custom-select__selected.placeholder {
+        color: #717171;
+    }
+    .review-custom-select__arrow {
+        width: 12px;
+        height: 12px;
+        margin: 0;
+        transition: transform 0.3s;
+    }
+    .review-custom-select.open .review-custom-select__arrow {
+        transform: rotate(180deg);
+    }
+    /* Перенос текста в селекте курса */
+    .review-custom-select__selected {
+        width: 190px;
+    }
+    .review-custom-select__options {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #FFFFFF;
+        border-radius: 10px;
+        list-style: none;
+        display: none;
+        z-index: 10;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        max-height: 200px;
+        overflow-y: auto;
+    }
+    .review-custom-select.open .review-custom-select__options {
+        display: block;
+    }
+    .review-custom-select__options li {
+        padding: 10px 15px;
+        font-size: 14px;
+        cursor: pointer;
+        font-family: 'Montserrat', sans-serif;
+    }
+    .review-custom-select__options li:hover {
+        background-color: #F0F0F0;
+    }
+
+    /* Поле "Отзыв" (textarea) */
+    .review-form-textarea-label {
+        font-size: 16px;
+        font-weight: 400;
+        color: #000;      
+        display: block;
+    }
+    .review-form-textarea {
+        width: 298px;             
+        height: 100px;
+        font-size: 14px;
+        font-weight: 400;
+        padding: 10px 15px;
+        background-color: #FCFCFC;
+        border: 1px solid #9B9B9B;
+        border-radius: 10px;
+        resize: none;
+        outline: none;
+        font-family: 'Montserrat', sans-serif;
+        color: #000;
+        box-sizing: border-box;
+        margin-bottom: -10px;
+        margin-top: -12px;      
+    }
+    .review-form-textarea::placeholder {
+        color: #717171;
+    }
+
+    /* Выпадающий список "Оценка" */
+    .review-custom-select--grade {
+        width: 220px;               
+        max-width: 220px;
+        margin-bottom: 0;       
+    }
+
+    /* Уменьшаем высоту выпадающего списка для оценки */
+    .review-custom-select--grade .review-custom-select__options {
+        max-height: 80px;
+    }
+
+    /* Кнопка Добавить */
+    .review-submit-btn {
+        width: 131px;
+        height: 47px;
+        font-size: 14px;
+        font-weight: 500;
+        font-family: 'Montserrat', sans-serif;
+        background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+        border: none;
+        border-radius: 10px;
+        color: #FCFCFC;
+        cursor: pointer;
+        display: block;
+        margin: 10px 0 0 auto;     
+        text-align: center;
+        line-height: 47px;
+        transition: opacity 0.2s;
+    }
+
+    .review-submit-btn:hover {
+        opacity: 1;
+    }
+
+    /* Ошибки в форме отзыва */
+    .review-input-wrapper .field-error-text {
+        position: absolute;
+        right: 8px;
+        bottom: 4px;
+        font-size: 9px;
+        color: #D90D26;
+        white-space: nowrap;
+        background: transparent;
+        padding: 0 2px;
+        pointer-events: none;
+    }
+    .review-custom-select .field-error-text {
+        position: absolute;
+        bottom: -16px;
+        right: 0;
+        font-size: 9px;
+        color: #D90D26;
+        white-space: nowrap;
+    }
+    .review-form-textarea.error ~ .field-error-text {
+        bottom: 0;
+        right: 0;
+        margin: 0;
+        margin-right: -40px;
+    }
+
+    /* Оверлей договора */
+    .add-course-box {
+        width: 328px;
+        max-width: 328px;
+        max-height: 85vh;
+        overflow-y: auto;
+        overflow-x: visible;            
+        background-color: #F0F0F0;
+        border-radius: 16px;
+        padding: 20px 15px 25px 15px;
+        position: relative;
+        margin: auto;
+    }
+    .add-course-box .form-container__close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .add-course-box .form-container__close img {
+        width: 15px;
+        height: 15px;
+        display: block;
+    }
+    .add-course-title {
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+        margin: 10px 0 20px 0;
+    }
+    .app-detail-row {
+        margin-bottom: 0;
+    }
+    .app-detail-label {
+        font-size: 14px;
+        font-weight: 400;
+        color: #000;
+        margin-bottom: 2px;
+        display: block;
+        white-space: normal;
+    }
+    .add-course-input-wrapper {
+        width: 100%;
+        position: relative;
+    }
+    .add-course-input {
+        width: 100%;
+        height: 37px;
+        font-size: 14px;
+        font-weight: 400;
+        padding: 0 15px;
+        background-color: #FCFCFC;
+        border: 1px solid #9B9B9B;
+        border-radius: 10px;
+        outline: none;
+        font-family: 'Montserrat', sans-serif;
+        color: #000;
+        box-sizing: border-box;
+        margin-bottom: 0;
+    }
+    .add-course-input::placeholder {
+        color: #717171;
+    }
+    .add-course-save-btn {
+        width: 201px !important;
+        height: 47px !important;
+        font-size: 14px !important;
+        font-weight: 500;
+        font-family: 'Montserrat', sans-serif;
+        background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+        border: none;
+        border-radius: 10px;
+        color: #FCFCFC;
+        cursor: pointer;
+        display: block;
+        margin: 20px 0 0 auto;
+        text-align: center;
+        line-height: 47px;
+        padding: 0 16px;
+        margin-top: -10px;
+    }
+
+    .add-course-save-btn:hover {
+        opacity: 1;
+    }
+
+    /* Ошибки в форме договора */
+    .add-course-input.error {
+        border-color: #D90D26;
+    }
+    .add-course-input-wrapper .field-error-text {
+        position: absolute;
+        right: 8px;
+        bottom: 18px;
+        font-size: 9px;
+        color: #D90D26;
+        white-space: nowrap;
+        pointer-events: none;
+    }
+
+    /* Полоса прокрутки */
+    .add-course-box::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Оверлеи успеха */
+    .success-overlay__box {
+        width: 300px;
+        padding: 30px 20px;
+    }
+    .success-overlay__icon {
+        width: 60px;
+        height: 60px;
+    }
+    .success-overlay__text {
+        font-size: 16px;
+        line-height: 1.4;
+    }
+
+    /* Повышаем z-index оверлеев, чтобы они были над сайдбаром */
+    .delete-overlay,
+    .success-overlay,
+    .review-form-overlay,
+    .add-course-box {
+        z-index: 1002 !important;
     }
 }

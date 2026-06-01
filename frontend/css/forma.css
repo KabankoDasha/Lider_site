@@ -498,6 +498,10 @@
         margin: 0 auto;
     }
 
+    .form-submit-btn:hover {
+        opacity: 1;
+    }
+
     /* Ошибка поля */
     .field-error-text {
         font-size: 10px;

@@ -1,27 +1,51 @@
 /* ========================
-   Страница 404
+   Страница 404 
    ======================== */
-.error-main {
-    margin-top: 250px;  
-    min-height: calc(100vh - 135px - 300px); 
-    display: flex;
-    align-items: center;
-    max-width: 1200px;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.error-container {
-    margin: 0 250px auto;
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #fcfcfc;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.header__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 400px;
-    flex-wrap: nowrap;
+}
+
+.error-main {
+    margin-top: 190px;
+    min-height: calc(100vh - 135px - 300px);
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.error-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    width: 100%;
 }
 
 .error-content {
     flex: 2;
     text-align: left;
-    min-width: 500px;
 }
 
 .error-code {
@@ -50,7 +74,7 @@
     display: flex;
     gap: 20px;
     align-items: center;
-    margin-bottom: 200px;
+    margin-bottom: 0;
 }
 
 .btn--error-home,
@@ -62,7 +86,7 @@
     font-weight: 500;
     text-decoration: none;
     transition: all 0.3s;
-    white-space: nowrap
+    white-space: nowrap;
 }
 
 .btn--error-home {
@@ -88,14 +112,14 @@
     transform: translateY(-2px);
 }
 
-/* Анимация колеса */
+/* Анимация колеса (десктоп) */
 .error-animation {
     flex-shrink: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 40px;
     position: relative;
+    margin-top: 160px;
 }
 
 .rolling-wheel {
@@ -115,7 +139,6 @@
     animation: spin 2s linear infinite;
 }
 
-/* Черный круг */
 .wheel-center {
     position: absolute;
     width: 90%;
@@ -127,7 +150,6 @@
     z-index: 2;
 }
 
-/* Белый круг */
 .wheel-white {
     position: absolute;
     width: 20%;
@@ -139,21 +161,19 @@
     z-index: 3;
 }
 
-/* Полукруги (зубцы) */
 .tooth {
     position: absolute;
     width: 30px;
     height: 30px;
     background: #fcfcfc;
-    border-radius: 50% 50% 30% 30%;   /* верхние углы скруглены — получается полукруг */
+    border-radius: 50% 50% 30% 30%;
     top: 50%;
     left: 50%;
-    margin: -20px 0 0 -10px;      /* смещение, чтобы центр вращения был на плоской стороне */
-    transform-origin: center bottom; /* вращение вокруг нижнего центра (плоской стороны) */
+    margin: -20px 0 0 -10px;
+    transform-origin: center bottom;
     z-index: 3;
 }
 
-/* Расположение 6 полукругов по кругу */
 .t1 { transform: rotate(0deg) translateY(-65px) translateX(-5px) rotate(180deg); }
 .t2 { transform: rotate(60deg) translateY(-55px) translateX(-10px) rotate(-180deg); }
 .t3 { transform: rotate(120deg) translateY(-45px) translateX(-5px) rotate(-180deg); }
@@ -161,43 +181,106 @@
 .t5 { transform: rotate(240deg) translateY(-52px) translateX(10px) rotate(-180deg); }
 .t6 { transform: rotate(300deg) translateY(-65px) translateX(5px) rotate(-180deg); }
 
-/* Вращение колеса */
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
-/* Качение туда-сюда */
 @keyframes rollAndMove {
-    0% { transform: translateX(-250px); }
-    100% { transform: translateX(50px); }
+    0% { transform: translateX(-300px); }
+    100% { transform: translateX(-50px); }
 }
 
-/* Адаптивность */
+/* ========================
+   Адаптивность 
+   ======================== */
 @media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        padding: 0 16px;
+        margin: 0 auto;
+        overflow-x: hidden;
+    }
+    .header .container {
+        padding: 0 16px;
+        width: 100%;
+    }
+
+    .error-main {
+        margin-top: 140px;
+        min-height: auto;
+        display: block;
+        padding: 0 16px;
+    }
+
     .error-container {
-        flex-wrap: wrap;
-        justify-content: center;
-        text-align: center;
-        padding: 0 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+        width: 100%;
     }
+
     .error-content {
-        text-align: center;
-        flex: auto;
+        width: 100%;
+        padding: 0;
     }
-    .error-actions {
-        justify-content: center;
-    }
+
     .error-code {
-        font-size: 80px;
+        font-size: 60px;
+        margin-bottom: 15px;
     }
-    .rolling-wheel {
-        transform: scale(0.8);
-        margin-top: 30px;
+
+    .error-title {
+        font-size: 24px;
+        margin-bottom: 10px;
     }
+
+    .error-message {
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
+    .error-message br {
+        display: none;
+    }
+
+    .error-actions {
+        justify-content: flex-start;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
     .btn--error-home,
     .btn--error-back {
-        white-space: normal;
         padding: 8px 20px;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .error-animation {
+        order: 2;
+        margin-top: 0;
+        margin-bottom: 40px;
+        align-self: flex-start;
+        width: auto;
+    }
+
+    /* Колесо – анимация качения с уменьшенной амплитудой (безопасно для экрана) */
+    .rolling-wheel {
+        width: 200px;
+        height: 200px;
+        transform: scale(0.4);
+        transform-origin: left top;
+        animation: rollAndMoveMobile 3s infinite alternate ease-in-out;
+        margin: 0;
+    }
+
+    .wheel-big {
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes rollAndMoveMobile {
+        0% { transform: scale(0.4) translateX(10px); }
+        100% { transform: scale(0.4) translateX(480px); }
     }
 }
