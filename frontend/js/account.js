@@ -1,7 +1,7 @@
 (function() {
     const token = localStorage.getItem('token');
     if (!token) {
-        window.location.href = '../pages/login.html';
+        window.location.href = '/login.html';
     }
 })();
 
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         container.classList.add('cards-wrapper--loading');
 
         try {
-            const response = await fetch('http://localhost:3001/api/applications', {
+            const response = await fetch('/api/applications', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (!response.ok) throw new Error('Ошибка загрузки');
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <time class="application-date">от ${date}</time>
                 ${repliesHtml}
                 <button class="application-delete-btn delete-item-btn" data-type="application">
-                    <img src="../images/krest.svg" alt="Удалить заявку">
+                    <img src="/images/krest.svg" alt="Удалить заявку">
                 </button>
             `;
             container.appendChild(card);
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // загружаем ответы
             const token = localStorage.getItem('token');
             try {
-                const res = await fetch(`http://localhost:3001/api/applications/${appId}/replies`, {
+                const res = await fetch(`/api/applications/${appId}/replies`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (!res.ok) throw new Error();
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!token) return;
 
         try {
-            const response = await fetch('http://localhost:3001/api/reviews/my', {
+            const response = await fetch('/api/reviews/my', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (!response.ok) throw new Error('Ошибка загрузки');
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="review-card__text">${escapeHtml(review.text)}</p>
                     <time class="review-card__date">${dateStr}</time>
                     <button class="application-delete-btn delete-item-btn" data-type="review">
-                        <img src="../images/krest.svg" alt="Удалить отзыв">
+                        <img src="/images/krest.svg" alt="Удалить отзыв">
                     </button>
                 `;
                 container.appendChild(card);
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!token) return;
 
         try {
-            const response = await fetch('http://localhost:3001/api/auth/me', {
+            const response = await fetch('/api/auth/me', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (!response.ok) throw new Error('Ошибка загрузки профиля');
@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const token = localStorage.getItem('token');
             try {
-                const response = await fetch('http://localhost:3001/api/auth/me', {
+                const response = await fetch('/api/auth/me', {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -347,7 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (type === 'application' && id) {
             const token = localStorage.getItem('token');
             try {
-                const response = await fetch(`http://localhost:3001/api/applications/${id}`, {
+                const response = await fetch(`/api/applications/${id}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
@@ -364,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (type === 'review' && id) {
             const token = localStorage.getItem('token');
             try {
-                const response = await fetch(`http://localhost:3001/api/reviews/${id}`, {
+                const response = await fetch(`/api/reviews/${id}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
@@ -398,7 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('confirm-logout').addEventListener('click', () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        window.location.href = '../pages/login.html';
+        window.location.href = '/login.html';
     });
 
     // --- Оверлей удаления аккаунта ---
@@ -408,14 +408,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('confirm-delete-account').addEventListener('click', async () => {
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch('http://localhost:3001/api/auth/me', {
+            const response = await fetch('/api/auth/me', {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (response.ok) {
                 localStorage.removeItem('token');
                 localStorage.removeItem('user');
-                window.location.href = '../pages/login.html';
+                window.location.href = '/login.html';
             } else {
                 const data = await response.json();
                 alert(data.message || 'Не удалось удалить аккаунт');
@@ -600,7 +600,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const token = localStorage.getItem('token');
 
         try {
-            const response = await fetch('http://localhost:3001/api/reviews', {
+            const response = await fetch('/api/reviews', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -779,7 +779,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!currentAgreement || !currentAgreement.id) return;
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch(`http://localhost:3001/api/agreements/${currentAgreement.id}`, {
+            const response = await fetch(`/api/agreements/${currentAgreement.id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -802,7 +802,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadAgreement() {
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch('http://localhost:3001/api/agreements/my', {
+            const res = await fetch('/api/agreements/my', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (res.ok) {
@@ -895,7 +895,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch('http://localhost:3001/api/agreements/my', {
+            const res = await fetch('/api/agreements/my', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -945,7 +945,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!currentAgreement || !currentAgreement.id) return;
         const token = localStorage.getItem('token');
         try {
-            const pdfRes = await fetch(`http://localhost:3001/api/agreements/${currentAgreement.id}/pdf`, {
+            const pdfRes = await fetch(`/api/agreements/${currentAgreement.id}/pdf`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (!pdfRes.ok) throw new Error('Ошибка загрузки PDF');
@@ -993,7 +993,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function openDocumentPdf(type) {
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch(`http://localhost:3001/api/documents/my/${type}`, {
+            const res = await fetch(`/api/documents/my/${type}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (!res.ok) throw new Error('Файл не найден');
@@ -1026,10 +1026,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const token = localStorage.getItem('token');
             const originalText = button.textContent;
-            button.textContent = 'Загрузка...';
+            button.textContent = 'Загрузка.';
 
             try {
-                const res = await fetch('http://localhost:3001/api/documents/upload', {
+                const res = await fetch('/api/documents/upload', {
                     method: 'POST',
                     headers: { 'Authorization': `Bearer ${token}` },
                     body: formData
@@ -1061,7 +1061,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadUserDocuments() {
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch('http://localhost:3001/api/documents/my', {
+            const res = await fetch('/api/documents/my', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (res.ok) {
@@ -1087,7 +1087,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Кнопка "Памятка" ---
     document.getElementById('memory-btn')?.addEventListener('click', () => {
-        window.open('../pamyatka.pdf', '_blank');
+        window.open('/pdf/pamyatka.pdf', '_blank');
     });
 
     // --- Назначение обработчиков ---

@@ -24,7 +24,11 @@ const agreementRoutes = require('./routes/agreement');
 const documentsRouter = require('./routes/documents');
 
 const app = express();
-app.use(cors({ origin: 'http://localhost:5500' }));
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || 'http://localhost:8080',
+  credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(helmet());
 app.use('/photos', express.static(path.join(__dirname, 'public', 'photos'), {
@@ -63,10 +67,10 @@ app.use('/api/courses', courseRoutes);
 app.use('/api/sales', saleRoutes);
 app.use('/api/instructors', instructorRoutes);
 
-// Отдача статических HTML-страниц (если у вас так сделано)
-app.use(express.static(path.join(__dirname, 'pages')));
+// Отдача статических HTML-страниц
+//app.use(express.static(path.join(__dirname, 'pages')));
 
-// Обработка 404 – для любых запросов, не обработанных выше
+// Обработка 404
 app.use((req, res) => {
     res.status(404).sendFile(path.join(__dirname, 'pages', '404.html'));
 });

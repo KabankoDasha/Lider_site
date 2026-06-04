@@ -209,7 +209,7 @@
                     headers['Authorization'] = `Bearer ${token}`;
                 }
 
-                fetch('http://localhost:3001/api/applications', {
+                fetch('/api/applications', {
                     method: 'POST',
                     headers: headers,
                     body: JSON.stringify({ name, phone, course, comment })

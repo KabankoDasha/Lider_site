@@ -24,11 +24,11 @@
 
                 if (input.type === 'password') {
                     input.type = 'text';
-                    this.src = '../images/visible.svg';
+                    this.src = '/images/visible.svg';
                     this.alt = 'Скрыть пароль';
                 } else {
                     input.type = 'password';
-                    this.src = '../images/hidden.svg';
+                    this.src = '/images/hidden.svg';
                     this.alt = 'Показать пароль';
                 }
             });
@@ -67,7 +67,7 @@
             consentWrapper.classList.remove('error-text');
         }
 
-        // Универсальная функция показа ошибки для поля
+        // Функция показа ошибки для поля
         function showFieldError(wrapper, input, message) {
             input.classList.add('error');
             const oldErr = wrapper.querySelector('.field-error-text');
@@ -85,7 +85,7 @@
             if (err) err.remove();
         }
 
-        // Обработчики ввода (снимаем ошибку при исправлении)
+        // Обработчики ввода 
         function attachInputListeners() {
             for (let [key, input] of Object.entries({
                 name: nameInput,
@@ -187,7 +187,7 @@
             const name = nameInput.value.trim();
             const surname = surnameInput.value.trim();
 
-            fetch('http://localhost:3001/api/auth/register', {
+            fetch('/api/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -210,10 +210,10 @@
                     // Через 2 секунды перенаправляем в личный кабинет
                     setTimeout(() => {
                         overlay.classList.remove('active');
-                        window.location.href = '../pages/account.html';
+                        window.location.href = '/account.html';
                     }, 2000);
                 } else {
-                    // Ошибка от сервера (например, email уже существует)
+                    // Ошибка от сервера 
                     clearErrors();
                     showFieldError(wrappers.email, emailInput, data.message || 'Ошибка регистрации');
                 }
@@ -229,7 +229,7 @@
         overlay.addEventListener('click', function(e) {
             if (e.target === overlay) {
                 overlay.classList.remove('active');
-                window.location.href = '../pages/login.html';
+                window.location.href = '/login.html';
             }
         });
     }

@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   let visibleCount = 5;         // сколько показано
   let currentSort = 'new';      // текущая сортировка
 
-  // Функция рендеринга отзывов (с учётом сортировки и пагинации)
+  // Функция рендеринга отзывов 
   function renderReviews() {
     // Сортируем согласно currentSort
     let sorted = [...allReviews];
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Загрузка отзывов с сервера
   async function loadReviews() {
     try {
-      const response = await fetch('http://localhost:3001/api/reviews');
+      const response = await fetch('/api/reviews');
       if (!response.ok) throw new Error('Ошибка загрузки');
       allReviews = await response.json();
       visibleCount = 5;
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderReviews();
   });
 
-  // Логика открытия/закрытия оверлея фильтра (без изменений)
+  // Логика открытия/закрытия оверлея фильтра 
   const filterBtn = document.getElementById('filter-btn');
   const filterOverlay = document.getElementById('filter-overlay');
   if (filterBtn && filterOverlay) {

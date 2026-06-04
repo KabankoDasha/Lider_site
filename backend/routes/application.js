@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
         const jwt = require('jsonwebtoken');
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         userId = decoded.id;
-      } catch (err) { /* игнорируем */ }
+      } catch (err) { }
     }
 
     const application = await Application.create(name, phone, course, comment, userId);
@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Получение заявок текущего пользователя (личный кабинет)
+// Получение заявок текущего пользователя 
 router.get('/', auth, async (req, res) => {
   try {
     const userId = req.user.id;
@@ -76,7 +76,7 @@ router.put('/admin/:id', auth, adminOnly, async (req, res) => {
   }
 });
 
-// Удаление заявки (своей)
+// Удаление заявки 
 router.delete('/:id', auth, async (req, res) => {
   try {
     const { id } = req.params;
@@ -90,7 +90,7 @@ router.delete('/:id', auth, async (req, res) => {
   }
 });
 
-// Создать ответ на заявку (только админ)
+// Создать ответ на заявку 
 router.post('/:id/reply', auth, adminOnly, async (req, res) => {
   try {
     const { id } = req.params;
@@ -120,7 +120,7 @@ router.get('/:id/replies', auth, async (req, res) => {
     const application = await Application.findById(id);
     if (!application) return res.status(404).json({ message: 'Заявка не найдена' });
 
-    // Доступ: админ ИЛИ владелец заявки (если user_id совпадает)
+    // Доступ админ или владелец заявки (если user_id совпадает)
     if (userRole !== 'admin' && application.user_id !== userId) {
       return res.status(403).json({ message: 'Доступ запрещён' });
     }

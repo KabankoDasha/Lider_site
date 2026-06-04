@@ -1,50 +1,48 @@
-// main.js
-
-// --- Данные карточек курсов ---
+// Данные карточек курсов 
 const coursesData = {
   a: {
     title: 'Обучение на мотоцикл',
     categoryText: 'Категория "A"',
-    imgSmall: '../images/moto.svg',
-    imgBig: '../images/gray2.svg',
-    link: '../pages/courses-data.html?course=motorcycle',
-    collapsedImg: '../images/gray2.svg',
+    imgSmall: '/images/moto.svg',
+    imgBig: '/images/gray2.svg',
+    link: '/courses-data.html?course=motorcycle',
+    collapsedImg: '/images/gray2.svg',
     collapsedClass: 'card--collapsed2'
   },
   b: {
     title: 'Обучение на автомобиль с МКПП',
     categoryText: 'Категория "B"',
-    imgSmall: '../images/car1.svg',
-    imgBig: '../images/gray1.svg',
-    link: '../pages/courses-data.html?course=auto',
-    collapsedImg: '../images/gray1.svg',
+    imgSmall: '/images/car1.svg',
+    imgBig: '/images/gray1.svg',
+    link: '/courses-data.html?course=auto',
+    collapsedImg: '/images/gray1.svg',
     collapsedClass: 'card--collapsed1'
   },
   akpp: {
     title: 'Обучение на автомобиль с АКПП',
     categoryText: 'Категория "B" автомат',
-    imgSmall: '../images/car2.svg',
-    imgBig: '../images/gray3.svg',
-    link: '../pages/courses-data.html?course=auto2',
-    collapsedImg: '../images/gray3.svg',
+    imgSmall: '/images/car2.svg',
+    imgBig: '/images/gray3.svg',
+    link: '/courses-data.html?course=auto2',
+    collapsedImg: '/images/gray3.svg',
     collapsedClass: 'card--collapsed1'
   },
   d: {
     title: 'Обучение на трактор',
     categoryText: 'Категория "D"',
-    imgSmall: '../images/truck.svg',
-    imgBig: '../images/gray4.svg',
-    link: '../pages/courses-data.html?course=truck',
-    collapsedImg: '../images/gray4.svg',
+    imgSmall: '/images/truck.svg',
+    imgBig: '/images/gray4.svg',
+    link: '/courses-data.html?course=truck',
+    collapsedImg: '/images/gray4.svg',
     collapsedClass: 'card--collapsed2'
   },
   e: {
     title: 'Обучение на квадроцикл',
     categoryText: 'Категория "АI" с 16 лет',
-    imgSmall: '../images/kvadro.svg',
-    imgBig: '../images/gray5.svg',
-    link: '../pages/courses-data.html?course=kvadro',
-    collapsedImg: '../images/gray5.svg',
+    imgSmall: '/images/kvadro.svg',
+    imgBig: '/images/gray5.svg',
+    link: '/courses-data.html?course=kvadro',
+    collapsedImg: '/images/gray5.svg',
     collapsedClass: 'card--collapsed1'
   }
 };

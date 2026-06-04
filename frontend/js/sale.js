@@ -8,7 +8,7 @@ function initPromoSlider() {
 
     const isMobile = window.innerWidth <= 768;
 
-    // Удаляем старые точки, если есть
+    // Удаляем старые точки
     const oldDots = document.querySelector('.promo-dots');
     if (oldDots) oldDots.remove();
 
@@ -19,8 +19,8 @@ function initPromoSlider() {
     }
 
     if (isMobile) {
-        // ========== МОБИЛЬНАЯ ВЕРСИЯ ==========
-        let currentIndex = 0;          // индекс текущей карточки (0-based)
+        // Мобильная версия
+        let currentIndex = 0;         
         let startX = 0;
         let isDragging = false;
 
@@ -56,7 +56,7 @@ function initPromoSlider() {
             }
         }
 
-        // Переход к первому слайду в группе (0, 1, 2)
+        // Переход к первому слайду в группе 
         function slideToGroup(groupIndex) {
             const groupSize = Math.ceil(cards.length / 3);
             let targetIndex = groupIndex * groupSize;
@@ -80,7 +80,7 @@ function initPromoSlider() {
             });
         }
 
-        // Создаём ровно 3 точки
+        // Создаём 3 точки
         const dotsContainer = document.createElement('div');
         dotsContainer.className = 'promo-dots';
         for (let i = 0; i < 3; i++) {
@@ -117,7 +117,7 @@ function initPromoSlider() {
         // Инициализация
         updateSlider();
     } else {
-        // ========== ДЕСКТОПНАЯ ВЕРСИЯ (стрелки) ==========
+        // Десктопная версия со стрелками
         const section = slider.closest('.promo-section');
         const leftBtn = section.querySelector('.promo-arrow--left');
         const rightBtn = section.querySelector('.promo-arrow--right');
@@ -183,7 +183,7 @@ window.addEventListener('resize', () => {
     setTimeout(initPromoSlider, 100);
 });
 
-// Запуск после загрузки DOM (если карточки уже есть)
+// Запуск после загрузки DOM 
 document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('sales-container')?.children.length > 0) {
         initPromoSlider();

@@ -7,7 +7,7 @@ const { Document } = require('../models/documents');
 const puppeteer = require('puppeteer');
 const path = require('path');
 
-// Убедитесь, что папка существует
+// Проверяем, что папка существует
 const uploadDir = path.join(__dirname, '..', 'uploads', 'documents');
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
@@ -133,7 +133,7 @@ router.get('/file/:id', auth, async (req, res) => {
   }
 });
 
-// Массовая проверка документов для админа (чтобы не делать много запросов)
+// Массовая проверка документов для админа 
 router.post('/bulk-check', auth, adminOnly, async (req, res) => {
   try {
     const { userIds } = req.body;
@@ -205,7 +205,7 @@ router.get('/user/:userId/:type/pdf', auth, adminOnly, async (req, res) => {
     }
 });
 
-// Получить документ по типу (для текущего пользователя)
+// Получить документ по типу для текущего пользователя
 router.get('/my/:type', auth, async (req, res) => {
   const { type } = req.params;
   if (!['passport', 'snils', 'medical'].includes(type)) {

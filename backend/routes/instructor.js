@@ -49,7 +49,7 @@ router.post('/:id/rate', auth, async (req, res) => {
   }
 });
 
-// Админские маршруты (без изменений)
+// Админские маршруты 
 router.post('/', auth, adminOnly, async (req, res) => {
   try {
     const instructor = await Instructor.create(req.body);

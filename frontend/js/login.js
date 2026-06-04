@@ -16,11 +16,11 @@
 
                 if (input.type === 'password') {
                     input.type = 'text';
-                    this.src = '../images/visible.svg';
+                    this.src = '/images/visible.svg';
                     this.alt = 'Скрыть пароль';
                 } else {
                     input.type = 'password';
-                    this.src = '../images/hidden.svg';
+                    this.src = '/images/hidden.svg';
                     this.alt = 'Показать пароль';
                 }
             });
@@ -65,7 +65,7 @@
 
         // Обработчик клика по кнопке
         submitBtn.addEventListener('click', (e) => {
-            e.preventDefault();  // предотвращаем отправку формы (если бы была)
+            e.preventDefault();  
             clearErrors();
             let isValid = true;
 
@@ -94,7 +94,7 @@
             // Все проверки пройдены – отправляем запрос на сервер
             const loginData = { email, password };
 
-            fetch('http://localhost:3001/api/auth/login', {
+            fetch('/api/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(loginData)
@@ -106,11 +106,11 @@
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('user', JSON.stringify(data.user));
 
-                // Перенаправляем в личный кабинет (или админку, в зависимости от роли)
+                // Перенаправляем в личный кабинет 
                 if (data.user.role === 'admin') {
-                window.location.href = '../pages/admin.html';
+                window.location.href = '/admin.html';
                 } else {
-                window.location.href = '../pages/account.html';
+                window.location.href = '/account.html';
                 }
             } else {
                 // Ошибка от сервера: неверный email или пароль

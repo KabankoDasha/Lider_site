@@ -57,9 +57,8 @@ router.delete('/:id', auth, async (req, res) => {
   }
 });
 
-// ========== АДМИНСКИЕ МАРШРУТЫ ==========
-
-// Все отзывы (для модерации) с информацией о пользователе
+// Админские маршруты
+// Все отзывы для модерации
 router.get('/admin', auth, adminOnly, async (req, res) => {
   try {
     const result = await pool.query(`
@@ -76,11 +75,11 @@ router.get('/admin', auth, adminOnly, async (req, res) => {
   }
 });
 
-// Изменить статус отзыва (одобрение – status = 'published')
+// Изменить статус отзыва 
 router.put('/admin/:id', auth, adminOnly, async (req, res) => {
   try {
     const { id } = req.params;
-    const { status } = req.body;   // 'published' или другой
+    const { status } = req.body;   
     const result = await pool.query(
       'UPDATE reviews SET status = $1 WHERE id = $2 RETURNING *',
       [status, id]

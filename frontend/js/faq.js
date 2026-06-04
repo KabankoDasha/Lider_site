@@ -1,4 +1,3 @@
-// faq.js
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.faq-list').forEach(list => {
     list.addEventListener('click', function (e) {

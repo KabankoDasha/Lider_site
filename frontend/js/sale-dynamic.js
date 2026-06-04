@@ -3,7 +3,7 @@
   if (!track) return;
 
   try {
-    const response = await fetch('http://localhost:3001/api/sales');
+    const response = await fetch('/api/sales');
     if (!response.ok) throw new Error('Ошибка загрузки акций');
     const sales = await response.json();
 
@@ -22,7 +22,6 @@
     </div>
     `).join('');
 
-    // Если есть функция инициализации слайдера, её нужно вызвать после вставки
     if (typeof initPromoSlider === 'function') {
       initPromoSlider();
     } else {

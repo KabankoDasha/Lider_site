@@ -6,7 +6,7 @@
   const token = localStorage.getItem('token');
 
   try {
-    const response = await fetch('http://localhost:3001/api/instructors');
+    const response = await fetch('/api/instructors');
     if (!response.ok) throw new Error('Ошибка загрузки инструкторов');
     const instructors = await response.json();
 
@@ -34,12 +34,12 @@
     // Создание HTML карточки
     function createCard(instr) {
       const photoUrl = instr.photo 
-          ? `http://localhost:3001/photos/${instr.photo}` 
-          : '../images/placeholder.jpg';
+          ? `/photos/${instr.photo}` 
+          : '/images/placeholder.jpg';
       const hasCar = instr.car && instr.car.trim() !== '';
       const cardClass = hasCar ? 'instructor-card instructor-card--with-car' : 'instructor-card';
       const carImgHtml = hasCar 
-          ? `<img src="../images/${instr.car.toLowerCase().replace(/\s+/g, '-')}.svg" alt="Машина инструктора" class="instructor-card__car">` 
+          ? `<img src="/images/${instr.car.toLowerCase().replace(/\s+/g, '-')}.svg" alt="Машина инструктора" class="instructor-card__car">` 
           : '';
 
       let detailsHtml = '';
@@ -125,7 +125,7 @@
       cards.forEach(card => {
         const instructorId = card.dataset.id;
         ratingPromises.push(
-          fetch(`http://localhost:3001/api/instructors/${instructorId}/user-rating`, {
+          fetch(`/api/instructors/${instructorId}/user-rating`, {
             headers: { 'Authorization': `Bearer ${token}` }
           })
           .then(res => res.ok ? res.json() : { rating: null })
@@ -219,7 +219,7 @@
         }
         const token = localStorage.getItem('token');
         try {
-          const res = await fetch(`http://localhost:3001/api/instructors/${pendingInstructorId}/rate`, {
+          const res = await fetch(`/api/instructors/${pendingInstructorId}/rate`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -307,7 +307,7 @@
         const cards = track.querySelectorAll('.instructor-card');
         if (cards.length === 0) return;
 
-        let currentIndex = 0;          // индекс текущей карточки (0-based)
+        let currentIndex = 0;         
         let startX = 0;
         let isDragging = false;
 
@@ -361,7 +361,7 @@
           updateSlider();
         }
 
-        // Создаём ровно 3 точки
+        // Создаём 3 точки
         dotsContainer.innerHTML = '';
         for (let i = 0; i < 3; i++) {
           const dot = document.createElement('div');

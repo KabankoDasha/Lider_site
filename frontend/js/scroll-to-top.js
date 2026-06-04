@@ -1,9 +1,7 @@
 (function() {
-    const pathToImages = window.location.pathname.includes('/course/') ? '../../images/' : '../images/';
-
     const btn = document.createElement('div');
     btn.className = 'scroll-to-top';
-    btn.innerHTML = `<img src="${pathToImages}arrow2.svg" alt="Наверх" class="scroll-to-top__icon">`;
+    btn.innerHTML = `<img src="/images/arrow2.svg" alt="Наверх" class="scroll-to-top__icon">`;
     document.body.appendChild(btn);
 
     window.addEventListener('scroll', () => {

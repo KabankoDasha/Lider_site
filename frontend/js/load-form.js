@@ -1,31 +1,31 @@
 (function() {
-    // Определяем пути относительно текущей страницы
-    const pathToPages = window.location.pathname.includes('/course/') ? '../../pages/' : '../pages/';
-    const pathToJs = window.location.pathname.includes('/course/') ? '../../js/' : '../js/';
-    const pathToImages = window.location.pathname.includes('/course/') ? '../../images/' : '../images/';
+    const basePath = '/';
+    const pagesPath = basePath;          
+    const jsPath = basePath + 'js/';
+    const imagesPath = basePath + 'images/';
 
     Promise.all([
-        fetch(pathToPages + 'forma.html').then(res => res.text()),
-        fetch(pathToPages + 'success.html').then(res => res.text())
+        fetch(pagesPath + 'forma.html').then(res => res.text()),
+        fetch(pagesPath + 'success.html').then(res => res.text())
     ])
     .then(([formHTML, successHTML]) => {
-        // Вставляем HTML в конец body
+        // Вставляем HTML оверлеев в конец body
         document.body.insertAdjacentHTML('beforeend', formHTML);
         document.body.insertAdjacentHTML('beforeend', successHTML);
 
-        // Исправляем пути ко всем иконкам внутри оверлеев
+        // Исправляем пути к картинкам внутри оверлеев
         document.querySelectorAll('#form-overlay img, #success-overlay img').forEach(img => {
             const src = img.getAttribute('src');
             if (src && !src.startsWith('http') && !src.startsWith('/')) {
-                // Оставляем только имя файла и подставляем правильный путь
+                // Берём только имя файла и подставляем абсолютный путь
                 const fileName = src.replace(/^.*[\\\/]/, '');
-                img.setAttribute('src', pathToImages + fileName);
+                img.setAttribute('src', imagesPath + fileName);
             }
         });
 
-        // Подключаем логику формы
+        // Загружаем скрипт логики формы
         var script = document.createElement('script');
-        script.src = pathToJs + 'forma.js';
+        script.src = jsPath + 'forma.js';
         document.body.appendChild(script);
     })
     .catch(err => console.error('Ошибка загрузки оверлеев:', err));

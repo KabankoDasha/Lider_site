@@ -4,11 +4,11 @@
   if (!autoContainer && !specialContainer) return;
 
   try {
-    const response = await fetch('http://localhost:3001/api/courses');
+    const response = await fetch('/api/courses');
     if (!response.ok) throw new Error('Ошибка загрузки курсов');
     const courses = await response.json();
 
-    // Разделяем на автошколу и спецтехнику по наличию fulltime_price (у спецтехники обычно пусто)
+    // Разделяем на автошколу и спецтехнику
     const autoCourses = courses.filter(c => c.fulltime_price && c.fulltime_price.trim() !== '');
     const specialCourses = courses.filter(c => !c.fulltime_price || c.fulltime_price.trim() === '');
 
@@ -71,7 +71,7 @@
 
     return `
         <article class="course-card">
-            <a href="../pages/courses-data.html?course=${courseKey}" class="course-card__link-overlay"></a>
+            <a href="/courses-data.html?course=${courseKey}" class="course-card__link-overlay"></a>
             <div class="course-card__name"><a href="#">${escapeHtml(course.name)}</a></div>
             <div class="course-card__duration desktop-only">${escapeHtml(course.duration)}</div>
             ${durationLabel}

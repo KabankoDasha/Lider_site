@@ -1,7 +1,7 @@
 (function() {
     // КОНФИГУРАЦИЯ 
     const TOTAL_IMAGES = 21;              
-    const IMAGE_BASE_PATH = '../images/license/';   
+    const IMAGE_BASE_PATH = '/images/license/';   
     const IMAGE_EXT = '.jpg';              
     
     // Элементы DOM
@@ -38,7 +38,7 @@
     let step = 0;
     let maxOffset = 0;
     let visibleCount = 1;
-    let currentIndex = 0;      // индекс текущего первого видимого слайда (0-based)
+    let currentIndex = 0;  
     
     function updateSliderParams() {
         const trackEl = track;
@@ -64,7 +64,7 @@
         }
         updateTransform();
         updateArrows();
-        updateMobileDots(); // обновляем активную точку
+        updateMobileDots(); 
     }
     
     function updateTransform() {
@@ -106,7 +106,7 @@
         }
     }
     
-    // Переход к конкретному слайду по индексу (0-based)
+    // Переход к конкретному слайду по индексу 
     function slideToIndex(index) {
         if (index < 0) index = 0;
         if (index > slides.length - visibleCount) index = slides.length - visibleCount;
@@ -117,7 +117,7 @@
         updateMobileDots();
     }
     
-    // ========== МОБИЛЬНЫЕ ТОЧКИ (3 штуки, навигация по группам) ==========
+    // ========== МОБИЛЬНЫЕ ТОЧКИ ==========
     let dotsContainer = null;
     let mobileDots = [];
     
@@ -128,7 +128,7 @@
         
         dotsContainer = document.createElement('div');
         dotsContainer.className = 'license-dots';
-        // Создаём ровно 3 точки
+        // Создаём 3 точки
         for (let i = 0; i < 3; i++) {
             const dot = document.createElement('div');
             dot.classList.add('license-dot');
@@ -174,7 +174,7 @@
     let isSwiping = false;
     
     function initSwipe() {
-        const sliderContainer = track.parentElement; // .license-slider-clip
+        const sliderContainer = track.parentElement; 
         if (!sliderContainer) return;
         
         sliderContainer.addEventListener('touchstart', (e) => {
@@ -187,9 +187,9 @@
             const deltaX = e.changedTouches[0].screenX - touchStartX;
             if (Math.abs(deltaX) > 50) {
                 if (deltaX > 0) {
-                    slidePrev(); // свайп вправо -> предыдущий
+                    slidePrev(); 
                 } else {
-                    slideNext(); // свайп влево -> следующий
+                    slideNext(); 
                 }
                 isSwiping = false;
             }

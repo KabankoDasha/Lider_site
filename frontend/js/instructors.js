@@ -89,7 +89,7 @@ function initSliders() {
   });
 }
 
-// Если контент уже в DOM, инициализируем сразу (на случай, если скрипт подключается после загрузки)
+// Если контент уже в DOM, инициализируем 
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
   if (document.querySelector('.instructor-card')) {
     initSliders();

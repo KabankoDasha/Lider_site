@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const token = localStorage.getItem('token');
         if (!token) return;
         try {
-            const response = await fetch('http://localhost:3001/api/applications/admin', {
+            const response = await fetch('/api/applications/admin', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (!response.ok) throw new Error('Ошибка загрузки заявок');
@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch(`http://localhost:3001/api/applications/admin/${currentAppId}`, {
+            const response = await fetch(`/api/applications/admin/${currentAppId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const token = localStorage.getItem('token');
         if (!token) return;
         try {
-            const response = await fetch('http://localhost:3001/api/reviews/admin', {
+            const response = await fetch('/api/reviews/admin', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (!response.ok) throw new Error('Ошибка загрузки отзывов');
@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!currentReviewId) return;
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch(`http://localhost:3001/api/reviews/admin/${currentReviewId}`, {
+            const response = await fetch(`/api/reviews/admin/${currentReviewId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!currentReviewId) return;
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch(`http://localhost:3001/api/reviews/admin/${currentReviewId}`, {
+            const response = await fetch(`/api/reviews/admin/${currentReviewId}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -366,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadCourses() {
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch('http://localhost:3001/api/courses', {
+            const response = await fetch('/api/courses', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (!response.ok) throw new Error('Ошибка загрузки курсов');
@@ -401,10 +401,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="course-edit-card__duration">${escapeHtml(course.duration || '')}</div>
                     <div class="course-edit-card__prices">${pricesHtml}</div>
                     <button class="course-edit-card__edit" data-id="${course.id}">
-                        <img src="../images/edit.svg" alt="Редактировать">
+                        <img src="/images/edit.svg" alt="Редактировать">
                     </button>
                     <button class="course-edit-card__delete" data-id="${course.id}">
-                        <img src="../images/delete.svg" alt="Удалить">
+                        <img src="/images/delete.svg" alt="Удалить">
                     </button>
                 </div>`;
         }).join('');
@@ -452,7 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!currentCourseToDelete) return;
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch(`http://localhost:3001/api/courses/${currentCourseToDelete}`, {
+            const response = await fetch(`/api/courses/${currentCourseToDelete}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -524,13 +524,13 @@ document.addEventListener('DOMContentLoaded', () => {
             fulltimeOld: document.getElementById('new-course-fulltime-old').value,
         };
         if (editingCourseId) {
-            await fetch(`http://localhost:3001/api/courses/${editingCourseId}`, {
+            await fetch(`/api/courses/${editingCourseId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify(data)
             });
         } else {
-            await fetch('http://localhost:3001/api/courses', {
+            await fetch('/api/courses', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify(data)
@@ -558,7 +558,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadSales() {
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch('http://localhost:3001/api/sales', {
+            const res = await fetch('/api/sales', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (!res.ok) throw new Error('Ошибка загрузки акций');
@@ -579,10 +579,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span>${escapeHtml(sale.validity)}</span>
                 </div>
                 <button class="course-edit-card__edit" data-id="${sale.id}">
-                    <img src="../images/edit.svg" alt="Редактировать">
+                    <img src="/images/edit.svg" alt="Редактировать">
                 </button>
                 <button class="course-edit-card__delete" data-id="${sale.id}">
-                    <img src="../images/delete.svg" alt="Удалить">
+                    <img src="/images/delete.svg" alt="Удалить">
                 </button>
             </div>
         `).join('');
@@ -628,7 +628,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!currentSaleToDelete) return;
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch(`http://localhost:3001/api/sales/${currentSaleToDelete}`, {
+            const response = await fetch(`/api/sales/${currentSaleToDelete}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -678,13 +678,13 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         if (!data.name || !data.discount || !data.validity) return;
         if (editingSaleId) {
-            await fetch(`http://localhost:3001/api/sales/${editingSaleId}`, {
+            await fetch(`/api/sales/${editingSaleId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify(data)
             });
         } else {
-            await fetch('http://localhost:3001/api/sales', {
+            await fetch('/api/sales', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify(data)
@@ -711,7 +711,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadInstructors() {
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch('http://localhost:3001/api/instructors', {
+            const res = await fetch('/api/instructors', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (!res.ok) throw new Error('Ошибка загрузки инструкторов');
@@ -739,10 +739,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="instructor-photo-status">${inst.photo ? 'Фотография загружена' : 'Фотография не загружена'}</span>
                     </div>
                     <button class="course-edit-card__edit" data-id="${inst.id}">
-                        <img src="../images/edit.svg" alt="Редактировать">
+                        <img src="/images/edit.svg" alt="Редактировать">
                     </button>
                     <button class="course-edit-card__delete" data-id="${inst.id}">
-                        <img src="../images/delete.svg" alt="Удалить">
+                        <img src="/images/delete.svg" alt="Удалить">
                     </button>
                 </div>`;
         }).join('');
@@ -818,7 +818,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!currentInstructorToDelete) return;
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch(`http://localhost:3001/api/instructors/${currentInstructorToDelete}`, {
+            const response = await fetch(`/api/instructors/${currentInstructorToDelete}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -898,7 +898,7 @@ document.addEventListener('DOMContentLoaded', () => {
             uploadBtn.disabled = true;
 
             try {
-                const response = await fetch('http://localhost:3001/api/upload/photo', {
+                const response = await fetch('/api/upload/photo', {
                     method: 'POST',
                     headers: { 'Authorization': `Bearer ${token}` },
                     body: formData
@@ -973,13 +973,13 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             let response;
             if (editingInstructorId) {
-                response = await fetch(`http://localhost:3001/api/instructors/${editingInstructorId}`, {
+                response = await fetch(`/api/instructors/${editingInstructorId}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                     body: JSON.stringify(data)
                 });
             } else {
-                response = await fetch('http://localhost:3001/api/instructors', {
+                response = await fetch('/api/instructors', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                     body: JSON.stringify(data)
@@ -1005,7 +1005,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!container) return;
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch('http://localhost:3001/api/agreements/admin', {
+            const res = await fetch('/api/agreements/admin', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (!res.ok) throw new Error('Ошибка загрузки договоров');
@@ -1014,7 +1014,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Собираем уникальные user_id
             const userIds = [...new Set(agreements.map(a => a.user_id))];
             // Получаем статус документов для всех пользователей одним запросом
-            const docsRes = await fetch('http://localhost:3001/api/documents/bulk-check', {
+            const docsRes = await fetch('/api/documents/bulk-check', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1061,7 +1061,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const agreementId = btn.dataset.id;
                 const token = localStorage.getItem('token');
                 try {
-                    const pdfRes = await fetch(`http://localhost:3001/api/agreements/${agreementId}/pdf`, {
+                    const pdfRes = await fetch(`/api/agreements/${agreementId}/pdf`, {
                         headers: { 'Authorization': `Bearer ${token}` }
                     });
                     if (!pdfRes.ok) throw new Error('Ошибка загрузки PDF');
@@ -1080,7 +1080,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const token = localStorage.getItem('token');
                 const userId = btn.dataset.user;
                 const docType = btn.dataset.type;
-                window.open(`http://localhost:3001/api/documents/user/${userId}/${docType}/pdf?token=${token}`, '_blank');
+                window.open(`/api/documents/user/${userId}/${docType}/pdf?token=${token}`, '_blank');
             });
         });
 
@@ -1096,7 +1096,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('confirm-logout').addEventListener('click', () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        window.location.href = '../pages/login.html';
+        window.location.href = '/login.html';
     });
 
     const deleteAccountOverlay = document.getElementById('delete-account-overlay');
@@ -1150,7 +1150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch(`http://localhost:3001/api/applications/${currentReplyApplicationId}/reply`, {
+            const response = await fetch(`/api/applications/${currentReplyApplicationId}/reply`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
