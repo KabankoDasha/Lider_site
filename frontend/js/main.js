@@ -3,46 +3,46 @@ const coursesData = {
   a: {
     title: 'Обучение на мотоцикл',
     categoryText: 'Категория "A"',
-    imgSmall: '/images/moto.svg',
-    imgBig: '/images/gray2.svg',
+    imgSmall: '/images/moto.png',
+    imgBig: '/images/gray2.png',
     link: '/courses-data.html?course=motorcycle',
-    collapsedImg: '/images/gray2.svg',
+    collapsedImg: '/images/gray2.png',
     collapsedClass: 'card--collapsed2'
   },
   b: {
     title: 'Обучение на автомобиль с МКПП',
     categoryText: 'Категория "B"',
-    imgSmall: '/images/car1.svg',
-    imgBig: '/images/gray1.svg',
+    imgSmall: '/images/car1.png',
+    imgBig: '/images/gray1.png',
     link: '/courses-data.html?course=auto',
-    collapsedImg: '/images/gray1.svg',
+    collapsedImg: '/images/gray1.png',
     collapsedClass: 'card--collapsed1'
   },
   akpp: {
     title: 'Обучение на автомобиль с АКПП',
     categoryText: 'Категория "B" автомат',
-    imgSmall: '/images/car2.svg',
-    imgBig: '/images/gray3.svg',
+    imgSmall: '/images/car2.png',
+    imgBig: '/images/gray3.png',
     link: '/courses-data.html?course=auto2',
-    collapsedImg: '/images/gray3.svg',
+    collapsedImg: '/images/gray3.png',
     collapsedClass: 'card--collapsed1'
   },
   d: {
     title: 'Обучение на трактор',
     categoryText: 'Категория "D"',
-    imgSmall: '/images/truck.svg',
-    imgBig: '/images/gray4.svg',
+    imgSmall: '/images/truck.png',
+    imgBig: '/images/gray4.png',
     link: '/courses-data.html?course=truck',
-    collapsedImg: '/images/gray4.svg',
+    collapsedImg: '/images/gray4.png',
     collapsedClass: 'card--collapsed2'
   },
   e: {
     title: 'Обучение на квадроцикл',
     categoryText: 'Категория "АI" с 16 лет',
-    imgSmall: '/images/kvadro.svg',
-    imgBig: '/images/gray5.svg',
+    imgSmall: '/images/kvadro.png',
+    imgBig: '/images/gray5.png',
     link: '/courses-data.html?course=kvadro',
-    collapsedImg: '/images/gray5.svg',
+    collapsedImg: '/images/gray5.png',
     collapsedClass: 'card--collapsed1'
   }
 };
