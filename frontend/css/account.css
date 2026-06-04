@@ -1321,6 +1321,8 @@ body {
 
     body {
         overflow-x: visible;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
     }
 
     .container {

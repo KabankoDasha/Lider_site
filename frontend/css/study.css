@@ -276,10 +276,15 @@ body {
    Адаптивность
    ======================== */
 @media (max-width: 768px) {
-    /* Скрываем десктопные элементы */
     .desktop-only {
         display: none !important;
     }
+
+    body {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+    
     .price-option__label {
         display: none;
     }

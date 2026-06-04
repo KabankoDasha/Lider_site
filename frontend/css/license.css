@@ -168,9 +168,13 @@ body {
    Адаптивность (мобильная версия)
    ======================== */
 @media (max-width: 768px) {
-    /* Скрываем стрелки */
     .section-controls {
         display: none;
+    }
+
+    body {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
     }
 
     /* Контейнер и отступы */

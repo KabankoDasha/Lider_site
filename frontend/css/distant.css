@@ -214,6 +214,11 @@ body {
         display: none !important;
     }
 
+    body {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
     .container {
         max-width: 328px;
         padding: 0;

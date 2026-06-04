@@ -354,6 +354,11 @@ body {
         display: none !important;
     }
 
+    body {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
     .container {
         max-width: 100%;
         padding: 0 16px;
@@ -430,11 +435,11 @@ body {
         padding-right: 40px;
     }
 
-        /* Чекбокс согласия */
+    /* Чекбокс согласия */
     .register-consent {
         display: flex;
         align-items: center;
-        justify-content: flex-start;  /* вместо space-between */
+        justify-content: flex-start;  
         gap: 10px;
         margin-bottom: 25px;
         flex-wrap: wrap;

@@ -371,6 +371,11 @@ body {
         width: 100%;
     }
 
+    body {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
     .info-main {
         margin-top: 83px;
         margin-bottom: 40px;

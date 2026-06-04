@@ -195,6 +195,11 @@
    Адаптивность 
    ======================== */
 @media (max-width: 768px) {
+    body {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+    
     .container {
         max-width: 100%;
         padding: 0 16px;

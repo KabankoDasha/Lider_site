@@ -1297,7 +1297,7 @@ button,
 }
 
 .photo-upload-input {
-    display: none;          /* скрыт, кликаем по кнопке-имитатору */
+    display: none;          
 }
 
 .instructor-photo-row {
@@ -1417,7 +1417,6 @@ button,
     height: 24px;
 }
 
-/* Текстовое поле ответа */
 /* Текстовое поле ответа */
 #reply-message {
     font-size: 18px;

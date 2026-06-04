@@ -39,7 +39,7 @@
       const hasCar = instr.car && instr.car.trim() !== '';
       const cardClass = hasCar ? 'instructor-card instructor-card--with-car' : 'instructor-card';
       const carImgHtml = hasCar 
-          ? `<img src="/images/${instr.car.toLowerCase().replace(/\s+/g, '-')}.svg" alt="Машина инструктора" class="instructor-card__car">` 
+          ? `<img src="/images/${instr.car.toLowerCase().replace(/\s+/g, '-')}.png" alt="Машина инструктора" class="instructor-card__car">` 
           : '';
 
       let detailsHtml = '';

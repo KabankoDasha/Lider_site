@@ -443,6 +443,11 @@ body {
         display: none !important;
     }
 
+    body {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
     .container {
         max-width: 100%;
         padding: 0 16px;

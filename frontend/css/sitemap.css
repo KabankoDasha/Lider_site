@@ -130,6 +130,11 @@ body {
         margin: 0 auto;
     }
 
+    body {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
     .sitemap-main {
         margin-top: 83px;
         margin-bottom: 40px;
