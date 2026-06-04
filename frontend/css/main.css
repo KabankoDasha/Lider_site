@@ -21,6 +21,12 @@ body {
     overflow-x: hidden;
 }
 
+a[href^="tel"] {
+    color: inherit !important;
+    text-decoration: none !important;
+    background: transparent !important;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -947,6 +953,11 @@ main {
 @media (max-width: 768px) {
     .desktop-only {
         display: none !important;
+    }
+
+    body {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
     }
 
     .container {
