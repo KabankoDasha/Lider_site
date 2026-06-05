@@ -158,8 +158,8 @@ body {
 
 .instructor-slider-clip {
     overflow: hidden;
-    padding: 20px;      /* создаём место для тени со всех сторон */
-    margin: -20px;      /* компенсируем, чтобы не раздвинулся контейнер */
+    padding: 20px;     
+    margin: -20px;     
 }
 
 .instructor-slider {
@@ -487,8 +487,9 @@ body {
         width: 350px;
         margin: 0 auto;
         overflow: hidden;
-        padding: 10px 10px;    /* увеличиваем горизонтальные отступы для тени */
+        padding: 10px 10px;   
         margin: -30px -10px auto;
+        touch-action: pan-y pinch-zoom;
     }
     .instructor-slider__track {
         gap: 20px;

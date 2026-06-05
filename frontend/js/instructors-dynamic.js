@@ -289,20 +289,24 @@
     }
     bindOverlayHandlers();
 
-    // ========== МОБИЛЬНЫЙ СЛАЙДЕР (СВАЙП, ТОЧКИ) ==========
+    // Мобильный слайдер
     function initMobileSliders() {
       const isMobile = window.innerWidth <= 768;
       if (!isMobile) return;
 
       const sliders = [
-        { trackId: 'theory-track', dotsId: 'theory-dots' },
-        { trackId: 'driving-track', dotsId: 'driving-dots' }
+        { trackId: 'theory-track', dotsId: 'theory-dots', clipClass: 'instructor-slider-clip' },
+        { trackId: 'driving-track', dotsId: 'driving-dots', clipClass: 'instructor-slider-clip' }
       ];
 
-      sliders.forEach(({ trackId, dotsId }) => {
+      sliders.forEach(({ trackId, dotsId, clipClass }) => {
         const track = document.getElementById(trackId);
         const dotsContainer = document.getElementById(dotsId);
         if (!track || !dotsContainer) return;
+
+        // Находим контейнер-клип 
+        const clipContainer = track.closest(`.${clipClass}`);
+        if (!clipContainer) return;
 
         const cards = track.querySelectorAll('.instructor-card');
         if (cards.length === 0) return;
@@ -327,20 +331,15 @@
           if (!dotsContainer) return;
           const dots = dotsContainer.querySelectorAll('.instructor-dot');
           if (dots.length === 0) return;
-          // Определяем, к какой группе (0,1,2) относится текущий индекс
           const groupIndex = Math.floor((currentIndex / cards.length) * 3);
           const activeGroup = Math.min(2, Math.max(0, groupIndex));
           dots.forEach((dot, idx) => {
-            if (idx === activeGroup) {
-              dot.classList.add('active');
-            } else {
-              dot.classList.remove('active');
-            }
+            if (idx === activeGroup) dot.classList.add('active');
+            else dot.classList.remove('active');
           });
         }
 
         function nextSlide() {
-          const step = getStep();
           if (currentIndex < cards.length - 1) {
             currentIndex++;
             updateSlider();
@@ -348,7 +347,6 @@
         }
 
         function prevSlide() {
-          const step = getStep();
           if (currentIndex > 0) {
             currentIndex--;
             updateSlider();
@@ -376,35 +374,35 @@
         }
 
         window.addEventListener('resize', () => {
-            setTimeout(() => {
-                // Пересчитываем текущую позицию и обновляем слайдер
-                const step = getStep();
-                const newOffset = currentIndex * step;
-                track.style.transform = `translateX(-${newOffset}px)`;
-                // Обновляем точки (если нужно)
-                updateMobileDots();
-            }, 100);
+          setTimeout(() => {
+            const step = getStep();
+            const newOffset = currentIndex * step;
+            track.style.transform = `translateX(-${newOffset}px)`;
+            updateMobileDots();
+          }, 100);
         });
 
-        // Обработка свайпа
-        track.addEventListener('touchstart', (e) => {
+        // Обработка свайпа на контейнере-клипе
+        clipContainer.addEventListener('touchstart', (e) => {
           startX = e.touches[0].clientX;
           isDragging = true;
         });
-        track.addEventListener('touchmove', (e) => {
+
+        clipContainer.addEventListener('touchmove', (e) => {
           if (!isDragging) return;
           const diffX = e.touches[0].clientX - startX;
           if (Math.abs(diffX) > 50) {
             if (diffX > 0) prevSlide();
             else nextSlide();
+            e.preventDefault(); 
             isDragging = false;
           }
         });
-        track.addEventListener('touchend', () => {
+
+        clipContainer.addEventListener('touchend', () => {
           isDragging = false;
         });
 
-        // Начальная позиция
         updateSlider();
       });
     }
