@@ -1252,7 +1252,7 @@ main {
     .footer__city { font-size: 12px; margin-top: -5px; }
     .footer__subtitle { font-size: 12px; font-weight: 500; }
     .footer__sitemap-title { font-size: 16px; font-weight: 500; margin-bottom: 4px; margin-top: 0;}
-    .footer__divider { height: 1px; width: 328px; margin: 0 auto 10px; }
+    .footer__divider { height: 1px; width: 100%; margin: 10px 0; }
     .footer__sitemap-columns { display: none; }
     hr.footer__divider:nth-of-type(2) { display: none; }
     .footer__legal { flex-direction: column; gap: 5px; margin-top: 15px; font-size: 12px; font-weight: 300; }
