@@ -24,16 +24,14 @@ function initPromoSlider() {
         let startX = 0;
         let isDragging = false;
 
+        // Контейнер-клип для обработки свайпа (как в license-slider)
+        const clipContainer = slider.closest('.promo-slider-clip');
+        if (!clipContainer) return;
+
         function getStep() {
             const cardWidth = cards[0].offsetWidth;
             const gap = parseInt(window.getComputedStyle(track).gap) || 20;
             return cardWidth + gap;
-        }
-
-        function getMaxOffset() {
-            const step = getStep();
-            const maxIndex = cards.length - 1;
-            return maxIndex * step;
         }
 
         function updateSlider() {
@@ -43,7 +41,6 @@ function initPromoSlider() {
         }
 
         function nextSlide() {
-            const step = getStep();
             if (currentIndex < cards.length - 1) {
                 currentIndex++;
                 updateSlider();
@@ -51,14 +48,12 @@ function initPromoSlider() {
         }
 
         function prevSlide() {
-            const step = getStep();
             if (currentIndex > 0) {
                 currentIndex--;
                 updateSlider();
             }
         }
 
-        // Переход к первому слайду в группе 
         function slideToGroup(groupIndex) {
             const groupSize = Math.ceil(cards.length / 3);
             let targetIndex = groupIndex * groupSize;
@@ -67,7 +62,6 @@ function initPromoSlider() {
             updateSlider();
         }
 
-        // Обновление активной точки в зависимости от текущей группы
         function updateMobileDots() {
             const dots = document.querySelectorAll('.promo-dot');
             if (dots.length === 0) return;
@@ -96,38 +90,37 @@ function initPromoSlider() {
         }
         slider.parentNode.insertBefore(dotsContainer, slider.nextSibling);
 
-        window.addEventListener('resize', () => {
-            setTimeout(() => {
-                // Пересчитываем текущую позицию и обновляем слайдер
-                const step = getStep();
-                const newOffset = currentIndex * step;
-                track.style.transform = `translateX(-${newOffset}px)`;
-                // Обновляем точки (если нужно)
-                updateMobileDots();
-            }, 100);
-        });
-
-        // Обработка свайпа
-        track.addEventListener('touchstart', (e) => {
+        // Обработка свайпа на контейнере-клипе
+        clipContainer.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
             isDragging = true;
         });
 
-        track.addEventListener('touchmove', (e) => {
+        clipContainer.addEventListener('touchmove', (e) => {
             if (!isDragging) return;
             const diffX = e.touches[0].clientX - startX;
             if (Math.abs(diffX) > 50) {
                 if (diffX > 0) prevSlide();
                 else nextSlide();
+                e.preventDefault(); // предотвращаем вертикальную прокрутку при свайпе
                 isDragging = false;
             }
         });
 
-        track.addEventListener('touchend', () => {
+        clipContainer.addEventListener('touchend', () => {
             isDragging = false;
         });
 
-        // Инициализация
+        // Обработчик изменения размера окна
+        window.addEventListener('resize', () => {
+            setTimeout(() => {
+                const step = getStep();
+                const newOffset = currentIndex * step;
+                track.style.transform = `translateX(-${newOffset}px)`;
+                updateMobileDots();
+            }, 100);
+        });
+
         updateSlider();
     } else {
         // Десктопная версия со стрелками

@@ -416,6 +416,7 @@ body {
         padding: 10px 10px;
         margin: -30px auto;
         margin-bottom: -10px;
+        touch-action: pan-y pinch-zoom;
     }
     .promo-slider__track {
         gap: 20px;
