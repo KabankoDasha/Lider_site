@@ -43,6 +43,7 @@ function initPromoSlider() {
         }
 
         function nextSlide() {
+            const step = getStep();
             if (currentIndex < cards.length - 1) {
                 currentIndex++;
                 updateSlider();
@@ -50,6 +51,7 @@ function initPromoSlider() {
         }
 
         function prevSlide() {
+            const step = getStep();
             if (currentIndex > 0) {
                 currentIndex--;
                 updateSlider();
@@ -93,6 +95,17 @@ function initPromoSlider() {
             dotsContainer.appendChild(dot);
         }
         slider.parentNode.insertBefore(dotsContainer, slider.nextSibling);
+
+        window.addEventListener('resize', () => {
+            setTimeout(() => {
+                // Пересчитываем текущую позицию и обновляем слайдер
+                const step = getStep();
+                const newOffset = currentIndex * step;
+                track.style.transform = `translateX(-${newOffset}px)`;
+                // Обновляем точки (если нужно)
+                updateMobileDots();
+            }, 100);
+        });
 
         // Обработка свайпа
         track.addEventListener('touchstart', (e) => {
