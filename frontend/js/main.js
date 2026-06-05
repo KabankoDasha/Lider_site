@@ -268,12 +268,12 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
 
   // При ресайзе перезагружаем страницу, если пересечена граница 768px
-  window.addEventListener('resize', () => {
-    if (
-      (window.innerWidth <= 768 && !document.getElementById('cards-dots')?.children.length) ||
-      (window.innerWidth > 768 && document.getElementById('cards-dots')?.children.length)
-    ) {
-      location.reload();
-    }
-  });
+  // window.addEventListener('resize', () => {
+  //   if (
+  //     (window.innerWidth <= 768 && !document.getElementById('cards-dots')?.children.length) ||
+  //     (window.innerWidth > 768 && document.getElementById('cards-dots')?.children.length)
+  //   ) {
+  //     location.reload();
+  //   }
+  // });
 });
