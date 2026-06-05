@@ -267,6 +267,23 @@ document.addEventListener('DOMContentLoaded', () => {
   initGallery();
   initMobileMenu();
 
+  (function initCookieBanner() {
+    const banner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('cookie-accept');
+    if (!banner || !acceptBtn) return;
+
+    // Если уже давали согласие – скрываем баннер
+    if (localStorage.getItem('cookie_consent') === 'accepted') {
+        banner.style.display = 'none';
+        return;
+    }
+
+    acceptBtn.addEventListener('click', () => {
+        localStorage.setItem('cookie_consent', 'accepted');
+        banner.style.display = 'none';
+    });
+})();
+
   // При ресайзе перезагружаем страницу, если пересечена граница 768px
   // window.addEventListener('resize', () => {
   //   if (
