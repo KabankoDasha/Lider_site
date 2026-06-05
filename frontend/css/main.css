@@ -1,6 +1,4 @@
-/* ========================
-   Подключение шрифтов
-   ======================== */
+/* Подключение шрифтов */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Unbounded:wght@500&display=swap');
 
 /* ========================
@@ -12,6 +10,10 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+b, strong {
+    font-weight: 500;  
 }
 
 body {

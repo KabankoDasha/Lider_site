@@ -34,7 +34,7 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_NAME: ${DB_NAME}
       JWT_SECRET: ${JWT_SECRET}
-      FRONTEND_URL: http://localhost  
+      FRONTEND_URL: http://lider-avto74.ru
     depends_on:
       postgres:
         condition: service_healthy

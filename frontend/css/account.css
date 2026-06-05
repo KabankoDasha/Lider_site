@@ -1348,7 +1348,7 @@ body {
         margin-bottom: 15px;
     }
 
-    /* ===== Мобильный триггер ===== */
+    /* Мобильный триггер */
     .sidebar-toggle-mobile {
         display: flex;
         align-items: center;
@@ -1357,12 +1357,13 @@ body {
         max-width: 110px;
         margin-left: -16px;
         margin-right: 0;
-        background-color: #F0F0F0;
+        background-color: #fcfcfc;
         padding: 10px 16px 10px 16px;
         border-radius: 0 12px 12px 0;
         cursor: pointer;
         margin-bottom: 20px;
         box-sizing: border-box;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     .sidebar-toggle-mobile__text {
         font-size: 16px;
