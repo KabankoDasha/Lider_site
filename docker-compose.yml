@@ -55,6 +55,8 @@ services:
       - backend
     networks:
       - lider_network
+    volumes:
+      - ./ssl:/etc/nginx/ssl
 
 volumes:
   postgres_data:
