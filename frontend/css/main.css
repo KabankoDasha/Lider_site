@@ -315,6 +315,14 @@ main {
     animation: fadeInContent 0.7s ease;
 }
 
+.card__icon {
+    max-width: 100px;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
 @keyframes fadeInContent {
     from { opacity: 0; transform: translateX(5px); }
     to   { opacity: 1; transform: translateX(0); }
