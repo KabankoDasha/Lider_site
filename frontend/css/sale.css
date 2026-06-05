@@ -482,7 +482,7 @@ body {
     .discount-item__name {
         font-size: 14px;
         font-weight: 500;
-        white-space: normal;
+        white-space: nowrap;
         flex: 1;
     }
     .discount-item__value {
