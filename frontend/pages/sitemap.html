@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/forma.css">
 </head>
 <body>
-    <!-- Шапка (как на всех страницах) -->
+    <!-- Шапка -->
     <header class="header">
         <div class="container header__inner">
             <a href="/main.html" class="logo desktop-only">
@@ -159,7 +159,31 @@
         </div>
     </main>
 
-    <!-- Подвал сайта (как на всех страницах) -->
+    <!-- Баннер согласия на использование cookie -->
+    <div id="cookie-banner">
+        <div class="cookie-banner__content">
+            <img src="/images/cookie.svg" alt="Cookie" class="cookie-banner__icon">
+            
+            <!-- Мобильная версия -->
+            <div class="cookie-banner__mobile mobile-only">
+                <p class="cookie-banner__text-part1">Мы используем файлы cookie для улучшения работы сайта. Продолжая использовать сайт,</p>
+                <div class="cookie-banner__row">
+                    <p class="cookie-banner__text-part2">вы соглашаетесь с <a href="/pdf/policy.pdf" target="_blank">политикой обработки данных</a></p>
+                    <button id="cookie-accept" class="cookie-banner__btn">Ок</button>
+                </div>
+            </div>
+
+            <!-- Десктопная версия -->
+            <div class="cookie-banner__desktop desktop-only">
+                <p class="cookie-banner__text-full">
+                    Мы используем файлы cookie для улучшения работы сайта. Продолжая использовать сайт, вы соглашаетесь с <a href="/pdf/policy.pdf" target="_blank">политикой обработки данных</a>
+                </p>
+                <button id="cookie-accept" class="cookie-banner__btn">Ок</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подвал сайта -->
     <footer class="footer">
         <div class="container footer__inner">
             <!-- Верхняя часть с контактами -->
@@ -190,7 +214,7 @@
                 </div>
             </div>
 
-            <!-- Карта сайта (ссылка внутри) -->
+            <!-- Карта сайта -->
             <div class="footer__sitemap">
                 <h3 class="footer__sitemap-title">
                     <span class="desktop-only">Карта сайта</span>
@@ -198,7 +222,6 @@
                 </h3>
                 <hr class="footer__divider">
                 <div class="footer__sitemap-columns">
-                    <!-- Десктопные колонки для SEO (не удаляем, они скрыты на мобильных) -->
                     <div class="footer__sitemap-col">
                         <p class="footer__sitemap-heading"><a href="/main.html">Главная страница</a></p>
                         <ul>
