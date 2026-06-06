@@ -472,7 +472,7 @@ body {
         border-radius: 10px;
         padding: 15px;
         display: flex;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         justify-content: space-between;
         align-items: center;
         gap: 8px;
@@ -492,6 +492,7 @@ body {
         margin-left: auto;
         margin-top: 0; 
         flex-shrink: 0;
+        white-space: nowrap;
     }
     .discount-item__desc {
         width: 100%;
