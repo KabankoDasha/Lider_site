@@ -962,28 +962,30 @@ main {
 #cookie-banner {
     position: fixed;
     bottom: 20px;
-    left: 20px;
-    right: 20px;
+    left: 16px;
+    right: 16px;
     width: auto;
     max-width: 1200px;
     margin: 0 auto;
     background: #fff;
-    border-radius: 10px;
+    border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    padding: 15px 25px;
+    padding: 16px 24px;
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 15px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
     z-index: 1001;
     font-family: 'Montserrat', sans-serif;
+    flex-wrap: wrap;
 }
 
 .cookie-banner__content {
     display: flex;
     align-items: center;
     gap: 15px;
-    width: 100%;
+    flex: 1; 
+    min-width: 0; 
 }
 
 .cookie-banner__icon {
@@ -997,7 +999,7 @@ main {
     line-height: 1.5;
     color: #333;
     margin: 0;
-    flex: 1;
+    max-width: 70%; 
 }
 
 .cookie-banner__text a {
@@ -1016,8 +1018,8 @@ main {
     font-weight: 500;
     font-family: 'Montserrat', sans-serif;
     transition: opacity 0.2s;
-    align-self: flex-start;
-    width: auto;
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .cookie-banner__btn:hover {
@@ -1338,13 +1340,17 @@ main {
     .scroll-to-top__icon { width: 20px; }
 
     #cookie-banner {
-        left: 15px;
-        right: 15px;
-        bottom: 15px;
-        padding: 12px 15px;
+        flex-direction: column;
+        align-items: stretch;
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        padding: 12px 16px;
         gap: 12px;
     }
     .cookie-banner__content {
+        flex: none;
+        width: 100%;
         gap: 10px;
     }
     .cookie-banner__icon {
@@ -1352,10 +1358,11 @@ main {
         height: 28px;
     }
     .cookie-banner__text {
-        font-size: 12px;
-        line-height: 1.4;
+        font-size: 11px;
+        max-width: 100%; 
     }
     .cookie-banner__btn {
+        align-self: flex-end;
         padding: 5px 12px;
         font-size: 12px;
         border-radius: 8px;
