@@ -1415,11 +1415,11 @@ main {
     }
 
     .cookie-banner__text-part2 {
-        margin-top: -10px;
+        margin-top: -12px;
     }
     .cookie-banner__btn {
-        padding: 5px 12px;
-        font-size: 12px;
+        padding: 7px 20px;
+        font-size: 14px;
         margin-top: 10px;
     }
     .cookie-banner__row {
