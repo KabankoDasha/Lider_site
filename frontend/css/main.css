@@ -1353,11 +1353,13 @@ main {
         gap: 10px;
     }
     .cookie-banner__text-part2 {
+        width: 80%;
         font-size: 11px;
         line-height: 1.4;
     }
     .cookie-banner__btn {
         padding: 5px 12px;
         font-size: 12px;
+        margin-top: 0;
     }
 }
