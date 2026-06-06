@@ -472,10 +472,10 @@ body {
         border-radius: 10px;
         padding: 15px;
         display: flex;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
         justify-content: space-between;
-        align-items: center;
-        gap: 8px;
+        align-items: baseline;
+        gap: 6px;
         height: auto;
         width: 100%;
     }
@@ -483,13 +483,14 @@ body {
         font-size: 14px;
         font-weight: 500;
         white-space: nowrap;
-        flex: 1;
+        flex: 1 1 70%;
     }
     .discount-item__value {
         font-size: 14px;
         color: #D90D26;
         text-align: right;
         margin-left: auto;
+        flex: 0 0 auto;
         margin-top: 0; 
         flex-shrink: 0;
         white-space: nowrap;
