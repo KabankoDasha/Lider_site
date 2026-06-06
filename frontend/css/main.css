@@ -962,15 +962,15 @@ main {
 #cookie-banner {
     position: fixed;
     bottom: 20px;
-    left: 16px;
-    right: 16px;
+    left: 20px;
+    right: 20px;
     width: auto;
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
     background: #fff;
-    border-radius: 12px;
+    border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    padding: 16px 24px;
+    padding: 15px 25px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -997,7 +997,7 @@ main {
 .cookie-banner__text {
     font-size: 14px;
     line-height: 1.5;
-    color: #333;
+    color: #000000;
     margin: 0;
     max-width: 70%; 
 }
@@ -1345,8 +1345,8 @@ main {
         left: 16px;
         right: 16px;
         bottom: 16px;
-        padding: 12px 16px;
-        gap: 12px;
+        padding: 12px 15px;
+        gap: 10px;
     }
     .cookie-banner__content {
         flex: none;
@@ -1354,8 +1354,8 @@ main {
         gap: 10px;
     }
     .cookie-banner__icon {
-        width: 28px;
-        height: 28px;
+        width: 22px;
+        height: 22px;
     }
     .cookie-banner__text {
         font-size: 11px;
@@ -1363,7 +1363,7 @@ main {
     }
     .cookie-banner__btn {
         align-self: flex-end;
-        padding: 5px 12px;
+        padding: 5px 15px;
         font-size: 12px;
         border-radius: 8px;
     }
