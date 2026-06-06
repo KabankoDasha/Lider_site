@@ -1356,6 +1356,8 @@ main {
         width: 80%;
         font-size: 11px;
         line-height: 1.4;
+        margin-top: 0;
+        padding-top: 0;
     }
     .cookie-banner__btn {
         padding: 5px 12px;
