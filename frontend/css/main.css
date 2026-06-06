@@ -965,10 +965,10 @@ main {
     left: 16px;
     right: 16px;
     width: auto;
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
     background: #fff;
-    border-radius: 12px;
+    border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     padding: 16px 24px;
     z-index: 1001;
@@ -977,38 +977,76 @@ main {
 
 .cookie-banner__content {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 15px;
+    flex-wrap: nowrap;
 }
 
 .cookie-banner__icon {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     flex-shrink: 0;
-    margin-top: 2px; /* выравнивание с первой строкой текста */
 }
 
-.cookie-banner__text-part1 {
+/* Десктопная версия */
+.cookie-banner__desktop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;    
+    text-align: right;  
+    line-height: 1.5; 
+}
+
+.cookie-banner__text-full {
     font-size: 14px;
     line-height: 1.5;
     color: #333;
     margin: 0;
+    padding: 0;
+    flex: 1 1 auto;            
+    max-width: 80%;                        
+    word-break: break-word;   
+    text-align: left;
+    align-self: center;
+    margin-bottom: -40px;
+    padding-left: 10px;
+}
+
+.cookie-banner__text-full a {
+    color: #D90D26;
+    text-decoration: underline;
+}
+
+/* Мобильная версия */
+.cookie-banner__mobile {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cookie-banner__text-part1 {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #333;
+    margin: 0;
 }
 
 .cookie-banner__row {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    gap: 15px;
-    margin-top: 0;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 .cookie-banner__text-part2 {
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: 12px;
+    line-height: 1.4;
     color: #333;
     margin: 0;
+    flex: 1;
 }
 
 .cookie-banner__text-part2 a {
@@ -1016,6 +1054,7 @@ main {
     text-decoration: underline;
 }
 
+/* Общие стили для кнопки */
 .cookie-banner__btn {
     background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
     border: none;
@@ -1029,10 +1068,15 @@ main {
     transition: opacity 0.2s;
     flex-shrink: 0;
     white-space: nowrap;
-    line-height: 1.2;
+    line-height: 1.5;
 }
 
-.cookie-banner__btn:hover {
+.cookie-banner__desktop .cookie-banner__btn { 
+    line-height: 1.5;     
+    align-items: center;
+}
+
+.cookie-banner__desktop .cookie-banner__btn:hover {
     opacity: 0.9;
 }
 
@@ -1350,32 +1394,35 @@ main {
     .scroll-to-top__icon { width: 20px; }
 
     #cookie-banner {
-        padding: 12px 16px;
-        bottom: 16px;
+        padding: 12px 12px;
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
     }
     .cookie-banner__content {
         gap: 10px;
     }
     .cookie-banner__icon {
-        width: 24px;
-        height: 24px;
-        margin-top: 2px;
+        width: 28px;
+        height: 28px;
     }
-    .cookie-banner__text-part1 {
-        font-size: 11px;
-        line-height: 1.4;
+    .cookie-banner__mobile {
+        gap: 6px;
     }
-    .cookie-banner__row {
-        gap: 8px;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-    }
+    .cookie-banner__text-part1,
     .cookie-banner__text-part2 {
         font-size: 11px;
-        line-height: 1.4;
+    }
+
+    .cookie-banner__text-part2 {
+        margin-top: -10px;
     }
     .cookie-banner__btn {
         padding: 5px 12px;
         font-size: 12px;
+        margin-top: 10px;
+    }
+    .cookie-banner__row {
+        justify-content: space-between;
     }
 }
