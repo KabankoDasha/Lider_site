@@ -945,14 +945,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!currentAgreement || !currentAgreement.id) return;
         const token = localStorage.getItem('token');
         
-        // Открываем пустое окно сразу
-        const newWindow = window.open();
-        if (!newWindow) {
-            alert('Пожалуйста, разрешите всплывающие окна для этого сайта');
-            return;
-        }
-        newWindow.document.write('<p>Загрузка PDF...</p>');
-        
+        // Не открываем окно до fetch!
         try {
             const pdfRes = await fetch(`/api/agreements/${currentAgreement.id}/pdf`, {
                 headers: { 'Authorization': `Bearer ${token}` }
@@ -960,10 +953,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!pdfRes.ok) throw new Error('Ошибка загрузки PDF');
             const blob = await pdfRes.blob();
             const url = URL.createObjectURL(blob);
-            newWindow.location.href = url;
+            
+            // После получения данных – открываем окно
+            const newWindow = window.open(url, '_blank');
+            if (!newWindow) {
+                // Если Safari заблокировал – пробуем через ссылку
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `dogovor-${currentAgreement.id}.pdf`;
+                link.click();
+            }
             setTimeout(() => URL.revokeObjectURL(url), 1000);
         } catch (e) {
-            newWindow.document.write('<p>Ошибка загрузки PDF</p>');
             alert('Не удалось открыть PDF. Проверьте права доступа.');
         }
     }
@@ -1011,17 +1012,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const blob = await res.blob();
             const url = URL.createObjectURL(blob);
             
-            const newWindow = window.open();
-            if (newWindow) {
-                newWindow.location.href = url;
-            } else {
+            const newWindow = window.open(url, '_blank');
+            if (!newWindow) {
                 const link = document.createElement('a');
                 link.href = url;
                 link.download = `${type}.pdf`;
-                alert('Браузер заблокировал всплывающее окно. Нажмите "Скачать PDF" в открывшемся диалоге.');
-                document.body.appendChild(link);
                 link.click();
-                document.body.removeChild(link);
             }
             setTimeout(() => URL.revokeObjectURL(url), 1000);
         } catch (err) {
