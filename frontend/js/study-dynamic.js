@@ -52,7 +52,7 @@
       return `
         <article class="course-card">
             <div class="course-card__name">
-            <a href="/courses-data.html?id=${course.id}">${escapeHtml(course.name)}</a>
+            <a href="/courses-data?id=${course.id}">${escapeHtml(course.name)}</a>
             </div>
             <div class="course-card__duration desktop-only">${escapeHtml(course.duration)}</div>
             ${durationLabel}
