@@ -2,7 +2,7 @@ const router = require('express').Router();
 const auth = require('../middleware/auth');
 const adminOnly = require('../middleware/adminOnly');
 const { Agreement } = require('../models/agreement');
-const puppeteer = require('puppeteer');
+const { getBrowser } = require('../lib/browser');
 
 // Получить свой договор
 router.get('/my', auth, async (req, res) => {
@@ -66,18 +66,19 @@ router.get('/:id/pdf', auth, async (req, res) => {
       return res.status(403).json({ message: 'Доступ запрещён' });
     }
 
-    // Формируем инициалы заказчика
     const shortName = agreement.full_name
       ? agreement.full_name.split(' ').map((s, i) => i === 0 ? s : s.charAt(0) + '.').join(' ')
       : '';
 
     const html = buildAgreementHtml(agreement, shortName);
 
-    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
+    const browser = await getBrowser();
     const page = await browser.newPage();
-    await page.setContent(html, { waitUntil: 'networkidle0' });
-    const pdfBuffer = await page.pdf({ format: 'A4', printBackground: true });
-    await browser.close();
+    
+    await page.setDefaultTimeout(30000);
+    await page.setContent(html, { waitUntil: 'networkidle0', timeout: 30000 });
+    const pdfBuffer = await page.pdf({ format: 'A4', printBackground: true, timeout: 30000 });
+    await page.close();
 
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', `inline; filename="dogovor-${agreement.id}.pdf"`);

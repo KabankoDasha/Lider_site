@@ -23,6 +23,8 @@ services:
       context: .
       dockerfile: Dockerfile.backend
     container_name: lider_backend
+    cpus: 0.5             
+    mem_limit: 512m        
     environment:
       NODE_ENV: production
       PORT: 3001

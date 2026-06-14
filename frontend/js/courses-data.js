@@ -530,24 +530,27 @@
   };
 
   const idToKey = {
-    1: 'auto',
-    2: 'auto2',
-    3: 'motorcycle',
-    4: 'pogruz',
-    5: 'excovator',
-    6: 'truck',
-    7: 'buldozer',
-    8: 'autograde',
-    9: 'autocran',
-    10: 'mostcran',
-    11: 'autovyshka',
-    12: 'kvadro',
-    13: 'trekol',
-    14: 'belaz',
-    15: 'katok',
-    16: 'ratrak',
-    17: 'samohod'
+    "1": 'auto',
+    "2": 'auto2',
+    "3": 'motorcycle',
+    "4": 'pogruz',
+    "5": 'excovator',
+    "6": 'truck',
+    "7": 'buldozer',
+    "8": 'autograde',
+    "9": 'autocran',
+    "10": 'mostcran',
+    "11": 'autovyshka',
+    "12": 'kvadro',
+    "13": 'trekol',
+    "14": 'belaz',
+    "15": 'katok',
+    "16": 'ratrak',
+    "17": 'samohod'
   };
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const courseId = urlParams.get('id');
 
   let data;
   if (courseId && idToKey[courseId]) {

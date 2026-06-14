@@ -4,7 +4,7 @@ const fs = require('fs');
 const auth = require('../middleware/auth');
 const adminOnly = require('../middleware/adminOnly');
 const { Document } = require('../models/documents');
-const puppeteer = require('puppeteer');
+const { getBrowser } = require('../lib/browser');
 const path = require('path');
 
 // Проверяем, что папка существует
@@ -167,11 +167,12 @@ async function generatePdfFromImage(filePath) {
 </body>
 </html>`;
 
-    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
+    const browser = await getBrowser();
     const page = await browser.newPage();
-    await page.setContent(html, { waitUntil: 'networkidle0' });
-    const pdfBuffer = await page.pdf({ format: 'A4', printBackground: true });
-    await browser.close();
+    await page.setDefaultTimeout(30000);
+    await page.setContent(html, { waitUntil: 'networkidle0', timeout: 30000 });
+    const pdfBuffer = await page.pdf({ format: 'A4', printBackground: true, timeout: 30000 });
+    await page.close();
     return pdfBuffer;
 }
 
