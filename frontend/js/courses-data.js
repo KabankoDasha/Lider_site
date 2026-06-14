@@ -549,15 +549,6 @@
     17: 'samohod'
   };
 
-  // Отладка (после объявления idToKey)
-  console.log('=== courses-data.js запущен ===');
-  console.log('URL страницы:', window.location.href);
-  const urlParams = new URLSearchParams(window.location.search);
-  const courseId = urlParams.get('id');
-  console.log('courseId из URL:', courseId);
-  console.log('idToKey:', idToKey);
-  console.log('существует ли ключ?', idToKey[courseId]);
-
   let data;
   if (courseId && idToKey[courseId]) {
     console.log('ID найден, ключ =', idToKey[courseId]);

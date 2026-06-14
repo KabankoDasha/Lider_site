@@ -5,7 +5,7 @@ const coursesData = {
     categoryText: 'Категория "A"',
     imgSmall: '/images/moto.png',
     imgBig: '/images/gray2.png',
-    link: '/courses-data?course=motorcycle',
+    link: '/courses-data?id=3',
     collapsedImg: '/images/gray2.png',
     collapsedClass: 'card--collapsed2'
   },
@@ -14,7 +14,7 @@ const coursesData = {
     categoryText: 'Категория "B"',
     imgSmall: '/images/car1.png',
     imgBig: '/images/gray1.png',
-    link: '/courses-data?course=auto',
+    link: '/courses-data?id=1',
     collapsedImg: '/images/gray1.png',
     collapsedClass: 'card--collapsed1'
   },
@@ -23,7 +23,7 @@ const coursesData = {
     categoryText: 'Категория "B" автомат',
     imgSmall: '/images/car2.png',
     imgBig: '/images/gray3.png',
-    link: '/courses-data?course=auto2',
+    link: '/courses-data?id=2',
     collapsedImg: '/images/gray3.png',
     collapsedClass: 'card--collapsed1'
   },
@@ -32,7 +32,7 @@ const coursesData = {
     categoryText: 'Категория "D"',
     imgSmall: '/images/truck.png',
     imgBig: '/images/gray4.png',
-    link: '/courses-data?course=truck',
+    link: '/courses-data?id=6',
     collapsedImg: '/images/gray4.png',
     collapsedClass: 'card--collapsed2'
   },
@@ -41,7 +41,7 @@ const coursesData = {
     categoryText: 'Категория "АI" с 16 лет',
     imgSmall: '/images/kvadro.png',
     imgBig: '/images/gray5.png',
-    link: '/courses-data?course=kvadro',
+    link: '/courses-data?id=12',
     collapsedImg: '/images/gray5.png',
     collapsedClass: 'card--collapsed1'
   }
