@@ -952,14 +952,22 @@ document.addEventListener('DOMContentLoaded', () => {
             const blob = await pdfRes.blob();
             const url = URL.createObjectURL(blob);
             
-            // Создаём временную ссылку и кликаем по ней
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `dogovor-${currentAgreement.id}.pdf`;  // атрибут download заставит скачать
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);  // очищаем память
+            // Пытаемся открыть в новой вкладке
+            const newWindow = window.open();
+            if (newWindow) {
+                newWindow.location.href = url;
+            } else {
+                // Если браузер заблокировал, показываем ссылку для ручного открытия
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `dogovor-${currentAgreement.id}.pdf`;
+                link.textContent = 'Скачать PDF';
+                alert('Браузер заблокировал всплывающее окно. Нажмите "Скачать PDF" в открывшемся диалоге.');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
         } catch (e) {
             alert('Не удалось открыть PDF. Проверьте права доступа.');
         }
@@ -1008,13 +1016,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const blob = await res.blob();
             const url = URL.createObjectURL(blob);
             
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `${type}.pdf`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
+            const newWindow = window.open();
+            if (newWindow) {
+                newWindow.location.href = url;
+            } else {
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `${type}.pdf`;
+                alert('Браузер заблокировал всплывающее окно. Нажмите "Скачать PDF" в открывшемся диалоге.');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
         } catch (err) {
             alert('Не удалось открыть документ');
         }

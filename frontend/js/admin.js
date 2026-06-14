@@ -1068,13 +1068,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     const blob = await pdfRes.blob();
                     const url = URL.createObjectURL(blob);
                     
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.download = `dogovor-${agreementId}.pdf`;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    URL.revokeObjectURL(url);
+                    const newWindow = window.open();
+                    if (newWindow) {
+                        newWindow.location.href = url;
+                    } else {
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = `dogovor-${agreementId}.pdf`;
+                        alert('Браузер заблокировал всплывающее окно. Нажмите "Скачать PDF" в открывшемся диалоге.');
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    }
+                    setTimeout(() => URL.revokeObjectURL(url), 1000);
                 } catch (e) {
                     alert('Не удалось открыть PDF. Проверьте права доступа.');
                 }

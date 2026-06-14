@@ -222,7 +222,9 @@ router.get('/my/:type', auth, async (req, res) => {
     '.png': 'image/png',
     '.pdf': 'application/pdf',
   };
-  res.type(mimeTypes[ext] || 'application/octet-stream');
+  
+  res.setHeader('Content-Type', mimeTypes[ext] || 'application/octet-stream');
+  res.setHeader('Content-Disposition', 'inline');  
   res.sendFile(doc.file_path);
 });
 
