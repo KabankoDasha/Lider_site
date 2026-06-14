@@ -1,11 +1,4 @@
 (function() {
-  console.log('=== courses-data.js запущен ===');
-  console.log('URL страницы:', window.location.href);
-  const urlParams = new URLSearchParams(window.location.search);
-  const courseId = urlParams.get('id');
-  console.log('courseId из URL:', courseId);
-  console.log('idToKey:', idToKey);
-  console.log('существует ли ключ?', idToKey[courseId]);
   const coursesData = {
     auto: {
       breadcrumb: 'Автомобиль с МКПП',
@@ -556,9 +549,14 @@
     17: 'samohod'
   };
 
-  // Получаем ID из URL
+  // Отладка (после объявления idToKey)
+  console.log('=== courses-data.js запущен ===');
+  console.log('URL страницы:', window.location.href);
   const urlParams = new URLSearchParams(window.location.search);
   const courseId = urlParams.get('id');
+  console.log('courseId из URL:', courseId);
+  console.log('idToKey:', idToKey);
+  console.log('существует ли ключ?', idToKey[courseId]);
 
   let data;
   if (courseId && idToKey[courseId]) {
@@ -566,7 +564,6 @@
     const key = idToKey[courseId];
     data = coursesData[key];
   } else {
-    // Если ID не указан или не найден 
     console.warn('Неверный или отсутствующий ID курса, показываем мотоцикл');
     data = coursesData.motorcycle;
   }
