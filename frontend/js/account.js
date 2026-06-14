@@ -940,7 +940,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('#agreement-form-overlay .add-course-input-wrapper .field-error-text').forEach(el => el.remove());
     }
 
-    // --- Открытие PDF договора ---
+    // Открытие PDF договора 
     async function viewAgreementPdf() {
         if (!currentAgreement || !currentAgreement.id) return;
         const token = localStorage.getItem('token');
@@ -951,7 +951,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!pdfRes.ok) throw new Error('Ошибка загрузки PDF');
             const blob = await pdfRes.blob();
             const url = URL.createObjectURL(blob);
-            window.open(url, '_blank');
+            
+            // Создаём временную ссылку и кликаем по ней
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `dogovor-${currentAgreement.id}.pdf`;  // атрибут download заставит скачать
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);  // очищаем память
         } catch (e) {
             alert('Не удалось открыть PDF. Проверьте права доступа.');
         }
@@ -999,7 +1007,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!res.ok) throw new Error('Файл не найден');
             const blob = await res.blob();
             const url = URL.createObjectURL(blob);
-            window.open(url, '_blank');
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${type}.pdf`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
         } catch (err) {
             alert('Не удалось открыть документ');
         }

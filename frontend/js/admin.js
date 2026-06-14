@@ -1067,7 +1067,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!pdfRes.ok) throw new Error('Ошибка загрузки PDF');
                     const blob = await pdfRes.blob();
                     const url = URL.createObjectURL(blob);
-                    window.open(url, '_blank');
+                    
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = `dogovor-${agreementId}.pdf`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
                 } catch (e) {
                     alert('Не удалось открыть PDF. Проверьте права доступа.');
                 }
@@ -1076,11 +1083,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 2) Кнопки «Паспорт», «СНИЛС», «Справка»
         container.querySelectorAll('.btn--doc-link').forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', async () => {
                 const token = localStorage.getItem('token');
                 const userId = btn.dataset.user;
                 const docType = btn.dataset.type;
-                window.open(`/api/documents/user/${userId}/${docType}/pdf?token=${token}`, '_blank');
+                
+                try {
+                    const res = await fetch(`/api/documents/user/${userId}/${docType}/pdf?token=${token}`);
+                    if (!res.ok) throw new Error('Файл не найден');
+                    const blob = await res.blob();
+                    const url = URL.createObjectURL(blob);
+                    
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = `${docType}_user_${userId}.pdf`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                } catch (err) {
+                    alert('Не удалось открыть документ');
+                }
             });
         });
 
