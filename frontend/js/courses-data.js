@@ -1,4 +1,5 @@
 (function() {
+  // ---------- Статический контент (без изменений) ----------
   const coursesData = {
     auto: {
       breadcrumb: 'Автомобиль с МКПП',
@@ -31,7 +32,6 @@
       ctaImg: '/images/car1-info.png',
       ctaImgAlt: 'Автомобиль с МКПП'
     },
-
     auto2: {
       breadcrumb: 'Автомобиль с АКПП',
       heroTitle: 'Обучение на права категории “B” (легковые автомобили с коробкой автомат)',
@@ -63,7 +63,6 @@
       ctaImg: '/images/car2-info.png',
       ctaImgAlt: 'Автомобиль с АКПП'
     },
-
     motorcycle: {
       breadcrumb: 'Мотоцикл',
       heroTitle: 'Обучение на права категории “А” (мотоцикл)',
@@ -95,7 +94,6 @@
       ctaImg: '/images/moto-info.png',
       ctaImgAlt: 'Мотоцикл'
     },
-
     pogruz: {
       breadcrumb: 'Погрузчик',
       heroTitle: 'Обучение на погрузчик — категории «B», «C», «D»',
@@ -127,7 +125,6 @@
       ctaImg: '/images/pogruz.png',       
       ctaImgAlt: 'Погрузчик'
     },
-
     excovator: {
       breadcrumb: 'Экскаватор',
       heroTitle: 'Обучение на экскаватор — категории «C», «E», «D»',
@@ -159,7 +156,6 @@
       ctaImg: '/images/excovator.png',       
       ctaImgAlt: 'Экскаватор'
     },
-
     truck: {
       breadcrumb: 'Трактор',
       heroTitle: 'Обучение на тракториста-машиниста — категории «B», «C», «E», «D»',
@@ -191,7 +187,6 @@
       ctaImg: '/images/truck-info.png',       
       ctaImgAlt: 'Трактор'
     },
-
     buldozer: {
       breadcrumb: 'Бульдозер',
       heroTitle: 'Обучение на бульдозер — категория «E»',
@@ -223,7 +218,6 @@
       ctaImg: '/images/buldozer.png',       
       ctaImgAlt: 'Бульдозер'
     },
-
     autograde: {
       breadcrumb: 'Автогрейдер',
       heroTitle: 'Обучение на автогрейдер — категории «C», «D» с 19 лет',
@@ -255,7 +249,6 @@
       ctaImg: '/images/autograde.png',       
       ctaImgAlt: 'Автогрейдер'
     },
-
     autocran: {
       breadcrumb: 'Автомобильный кран',
       heroTitle: 'Обучение на машиниста автомобильного крана',
@@ -287,7 +280,6 @@
       ctaImg: '/images/autocran.png',       
       ctaImgAlt: 'Автомобильный кран'
     },
-
     mostcran: {
       breadcrumb: 'Мостовой кран',
       heroTitle: 'Обучение на машиниста мостового крана',
@@ -319,7 +311,6 @@
       ctaImg: '/images/mostcran.png',       
       ctaImgAlt: 'Мостовой кран'
     },
-
     autovyshka: {
       breadcrumb: 'Автовышка и автогидроподъемник',
       heroTitle: 'Обучение на машиниста автовышки и автогидроподъемника',
@@ -351,7 +342,6 @@
       ctaImg: '/images/autovyshka.png',       
       ctaImgAlt: 'Автовышка'
     },
-
     kvadro: {
       breadcrumb: 'Квадроцикл и снегоход',
       heroTitle: 'Обучение на квадроцикл и снегоход — категория «AI» с 16 лет',
@@ -383,7 +373,6 @@
       ctaImg: '/images/kvadro-info.png',       
       ctaImgAlt: 'Квадроцикл'
     },
-
     trekol: {
       breadcrumb: 'Внедорожные автотранспортные средства',
       heroTitle: 'Обучение на внедорожные автотранспортные средства — категория «АII» с 19 лет',
@@ -415,7 +404,6 @@
       ctaImg: '/images/trekol.png',       
       ctaImgAlt: 'Трекол'
     },
-
     belaz: {
       breadcrumb: 'Внедорожные автотранспортные средства (БелАЗ)',
       heroTitle: 'Обучение на внедорожные автотранспортные средства — категория «АIII» (БелАЗ)',
@@ -447,7 +435,6 @@
       ctaImg: '/images/belaz.png',       
       ctaImgAlt: 'БелАЗ'
     },
-
     katok: {
       breadcrumb: 'Машинист катка',
       heroTitle: 'Обучение на машиниста катка — категория «C»',
@@ -479,7 +466,6 @@
       ctaImg: '/images/katok.png',       
       ctaImgAlt: 'Машина-каток'
     },
-
     ratrak: {
       breadcrumb: 'Машинист уплотняющей машины «Ратрак»',
       heroTitle: 'Обучение на машиниста уплотняющей машины «Ратрак» — категория «E»',
@@ -511,7 +497,6 @@
       ctaImg: '/images/ratrak.png',       
       ctaImgAlt: 'Машина «Ратрак»'
     },
-
     samohod: {
       breadcrumb: 'Машинист крана на самоходном ходу',
       heroTitle: 'Обучение на машиниста крана на самоходном ходу',
@@ -543,20 +528,43 @@
       ctaImg: '/images/samohod.png',       
       ctaImgAlt: 'Кран на самоходном ходу'
     },
-
-
   };
 
-  // Если курса нет в URL, можно задать курс по умолчанию
-  function getCourseKey() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('course') || 'motorcycle';
+  const idToKey = {
+    1: 'auto',
+    2: 'auto2',
+    3: 'motorcycle',
+    4: 'pogruz',
+    5: 'excovator',
+    6: 'truck',
+    7: 'buldozer',
+    8: 'autograde',
+    9: 'autocran',
+    10: 'mostcran',
+    11: 'autovyshka',
+    12: 'kvadro',
+    13: 'trekol',
+    14: 'belaz',
+    15: 'katok',
+    16: 'ratrak',
+    17: 'samohod'
+  };
+
+  // Получаем ID из URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const courseId = urlParams.get('id');
+
+  let data;
+  if (courseId && idToKey[courseId]) {
+    const key = idToKey[courseId];
+    data = coursesData[key];
+  } else {
+    // Если ID не указан или не найден 
+    console.warn('Неверный или отсутствующий ID курса, показываем мотоцикл');
+    data = coursesData.motorcycle;
   }
 
-  const courseKey = getCourseKey();
-  const data = coursesData[courseKey] || coursesData.motorcycle;
-
-  // Заполнение контента
+  // Заполнение страницы (без изменений)
   document.getElementById('breadcrumb-current').textContent = data.breadcrumb;
   document.getElementById('hero-title').textContent = data.heroTitle;
   document.getElementById('hero-desc').textContent = data.heroDesc;
@@ -567,31 +575,31 @@
   const cols = [[], []];
   data.steps.forEach((step, i) => cols[i % 2].push(step));
   cols.forEach(colSteps => {
-      const colDiv = document.createElement('div');
-      colDiv.className = 'steps__col';
-      colSteps.forEach(step => {
-          colDiv.innerHTML += `
-              <div class="step">
-                  <div class="step__badge">
-                      <span class="step__num">${step.num}</span>
-                      <span class="step__label">этап</span>
-                  </div>
-                  <p class="step__desc">${step.text}</p>
-              </div>`;
-      });
-      stepsGrid.appendChild(colDiv);
+    const colDiv = document.createElement('div');
+    colDiv.className = 'steps__col';
+    colSteps.forEach(step => {
+      colDiv.innerHTML += `
+        <div class="step">
+          <div class="step__badge">
+            <span class="step__num">${step.num}</span>
+            <span class="step__label">этап</span>
+          </div>
+          <p class="step__desc">${step.text}</p>
+        </div>`;
+    });
+    stepsGrid.appendChild(colDiv);
   });
 
   const rightsSection = document.getElementById('rights-section');
   if (data.rightsTitle) {
-      rightsSection.style.display = 'block';
-      document.getElementById('rights-title').textContent = data.rightsTitle;
-      const rightsTexts = document.getElementById('rights-texts');
-      rightsTexts.innerHTML = data.rightsTexts.map(t => `<p class="rights__text">${t}</p>`).join('');
-      const rightsList = document.getElementById('rights-list');
-      rightsList.innerHTML = data.rightsList.map(li => `<li>${li}</li>`).join('');
+    rightsSection.style.display = 'block';
+    document.getElementById('rights-title').textContent = data.rightsTitle;
+    const rightsTexts = document.getElementById('rights-texts');
+    rightsTexts.innerHTML = data.rightsTexts.map(t => `<p class="rights__text">${t}</p>`).join('');
+    const rightsList = document.getElementById('rights-list');
+    rightsList.innerHTML = data.rightsList.map(li => `<li>${li}</li>`).join('');
   } else {
-      rightsSection.style.display = 'none';
+    rightsSection.style.display = 'none';
   }
 
   document.getElementById('cta-slogan').innerHTML = data.ctaSlogan;

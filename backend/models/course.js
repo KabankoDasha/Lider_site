@@ -41,6 +41,10 @@ const Course = {
   async delete(id) {
     const res = await pool.query('DELETE FROM courses WHERE id=$1 RETURNING *', [id]);
     return res.rows[0];
+  },
+  async findById(id) {
+    const res = await pool.query('SELECT * FROM courses WHERE id = $1', [id]);
+    return res.rows[0];
   }
 };
 

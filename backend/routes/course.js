@@ -14,6 +14,20 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Публичное получение одного курса по ID
+router.get('/:id', async (req, res) => {
+  try {
+    const course = await Course.findById(req.params.id);
+    if (!course) {
+      return res.status(404).json({ message: 'Курс не найден' });
+    }
+    res.json(course);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Ошибка сервера' });
+  }
+});
+
 // Админские защищённые маршруты
 router.post('/', auth, adminOnly, async (req, res) => {
   try {
