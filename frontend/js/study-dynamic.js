@@ -51,14 +51,15 @@
       console.log('Курс', course.id, course.name, 'ссылка:', `/courses-data.html?id=${course.id}`);
       return `
         <article class="course-card">
-          <a href="/courses-data.html?id=${course.id}" class="course-card__link-overlay"></a>
-          <div class="course-card__name"><a href="#">${escapeHtml(course.name)}</a></div>
-          <div class="course-card__duration desktop-only">${escapeHtml(course.duration)}</div>
-          ${durationLabel}
-          <div class="course-card__prices">${pricesHtml}</div>
-          <button class="btn course-card__btn" data-course="${escapeHtml(course.name)}">Записаться</button>
+            <div class="course-card__name">
+            <a href="/courses-data.html?id=${course.id}">${escapeHtml(course.name)}</a>
+            </div>
+            <div class="course-card__duration desktop-only">${escapeHtml(course.duration)}</div>
+            ${durationLabel}
+            <div class="course-card__prices">${pricesHtml}</div>
+            <button class="btn course-card__btn" data-course="${escapeHtml(course.name)}">Записаться</button>
         </article>
-      `;
+        `;
     }
 
     if (autoContainer) autoContainer.innerHTML = autoCourses.map(createCourseCard).join('');
