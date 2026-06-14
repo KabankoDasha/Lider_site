@@ -48,6 +48,7 @@
         `;
       }
 
+      console.log('Курс', course.id, course.name, 'ссылка:', `/courses-data.html?id=${course.id}`);
       return `
         <article class="course-card">
           <a href="/courses-data.html?id=${course.id}" class="course-card__link-overlay"></a>
