@@ -549,8 +549,11 @@
     "17": 'samohod'
   };
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const courseId = urlParams.get('id');
+  function getQueryParam(param) {
+    const match = window.location.search.match(new RegExp('[?&]' + param + '=([^&]+)'));
+    return match ? decodeURIComponent(match[1]) : null;
+  }
+  const courseId = getQueryParam('id');
 
   let data;
   if (courseId && idToKey[courseId]) {

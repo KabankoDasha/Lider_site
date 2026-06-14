@@ -216,16 +216,17 @@ router.get('/my/:type', auth, async (req, res) => {
   if (!doc) return res.status(404).json({ message: 'Документ не найден' });
 
   const ext = path.extname(doc.file_path).toLowerCase();
-  const mimeTypes = {
-    '.jpg': 'image/jpeg',
-    '.jpeg': 'image/jpeg',
-    '.png': 'image/png',
-    '.pdf': 'application/pdf',
-  };
-  
-  res.setHeader('Content-Type', mimeTypes[ext] || 'application/octet-stream');
-  res.setHeader('Content-Disposition', 'inline');  
-  res.sendFile(doc.file_path);
+  if (ext === '.pdf') {
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'inline');
+    res.sendFile(doc.file_path);
+  } else {
+    // Конвертируем изображение в PDF
+    const pdfBuffer = await generatePdfFromImage(doc.file_path);
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'inline');
+    res.send(pdfBuffer);
+  }
 });
 
 module.exports = router;

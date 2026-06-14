@@ -944,6 +944,15 @@ document.addEventListener('DOMContentLoaded', () => {
     async function viewAgreementPdf() {
         if (!currentAgreement || !currentAgreement.id) return;
         const token = localStorage.getItem('token');
+        
+        // Открываем пустое окно сразу
+        const newWindow = window.open();
+        if (!newWindow) {
+            alert('Пожалуйста, разрешите всплывающие окна для этого сайта');
+            return;
+        }
+        newWindow.document.write('<p>Загрузка PDF...</p>');
+        
         try {
             const pdfRes = await fetch(`/api/agreements/${currentAgreement.id}/pdf`, {
                 headers: { 'Authorization': `Bearer ${token}` }
@@ -951,24 +960,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!pdfRes.ok) throw new Error('Ошибка загрузки PDF');
             const blob = await pdfRes.blob();
             const url = URL.createObjectURL(blob);
-            
-            // Пытаемся открыть в новой вкладке
-            const newWindow = window.open();
-            if (newWindow) {
-                newWindow.location.href = url;
-            } else {
-                // Если браузер заблокировал, показываем ссылку для ручного открытия
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = `dogovor-${currentAgreement.id}.pdf`;
-                link.textContent = 'Скачать PDF';
-                alert('Браузер заблокировал всплывающее окно. Нажмите "Скачать PDF" в открывшемся диалоге.');
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
+            newWindow.location.href = url;
             setTimeout(() => URL.revokeObjectURL(url), 1000);
         } catch (e) {
+            newWindow.document.write('<p>Ошибка загрузки PDF</p>');
             alert('Не удалось открыть PDF. Проверьте права доступа.');
         }
     }
