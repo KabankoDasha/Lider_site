@@ -264,18 +264,19 @@ function initCards() {
 // --- Запуск всего после загрузки DOM ---
 function initCookieBanner() {
     const banner = document.getElementById('cookie-banner');
-    const acceptBtn = document.getElementById('cookie-accept');
-    if (!banner || !acceptBtn) return;
+    const acceptBtns = document.querySelectorAll('#cookie-accept'); 
+    if (!banner || !acceptBtns.length) return;
 
-    // Если уже давали согласие – скрываем баннер
     if (localStorage.getItem('cookie_consent') === 'accepted') {
         banner.style.display = 'none';
         return;
     }
 
-    acceptBtn.addEventListener('click', () => {
-        localStorage.setItem('cookie_consent', 'accepted');
-        banner.style.display = 'none';
+    acceptBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            localStorage.setItem('cookie_consent', 'accepted');
+            banner.style.display = 'none';
+        });
     });
 }
 
