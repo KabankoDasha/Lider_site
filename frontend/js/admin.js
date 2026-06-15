@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let allApps = [];
     let currentAppId = null;
+    let currentApplicationToDelete = null;
 
     const appsBadge = document.querySelector('.sidebar-menu__item[data-target="applications"] .counter-badge');
 
@@ -93,6 +94,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const newIndicator = app.status === 'processing' ? '<span class="new-indicator"></span>' : '';
 
+            // Добавляем кнопку удаления ТОЛЬКО для обработанных заявок
+            const deleteButton = (app.status === 'confirmed' || app.status === 'rejected') 
+                ? `<button class="application-delete-btn admin-delete-item-btn" data-id="${app.id}" data-type="application">
+                    <img src="/images/krest.svg" alt="Удалить заявку">
+                </button>`
+                : '';
+
             return `
                 <article class="application-card" data-id="${app.id}" data-status="${app.status}">
                     <div class="application-header">
@@ -103,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="application-message">${escapeHtml(app.comment || '')}</p>
                     <time class="application-date">от ${date}</time>
                     ${newIndicator}
+                    ${deleteButton}
                 </article>`;
         }).join('');
 
@@ -138,6 +147,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('app-status-selected').classList.remove('placeholder');
 
                 appOverlay.classList.add('active');
+            });
+        });
+
+        // Обработчики для кнопок удаления
+        document.querySelectorAll('#applications-container .admin-delete-item-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                const appId = btn.dataset.id;
+                const app = allApps.find(a => a.id == appId);
+                if (app && (app.status === 'confirmed' || app.status === 'rejected')) {
+                    currentApplicationToDelete = appId;
+                    document.getElementById('delete-application-overlay').classList.add('active');
+                }
             });
         });
 
@@ -1214,6 +1236,59 @@ document.addEventListener('DOMContentLoaded', () => {
     replySuccessOverlay.addEventListener('click', () => {
         replySuccessOverlay.classList.remove('active');
     });
+
+    // === УДАЛЕНИЕ ЗАЯВКИ (АДМИН) ===
+    const deleteApplicationOverlay = document.getElementById('delete-application-overlay');
+    const cancelDeleteAppBtn = document.getElementById('cancel-delete-application');
+    const confirmDeleteAppBtn = document.getElementById('confirm-delete-application');
+    const adminDeleteSuccessOverlay = document.getElementById('admin-delete-success-overlay');
+
+    if (cancelDeleteAppBtn) {
+        cancelDeleteAppBtn.addEventListener('click', () => {
+            deleteApplicationOverlay.classList.remove('active');
+            currentApplicationToDelete = null;
+        });
+    }
+
+    if (confirmDeleteAppBtn) {
+        confirmDeleteAppBtn.addEventListener('click', async () => {
+            if (!currentApplicationToDelete) return;
+            
+            const token = localStorage.getItem('token');
+            try {
+                const response = await fetch(`/api/applications/admin/${currentApplicationToDelete}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!response.ok) throw new Error('Ошибка удаления');
+                
+                // Удаляем из массива allApps
+                allApps = allApps.filter(app => app.id != currentApplicationToDelete);
+                updateApplicationsBadge();
+                renderApplications();
+                
+                deleteApplicationOverlay.classList.remove('active');
+                adminDeleteSuccessOverlay.classList.add('active');
+                setTimeout(() => {
+                    adminDeleteSuccessOverlay.classList.remove('active');
+                }, 2000);
+                
+                currentApplicationToDelete = null;
+            } catch (err) {
+                console.error(err);
+                alert('Не удалось удалить заявку');
+                deleteApplicationOverlay.classList.remove('active');
+                currentApplicationToDelete = null;
+            }
+        });
+    }
+
+    // Закрытие оверлея успеха по клику
+    if (adminDeleteSuccessOverlay) {
+        adminDeleteSuccessOverlay.addEventListener('click', () => {
+            adminDeleteSuccessOverlay.classList.remove('active');
+        });
+    }
 
     function escapeHtml(str) {
         return str.replace(/[&<>]/g, function(m) {

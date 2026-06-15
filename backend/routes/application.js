@@ -90,6 +90,21 @@ router.delete('/:id', auth, async (req, res) => {
   }
 });
 
+// Админское удаление заявки
+router.delete('/admin/:id', auth, adminOnly, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query('DELETE FROM applications WHERE id = $1 RETURNING id', [id]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: 'Заявка не найдена' });
+    }
+    res.json({ message: 'Заявка удалена' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Ошибка сервера' });
+  }
+});
+
 // Создать ответ на заявку 
 router.post('/:id/reply', auth, adminOnly, async (req, res) => {
   try {

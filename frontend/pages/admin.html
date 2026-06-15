@@ -214,6 +214,25 @@
             </div>
         </div>
 
+        <!-- Оверлей подтверждения удаления заявки -->
+        <div class="delete-overlay" id="delete-application-overlay">
+            <div class="delete-overlay__box">
+                <p class="delete-overlay__text">Вы уверены, что хотите<br>удалить заявку?</p>
+                <div class="delete-overlay__buttons">
+                    <button class="btn--cancel" id="cancel-delete-application">Отмена</button>
+                    <button class="btn--confirm-delete" id="confirm-delete-application">Удалить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Оверлей успешного удаления заявки -->
+        <div class="success-overlay" id="admin-delete-success-overlay">
+            <div class="success-overlay__box">
+                <img src="/images/done.svg" alt="" class="success-overlay__icon">
+                <p class="success-overlay__text">Заявка успешно удалена!</p>
+            </div>
+        </div>
+
         <!-- Оверлей отправки ответа -->
         <div class="delete-overlay" id="reply-overlay">
             <div class="reply-box">
