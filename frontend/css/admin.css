@@ -353,6 +353,32 @@ body.no-scroll {
     border-radius: 50%;
 }
 
+.application-delete-btn {
+    position: absolute;
+    top: -19.5px; 
+    right: -19.5px;
+    width: 39px; 
+    height: 39px;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    border: none; 
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    transition: opacity 0.2s;
+    z-index: 10;
+}
+
+.application-delete-btn img { 
+    width: 15px; 
+    height: 15px; 
+}
+
+.application-delete-btn:hover { 
+    opacity: 0.8; 
+}
+
 /* Карточки отзывов */
 .review-card {
     position: relative; 
