@@ -549,6 +549,9 @@
     "17": 'samohod'
   };
 
+  const loadingIndicator = document.getElementById('loading-indicator');
+  if (loadingIndicator) loadingIndicator.style.display = 'none';
+
   function getQueryParam(param) {
     const match = window.location.search.match(new RegExp('[?&]' + param + '=([^&]+)'));
     return match ? decodeURIComponent(match[1]) : null;

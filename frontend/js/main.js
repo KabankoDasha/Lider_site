@@ -262,12 +262,7 @@ function initCards() {
 }
 
 // --- Запуск всего после загрузки DOM ---
-document.addEventListener('DOMContentLoaded', () => {
-  initCards();
-  initGallery();
-  initMobileMenu();
-
-  (function initCookieBanner() {
+function initCookieBanner() {
     const banner = document.getElementById('cookie-banner');
     const acceptBtn = document.getElementById('cookie-accept');
     if (!banner || !acceptBtn) return;
@@ -282,15 +277,12 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('cookie_consent', 'accepted');
         banner.style.display = 'none';
     });
-})();
+}
 
-  // При ресайзе перезагружаем страницу, если пересечена граница 768px
-  // window.addEventListener('resize', () => {
-  //   if (
-  //     (window.innerWidth <= 768 && !document.getElementById('cards-dots')?.children.length) ||
-  //     (window.innerWidth > 768 && document.getElementById('cards-dots')?.children.length)
-  //   ) {
-  //     location.reload();
-  //   }
-  // });
+// В DOMContentLoaded вызовите:
+document.addEventListener('DOMContentLoaded', () => {
+    initCards();
+    initGallery();
+    initMobileMenu();
+    initCookieBanner();  
 });
