@@ -147,6 +147,34 @@
                         <p class="register-overlay__text">Регистрация прошла успешно!</p>
                     </div>
                 </div>
+
+                <!-- Оверлей подтверждения email -->
+                <div class="register-overlay" id="email-verification-overlay">
+                    <div class="register-overlay__box register-overlay__box--verify">
+                        <h3 class="verify-title">Подтверждение email</h3>
+                        <p class="verify-subtitle">Код подтверждения отправлен на вашу почту</p>
+                        
+                        <!-- Ячейки для ввода кода -->
+                        <div class="code-input-container" id="code-input-container">
+                            <input type="text" maxlength="1" class="code-input" data-index="0">
+                            <input type="text" maxlength="1" class="code-input" data-index="1">
+                            <input type="text" maxlength="1" class="code-input" data-index="2">
+                            <input type="text" maxlength="1" class="code-input" data-index="3">
+                            <input type="text" maxlength="1" class="code-input" data-index="4">
+                            <input type="text" maxlength="1" class="code-input" data-index="5">
+                        </div>
+                        
+                        <div id="verification-error" class="verify-error"></div>
+                        <div id="verification-success" class="verify-success"></div>
+                        
+                        <div class="verify-actions">
+                            <button id="resend-code-btn" class="btn btn--resend-code">Отправить код повторно</button>
+                            <span id="resend-timer" class="resend-timer"></span>
+                        </div>
+                        
+                        <p class="verify-hint">Код действителен 15 минут</p>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

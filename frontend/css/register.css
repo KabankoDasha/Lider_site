@@ -347,6 +347,132 @@ body {
 }
 
 /* ========================
+   Оверлей подтверждения email
+   ======================== */
+.register-overlay__box--verify {
+    width: 650px;
+    height: auto;
+    padding: 50px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.verify-title {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+.verify-subtitle {
+    color: #717171;
+    font-size: 16px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.verify-error {
+    color: #D90D26;
+    font-size: 14px;
+    margin-top: 10px;
+    display: none;
+    text-align: center;
+}
+
+.verify-success {
+    color: #27ae60;
+    font-size: 14px;
+    margin-top: 10px;
+    display: none;
+    text-align: center;
+}
+
+.verify-actions {
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn--resend-code {
+    background: transparent;
+    border: 2px solid #D90D26;
+    color: #D90D26;
+    width: auto;
+    padding: 10px 30px;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    transition: opacity 0.3s, background 0.3s;
+}
+
+.btn--resend-code:hover:not(:disabled) {
+    background: rgba(217, 13, 38, 0.05);
+}
+
+.btn--resend-code:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.resend-timer {
+    color: #999;
+    font-size: 14px;
+}
+
+.verify-hint {
+    color: #999;
+    font-size: 13px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* ========================
+   Ячейки ввода кода подтверждения
+   ======================== */
+.code-input-container {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.code-input {
+    width: 55px;
+    height: 65px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    border: 2px solid #D6D6D6;
+    border-radius: 10px;
+    background: #FCFCFC;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.code-input:focus {
+    border-color: #D90D26;
+    box-shadow: 0 0 0 3px rgba(217, 13, 38, 0.15);
+}
+
+.code-input.success {
+    border-color: #27ae60;
+    background: #eafaf1;
+}
+
+.code-input.error {
+    border-color: #D90D26;
+    background: #fde8ea;
+}
+
+/* ========================
    Адаптивность (мобильная версия)
    ======================== */
 @media (max-width: 768px) {
@@ -516,5 +642,40 @@ body {
     .register-overlay__text {
         font-size: 18px;
         line-height: 1.4;
+    }
+
+    // ячейки ввода кода
+    .code-input {
+        width: 38px;
+        height: 48px;
+        font-size: 20px;
+    }
+
+    .code-input-container {
+        gap: 8px;
+    }
+
+    .register-overlay__box--verify {
+        width: 90%;
+        max-width: 380px;
+        padding: 30px 20px;
+    }
+
+    .verify-title {
+        font-size: 20px;
+    }
+
+    .verify-subtitle {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .btn--resend-code {
+        padding: 8px 20px;
+        font-size: 13px;
+    }
+
+    .verify-hint {
+        font-size: 12px;
     }
 }

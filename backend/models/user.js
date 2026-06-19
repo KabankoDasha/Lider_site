@@ -10,6 +10,7 @@ const createTable = async () => {
       phone VARCHAR(20) DEFAULT '',
       password VARCHAR(255) NOT NULL,
       role VARCHAR(20) DEFAULT 'user',
+      is_verified BOOLEAN DEFAULT FALSE,
       created_at TIMESTAMP DEFAULT NOW()
     );
   `;
@@ -48,6 +49,13 @@ const User = {
   },
   async updatePassword(id, newPassword) {
     await pool.query('UPDATE users SET password = $1 WHERE id = $2', [newPassword, id]);
+  },
+  async verifyUser(id) {
+    const result = await pool.query(
+      'UPDATE users SET is_verified = TRUE WHERE id = $1 RETURNING id, name, surname, email, phone, role, is_verified, created_at',
+      [id]
+    );
+    return result.rows[0];
   }
 };
 

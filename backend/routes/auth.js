@@ -6,6 +6,8 @@ const pool = require('../db');
 
 router.post('/register', authController.register);
 router.post('/login', authController.login);
+router.post('/verify-email', authController.verifyEmail);
+router.post('/resend-code', authController.resendCode);
 
 // Получить профиль текущего пользователя
 router.get('/me', auth, async (req, res) => {

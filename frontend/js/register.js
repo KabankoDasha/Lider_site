@@ -13,6 +13,19 @@
         const consentWrapper = document.querySelector('.register-consent');
         const submitBtn = document.getElementById('register-submit');
         const overlay = document.getElementById('register-overlay');
+        
+        // Элементы для подтверждения email
+        const verificationOverlay = document.getElementById('email-verification-overlay');
+        const codeInputs = document.querySelectorAll('.code-input');
+        const verificationError = document.getElementById('verification-error');
+        const verificationSuccess = document.getElementById('verification-success');
+        const resendBtn = document.getElementById('resend-code-btn');
+        const resendTimer = document.getElementById('resend-timer');
+        
+        let registeredUserId = null;
+        let resendCooldown = 60; // секунд
+        let resendInterval = null;
+        let isVerifying = false;
 
         // Переключение видимости пароля 
         document.querySelectorAll('.password-toggle-icon').forEach(icon => {
@@ -61,7 +74,6 @@
                 .forEach(el => el.classList.remove('error'));
             document.querySelectorAll('.register-field .field-error-text')
                 .forEach(el => el.remove());
-            // Чекбокс
             const consentErr = consentWrapper.querySelector('.consent-error-text');
             if (consentErr) consentErr.remove();
             consentWrapper.classList.remove('error-text');
@@ -107,7 +119,169 @@
         }
         attachInputListeners();
 
-        // Обработка отправки
+        // === ЛОГИКА ЯЧЕЕК КОДА ===
+        function initCodeInputs() {
+            codeInputs.forEach((input, index) => {
+                // Фокус на следующий инпут при вводе цифры
+                input.addEventListener('input', function() {
+                    this.value = this.value.replace(/\D/g, '').slice(0, 1);
+                    if (this.value && index < codeInputs.length - 1) {
+                        codeInputs[index + 1].focus();
+                    }
+                    // Автоматическая проверка при заполнении всех ячеек
+                    if (getFullCode().length === 6) {
+                        verifyCode();
+                    }
+                });
+
+                // Обработка Backspace
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Backspace' && !this.value && index > 0) {
+                        codeInputs[index - 1].focus();
+                    }
+                });
+
+                // Вставка из буфера обмена
+                input.addEventListener('paste', function(e) {
+                    e.preventDefault();
+                    const pasted = (e.clipboardData || window.clipboardData).getData('text');
+                    const digits = pasted.replace(/\D/g, '').slice(0, 6);
+                    digits.split('').forEach((digit, i) => {
+                        if (codeInputs[i]) {
+                            codeInputs[i].value = digit;
+                        }
+                    });
+                    const lastIndex = Math.min(digits.length, 6) - 1;
+                    if (lastIndex >= 0 && codeInputs[lastIndex]) {
+                        codeInputs[lastIndex].focus();
+                    }
+                    if (digits.length === 6) {
+                        verifyCode();
+                    }
+                });
+            });
+        }
+
+        function getFullCode() {
+            let code = '';
+            codeInputs.forEach(input => code += input.value);
+            return code;
+        }
+
+        function resetCodeInputs() {
+            codeInputs.forEach(input => {
+                input.value = '';
+                input.className = 'code-input';
+            });
+            codeInputs[0].focus();
+        }
+
+        function showVerificationError(message) {
+            verificationError.textContent = message;
+            verificationError.style.display = 'block';
+            verificationSuccess.style.display = 'none';
+            codeInputs.forEach(input => {
+                input.classList.add('error');
+                input.classList.remove('success');
+            });
+            setTimeout(() => {
+                verificationError.style.display = 'none';
+            }, 3000);
+        }
+
+        function showVerificationSuccess(message) {
+            verificationSuccess.textContent = message;
+            verificationSuccess.style.display = 'block';
+            verificationError.style.display = 'none';
+            codeInputs.forEach(input => {
+                input.classList.add('success');
+                input.classList.remove('error');
+            });
+        }
+
+        async function verifyCode() {
+            if (isVerifying) return;
+            const code = getFullCode();
+            if (code.length !== 6) return;
+            
+            isVerifying = true;
+            verificationError.style.display = 'none';
+            verificationSuccess.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/auth/verify-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId: registeredUserId, code })
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    showVerificationSuccess('Email подтверждён!');
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    setTimeout(() => {
+                        window.location.href = data.user.role === 'admin' ? '/admin.html' : '/account.html';
+                    }, 1500);
+                } else {
+                    showVerificationError(data.message || 'Неверный код');
+                    resetCodeInputs();
+                }
+            } catch (err) {
+                console.error(err);
+                showVerificationError('Ошибка соединения с сервером');
+                resetCodeInputs();
+            } finally {
+                isVerifying = false;
+            }
+        }
+
+        // === Повторная отправка кода ===
+        function startResendTimer() {
+            resendCooldown = 60;
+            resendBtn.disabled = true;
+            resendBtn.style.opacity = '0.5';
+            resendTimer.textContent = `(${resendCooldown}с)`;
+            
+            if (resendInterval) clearInterval(resendInterval);
+            resendInterval = setInterval(() => {
+                resendCooldown--;
+                resendTimer.textContent = `(${resendCooldown}с)`;
+                if (resendCooldown <= 0) {
+                    clearInterval(resendInterval);
+                    resendBtn.disabled = false;
+                    resendBtn.style.opacity = '1';
+                    resendTimer.textContent = '';
+                }
+            }, 1000);
+        }
+
+        resendBtn.addEventListener('click', async () => {
+            if (resendBtn.disabled) return;
+            
+            try {
+                const response = await fetch('/api/auth/resend-code', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId: registeredUserId })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    verificationSuccess.textContent = 'Новый код отправлен! Проверьте почту.';
+                    verificationSuccess.style.display = 'block';
+                    verificationError.style.display = 'none';
+                    resetCodeInputs();
+                    startResendTimer();
+                } else {
+                    alert(data.message || 'Ошибка при отправке кода');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Ошибка соединения с сервером');
+            }
+        });
+
+        // === Обработка отправки формы регистрации ===
         submitBtn.addEventListener('click', (e) => {
             e.preventDefault();
             clearErrors();
@@ -183,7 +357,7 @@
 
             if (!isValid) return;
 
-            // Отправка данных на сервер 
+            // Отправка данных на сервер
             const name = nameInput.value.trim();
             const surname = surnameInput.value.trim();
 
@@ -200,20 +374,14 @@
             })
             .then(response => response.json())
             .then(data => {
-                if (data.token) {
-                    // Сохраняем токен и данные пользователя (автоматический вход после регистрации)
-                    localStorage.setItem('token', data.token);
-                    localStorage.setItem('user', JSON.stringify(data.user));
-
-                    // Показываем оверлей успеха
-                    overlay.classList.add('active');
-                    // Через 2 секунды перенаправляем в личный кабинет
-                    setTimeout(() => {
-                        overlay.classList.remove('active');
-                        window.location.href = '/account.html';
-                    }, 2000);
+                if (data.success && data.userId) {
+                    registeredUserId = data.userId;
+                    // Показываем оверлей с ячейками
+                    verificationOverlay.classList.add('active');
+                    overlay.classList.remove('active'); // скрываем старый оверлей успеха
+                    resetCodeInputs();
+                    startResendTimer();
                 } else {
-                    // Ошибка от сервера 
                     clearErrors();
                     showFieldError(wrappers.email, emailInput, data.message || 'Ошибка регистрации');
                 }
@@ -232,6 +400,9 @@
                 window.location.href = '/login.html';
             }
         });
+
+        // Инициализация ячеек
+        initCodeInputs();
     }
 
     if (document.readyState === 'loading') {

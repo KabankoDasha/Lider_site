@@ -12,6 +12,7 @@ const { createTable: createSalesTable } = require('./models/sale');
 const { createTable: createInstructorsTable, createRatingsTable } = require('./models/instructor');
 const { createTable: createAgreementsTable } = require('./models/agreement');
 const { createTable: createDocumentsTable } = require('./models/documents');
+const { createTable: createEmailVerificationsTable } = require('./models/emailVerification');
 
 const authRoutes = require('./routes/auth');
 const applicationRoutes = require('./routes/application');
@@ -54,6 +55,7 @@ app.use('/api/documents', documentsRouter);
     await createRatingsTable(); 
     await createAgreementsTable();
     await createDocumentsTable();
+    await createEmailVerificationsTable();
     console.log('Все таблицы готовы');
   } catch (err) {
     console.error('Ошибка создания таблиц:', err);
@@ -77,3 +79,27 @@ app.use((req, res) => {
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Сервер запущен на порту ${PORT}`));
+
+// Автоудаление неподтверждённых пользователей через 24 часа
+const { User } = require('./models/user');
+const { EmailVerification } = require('./models/emailVerification');
+
+async function cleanupUnverifiedUsers() {
+  try {
+    const result = await pool.query(`
+      DELETE FROM users 
+      WHERE is_verified = FALSE 
+        AND created_at < NOW() - INTERVAL '24 hours'
+      RETURNING id, email
+    `);
+    if (result.rows.length > 0) {
+      console.log(`Удалено ${result.rows.length} неподтверждённых пользователей:`, 
+        result.rows.map(u => u.email).join(', '));
+    }
+  } catch (err) {
+    console.error('Ошибка при очистке неподтверждённых пользователей:', err);
+  }
+}
+
+setTimeout(cleanupUnverifiedUsers, 10000); 
+setInterval(cleanupUnverifiedUsers, 24 * 60 * 60 * 1000);
