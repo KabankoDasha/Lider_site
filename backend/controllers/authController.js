@@ -4,14 +4,14 @@ const { User } = require('../models/user');
 const { EmailVerification } = require('../models/emailVerification');
 const nodemailer = require('nodemailer');
 
-// Настройка Nodemailer для Yandex
+// Настройка Nodemailer 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.yandex.ru',
+  host: 'smtp.gmail.com',
   port: 465,
   secure: true,
   auth: {
     user: process.env.EMAIL_USER, 
-    pass: process.env.EMAIL_PASS 
+    pass: process.env.EMAIL_PASS   
   }
 });
 
