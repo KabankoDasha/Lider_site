@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
+const pool = require('./db');
 
 const { createTable: createUsersTable } = require('./models/user');
 const { createTable: createApplicationsTable, createRepliesTable } = require('./models/application');

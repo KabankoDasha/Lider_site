@@ -35,6 +35,8 @@ services:
       DB_NAME: ${DB_NAME}
       JWT_SECRET: ${JWT_SECRET}
       FRONTEND_URL: https://lider-avto74.ru
+      EMAIL_USER: ${EMAIL_USER}      
+      EMAIL_PASS: ${EMAIL_PASS}
     depends_on:
       postgres:
         condition: service_healthy
