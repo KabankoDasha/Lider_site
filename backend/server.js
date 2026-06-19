@@ -75,7 +75,7 @@ app.use('/api/instructors', instructorRoutes);
 
 // Обработка 404
 app.use((req, res) => {
-    res.status(404).sendFile(path.join(__dirname, 'pages', '404.html'));
+    res.status(404).sendFile(path.join(__dirname, '..', 'frontend', 'pages', '404.html'));
 });
 
 const PORT = process.env.PORT || 3001;
