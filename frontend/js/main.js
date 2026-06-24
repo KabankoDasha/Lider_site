@@ -225,7 +225,7 @@ function initMobileMenu() {
                 } else {
                     scrollBtn.style.opacity = '';
                     scrollBtn.style.visibility = '';
-                    // Восстанавливаем исходное состояние (видимость по скроллу)
+                    // Восстанавливаем исходное состояние 
                     const isVisible = window.scrollY > 300;
                     if (isVisible) {
                         scrollBtn.classList.add('scroll-to-top--visible');
@@ -280,10 +280,53 @@ function initCookieBanner() {
     });
 }
 
-// В DOMContentLoaded вызовите:
+// Анимация появления карточек "Как получить права?"
+function initStepsAnimation() {
+    const stepCards = document.querySelectorAll('.step-card--animate');
+    if (!stepCards.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.2,
+        once: true  
+    });
+
+    stepCards.forEach(card => {
+        observer.observe(card);
+    });
+}
+
+// Слайдер филиалов с прогресс-баром
+function initBranchesSlider() {
+    const slider = document.getElementById('branches-slider');
+    const progressBar = document.getElementById('branches-progress');
+    if (!slider || !progressBar) return;
+
+    function updateProgress() {
+        const scrollLeft = slider.scrollLeft;
+        const scrollWidth = slider.scrollWidth - slider.clientWidth;
+        if (scrollWidth <= 0) return;
+        const progress = scrollLeft / scrollWidth;
+        const trackWidth = progressBar.parentElement.clientWidth;
+        const maxOffset = trackWidth - progressBar.offsetWidth;
+        progressBar.style.transform = `translateX(${progress * maxOffset}px)`;
+    }
+
+    slider.addEventListener('scroll', updateProgress);
+    window.addEventListener('resize', updateProgress);
+    setTimeout(updateProgress, 100);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initCards();
     initGallery();
     initMobileMenu();
-    initCookieBanner();  
+    initCookieBanner();
+    initStepsAnimation();    
+    initBranchesSlider();    
 });

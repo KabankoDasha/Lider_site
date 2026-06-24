@@ -135,76 +135,169 @@
         <section id="about" class="about container">
             <h2 class="about__title">О центре</h2>
             <div class="about__content">
-                <p class="about__text about__text--main">
-                    Учебный центр «Лидер» не просто автошкола, а настоящий старт для тысяч водителей. Наша история началась более 10 лет назад, и за это время мы выросли в крупный образовательный центр. Сейчас у нас есть множество направлений от классической автошколы до курсов по управлению спецтехникой и дорожно-строительными машинами
-                </p>
-                <div class="about__stats">
-                    <div class="stat-box">
-                        <span class="stat-box__value">&gt;10</span>
-                        <span class="stat-box__label">лет на рынке</span>
+                <!-- Основной прямоугольник -->
+                <div class="about__main-card">
+                    <div class="about__main-text">
+                        <p>Учебный центр «Лидер» — не просто автошкола, наша история началась более 10 лет назад и за это время мы выросли в крупный образовательный центр.</p>
+                        <p>Сейчас у нас есть множество направлений от классической автошколы до курсов по управлению спецтехникой и дорожно-строительными машинами.</p>
                     </div>
-                    <div class="stat-box">
-                        <span class="stat-box__value">15+</span>
-                        <span class="stat-box__label">инструкторов</span>
+                    <div class="about__main-right">
+                        <img src="/images/fon-karta.png" alt="Карта" class="about__map-img">
+                        <button id="open-form-btn" class="btn btn--about-start">Начать обучение</button>
+                        <div class="about__stat-card about__stat-card--main">
+                            <span class="about__stat-number">&gt;10</span>
+                            <span class="about__stat-label">лет на рынке</span>
+                            <span class="about__stat-desc">Знаем все тонкости обучения и помогаем сдать на права с 1 раза</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Три карточки статистики -->
+                <div class="about__stats-row">
+                    <a href="/instructors.html" class="about__stat-card about__stat-card--secondary">
+                        <img src="/images/link-arrow.svg" alt="" class="about__stat-icon">
+                        <span class="about__stat-number">15+</span>
+                        <span class="about__stat-label">инструкторов</span>
+                        <span class="about__stat-desc">Поможем освоить вождение с нуля в комфортном темпе</span>
+                    </a>
+                    <a href="/study.html" class="about__stat-card about__stat-card--secondary">
+                        <img src="/images/link-arrow.svg" alt="" class="about__stat-icon">
+                        <span class="about__stat-number">18</span>
+                        <span class="about__stat-label">курсов обучения</span>
+                        <span class="about__stat-desc">Направления от легкового автомобиля до спецтехники</span>
+                    </a>
+                    <a href="#branches" class="about__stat-card about__stat-card--secondary">
+                        <img src="/images/link-arrow.svg" alt="" class="about__stat-icon">
+                        <span class="about__stat-number">6</span>
+                        <span class="about__stat-label">офисов по городу</span>
+                        <span class="about__stat-desc">Занятия в удобном районе, выбирайте ближайший офис</span>
+                    </a>
+                    <div class="about__stat-card about__stat-card--photo">
+                        <img src="/images/photo.jpeg" alt="Фото" class="about__stat-photo">
                     </div>
                 </div>
             </div>
-            <div class="about__bottom">
-                <div class="about__stats about__stats--row">
-                    <div class="stat-box">
-                        <span class="stat-box__value">18</span>
-                        <span class="stat-box__label">курсов обучения</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="stat-box__value">6</span>
-                        <span class="stat-box__label">офисов по городу</span>
-                    </div>
+        </section>
+
+        <!-- Как получить права -->
+        <section id="steps" class="steps-section container">
+            <h2 class="steps-section__title">Как получить права?</h2>
+            <div class="steps-grid">
+                <!-- Шаг 01 -->
+                <div class="step-card step-card--animate">
+                    <img src="/images/step-1.svg" alt="Оставьте заявку" class="step-card__icon">
+                    <span class="step-card__number">01</span>
+                    <h3 class="step-card__title">Оставьте заявку</h3>
+                    <p class="step-card__desc">Позвоните нам или заполните форму на сайте и наш менеджер свяжется с вами</p>
                 </div>
-                <p class="about__text about__text--secondary">
-                    Теоретические занятия проходят в филиалах по всему городу, вы легко выберете тот, что ближе к дому или работе. А для отработки практических навыков у нас есть собственный автодром, где под руководством опытных инструкторов вы освоите тонкости вождения
-                </p>
+                <!-- Шаг 02 -->
+                <div class="step-card step-card--animate">
+                    <img src="/images/step-2.svg" alt="Заключите договор" class="step-card__icon">
+                    <span class="step-card__number">02</span>
+                    <h3 class="step-card__title">Заключите договор</h3>
+                    <p class="step-card__desc">Вы можете приехать в наш офис или заполнить необходимые документы дистанционно через личный кабинет</p>
+                </div>
+                <!-- Шаг 03 -->
+                <div class="step-card step-card--animate">
+                    <img src="/images/step-3.svg" alt="Изучите теорию" class="step-card__icon">
+                    <span class="step-card__number">03</span>
+                    <h3 class="step-card__title">Изучите теорию</h3>
+                    <p class="step-card__desc">Онлайн на платформе Профтеха или очно в оборудованных классах</p>
+                </div>
+                <!-- Шаг 04 -->
+                <div class="step-card step-card--animate">
+                    <img src="/images/step-4.svg" alt="Пройдите практику" class="step-card__icon">
+                    <span class="step-card__number">04</span>
+                    <h3 class="step-card__title">Пройдите практику</h3>
+                    <p class="step-card__desc">Под руководством инструктора освойте вождение на автодроме, а затем закрепите навыки в городских условиях</p>
+                </div>
+                <!-- Шаг 05 -->
+                <div class="step-card step-card--animate">
+                    <img src="/images/step-5.svg" alt="Сдайте внутренний экзамен" class="step-card__icon">
+                    <span class="step-card__number">05</span>
+                    <h3 class="step-card__title">Сдайте внутренний экзамен</h3>
+                    <p class="step-card__desc">По теории и практике в точности как в ГАИ, проверьте свои знания и получите свидетельство об окончании автошколы</p>
+                </div>
+                <!-- Шаг 06 -->
+                <div class="step-card step-card--animate step-card--highlighted">
+                    <img src="/images/step-6.svg" alt="Сдайте экзамен в ГАИ" class="step-card__icon">
+                    <span class="step-card__number">06</span>
+                    <h3 class="step-card__title">Сдайте экзамен в ГАИ</h3>
+                    <p class="step-card__desc">Мы подготовим все документы и будем рядом. Сдайте теорию, практику в городе и получите водительские права</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Подарочный сертификат -->
+        <section class="certificate container">
+            <div class="certificate__card">
+                <img src="/images/certificate.png" alt="Подарочный сертификат" class="certificate__image">
+                <div class="certificate__content">
+                    <h3 class="certificate__title">Подарочный сертификат в автошколу «Лидер»</h3>
+                    <p class="certificate__subtitle">Подарите обучение на любую категорию</p>
+                </div>
+                <button id="open-form-btn" class="btn btn--certificate">Оформить сертификат</button>
             </div>
         </section>
 
         <!-- Филиалы -->
         <section id="branches" class="branches container">
             <h2 class="branches__title">Филиалы</h2>
-            <div class="branches__grid">
-                <div class="branch-card">
-                    <div class="branch-card__img-wrap" data-gallery="office1" data-images='["/images/1f1.webp","/images/1f2.webp","/images/1f3.webp","/images/1f4.jpg"]'>
-                        <img src="/images/office1.png" alt="Офис на пр. Победы, 384" class="branch-card__img">
+            <div class="branches-slider-wrapper">
+                <div class="branches-slider" id="branches-slider">
+                    <div class="branch-card-slide">
+                        <img src="/images/office1.png" alt="Офис на пр. Победы, 384" class="branch-card-slide__img">
+                        <div class="branch-card-slide__info">
+                            <h4 class="branch-card-slide__address">Офис на пр. Победы, 384</h4>
+                            <p class="branch-card-slide__phone">Телефон: +7 (951) 479-72-33</p>
+                            <p class="branch-card-slide__email">Почта: info@lider-center.com</p>
+                        </div>
                     </div>
-                    <p class="branch-card__caption">Офис на пр. Победы, 384</p>
+                    <div class="branch-card-slide">
+                        <img src="/images/office2.png" alt="Офис на Комсомольском пр., 80" class="branch-card-slide__img">
+                        <div class="branch-card-slide__info">
+                            <h4 class="branch-card-slide__address">Офис на Комсомольском пр., 80</h4>
+                            <p class="branch-card-slide__phone">Телефон: +7 (951) 479-72-33</p>
+                            <p class="branch-card-slide__email">Почта: info@lider-center.com</p>
+                        </div>
+                    </div>
+                    <div class="branch-card-slide">
+                        <img src="/images/office3.png" alt="Офис на ул. Комарова, 114" class="branch-card-slide__img">
+                        <div class="branch-card-slide__info">
+                            <h4 class="branch-card-slide__address">Офис на ул. Комарова, 114</h4>
+                            <p class="branch-card-slide__phone">Телефон: +7 (951) 479-72-33</p>
+                            <p class="branch-card-slide__email">Почта: info@lider-center.com</p>
+                        </div>
+                    </div>
+                    <div class="branch-card-slide">
+                        <img src="/images/office4.png" alt="Офис на ул. Сталеваров, 5а" class="branch-card-slide__img">
+                        <div class="branch-card-slide__info">
+                            <h4 class="branch-card-slide__address">Офис на ул. Сталеваров, 5а</h4>
+                            <p class="branch-card-slide__phone">Телефон: +7 (951) 479-72-33</p>
+                            <p class="branch-card-slide__email">Почта: info@lider-center.com</p>
+                        </div>
+                    </div>
+                    <div class="branch-card-slide">
+                        <img src="/images/office5.png" alt="Офис на ул. 60 лет Октября, 18" class="branch-card-slide__img">
+                        <div class="branch-card-slide__info">
+                            <h4 class="branch-card-slide__address">Офис на ул. 60 лет Октября, 18</h4>
+                            <p class="branch-card-slide__phone">Телефон: +7 (951) 479-72-33</p>
+                            <p class="branch-card-slide__email">Почта: info@lider-center.com</p>
+                        </div>
+                    </div>
+                    <div class="branch-card-slide">
+                        <img src="/images/office6.png" alt="Офис на шоссе Металлургов, 51" class="branch-card-slide__img">
+                        <div class="branch-card-slide__info">
+                            <h4 class="branch-card-slide__address">Офис на шоссе Металлургов, 51</h4>
+                            <p class="branch-card-slide__phone">Телефон: +7 (951) 479-72-33</p>
+                            <p class="branch-card-slide__email">Почта: info@lider-center.com</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="branch-card">
-                    <div class="branch-card__img-wrap" data-gallery="office2" data-images='["/images/2f1.webp","/images/2f2.webp","/images/2f3.jpg","/images/2f4.jpeg"]'>
-                        <img src="/images/office2.png" alt="Офис на Комсомольском пр., 80" class="branch-card__img">
+                <div class="branches-slider__progress">
+                    <div class="branches-slider__progress-track">
+                        <div class="branches-slider__progress-bar" id="branches-progress"></div>
                     </div>
-                    <p class="branch-card__caption">Офис на Комсомольском пр., 80</p>
-                </div>
-                <div class="branch-card">
-                    <div class="branch-card__img-wrap" data-gallery="office3" data-images='["/images/3f1.jpg","/images/3f2.webp","/images/3f3.webp","/images/3f4.jpeg"]'>
-                        <img src="/images/office3.png" alt="Офис на ул. Комарова, 114" class="branch-card__img">
-                    </div>
-                    <p class="branch-card__caption">Офис на ул. Комарова, 114</p>
-                </div>
-                <div class="branch-card">
-                    <div class="branch-card__img-wrap" data-gallery="office4" data-images='["/images/4f1.webp","/images/4f2.webp","/images/4f3.webp","/images/4f4.webp"]'>
-                        <img src="/images/office4.png" alt="Офис на ул. Сталеваров, 5а" class="branch-card__img">
-                    </div>
-                    <p class="branch-card__caption">Офис на ул. Сталеваров, 5а</p>
-                </div>
-                <div class="branch-card">
-                    <div class="branch-card__img-wrap" data-gallery="office5" data-images='["/images/5f1.webp","/images/5f2.webp","/images/5f3.jpg","/images/5f4.jpg"]'>
-                        <img src="/images/office5.png" alt="Офис на ул. 60 лет Октября, 18" class="branch-card__img">
-                    </div>
-                    <p class="branch-card__caption">Офис на ул. 60 лет Октября, 18</p>
-                </div>
-                <div class="branch-card">
-                    <div class="branch-card__img-wrap" data-gallery="office6" data-images='["/images/6f1.jpg","/images/6f2.jpg","/images/6f3.jpg","/images/6f4.webp"]'>
-                        <img src="/images/office6.png" alt="Офис на шоссе Металлургов, 51" class="branch-card__img">
-                    </div>
-                    <p class="branch-card__caption">Офис на шоссе Металлургов, 51</p>
                 </div>
             </div>
         </section>

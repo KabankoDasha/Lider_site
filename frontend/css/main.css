@@ -240,7 +240,7 @@ main {
 }
 
 .card--expanded .card__img-big {
-    opacity: 0.4;  /* лёгкая прозрачность */
+    opacity: 0.4;  
 }
 
 .btn--detail {
@@ -333,6 +333,9 @@ main {
 /* ========================
    Секция "О центре"
    ======================== */
+/* ========================
+   О центре (новый дизайн)
+   ======================== */
 .about__title {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
@@ -342,68 +345,398 @@ main {
 
 .about__content {
     display: flex;
-    align-items: flex-start;
-    gap: 43px;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.about__main-card {
+    display: flex;
+    background: #fcfcfc;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    min-height: 218px;
+    position: relative;
+    overflow: hidden;
+}
+
+.about__main-text {
+    width: 664px;
+    flex-shrink: 0;
+    padding-right: 30px;
+}
+
+.about__main-text p {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.about__main-text p:last-child {
+    margin-bottom: 0;
+}
+
+.about__main-right {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    min-height: 158px;
+}
+
+.about__map-img {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.btn--about-start {
+    position: relative;
+    z-index: 2;
+    width: 221px;
+    height: 52px;
+    font-size: 18px;
+    font-weight: 400;
+    border-radius: 10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    color: #fcfcfc;
+}
+
+.about__stat-card--main {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 2;
+    width: 270px;
+    height: 218px;
+    background: #fcfcfc;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 30px 20px 20px 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.about__stat-number {
+    font-size: 35px;
+    font-weight: 500;
+    color: #D90D26;
+    margin-bottom: 5px;
+}
+
+.about__stat-label {
+    font-size: 20px;
+    font-weight: 500;
+    color: #D90D26;
+    margin-bottom: 5px;
+}
+
+.about__stat-desc {
+    font-size: 18px;
+    font-weight: 300;
+    color: #000;
+    line-height: 1.4;
+}
+
+.about__stats-row {
+    display: flex;
+    gap: 40px;
+    align-items: stretch;
+}
+
+.about__stat-card--secondary {
+    width: 270px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    padding: 15px 20px 20px 15px;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+
+.about__stat-card--secondary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.about__stat-icon {
+    width: 24px;
+    height: 24px;
+    align-self: flex-end;
+    margin-bottom: auto;
+}
+
+.about__stat-card--secondary .about__stat-number {
+    font-size: 35px;
+    font-weight: 500;
+    color: #D90D26;
+    margin-bottom: 5px;
+}
+
+.about__stat-card--secondary .about__stat-label {
+    font-size: 20px;
+    font-weight: 500;
+    color: #D90D26;
+    margin-bottom: 5px;
+}
+
+.about__stat-card--secondary .about__stat-desc {
+    font-size: 18px;
+    font-weight: 300;
+    color: #000;
+    line-height: 1.4;
+    margin-top: auto;
+}
+
+.about__stat-card--photo {
+    width: 270px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.about__stat-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ========================
+   Как получить права?
+   ======================== */
+.steps-section {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.steps-section__title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 50px;
     margin-bottom: 30px;
 }
 
-.about__text {
-    font-weight: 300;
-    font-size: 18px;
-    line-height: 1.5;
-    color: #000;
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
 }
 
-.about__text--main {
-    width: 723px;
-    flex-shrink: 0;
-}
-
-.about__stats {
-    display: flex;
-    gap: 20px;
-    flex-shrink: 0;
-}
-
-.stat-box {
-    width: 207px;
-    height: 110px;
-    border: 3px solid #24486B;
+.step-card {
+    background: #fcfcfc;
     border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    padding: 20px 20px 20px 30px;
+    min-height: 230px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 10px;
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.stat-box__value {
-    font-size: 35px;
-    font-weight: 500;
+.step-card--animate.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.step-card__icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 75px;
+    height: 75px;
+}
+
+.step-card__number {
+    font-size: 22px;
+    font-weight: 400;
+    color: #D90D26;
+    margin-bottom: 20px;
+}
+
+.step-card__title {
+    font-size: 22px;
+    font-weight: 400;
     color: #000;
-    margin-bottom: 1px;
-    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 15px;
 }
 
-.stat-box__label {
+.step-card__desc {
     font-size: 18px;
+    font-weight: 300;
+    color: #000;
+    line-height: 1.5;
+    max-width: 317px;
+}
+
+.step-card--highlighted {
+    border: 2px solid #D90D26;
+}
+
+.step-card--highlighted .step-card__number {
+    letter-spacing: -0.03em;
+}
+
+/* Анимация задержек для карточек */
+.step-card--animate:nth-child(1) { transition-delay: 0.1s; }
+.step-card--animate:nth-child(2) { transition-delay: 0.2s; }
+.step-card--animate:nth-child(3) { transition-delay: 0.3s; }
+.step-card--animate:nth-child(4) { transition-delay: 0.4s; }
+.step-card--animate:nth-child(5) { transition-delay: 0.5s; }
+.step-card--animate:nth-child(6) { transition-delay: 0.6s; }
+
+/* ========================
+   Подарочный сертификат
+   ======================== */
+.certificate {
+    margin-bottom: 100px;
+}
+
+.certificate__card {
+    display: flex;
+    align-items: center;
+    background: #f0f0f0;
+    border-radius: 10px;
+    padding: 30px 40px;
+    min-height: 218px;
+    gap: 65px;
+}
+
+.certificate__image {
+    width: auto;
+    height: 158px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.certificate__content {
+    flex: 1;
+}
+
+.certificate__title {
+    font-size: 25px;
     font-weight: 500;
     color: #000;
-    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 15px;
 }
 
-.about__bottom {
+.certificate__subtitle {
+    font-size: 18px;
+    font-weight: 400;
+    color: #000;
+}
+
+.btn--certificate {
+    width: 281px;
+    height: 70px;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 10px;
+    background: linear-gradient(-41deg, #D90D26, #E94055, #D90D26);
+    color: #fcfcfc;
+    flex-shrink: 0;
+}
+
+/* ========================
+   Филиалы (слайдер)
+   ======================== */
+.branches-slider-wrapper {
+    position: relative;
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+.branches-slider {
     display: flex;
-    align-items: flex-start;
-    gap: 43px;
+    gap: 30px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 20px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
 }
 
-.about__text--secondary {
-    width: 723px;
-    text-align: right;
+.branches-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.branch-card-slide {
+    flex: 0 0 443px;
+    background: #fcfcfc;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+.branch-card-slide__img {
+    width: 443px;
+    height: 271px;
+    object-fit: cover;
+}
+
+.branch-card-slide__info {
+    padding: 23px 30px 30px;
+}
+
+.branch-card-slide__address {
+    font-size: 22px;
+    font-weight: 400;
+    color: #000;
+    margin-bottom: 15px;
+}
+
+.branch-card-slide__phone,
+.branch-card-slide__email {
+    font-size: 18px;
+    font-weight: 400;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.branch-card-slide__email {
+    margin-bottom: 0;
+}
+
+.branches-slider__progress {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.branches-slider__progress-track {
+    width: 1200px;
+    height: 7px;
+    background: #d9d9d9;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.branches-slider__progress-bar {
+    height: 100%;
+    width: 300px;
+    background: #aaaaaa;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
 }
 
 /* ========================
@@ -1317,36 +1650,166 @@ main {
     .card-dot.active { background: #B5B5B5; }
 
     /* О центре */
-    .about__title { font-size: 30px; margin-bottom: 15px; }
-    .about__content { flex-direction: column; gap: 15px; margin-bottom: 15px; }
-    .about__text { font-size: 14px; font-weight: 300; }
-    .about__text--main { width: 100%; text-align: left; }
-    .about__stats { flex-wrap: wrap; gap: 16px; }
-    .stat-box {
-        width: 156px;
-        height: 83px;
-        border: 2px solid #24486B;
-        border-radius: 10px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 5px;
+    .about__title {
+        font-size: 30px;
     }
-    .stat-box__value { font-size: 25px; font-weight: 500; }
-    .stat-box__label { font-size: 12px; font-weight: 500; }
-    .about__bottom { flex-direction: column; gap: 15px; }
-    .about__bottom .about__text--secondary { order: 1; }
-    .about__bottom .about__stats--row { order: 2; }
-    .about__text--secondary { width: 100%; text-align: left; }
 
-    /* Филиалы */
-    .branches__title { font-size: 30px; margin-top: 40px; margin-bottom: 15px;}
-    .branches__grid { display: flex; flex-direction: column; gap: 15px; }
-    
-    .branch-card:last-child { margin-bottom: 30px; }
-    .branch-card__img { width: 100%; height: 220px; object-fit: cover; }
-    .branch-card__caption { font-size: 14px; margin-top: 10px; margin-bottom: 10px;}
+    .about__main-card {
+        flex-direction: column;
+        padding: 20px;
+        min-height: auto;
+    }
+
+    .about__main-text {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .about__main-text p {
+        font-size: 14px;
+    }
+
+    .about__main-right {
+        min-height: 300px;
+        align-items: flex-start;
+    }
+
+    .about__stat-card--main {
+        position: relative;
+        right: auto;
+        top: auto;
+        width: 100%;
+        height: auto;
+        margin-top: 15px;
+        padding: 20px;
+    }
+
+    .btn--about-start {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .about__stats-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .about__stat-card--secondary {
+        width: 100%;
+    }
+
+    .about__stat-card--photo {
+        width: 100%;
+        height: 200px;
+    }
+
+    /* ========================
+    Мобильная версия: Как получить права?
+    ======================== */
+    .steps-section {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    .steps-section__title {
+        font-size: 30px;
+    }
+
+    .steps-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .step-card {
+        min-height: 180px;
+        padding: 15px 15px 15px 20px;
+    }
+
+    .step-card__icon {
+        width: 50px;
+        height: 50px;
+        top: 15px;
+        right: 15px;
+    }
+
+    .step-card__number {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .step-card__title {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .step-card__desc {
+        font-size: 14px;
+        max-width: 100%;
+    }
+
+    /* ========================
+    Мобильная версия: Сертификат
+    ======================== */
+    .certificate {
+        margin-bottom: 40px;
+    }
+
+    .certificate__card {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .certificate__image {
+        height: 100px;
+    }
+
+    .certificate__title {
+        font-size: 20px;
+    }
+
+    .certificate__subtitle {
+        font-size: 15px;
+    }
+
+    .btn--certificate {
+        width: 100%;
+        height: 56px;
+        font-size: 16px;
+    }
+
+    /* ========================
+    Мобильная версия: Филиалы
+    ======================== */
+    .branch-card-slide {
+        flex: 0 0 280px;
+    }
+
+    .branch-card-slide__img {
+        width: 280px;
+        height: 180px;
+    }
+
+    .branch-card-slide__info {
+        padding: 15px 15px 20px;
+    }
+
+    .branch-card-slide__address {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .branch-card-slide__phone,
+    .branch-card-slide__email {
+        font-size: 14px;
+    }
+
+    .branches-slider__progress-track {
+        width: 100%;
+        max-width: 328px;
+    }
 
     /* Галерея */
     .gallery-container {
