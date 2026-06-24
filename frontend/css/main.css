@@ -444,7 +444,7 @@ main {
     min-height: 218px;
     background: #f0f0f0;
     border-radius: 10px;
-    padding: 30px 20px 20px 30px;
+    padding: 15px 20px 20px 30px;
     display: flex;
     flex-direction: column;
     text-decoration: none;
@@ -470,6 +470,7 @@ main {
     font-weight: 500;
     color: #D90D26;
     margin-bottom: 5px;
+    margin-top: 0;
 }
 
 .about__stat-card--secondary .about__stat-label {
@@ -622,8 +623,8 @@ main {
 
 .certificate__image {
     width: auto;
-    height: 180px;
-    margin-left: -20px;
+    height: 200px;
+    margin-left: -30px;
     animation: float 3s ease-in-out infinite;
 }
 
@@ -637,7 +638,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-left: 20px;
+    padding-left: 40px;
 }
 
 .certificate__title {
@@ -645,7 +646,7 @@ main {
     font-weight: 500;
     color: #000;
     margin-bottom: 15px;
-    max-width: 339px;
+    max-width: 400px;
     text-align: left;
 }
 
@@ -653,7 +654,7 @@ main {
     font-size: 18px;
     font-weight: 400;
     color: #000;
-    max-width: 198px;
+    max-width: 250px;
     text-align: left;
 }
 
@@ -1457,12 +1458,15 @@ main {
         background: #fcfcfc;
         z-index: 105;
     }
+
     .header__inner {
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        padding: 0;
+        max-width: 328px;
+        margin: 0 auto;
+        padding: 0 16px;
     }
     .logo__img { height: 40px; width: auto; }
     .header__phone {
@@ -1741,7 +1745,7 @@ main {
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 100px;
+        height: 100%;
         object-fit: cover;
         border-radius: 0 0 10px 10px;
         z-index: 1;
@@ -1863,7 +1867,8 @@ main {
     }
 
     .certificate__image {
-        height: 100px;
+        height: 120px;
+        margin-left: 0;
     }
 
     .certificate__content {
@@ -1904,6 +1909,7 @@ main {
 
     .branches-slider-wrapper {
         padding: 10px 0 0 10px;
+        margin-top: 10px;
     }
 
     .branch-card-slide {
