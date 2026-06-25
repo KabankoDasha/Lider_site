@@ -243,7 +243,7 @@ function initBranchesSlider() {
         if (scrollWidth <= 0) return;
         const progress = scrollLeft / scrollWidth;
         const trackWidth = progressBar.parentElement.clientWidth;
-        const barWidth = progressBar.offsetWidth;
+        const barWidth = progressBar.offsetWidth || 80; // fallback если 0
         const maxOffset = trackWidth - barWidth;
         progressBar.style.transform = `translateX(${progress * maxOffset}px)`;
     }
@@ -256,8 +256,9 @@ function initBranchesSlider() {
         requestAnimationFrame(updateProgress);
     });
     
-    // Задержка для правильного расчёта после рендера
-    setTimeout(updateProgress, 200);
+    setTimeout(updateProgress, 100);
+    setTimeout(updateProgress, 300);
+    setTimeout(updateProgress, 500);
 }
 
 // Галерея филиалов 
@@ -291,22 +292,15 @@ function initBranchGallery() {
             isAnimating = true;
             
             currentIndex = index;
+            
+            // Плавная смена картинки
             imgElement.style.opacity = '0';
             
             setTimeout(() => {
                 imgElement.src = images[currentIndex];
-                imgElement.onload = function() {
-                    imgElement.style.opacity = '1';
-                    isAnimating = false;
-                };
-                // Fallback если картинка уже загружена
-                setTimeout(() => {
-                    if (isAnimating) {
-                        imgElement.style.opacity = '1';
-                        isAnimating = false;
-                    }
-                }, 500);
-            }, 200);
+                imgElement.style.opacity = '1';
+                isAnimating = false;
+            }, 300);
             
             dots.forEach((dot, i) => {
                 dot.classList.toggle('active', i === currentIndex);
