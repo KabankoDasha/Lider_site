@@ -584,6 +584,7 @@ main {
     font-weight: 400;
     color: #000;
     margin-bottom: 15px;
+    z-index: 10;
 }
 
 .step-card__desc {
@@ -1603,7 +1604,7 @@ main {
         gap: 2px;
         align-items: flex-start;
         margin-bottom: 9px;
-        margin-top: 30px;
+        margin-top: 50px;
         font-family: 'Unbounded', sans-serif;
     }
     .hero__word:first-child { font-size: 40px; font-weight: 500; letter-spacing: 0.01em; }

@@ -364,7 +364,7 @@ function initBranchGallery() {
             currentIndex = index;
             
             // Плавное исчезновение
-            imgElement.style.transition = 'opacity 0.4s ease';
+            imgElement.style.transition = 'opacity 0.2s ease';
             imgElement.style.opacity = '0';
             
             setTimeout(() => {
