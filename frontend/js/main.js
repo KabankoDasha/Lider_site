@@ -140,76 +140,6 @@ function initMobileCardsSlider() {
   });
 }
 
-// --- Галерея филиалов ---
-function initGallery() {
-  const galleryOverlay = document.getElementById('gallery-overlay');
-  const gallerySlides = document.getElementById('gallery-slides');
-  const galleryDots = document.getElementById('gallery-dots');
-  const areaLeft = document.getElementById('gallery-area-left');
-  const areaRight = document.getElementById('gallery-area-right');
-  if (!galleryOverlay || !gallerySlides) return;
-
-  let currentSlide = 0;
-  let images = [];
-
-  document.querySelectorAll('.branch-card__img-wrap').forEach(wrap => {
-    wrap.addEventListener('click', () => {
-      const json = wrap.dataset.images;
-      if (json) {
-        try {
-          images = JSON.parse(json);
-        } catch (e) {
-          console.error('Ошибка в data-images:', e);
-          return;
-        }
-        currentSlide = 0;
-        renderGallery();
-        galleryOverlay.classList.add('active');
-      }
-    });
-  });
-
-  galleryOverlay.addEventListener('click', (e) => {
-    if (e.target === galleryOverlay) {
-      galleryOverlay.classList.remove('active');
-    }
-  });
-
-  function goToSlide(index) {
-    currentSlide = index;
-    gallerySlides.style.transform = `translateX(-${index * 100}%)`;
-    updateDots();
-  }
-
-  areaLeft?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (currentSlide > 0) goToSlide(currentSlide - 1);
-  });
-  areaRight?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (currentSlide < images.length - 1) goToSlide(currentSlide + 1);
-  });
-
-  function renderGallery() {
-    gallerySlides.innerHTML = images.map(src => `<img src="${src}" alt="">`).join('');
-    galleryDots.innerHTML = '';
-    images.forEach((_, i) => {
-      const dot = document.createElement('span');
-      dot.className = 'gallery-dot';
-      dot.addEventListener('click', () => goToSlide(i));
-      galleryDots.appendChild(dot);
-    });
-    gallerySlides.style.transform = 'translateX(0)';
-    updateDots();
-  }
-
-  function updateDots() {
-    document.querySelectorAll('.gallery-dot').forEach((dot, i) => {
-      dot.classList.toggle('active', i === currentSlide);
-    });
-  }
-}
-
 // --- Мобильное меню ---
 function initMobileMenu() {
     const burger = document.getElementById('burger-btn');
@@ -322,11 +252,97 @@ function initBranchesSlider() {
     setTimeout(updateProgress, 100);
 }
 
+// Галерея филиалов 
+function initBranchGallery() {
+    const slides = document.querySelectorAll('.branch-card-slide');
+    
+    slides.forEach(slide => {
+        const images = JSON.parse(slide.dataset.images || '[]');
+        if (images.length === 0) return;
+        
+        const imgElement = slide.querySelector('.branch-card-slide__img');
+        const dots = slide.querySelectorAll('.branch-card-slide__dot');
+        const leftArrow = slide.querySelector('.branch-card-slide__arrow--left');
+        const rightArrow = slide.querySelector('.branch-card-slide__arrow--right');
+        
+        let currentIndex = 0;
+        let isAnimating = false;
+        
+        function updateGallery(index) {
+            if (isAnimating) return;
+            isAnimating = true;
+            
+            currentIndex = index;
+            imgElement.style.opacity = '0';
+            imgElement.src = images[currentIndex];
+            
+            setTimeout(() => {
+                imgElement.style.opacity = '1';
+                isAnimating = false;
+            }, 300);
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+        
+        function nextImage(e) {
+            e.stopPropagation();
+            const newIndex = (currentIndex + 1) % images.length;
+            updateGallery(newIndex);
+        }
+        
+        function prevImage(e) {
+            e.stopPropagation();
+            const newIndex = (currentIndex - 1 + images.length) % images.length;
+            updateGallery(newIndex);
+        }
+        
+        // Обработчики для стрелок
+        if (leftArrow) leftArrow.addEventListener('click', prevImage);
+        if (rightArrow) rightArrow.addEventListener('click', nextImage);
+        
+        // Обработчики для точек
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (i !== currentIndex) {
+                    updateGallery(i);
+                }
+            });
+        });
+        
+        // Свайп на мобильных
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        const wrapper = slide.querySelector('.branch-card-slide__image-wrapper');
+        
+        wrapper.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        wrapper.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > 30) {
+                if (diff > 0) {
+                    nextImage(e);
+                } else {
+                    prevImage(e);
+                }
+            }
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initCards();
     initGallery();
     initMobileMenu();
     initCookieBanner();
     initStepsAnimation();    
-    initBranchesSlider();    
+    initBranchesSlider();  
+    initBranchGallery();   
 });

@@ -431,6 +431,7 @@ main {
     font-weight: 300;
     color: #000;
     line-height: 1.4;
+    margin-top: 10px;
 }
 
 .about__stats-row {
@@ -470,7 +471,7 @@ main {
     font-weight: 500;
     color: #D90D26;
     margin-bottom: 2px;
-    margin-top: 0;
+    margin-top: -40px;
 }
 
 .about__stat-card--secondary .about__stat-label {
@@ -626,7 +627,8 @@ main {
 .certificate__image {
     width: auto;
     height: 200px;
-    margin-left: -10px;
+    margin-left: 0;
+    margin-right: -20px;
     animation: float 3s ease-in-out infinite;
 }
 
@@ -767,7 +769,7 @@ main {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     font-size: 50px;
-    margin-bottom: 30px;
+    margin-bottom: 0;
 }
 
 .branches__grid {
@@ -801,115 +803,90 @@ main {
 }
 
 /* ========================
-   Филиалы: hover-эффект с иконкой
+   Галерея филиалов 
    ======================== */
-.branch-card__img-wrap {
+.branch-card-slide__image-wrapper {
     position: relative;
-    border-radius: 10px;
     overflow: hidden;
-    display: block;
+    cursor: pointer;
 }
-.branch-card__img {
-    display: block;
-    width: 373px;
-    height: 220px;
+
+.branch-card-slide__img {
+    width: 443px;
+    height: 271px;
     object-fit: cover;
-    border-radius: 10px;
     transition: filter 0.3s;
 }
-.branch-card__img-wrap:hover .branch-card__img {
+
+.branch-card-slide__image-wrapper:hover .branch-card-slide__img {
     filter: brightness(0.6);
-    cursor: pointer;
 }
-.branch-card__img-wrap::after {
-    content: url('../images/increase.svg');
+
+.branch-card-slide__arrow {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-}
-.branch-card__img-wrap:hover::after {
-    opacity: 1;
-}
-
-/* ========================
-   Оверлей галереи
-   ======================== */
-.gallery-overlay {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(33, 33, 33, 0.8);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
-.gallery-overlay.active {
-    display: flex;
-}
-.gallery-container {
-    position: relative;
-    width: 850px;
-    height: 500px;
-    background: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-/* Прозрачные области для листания */
-.gallery-area {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 50%;
-    z-index: 5;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    font-size: 24px;
+    color: #D90D26;
     cursor: pointer;
-}
-.gallery-area--left {
-    left: 0;
-}
-.gallery-area--right {
-    right: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s;
+    z-index: 10;
+    font-weight: 300;
+    line-height: 1;
 }
 
-.gallery-slides {
-    width: 100%;
-    height: 100%;
+.branch-card-slide__image-wrapper:hover .branch-card-slide__arrow {
     display: flex;
-    transition: transform 0.3s;
-}
-.gallery-slides img {
-    width: 850px;
-    height: 500px;
-    object-fit: cover;
-    flex-shrink: 0;
 }
 
-/* Точки */
-.gallery-dots {
+.branch-card-slide__arrow:hover {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.branch-card-slide__arrow--left {
+    left: 10px;
+}
+
+.branch-card-slide__arrow--right {
+    right: 10px;
+}
+
+.branch-card-slide__dots {
     position: absolute;
-    bottom: 20px;
+    bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 10px;
-    align-items: center;
+    gap: 8px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 6px 12px;
+    border-radius: 20px;
 }
-.gallery-dot {
-    width: 14px;         
-    height: 14px;
+
+.branch-card-slide__dot {
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    background: #f0f0f0;  
+    background: rgba(255, 255, 255, 0.5);
     cursor: pointer;
-    transition: all 0.3s;
 }
-.gallery-dot.active {
-    background: #717171;   
-    transform: scale(1.3);
+
+.branch-card-slide__dot.active {
+    background: #fff;
+    transform: scale(1.2);
+}
+
+.branch-card-slide__dot:hover {
+    background: rgba(255, 255, 255, 0.8);
 }
 
 /* ========================
@@ -1627,18 +1604,18 @@ main {
         margin-bottom: 9px;
         font-family: 'Unbounded', sans-serif;
     }
-    .hero__word:first-child { font-size: 38px; font-weight: 500; letter-spacing: 0.01em; }
-    .hero__word:last-child { font-size: 32px; font-weight: 500; letter-spacing: 0; margin-bottom: 0; }
+    .hero__word:first-child { font-size: 41px; font-weight: 500; letter-spacing: 0.01em; }
+    .hero__word:last-child { font-size: 38px; font-weight: 500; letter-spacing: 0.01em; margin-bottom: 0; }
     .hero__bottom { flex-direction: column; align-items: flex-start; margin-bottom: 30px; }
     .hero__subtitle {
         font-size: 10px;
         font-weight: 500;
         align-self: flex-end;
-        margin-left: 13px;
-        margin-top: -37px;
+        margin-left: 12px;
+        margin-top: -40px;
         margin-bottom: 27px;
     }
-    .btn--cta { width: 100%; font-size: 16px; font-weight: 500; height: 50px; }
+    .btn--cta { width: 100%; font-size: 16px; font-weight: 500; height: 50px; margin-top: 10px; margin-bottom: 30px; }
 
     /* Слайдер карточек */
     .courses { margin-bottom: 30px; }
@@ -1654,7 +1631,7 @@ main {
         width: 100%;
         margin: 0;
         border-radius: 10px;
-        height: 156px;
+        height: 170px;
         background: linear-gradient(-65deg, #F0F0F0, #F9F9F9, #F0F0F0);
         border: 2px solid #D90D26;
         position: relative;
@@ -1903,8 +1880,8 @@ main {
     }
 
     /* ========================
-    Филиалы
-    ======================== */
+    Филиалы 
+    ======================= */
     .branches__title {
         font-size: 30px;
     }
@@ -1915,12 +1892,43 @@ main {
     }
 
     .branch-card-slide {
-        flex: 0 0 280px;
+        flex: 0 0 328px;
+        background: #fcfcfc;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
     }
 
     .branch-card-slide__img {
-        width: 280px;
-        height: 180px;
+        width: 328px;
+        height: 200px;
+    }
+
+    .branch-card-slide__arrow {
+        display: flex !important;
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+        background: rgba(255, 255, 255, 0.85);
+    }
+
+    .branch-card-slide__arrow--left {
+        left: 8px;
+    }
+
+    .branch-card-slide__arrow--right {
+        right: 8px;
+    }
+
+    .branch-card-slide__dots {
+        bottom: 12px;
+        padding: 4px 10px;
+        gap: 6px;
+    }
+
+    .branch-card-slide__dot {
+        width: 8px;
+        height: 8px;
     }
 
     .branch-card-slide__info {
@@ -1928,7 +1936,8 @@ main {
     }
 
     .branch-card-slide__address {
-        font-size: 18px;
+        font-size: 16px;
+        font-weight: 500;
         margin-bottom: 10px;
     }
 
@@ -1956,16 +1965,6 @@ main {
 
     .branches {
         margin-bottom: 60px;
-    }
-
-    /* Галерея */
-    .gallery-container {
-        width: 328px;
-        height: 300px;
-    }
-    .gallery-slides img {
-        width: 328px;
-        height: 300px;
     }
 
     /* Карта */
