@@ -1607,15 +1607,15 @@ main {
         margin-top: 50px;
         font-family: 'Unbounded', sans-serif;
     }
-    .hero__word:first-child { font-size: 40px; font-weight: 500; letter-spacing: 0.01em; }
-    .hero__word:last-child { font-size: 37px; font-weight: 500; letter-spacing: 0; margin-bottom: 0; }
+    .hero__word:first-child { font-size: 39px; font-weight: 500; letter-spacing: 0.01em; }
+    .hero__word:last-child { font-size: 36px; font-weight: 500; letter-spacing: 0; margin-bottom: 0; }
     .hero__bottom { flex-direction: column; align-items: flex-start; margin-bottom: 30px; }
     .hero__subtitle {
         font-size: 10px;
         font-weight: 500;
         align-self: flex-end;
-        margin-left: 15px;
-        margin-top: -40px;
+        margin-left: 12px;
+        margin-top: -38px;
         margin-bottom: 27px;
     }
     .btn--cta { width: 100%; font-size: 16px; font-weight: 500; height: 50px; margin-top: 10px; margin-bottom: 30px; }

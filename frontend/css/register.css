@@ -646,8 +646,8 @@ body {
 
     /* Ячейки ввода кода */
     .code-input {
-        width: 26px;
-        height: 34px;
+        width: 30px;
+        height: 38px;
         font-size: 14px;
         border-width: 1.5px;
         border-radius: 8px;
