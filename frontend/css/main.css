@@ -445,7 +445,7 @@ main {
     min-height: 218px;
     background: #f0f0f0;
     border-radius: 10px;
-    padding: 10px 20px 20px 20px;
+    padding: 30px 20px 20px 30px;
     display: flex;
     flex-direction: column;
     text-decoration: none;
@@ -463,22 +463,23 @@ main {
     width: 35px;
     height: 35px;
     align-self: flex-end;
-    margin-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: 10px;
 }
 
 .about__stat-card--secondary .about__stat-number {
     font-size: 35px;
     font-weight: 500;
     color: #D90D26;
-    margin-bottom: 2px;
-    margin-top: -40px;
+    margin-bottom: 5px;
+    margin-top: 0;
 }
 
 .about__stat-card--secondary .about__stat-label {
     font-size: 20px;
     font-weight: 500;
     color: #D90D26;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .about__stat-card--secondary .about__stat-desc {
@@ -548,14 +549,20 @@ main {
     display: flex;
     flex-direction: column;
     position: relative;
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 1;
+    transform: translateY(0);
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .step-card--animate.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Для анимации */
+.step-card--animate {
+    opacity: 0;
+    transform: translateY(30px);
 }
 
 .step-card__icon {
@@ -642,7 +649,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-left: 40px;
+    padding-left: 80px;
 }
 
 .certificate__title {
@@ -816,10 +823,6 @@ main {
     height: 271px;
     object-fit: cover;
     transition: filter 0.3s;
-}
-
-.branch-card-slide__image-wrapper:hover .branch-card-slide__img {
-    filter: brightness(0.6);
 }
 
 .branch-card-slide__arrow {
@@ -1604,14 +1607,14 @@ main {
         margin-bottom: 9px;
         font-family: 'Unbounded', sans-serif;
     }
-    .hero__word:first-child { font-size: 41px; font-weight: 500; letter-spacing: 0.01em; }
-    .hero__word:last-child { font-size: 38px; font-weight: 500; letter-spacing: 0.01em; margin-bottom: 0; }
+    .hero__word:first-child { font-size: 40px; font-weight: 500; letter-spacing: 0.01em; }
+    .hero__word:last-child { font-size: 37px; font-weight: 500; letter-spacing: 0; margin-bottom: 0; }
     .hero__bottom { flex-direction: column; align-items: flex-start; margin-bottom: 30px; }
     .hero__subtitle {
         font-size: 10px;
         font-weight: 500;
         align-self: flex-end;
-        margin-left: 12px;
+        margin-left: 15px;
         margin-top: -40px;
         margin-bottom: 27px;
     }
@@ -1807,6 +1810,13 @@ main {
     .step-card {
         min-height: 180px;
         padding: 15px 15px 15px 20px;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .step-card--animate {
+        opacity: 0;
+        transform: translateY(30px);
     }
 
     .step-card__icon {

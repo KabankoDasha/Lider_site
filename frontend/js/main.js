@@ -243,13 +243,21 @@ function initBranchesSlider() {
         if (scrollWidth <= 0) return;
         const progress = scrollLeft / scrollWidth;
         const trackWidth = progressBar.parentElement.clientWidth;
-        const maxOffset = trackWidth - progressBar.offsetWidth;
+        const barWidth = progressBar.offsetWidth;
+        const maxOffset = trackWidth - barWidth;
         progressBar.style.transform = `translateX(${progress * maxOffset}px)`;
     }
 
-    slider.addEventListener('scroll', updateProgress);
-    window.addEventListener('resize', updateProgress);
-    setTimeout(updateProgress, 100);
+    slider.addEventListener('scroll', function() {
+        requestAnimationFrame(updateProgress);
+    });
+    
+    window.addEventListener('resize', function() {
+        requestAnimationFrame(updateProgress);
+    });
+    
+    // Задержка для правильного расчёта после рендера
+    setTimeout(updateProgress, 200);
 }
 
 // Галерея филиалов 
@@ -257,7 +265,17 @@ function initBranchGallery() {
     const slides = document.querySelectorAll('.branch-card-slide');
     
     slides.forEach(slide => {
-        const images = JSON.parse(slide.dataset.images || '[]');
+        const imagesData = slide.dataset.images;
+        if (!imagesData) return;
+        
+        let images;
+        try {
+            images = JSON.parse(imagesData);
+        } catch (e) {
+            console.error('Ошибка парсинга data-images:', e);
+            return;
+        }
+        
         if (images.length === 0) return;
         
         const imgElement = slide.querySelector('.branch-card-slide__img');
@@ -274,12 +292,21 @@ function initBranchGallery() {
             
             currentIndex = index;
             imgElement.style.opacity = '0';
-            imgElement.src = images[currentIndex];
             
             setTimeout(() => {
-                imgElement.style.opacity = '1';
-                isAnimating = false;
-            }, 300);
+                imgElement.src = images[currentIndex];
+                imgElement.onload = function() {
+                    imgElement.style.opacity = '1';
+                    isAnimating = false;
+                };
+                // Fallback если картинка уже загружена
+                setTimeout(() => {
+                    if (isAnimating) {
+                        imgElement.style.opacity = '1';
+                        isAnimating = false;
+                    }
+                }, 500);
+            }, 200);
             
             dots.forEach((dot, i) => {
                 dot.classList.toggle('active', i === currentIndex);
@@ -287,24 +314,28 @@ function initBranchGallery() {
         }
         
         function nextImage(e) {
-            e.stopPropagation();
+            if (e) e.stopPropagation();
             const newIndex = (currentIndex + 1) % images.length;
             updateGallery(newIndex);
         }
         
         function prevImage(e) {
-            e.stopPropagation();
+            if (e) e.stopPropagation();
             const newIndex = (currentIndex - 1 + images.length) % images.length;
             updateGallery(newIndex);
         }
         
         // Обработчики для стрелок
-        if (leftArrow) leftArrow.addEventListener('click', prevImage);
-        if (rightArrow) rightArrow.addEventListener('click', nextImage);
+        if (leftArrow) {
+            leftArrow.addEventListener('click', prevImage);
+        }
+        if (rightArrow) {
+            rightArrow.addEventListener('click', nextImage);
+        }
         
         // Обработчики для точек
         dots.forEach((dot, i) => {
-            dot.addEventListener('click', (e) => {
+            dot.addEventListener('click', function(e) {
                 e.stopPropagation();
                 if (i !== currentIndex) {
                     updateGallery(i);
@@ -317,23 +348,24 @@ function initBranchGallery() {
         let touchEndX = 0;
         
         const wrapper = slide.querySelector('.branch-card-slide__image-wrapper');
-        
-        wrapper.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-        
-        wrapper.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            const diff = touchStartX - touchEndX;
+        if (wrapper) {
+            wrapper.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
             
-            if (Math.abs(diff) > 30) {
-                if (diff > 0) {
-                    nextImage(e);
-                } else {
-                    prevImage(e);
+            wrapper.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > 30) {
+                    if (diff > 0) {
+                        nextImage(e);
+                    } else {
+                        prevImage(e);
+                    }
                 }
-            }
-        });
+            }, { passive: true });
+        }
     });
 }
 
