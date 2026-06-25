@@ -363,13 +363,18 @@ function initBranchGallery() {
             
             currentIndex = index;
             
+            // Плавное исчезновение
+            imgElement.style.transition = 'opacity 0.4s ease';
             imgElement.style.opacity = '0';
             
             setTimeout(() => {
                 imgElement.src = images[currentIndex];
-                imgElement.style.opacity = '1';
-                isAnimating = false;
-            }, 300);
+                // Плавное появление
+                setTimeout(() => {
+                    imgElement.style.opacity = '1';
+                    isAnimating = false;
+                }, 50);
+            }, 400);
             
             dots.forEach((dot, i) => {
                 dot.classList.toggle('active', i === currentIndex);
