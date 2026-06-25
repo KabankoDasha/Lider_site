@@ -646,20 +646,20 @@ body {
 
     // ячейки ввода кода
     .code-input {
-        width: 32px;
-        height: 40px;
-        font-size: 16px;
+        width: 29px;
+        height: 37px;
+        font-size: 15px;
         border-width: 1.5px;
     }
 
     .code-input-container {
-        gap: 6px;
+        gap: 5px;
         margin: 15px 0;
     }
 
     .register-overlay__box--verify {
         width: 90%;
-        max-width: 340px;
+        max-width: 328px;
         padding: 25px 15px 20px;
     }
 
@@ -674,7 +674,7 @@ body {
     }
 
     .btn--resend-code {
-        padding: 6px 16px;
+        padding: 8px 16px;
         font-size: 12px;
     }
 
