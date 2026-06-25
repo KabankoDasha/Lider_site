@@ -1614,12 +1614,12 @@ main {
         font-family: 'Unbounded', sans-serif;
     }
     .hero__word:first-child { 
-        font-size: 40px; 
+        font-size: 38px; 
         font-weight: 500; 
         letter-spacing: 0.01em; 
     }
     .hero__word:last-child { 
-        font-size: 40px; 
+        font-size: 38px; 
         font-weight: 500; 
         letter-spacing: 0; 
         margin-bottom: 0; 
@@ -1627,7 +1627,7 @@ main {
     .hero__bottom { 
         flex-direction: column; 
         align-items: flex-start; 
-        margin-bottom: 30px; 
+        margin-bottom: 20px; 
     }
     .hero__subtitle {
         font-size: 16px;
