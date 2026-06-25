@@ -646,42 +646,41 @@ body {
 
     /* Ячейки ввода кода */
     .code-input {
-        width: 22px;
-        height: 30px;
-        font-size: 12px;
+        width: 26px;
+        height: 34px;
+        font-size: 14px;
         border-width: 1.5px;
-        border-radius: 6px;
+        border-radius: 8px;
     }
 
     .code-input-container {
-        gap: 3px;
-        margin: 10px 0;
+        gap: 4px;
+        margin: 12px 0;
     }
 
     .register-overlay__box--verify {
-        width: 92%;
-        max-width: 290px;
-        padding: 15px 10px 15px;
+        width: 90%;
+        max-width: 310px;
+        padding: 20px 12px 15px;
     }
 
     .verify-title {
-        font-size: 15px;
-        margin-bottom: 3px;
+        font-size: 16px;
+        margin-bottom: 4px;
     }
 
     .verify-subtitle {
-        font-size: 11px;
-        margin-bottom: 10px;
+        font-size: 12px;
+        margin-bottom: 12px;
     }
 
     .btn--resend-code {
-        padding: 5px 10px;
-        font-size: 10px;
-        border-radius: 6px;
+        padding: 6px 14px;
+        font-size: 11px;
     }
 
     .verify-hint {
-        font-size: 9px;
-        margin-top: 6px;
+        font-size: 10px;
+        margin-top: 8px;
     }
 }
