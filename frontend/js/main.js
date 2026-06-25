@@ -140,6 +140,76 @@ function initMobileCardsSlider() {
   });
 }
 
+// --- Галерея филиалов (для оверлея) ---
+function initGallery() {
+  const galleryOverlay = document.getElementById('gallery-overlay');
+  const gallerySlides = document.getElementById('gallery-slides');
+  const galleryDots = document.getElementById('gallery-dots');
+  const areaLeft = document.getElementById('gallery-area-left');
+  const areaRight = document.getElementById('gallery-area-right');
+  if (!galleryOverlay || !gallerySlides) return;
+
+  let currentSlide = 0;
+  let images = [];
+
+  document.querySelectorAll('.branch-card__img-wrap').forEach(wrap => {
+    wrap.addEventListener('click', () => {
+      const json = wrap.dataset.images;
+      if (json) {
+        try {
+          images = JSON.parse(json);
+        } catch (e) {
+          console.error('Ошибка в data-images:', e);
+          return;
+        }
+        currentSlide = 0;
+        renderGallery();
+        galleryOverlay.classList.add('active');
+      }
+    });
+  });
+
+  galleryOverlay.addEventListener('click', (e) => {
+    if (e.target === galleryOverlay) {
+      galleryOverlay.classList.remove('active');
+    }
+  });
+
+  function goToSlide(index) {
+    currentSlide = index;
+    gallerySlides.style.transform = `translateX(-${index * 100}%)`;
+    updateDots();
+  }
+
+  areaLeft?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (currentSlide > 0) goToSlide(currentSlide - 1);
+  });
+  areaRight?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (currentSlide < images.length - 1) goToSlide(currentSlide + 1);
+  });
+
+  function renderGallery() {
+    gallerySlides.innerHTML = images.map(src => `<img src="${src}" alt="">`).join('');
+    galleryDots.innerHTML = '';
+    images.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.className = 'gallery-dot';
+      dot.addEventListener('click', () => goToSlide(i));
+      galleryDots.appendChild(dot);
+    });
+    gallerySlides.style.transform = 'translateX(0)';
+    updateDots();
+  }
+
+  function updateDots() {
+    document.querySelectorAll('.gallery-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentSlide);
+    });
+  }
+}
+
 // --- Мобильное меню ---
 function initMobileMenu() {
     const burger = document.getElementById('burger-btn');
@@ -243,7 +313,7 @@ function initBranchesSlider() {
         if (scrollWidth <= 0) return;
         const progress = scrollLeft / scrollWidth;
         const trackWidth = progressBar.parentElement.clientWidth;
-        const barWidth = progressBar.offsetWidth || 80; // fallback если 0
+        const barWidth = progressBar.offsetWidth || 80;
         const maxOffset = trackWidth - barWidth;
         progressBar.style.transform = `translateX(${progress * maxOffset}px)`;
     }
@@ -261,7 +331,7 @@ function initBranchesSlider() {
     setTimeout(updateProgress, 500);
 }
 
-// Галерея филиалов 
+// Галерея филиалов (слайдер внутри карточки)
 function initBranchGallery() {
     const slides = document.querySelectorAll('.branch-card-slide');
     
@@ -293,7 +363,6 @@ function initBranchGallery() {
             
             currentIndex = index;
             
-            // Плавная смена картинки
             imgElement.style.opacity = '0';
             
             setTimeout(() => {
@@ -319,7 +388,6 @@ function initBranchGallery() {
             updateGallery(newIndex);
         }
         
-        // Обработчики для стрелок
         if (leftArrow) {
             leftArrow.addEventListener('click', prevImage);
         }
@@ -327,7 +395,6 @@ function initBranchGallery() {
             rightArrow.addEventListener('click', nextImage);
         }
         
-        // Обработчики для точек
         dots.forEach((dot, i) => {
             dot.addEventListener('click', function(e) {
                 e.stopPropagation();
@@ -337,7 +404,6 @@ function initBranchGallery() {
             });
         });
         
-        // Свайп на мобильных
         let touchStartX = 0;
         let touchEndX = 0;
         
