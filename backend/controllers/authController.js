@@ -42,7 +42,7 @@ exports.register = async (req, res) => {
 
     // Отправляем письмо
     await transporter.sendMail({
-        from: '"Автошкола Лидер" <info@lider-avto74.ru>',
+        from: '"Автошкола Лидер" <info@lider-centr.com>',
         to: email,
         subject: 'Подтверждение регистрации на сайте Автошкола Лидер',
         html: `
@@ -266,7 +266,7 @@ exports.resendCode = async (req, res) => {
 
     // Отправляем письмо
     await transporter.sendMail({
-        from: '"Автошкола Лидер" <info@lider-avto74.ru>',
+        from: '"Автошкола Лидер" <info@lider-centr.com>',
         to: user.email,
         subject: 'Новый код подтверждения – Автошкола Лидер',
         html: `
